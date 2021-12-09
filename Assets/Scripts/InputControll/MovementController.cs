@@ -8,10 +8,7 @@ public class MovementController : MonoBehaviour
     private Rigidbody rB;
     private Transform model;
     private bool inSprint;
-    private bool isOnGround;
-    private bool isOnCrouch = false;
-    private float actualHeight=1.7f;
-
+    private bool isCrouching = false;
 
     [SerializeField] private float speed;
     [SerializeField] private float sprintSpeed;
@@ -19,8 +16,6 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float crouchSpeed;
     [SerializeField] private LayerMask groundMask;
 
-    float horizontalMove;
-    float verticalMove;
     void Start()
     {
         rB = GetComponent<Rigidbody>();
@@ -29,10 +24,12 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        actualHeight = transform.localScale.y;
-        isOnGround = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - actualHeight, transform.position.z), 0.5f, groundMask);
-        
-        if(isOnCrouch)
+        float horizontalMove;
+        float verticalMove;
+        float currentHeight = transform.localScale.y;
+        bool isOnGround = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - currentHeight, transform.position.z), 0.5f, groundMask);
+
+        if(isCrouching)
         {
             horizontalMove = Input.GetAxis("Horizontal") * crouchSpeed;
             verticalMove = Input.GetAxis("Vertical") * crouchSpeed;
@@ -62,22 +59,20 @@ public class MovementController : MonoBehaviour
             inSprint = false;
         }
 
-        //Crouch controller
+        //Crouching controller
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
             if (isOnGround)
             {
-                if (isOnCrouch)
+                if (isCrouching)
                 {
-                   // actualHeight = 1.7f;
+                    isCrouching = false;
                     model.DOScaleY(1.7f, 0.25f);
-                    isOnCrouch = false;
                 }
                 else
                 {
-                   // actualHeight = 1f;
+                    isCrouching = true;
                     model.DOScaleY(1f, 0.3f);
-                    isOnCrouch = true;
                 }
             }
         }
@@ -87,25 +82,16 @@ public class MovementController : MonoBehaviour
         {
             if (isOnGround)
             {
-                if (Input.GetKey(KeyCode.LeftControl)&&isOnCrouch)
-                {
-                    rB.velocity = new Vector3(rB.velocity.x, jumpForce * 1.2f, rB.velocity.z);
-                    model.DOScaleY(1.7f, 0.01f);
-                    isOnCrouch = false;
-                }
-                else
-                {
-                    if (isOnCrouch)
+                    if (isCrouching)
                     {
                         rB.velocity = new Vector3(rB.velocity.x, jumpForce, rB.velocity.z);
                         model.DOScaleY(1.7f, 0.01f);
-                        isOnCrouch = false;
+                        isCrouching = false;
                     }
                     else
                     {
                         rB.velocity = new Vector3(rB.velocity.x, jumpForce, rB.velocity.z);
                     }
-                }
             }
         }
     }
