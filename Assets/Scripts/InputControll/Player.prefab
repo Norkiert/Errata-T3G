@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 388859102087290416}
-  - component: {fileID: 388859102087290423}
   - component: {fileID: 388859102087290422}
   - component: {fileID: 388859102087290421}
+  - component: {fileID: 2040721467340279748}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -27,30 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388859102087290420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 388859103362977979}
   - {fileID: 388859104078264812}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &388859102087290423
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388859102087290420}
-  serializedVersion: 2
-  m_Mass: 70
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!114 &388859102087290422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,12 +46,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b59113122d7cd94587ea131c0403418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 7
-  SprintSpeed: 16
-  JumpForce: 5
-  GroundMask:
+  defaultSpeed: 5
+  defaultJumpHeight: 1.2
+  defaultHeight: 1.9
+  groundMask:
     serializedVersion: 2
     m_Bits: 8
+  groundCheck: {fileID: 0}
+  sprintSpeed: 9
+  sprintJumpHeight: 1.4
+  crouchSpeed: 3
+  crouchJumpHeight: 2
+  crouchHeight: 1.2
+  inputJump: 0
+  inputSprint: 0
+  inputCrouch: 0
+  inputHorizontalMove: 0
+  inputVerticalMove: 0
+  isGrounded: 0
+  currentMod: 0
+  currentSpeed: 0
+  currentJumpHeight: 0
 --- !u!114 &388859102087290421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,50 +81,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 388859104078264812}
   Sensitivity: 7
---- !u!1 &388859103362977978
-GameObject:
+--- !u!143 &2040721467340279748
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 388859103362977979}
-  - component: {fileID: 388859103362977860}
-  m_Layer: 0
-  m_Name: PlayerModel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &388859103362977979
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388859103362977978}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.994, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 388859102087290416}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &388859103362977860
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388859103362977978}
-  m_Material: {fileID: 13400000, guid: 6d19f70b93a0e194c9572cecd02306ae, type: 2}
+  m_GameObject: {fileID: 388859102087290420}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
+  serializedVersion: 2
+  m_Height: 1.9
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &388859104078264801
 GameObject:
@@ -155,11 +126,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388859104078264801}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.012, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 388859102087290416}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &388859104078264803
 Camera:

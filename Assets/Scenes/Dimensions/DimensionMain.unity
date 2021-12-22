@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1815468, g: 0.22718757, b: 0.30740595, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154636, g: 0.22718701, b: 0.3074048, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1576,24 +1576,16 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 388859102087290422, guid: cc2655afac1564b4eba19b6ec84873fe, type: 3}
+      propertyPath: canJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 388859102087290422, guid: cc2655afac1564b4eba19b6ec84873fe, type: 3}
       propertyPath: jumpForce
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 388859102087290422, guid: cc2655afac1564b4eba19b6ec84873fe, type: 3}
       propertyPath: CrouchSpeed
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 388859102087290422, guid: cc2655afac1564b4eba19b6ec84873fe, type: 3}
-      propertyPath: crouchSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 388859102087290422, guid: cc2655afac1564b4eba19b6ec84873fe, type: 3}
-      propertyPath: sprintSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 388859102087290422, guid: cc2655afac1564b4eba19b6ec84873fe, type: 3}
-      propertyPath: groundMask.m_Bits
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 388859102087290422, guid: cc2655afac1564b4eba19b6ec84873fe, type: 3}
       propertyPath: MaterialMask.m_Bits
