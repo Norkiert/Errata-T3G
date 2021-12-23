@@ -81,8 +81,9 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 groundCheck = controller.bounds.center - (controller.bounds.extents.y - 0.1f) * Vector3.up;
-        isGrounded = Physics.CheckSphere(groundCheck, 0.3f, groundMask);
+        float radius = controller.radius * 0.9f;
+        Vector3 groundCheck = controller.bounds.center - (controller.bounds.extents.y - radius + 0.2f) * Vector3.up;
+        isGrounded = Physics.CheckSphere(groundCheck, radius, groundMask);
 
         GetInput();
         ChoseMode();

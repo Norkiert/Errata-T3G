@@ -47,14 +47,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 5
-  defaultJumpHeight: 1.2
   defaultHeight: 1.9
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  groundCheck: {fileID: 0}
+  canJump: 1
+  defaultJumpHeight: 1.2
+  canSprint: 1
   sprintSpeed: 9
   sprintJumpHeight: 1.4
+  canCrouch: 1
   crouchSpeed: 3
   crouchJumpHeight: 2
   crouchHeight: 1.2
@@ -94,7 +96,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.9
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
