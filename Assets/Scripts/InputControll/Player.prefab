@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 388859102087290422}
   - component: {fileID: 388859102087290421}
   - component: {fileID: 2040721467340279748}
+  - component: {fileID: 8097448248607727437}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
   defaultHeight: 1.9
   groundMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 9
   canJump: 1
   defaultJumpHeight: 1.2
   canSprint: 1
@@ -101,6 +102,24 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8097448248607727437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388859102087290420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd36343354c9ac409a78d84567ce767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 388859104078264812}
+  selectRange: 15
+  selectLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  selectedObject: {fileID: 0}
 --- !u!1 &388859104078264801
 GameObject:
   m_ObjectHideFlags: 0
