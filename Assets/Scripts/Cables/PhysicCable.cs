@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class CableConnectable : MonoBehaviour
+public class PhysicCable : MonoBehaviour
 {
     [SerializeField] [Min(1)] private int numberOfPoints = 3;
     [SerializeField] private float space = 0.3f;
