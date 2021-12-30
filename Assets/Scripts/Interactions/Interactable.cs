@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
 {
     [field: SerializeField] [field: ReadOnly] public bool IsSelected { get; private set; }
 
-    private void Start()
+    protected virtual void Awake()
     {
         Select(false);
     }
