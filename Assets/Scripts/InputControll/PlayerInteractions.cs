@@ -9,13 +9,13 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] [Required] private Transform playerCamera;
     [SerializeField] private float selectRange = 10f;
     [SerializeField] private LayerMask selectLayer;
-    [SerializeField] [ReadOnly] private Interactable selectedObject = null;
+    [field: SerializeField] [field: ReadOnly] public Interactable SelectedObject { get; private set; } = null;
 
     [Header("Hold")]
     [SerializeField] [Required] private Transform handTransform;
     [SerializeField] [Min(1)] private float holdingForce = 10f;
     [SerializeField] private int heldObjectLayer;
-    [SerializeField] [ReadOnly] private Liftable heldObject = null;
+    [field: SerializeField] [field: ReadOnly] public Liftable HeldObject { get; private set; } = null;
 
     private void Update()
     {
@@ -30,42 +30,42 @@ public class PlayerInteractions : MonoBehaviour
         if (Physics.SphereCast(playerCamera.position, 0.2f, playerCamera.forward, out RaycastHit hit, selectRange, selectLayer))
             foundInteractable = hit.collider.GetComponent<Interactable>();
 
-        if (selectedObject == foundInteractable)
+        if (SelectedObject == foundInteractable)
             return;
 
-        if (selectedObject)
-            selectedObject.Select(false);
+        if (SelectedObject)
+            SelectedObject.Select(false);
 
         if (foundInteractable)
             foundInteractable.Select(true);
 
-        selectedObject = foundInteractable;
+        SelectedObject = foundInteractable;
     }
 
     private void UpdateHeldObject()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (heldObject)
-                DropObject(heldObject);
-            else if (selectedObject is Liftable liftable)
+            if (HeldObject)
+                DropObject(HeldObject);
+            else if (SelectedObject is Liftable liftable)
                 PickUpObject(liftable);
         }
 
-        if (heldObject)
+        if (HeldObject)
         {
-            heldObject.Rigidbody.velocity = (handTransform.position - heldObject.transform.position) * holdingForce;
-            heldObject.transform.rotation = Quaternion.Euler(handTransform.rotation.eulerAngles + heldObject.LiftDirectionOffset);
+            HeldObject.Rigidbody.velocity = (handTransform.position - HeldObject.transform.position) * holdingForce;
+            HeldObject.transform.rotation = Quaternion.Euler(handTransform.rotation.eulerAngles + HeldObject.LiftDirectionOffset);
         }  
     }
     private void PickUpObject(Liftable obj)
     {
-        heldObject = obj;
+        HeldObject = obj;
         obj.PickUp(heldObjectLayer);
     }
     private void DropObject(Liftable obj)
     {
-        heldObject = null;
+        HeldObject = null;
         obj.Drop();
     }
 }

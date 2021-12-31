@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1833306369962025960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6414236727631918204}
+  m_Layer: 0
+  m_Name: ConnectionPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6414236727631918204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833306369962025960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4425292945848448425}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4425292944635748455
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,9 +364,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4425292945704825134}
-  - component: {fileID: 5386057892670760127}
+  - component: {fileID: 6936414931757238468}
   - component: {fileID: 7587608109998917}
   - component: {fileID: 4425292945704825129}
+  - component: {fileID: 7369714047963594621}
   m_Layer: 0
   m_Name: Start
   m_TagString: Untagged
@@ -357,10 +388,11 @@ Transform:
   m_Children:
   - {fileID: 3396111233493808345}
   - {fileID: 4425292945656508980}
+  - {fileID: 7566080898977319854}
   m_Father: {fileID: 4425292944727932742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5386057892670760127
+--- !u!114 &6936414931757238468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,10 +401,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4425292945704825135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4f31d767a4f39449d9b64586e63112, type: 3}
+  m_Script: {fileID: 11500000, guid: 56cfc81f37282d649955285c34bb5bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <IsSelected>k__BackingField: 0
+  <IsLift>k__BackingField: 0
   <LiftDirectionOffset>k__BackingField: {x: 0, y: 180, z: 0}
 --- !u!65 &7587608109998917
 BoxCollider:
@@ -403,6 +436,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7369714047963594621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4425292945704825135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6220163bcbd7a49aa14e0e43b4b9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectionPoint: {fileID: 7566080898977319854}
+  <RotationOffset>k__BackingField: {x: 0, y: 90, z: 0}
+  <ConnectedTo>k__BackingField: {fileID: 0}
 --- !u!1 &4425292945848448430
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,10 +460,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4425292945848448425}
-  - component: {fileID: 4940987670870144242}
+  - component: {fileID: 2280271565473323291}
   - component: {fileID: 6171860290587258968}
   - component: {fileID: 4425292945848448427}
   - component: {fileID: 4425292945848448424}
+  - component: {fileID: 7038249694742184892}
   m_Layer: 0
   m_Name: End
   m_TagString: Untagged
@@ -436,10 +485,11 @@ Transform:
   m_Children:
   - {fileID: 543028498665713790}
   - {fileID: 4425292944635748454}
+  - {fileID: 6414236727631918204}
   m_Father: {fileID: 4425292944727932742}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4940987670870144242
+--- !u!114 &2280271565473323291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -448,10 +498,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4425292945848448430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4f31d767a4f39449d9b64586e63112, type: 3}
+  m_Script: {fileID: 11500000, guid: 56cfc81f37282d649955285c34bb5bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <IsSelected>k__BackingField: 0
+  <IsLift>k__BackingField: 0
   <LiftDirectionOffset>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!65 &6171860290587258968
 BoxCollider:
@@ -506,6 +557,21 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &7038249694742184892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4425292945848448430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6220163bcbd7a49aa14e0e43b4b9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectionPoint: {fileID: 6414236727631918204}
+  <RotationOffset>k__BackingField: {x: 0, y: 90, z: 0}
+  <ConnectedTo>k__BackingField: {fileID: 0}
 --- !u!1 &4425292945922404051
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +740,36 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &9014851794521380693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7566080898977319854}
+  m_Layer: 0
+  m_Name: ConnectionPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7566080898977319854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9014851794521380693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4425292945704825134}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1567706606967540228
 PrefabInstance:
   m_ObjectHideFlags: 0

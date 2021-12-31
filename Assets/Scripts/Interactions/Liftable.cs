@@ -6,12 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Liftable : Interactable
 {
+    [field: SerializeField] public bool IsLift { get; private set; } = false;
     [field: SerializeField] public Vector3 LiftDirectionOffset { get; private set; } = Vector3.zero;
 
     public Rigidbody Rigidbody { get; protected set; }
     private readonly List<(GameObject, int)> defaultLayers = new List<(GameObject obj, int defaultLayer)>();
-
-    private bool isLift = false;
 
     protected override void Awake()
     {
@@ -19,9 +18,9 @@ public class Liftable : Interactable
         Rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void PickUp(int layer)
+    public virtual void PickUp(int layer)
     {
-        if (isLift)
+        if (IsLift)
             return;
 
         // save layers
@@ -35,16 +34,18 @@ public class Liftable : Interactable
         foreach ((GameObject obj, int defaultLayer) item in defaultLayers)
             item.obj.layer = layer;
 
-       isLift = true;
+        IsLift = true;
     }
-    public void Drop()
+    public virtual void Drop()
     {
-        if (!isLift)
+        if (!IsLift)
             return;
 
         Rigidbody.useGravity = true;
         Rigidbody.interpolation = RigidbodyInterpolation.None;
         foreach ((GameObject obj, int defaultLayer) item in defaultLayers)
             item.obj.layer = item.defaultLayer;
+
+        IsLift = false;
     }
 }
