@@ -6,7 +6,10 @@ using NaughtyAttributes;
 [RequireComponent(typeof(Rigidbody))]
 public class Connector : MonoBehaviour
 {
+    public enum ConType { Male, Female }
+
     [SerializeField] private Transform connectionPoint;
+    [field: SerializeField] public ConType ConnectionType { get; private set; } = ConType.Male;
     [field: SerializeField] [field: ReadOnly] public Connector ConnectedTo { get; private set; }
 
     private FixedJoint fixedJoint;
@@ -14,6 +17,7 @@ public class Connector : MonoBehaviour
 
     public Vector3 ConnectionPosition => connectionPoint ? connectionPoint.position : transform.position;
     public Quaternion ConnectionRotation => connectionPoint ? connectionPoint.rotation : transform.rotation;
+    public Quaternion RotationOffset => connectionPoint ? connectionPoint.localRotation : Quaternion.Euler(Vector3.zero);
 
     private void Awake()
     {
@@ -33,7 +37,7 @@ public class Connector : MonoBehaviour
         if (ConnectedTo != null)
             Disconnect();
 
-        secondConnector.transform.rotation = ConnectionRotation;
+        secondConnector.transform.rotation = ConnectionRotation * secondConnector.RotationOffset;
         secondConnector.transform.position = ConnectionPosition - (secondConnector.ConnectionPosition - secondConnector.transform.position);
 
         fixedJoint = gameObject.AddComponent<FixedJoint>();

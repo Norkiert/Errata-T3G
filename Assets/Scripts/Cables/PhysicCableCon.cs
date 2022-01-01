@@ -5,12 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Connector))]
 public class PhysicCableCon : Liftable
 {
-    private Connector connector;
+    private Connector _connector;
     protected override void Awake()
     {
         base.Awake();
 
-        connector = gameObject.GetComponent<Connector>();
+        _connector = gameObject.GetComponent<Connector>();
     }
 
     public override void Drop()
@@ -18,16 +18,16 @@ public class PhysicCableCon : Liftable
         base.Drop();
         
         Interactable selecredObject = FindObjectOfType<PlayerInteractions>().SelectedObject;
-        if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector) && secondConnector != connector)
+        if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector) && secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType)
         {
-            secondConnector.Connect(connector);
+            secondConnector.Connect(_connector);
         }
     }
     public override void PickUp(int layer)
     {
         base.PickUp(layer);
 
-        if (connector.ConnectedTo)
-            connector.Disconnect();
+        if (_connector.ConnectedTo)
+            _connector.Disconnect();
     }
 }
