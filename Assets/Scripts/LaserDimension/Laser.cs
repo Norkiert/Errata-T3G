@@ -37,7 +37,7 @@ public class Laser : Interactable
         }
         else
         {
-            laserIndices.Add(ray.GetPoint(30));
+            laserIndices.Add(ray.GetPoint(maxLaserLength));
             UpdateLaserBeam();
         }
     }
