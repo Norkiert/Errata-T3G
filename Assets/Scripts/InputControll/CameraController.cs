@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform Camera;
-    public float Sensitivity;
-    float xRotation;
+    [SerializeField] private Transform playerCamera;
+    [SerializeField] private float sensitivity = 8f;
+    [SerializeField] [Range(0, -90)] private float minXAngle = -90f;
+    [SerializeField] [Range(0, 90)] private float maxXAngle = 90f;
+
+    private float xRotation = 0f;
+
+    public bool FreezCamera { get; set; } = false;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -14,13 +20,18 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        float MouseX = Input.GetAxis("Mouse X") * Sensitivity;
-        float MouseY = Input.GetAxis("Mouse Y") * Sensitivity;
+        if (FreezCamera)
+            return;
 
-        transform.Rotate(Vector3.up * MouseX);
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-        xRotation -= MouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        Camera.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, minXAngle, maxXAngle);
+        Vector3 targetRotation = transform.rotation.eulerAngles;
+        targetRotation.x = xRotation;
+        playerCamera.eulerAngles = targetRotation;
+
+        transform.Rotate(Vector3.up, mouseX);
     }
 }

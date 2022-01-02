@@ -34,10 +34,10 @@ public class PlayerInteractions : MonoBehaviour
             return;
 
         if (SelectedObject)
-            SelectedObject.Select(false);
+            SelectedObject.Deselect();
 
         if (foundInteractable)
-            foundInteractable.Select(true);
+            foundInteractable.Select();
 
         SelectedObject = foundInteractable;
     }

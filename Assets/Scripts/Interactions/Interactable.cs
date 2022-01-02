@@ -9,14 +9,16 @@ public class Interactable : MonoBehaviour
 
     protected virtual void Awake()
     {
-        Select(false);
+        Deselect();
     }
 
-    public void Select(bool state)
+    public virtual void Select()
     {
-        IsSelected = state;
-        OnSelected(state);
+        IsSelected = true;
     }
 
-    protected virtual void OnSelected(bool state) { }
+    public virtual void Deselect()
+    {
+        IsSelected = false;
+    }
 }
