@@ -80,6 +80,8 @@ MonoBehaviour:
   numberOfPoints: 1
   space: 0.3
   size: 0.3
+  brakeLengthMultiplier: 1.7
+  minBrakeTime: 1
   start: {fileID: 2977188270349127251}
   end: {fileID: 2977188270624934610}
   connector0: {fileID: 2977188270571950511}
@@ -349,7 +351,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -558,7 +560,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -709,8 +711,8 @@ Rigidbody:
   m_GameObject: {fileID: 2977188270791029892}
   serializedVersion: 2
   m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0.01
+  m_Drag: 10
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0

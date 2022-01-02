@@ -137,7 +137,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -156,7 +156,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 100
+  m_Spring: 200
   m_Damper: 0.2
   m_MinDistance: 0.3
   m_MaxDistance: 0.3
@@ -288,8 +288,8 @@ Rigidbody:
   m_GameObject: {fileID: 2616688134847450919}
   serializedVersion: 2
   m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0.01
+  m_Drag: 10
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -308,7 +308,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 100
+  m_Spring: 200
   m_Damper: 0.2
   m_MinDistance: 0.3
   m_MaxDistance: 0.3
@@ -489,7 +489,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -641,6 +641,8 @@ MonoBehaviour:
   numberOfPoints: 1
   space: 0.3
   size: 0.3
+  brakeLengthMultiplier: 1.7
+  minBrakeTime: 1
   start: {fileID: 2616688134953645552}
   end: {fileID: 2616688134694744433}
   connector0: {fileID: 2616688134630156812}

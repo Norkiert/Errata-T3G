@@ -19,6 +19,8 @@ public class Connector : MonoBehaviour
     public Quaternion ConnectionRotation => connectionPoint ? connectionPoint.rotation : transform.rotation;
     public Quaternion RotationOffset => connectionPoint ? connectionPoint.localRotation : Quaternion.Euler(Vector3.zero);
 
+    public bool IsConnected => ConnectedTo != null;
+
     private void Awake()
     {
         Rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -34,7 +36,7 @@ public class Connector : MonoBehaviour
             return;
         }
 
-        if (ConnectedTo != null)
+        if (IsConnected)
             Disconnect();
 
         secondConnector.transform.rotation = ConnectionRotation * secondConnector.RotationOffset;

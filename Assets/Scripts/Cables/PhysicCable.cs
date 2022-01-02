@@ -9,6 +9,12 @@ public class PhysicCable : MonoBehaviour
     [SerializeField] private float space = 0.3f;
     [SerializeField] private float size = 0.3f;
 
+    [SerializeField] [Min(1f)] private float brakeLengthMultiplier = 2f;
+    [SerializeField] [Min(0.1f)] private float minBrakeTime = 1f;
+    private float brakeLength;
+    private float timeToBrake = 1f;
+
+    [Header("Object to set")]
     [SerializeField] private GameObject start;
     [SerializeField] private GameObject end;
     [SerializeField] private GameObject connector0;
@@ -18,6 +24,9 @@ public class PhysicCable : MonoBehaviour
     private List<Transform> connectors;
 
     const string cloneText = "Part";
+
+    private Connector startConnector;
+    private Connector endConnector;
 
     [Button]
     private void UpdatePoints()
@@ -85,6 +94,11 @@ public class PhysicCable : MonoBehaviour
 
     private void Start()
     {
+        startConnector = start.GetComponent<Connector>();
+        endConnector = end.GetComponent<Connector>();
+
+        brakeLength = space * numberOfPoints * brakeLengthMultiplier + 2f;
+
         points = new List<Transform>();
         connectors = new List<Transform>();
 
@@ -119,16 +133,41 @@ public class PhysicCable : MonoBehaviour
 
     private void Update()
     {
-        int length = connectors.Count;
+        float cableLength = 0f;
+        bool isConnected = startConnector.IsConnected || endConnector.IsConnected;
+
+        int numOfParts = connectors.Count;
         Transform lastPoint = points[0];
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < numOfParts; i++)
         {
             Transform nextPoint = points[i + 1];
             Transform connector = connectors[i].transform;
             connector.position = CountConPos(lastPoint.position, nextPoint.position);
             connector.rotation = Quaternion.LookRotation(nextPoint.position - connector.position);
             connector.localScale = CountSizeOfCon(lastPoint.position, nextPoint.position);
+
+            if (isConnected)
+                cableLength += (lastPoint.position - nextPoint.position).magnitude;
+
             lastPoint = nextPoint;
+        }
+
+        if (isConnected)
+        {
+            if (cableLength > brakeLength)
+            {
+                timeToBrake -= Time.deltaTime;
+                if (timeToBrake < 0f)
+                {
+                    startConnector.Disconnect();
+                    endConnector.Disconnect();
+                    timeToBrake = minBrakeTime;
+                }
+            }
+            else
+            {
+                timeToBrake = minBrakeTime;
+            }
         }
     }
 
