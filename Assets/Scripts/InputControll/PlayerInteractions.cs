@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using System;
 
 public class PlayerInteractions : MonoBehaviour
 {
@@ -17,12 +18,50 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private int heldObjectLayer;
     [field: SerializeField] [field: ReadOnly] public Liftable HeldObject { get; private set; } = null;
 
+    [field: Header("Input")]
+    [field: SerializeField] [field: ReadOnly] public bool Interacting { get; private set; } = false;
+
+    private event Action InteractionStart;
+    private event Action InteractionEnd;
+
+    private void Start()
+    {
+        AddInteractionStartListener(ChangeHeldObject);
+    }
+
     private void Update()
     {
+        UpdateInput();
+
         UpdateSelectedObject();
 
-        UpdateHeldObject();
+        if (HeldObject)
+            UpdateHeldObject();
     }
+
+
+    #region -input-
+
+    private void UpdateInput()
+    {
+        bool interacting = Input.GetMouseButton(0);
+        if (interacting != Interacting)
+        {
+            if (interacting)
+                InteractionStart?.Invoke();
+            else
+                InteractionEnd?.Invoke();
+        }
+        Interacting = interacting;
+    }
+    public void AddInteractionStartListener(Action action) => InteractionStart += action;
+    public void RemoveInteractionStartListener(Action action) => InteractionStart -= action;
+    public void AddInteractionEndListener(Action action) => InteractionEnd += action;
+    public void RemoveInteractionEndListener(Action action) => InteractionEnd -= action;
+
+    #endregion
+
+    #region -selected object-
 
     private void UpdateSelectedObject()
     {
@@ -42,21 +81,21 @@ public class PlayerInteractions : MonoBehaviour
         SelectedObject = foundInteractable;
     }
 
+    #endregion
+
+    #region -held object-
+
     private void UpdateHeldObject()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (HeldObject)
-                DropObject(HeldObject);
-            else if (SelectedObject is Liftable liftable)
-                PickUpObject(liftable);
-        }
-
+        HeldObject.Rigidbody.velocity = (handTransform.position - HeldObject.transform.position) * holdingForce;
+        HeldObject.transform.rotation = Quaternion.Euler(handTransform.rotation.eulerAngles + HeldObject.LiftDirectionOffset);
+    }
+    private void ChangeHeldObject()
+    {
         if (HeldObject)
-        {
-            HeldObject.Rigidbody.velocity = (handTransform.position - HeldObject.transform.position) * holdingForce;
-            HeldObject.transform.rotation = Quaternion.Euler(handTransform.rotation.eulerAngles + HeldObject.LiftDirectionOffset);
-        }  
+            DropObject(HeldObject);
+        else if (SelectedObject is Liftable liftable)
+            PickUpObject(liftable);
     }
     private void PickUpObject(Liftable obj)
     {
@@ -68,4 +107,6 @@ public class PlayerInteractions : MonoBehaviour
         HeldObject = null;
         obj.Drop();
     }
+
+    #endregion
 }
