@@ -8,17 +8,19 @@ public class LaserMirror : Interactable
     [SerializeField] private KeyCode roatateRightKey = KeyCode.E;
     [SerializeField] private KeyCode roatateLeftKey = KeyCode.Q;
 
+    [SerializeField] private float roataionSpeed = 20;
+
     private void Update()
     {
         if (IsSelected && (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E)))
         {
             if (Input.GetKey(roatateRightKey))
             {
-                transform.Rotate(0f, 0.2f, 0f);
+                transform.Rotate(Vector3.up * roataionSpeed * Time.deltaTime);
             }
             if (Input.GetKey(roatateLeftKey))
             {
-                transform.Rotate(0f, -0.2f, 0f);
+                transform.Rotate(-Vector3.up * roataionSpeed * Time.deltaTime);
             }
         }
     }
