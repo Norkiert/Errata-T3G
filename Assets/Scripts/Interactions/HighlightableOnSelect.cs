@@ -17,7 +17,7 @@ public class HighlightableOnSelect : Highlightable
         if(isEnabled != interactable.IsSelected)
         {
             isEnabled = interactable.IsSelected;
-            base.OnValidate();
+            base.UpdateOnce();
         }
     }
 }

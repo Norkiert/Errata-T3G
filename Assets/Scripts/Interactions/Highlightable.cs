@@ -23,6 +23,11 @@ public class Highlightable : ChrisNolet.Outline
 
     protected new void OnValidate()
     {
+        UpdateOnce();
+    }
+
+    protected void UpdateOnce()
+    {
         if (isEnabled)
         {
             base.Enable();
