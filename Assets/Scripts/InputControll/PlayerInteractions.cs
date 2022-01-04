@@ -21,12 +21,12 @@ public class PlayerInteractions : MonoBehaviour
     [field: Header("Input")]
     [field: SerializeField] [field: ReadOnly] public bool Interacting { get; private set; } = false;
 
-    private event Action InteractionStart;
-    private event Action InteractionEnd;
+    public event Action OnInteractionStart;
+    public event Action OnInteractionEnd;
 
     private void Start()
     {
-        AddInteractionStartListener(ChangeHeldObject);
+        OnInteractionStart += ChangeHeldObject;
     }
 
     private void Update()
@@ -48,16 +48,12 @@ public class PlayerInteractions : MonoBehaviour
         if (interacting != Interacting)
         {
             if (interacting)
-                InteractionStart?.Invoke();
+                OnInteractionStart?.Invoke();
             else
-                InteractionEnd?.Invoke();
+                OnInteractionEnd?.Invoke();
         }
         Interacting = interacting;
     }
-    public void AddInteractionStartListener(Action action) => InteractionStart += action;
-    public void RemoveInteractionStartListener(Action action) => InteractionStart -= action;
-    public void AddInteractionEndListener(Action action) => InteractionEnd += action;
-    public void RemoveInteractionEndListener(Action action) => InteractionEnd -= action;
 
     #endregion
 
