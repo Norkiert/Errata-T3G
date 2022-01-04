@@ -65,7 +65,7 @@ public class MovementController : MonoBehaviour
 
 
     private CharacterController controller;
-    private Vector3 velocity;
+    public Vector3 velocity;
     private Vector3 moveDirection;
     private DG.Tweening.Tweener hightModifier;
 
