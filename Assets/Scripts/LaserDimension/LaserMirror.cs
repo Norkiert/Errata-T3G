@@ -5,23 +5,18 @@ using DG.Tweening;
 
 public class LaserMirror : Interactable
 {
-    [SerializeField] private KeyCode roatateRightKey = KeyCode.E;
-    [SerializeField] private KeyCode roatateLeftKey = KeyCode.Q;
+    [SerializeField] private KeyCode rotateKey = KeyCode.Mouse0;
 
-    [SerializeField] private float roataionSpeed = 20;
+    [SerializeField] private float rotationSpeed = 20;
+    [SerializeField] private CameraController cController;
 
     private void Update()
     {
-        if (IsSelected && (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E)))
+        if (IsSelected && Input.GetKey(rotateKey))
         {
-            if (Input.GetKey(roatateRightKey))
-            {
-                transform.Rotate(Vector3.up * roataionSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(roatateLeftKey))
-            {
-                transform.Rotate(-Vector3.up * roataionSpeed * Time.deltaTime);
-            }
+            cController.enabled = false;
+            transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * rotationSpeed * Time.deltaTime);
         }
+        else cController.enabled = true;
     }
 }
