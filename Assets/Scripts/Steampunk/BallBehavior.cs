@@ -4,7 +4,7 @@ using NaughtyAttributes;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class Ball : ObjectGroundChecker
+public class BallBehavior : ObjectGroundChecker
 {
     [SerializeField] protected float timeLimit = 5f;
     [SerializeField] [field: ReadOnly] protected float timeElapsed = 0f;
