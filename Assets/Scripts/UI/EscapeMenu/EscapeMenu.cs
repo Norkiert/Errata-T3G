@@ -5,15 +5,14 @@ using UnityEngine;
 public class EscapeMenu : MonoBehaviour
 {
     [SerializeField] private Canvas escMenu;
-    [SerializeField] private Canvas crosshair;
-    private CameraController camController;
+    [SerializeField] private CameraController camController;
     private void Start()
     {
         Time.timeScale = 1f;
-        crosshair.enabled = true;
+        GameObject temporaryPlayer = GameObject.Find("Player");
         escMenu.enabled = false;
-        camController = GetComponent<CameraController>();
-        camController.enabled = true;
+        camController = temporaryPlayer.GetComponent<CameraController>();
+        camController.FreezCamera = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
@@ -22,8 +21,7 @@ public class EscapeMenu : MonoBehaviour
         {
             Time.timeScale = Time.timeScale==0f? 1f:0f;
             escMenu.enabled = !escMenu.enabled;
-            crosshair.enabled = !crosshair.enabled;
-            camController.enabled = !camController.enabled;
+            camController.FreezCamera = !camController.FreezCamera;
 
             if (escMenu.enabled)
             {
