@@ -160,7 +160,6 @@ namespace ChrisNolet
 
         protected void OnDestroy()
         {
-
             // Destroy material instances
             Destroy(outlineMaskMaterial);
             Destroy(outlineFillMaterial);
@@ -168,13 +167,11 @@ namespace ChrisNolet
 
         protected void Bake()
         {
-
             // Generate smooth normals for each mesh
             var bakedMeshes = new HashSet<Mesh>();
 
             foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
             {
-
                 // Skip duplicates
                 if (!bakedMeshes.Add(meshFilter.sharedMesh))
                 {
@@ -191,7 +188,6 @@ namespace ChrisNolet
 
         protected void LoadSmoothNormals()
         {
-
             // Retrieve or generate smooth normals
             foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
             {
@@ -222,7 +218,6 @@ namespace ChrisNolet
 
         protected List<Vector3> SmoothNormals(Mesh mesh)
         {
-
             // Group vertices by location
             var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);
 
@@ -261,7 +256,6 @@ namespace ChrisNolet
 
         protected void UpdateMaterialProperties()
         {
-
             // Apply properties according to mode
             outlineFillMaterial.SetColor("_OutlineColor", outlineColor);
 
