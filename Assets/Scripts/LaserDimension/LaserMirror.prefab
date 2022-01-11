@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2387275121970786026}
   - component: {fileID: 2387275121970786021}
   - component: {fileID: 2387275121970786020}
+  - component: {fileID: 3140978516663971872}
   m_Layer: 0
   m_Name: LaserMirror
   m_TagString: Untagged
@@ -112,3 +113,22 @@ MonoBehaviour:
   rotateKey: 323
   rotationSpeed: 20
   cController: {fileID: 4786394937728070140, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
+--- !u!114 &3140978516663971872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2387275121970786022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a531a1fc98fe5f4c89050c34a7c28f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  isEnabled: 0
