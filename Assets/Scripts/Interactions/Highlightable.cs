@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChrisNolet;
 
-public class Highlightable : ChrisNolet.Outline
+public class Highlightable : Outline
 {
     [SerializeField] protected bool isEnabled = false;
 
