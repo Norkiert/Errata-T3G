@@ -74,6 +74,9 @@ namespace ChrisNolet
         [SerializeField, Range(0f, 100f)]
         private float outlineWidth = 5f;
 
+        [SerializeField]
+        protected bool triggerEnable = false;
+
         [Header("Optional")]
 
         [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
@@ -91,7 +94,6 @@ namespace ChrisNolet
         private Material outlineFillMaterial;
 
         protected bool needsUpdate;
-        protected bool firstTime = true;
 
         protected void Awake()
         {
@@ -115,17 +117,12 @@ namespace ChrisNolet
 
         protected void OnEnable()
         {
-            Enable();
-            if (firstTime)
-            {
-                firstTime = false;
-                Disable();
-            }
+            if (triggerEnable)
+                Enable();
         }
 
         protected void OnValidate()
         {
-
             // Update material properties
             needsUpdate = true;
 
@@ -155,7 +152,8 @@ namespace ChrisNolet
 
         protected void OnDisable()
         {
-            Disable();
+            if (triggerEnable)
+                Disable();
         }
 
         protected void OnDestroy()
@@ -295,9 +293,11 @@ namespace ChrisNolet
 
         protected void Enable()
         {
-            if(renderers != null) foreach (var renderer in renderers)
-            {
+            if (renderers == null)
+                return;
 
+            foreach (var renderer in renderers)
+            {
                 // Append outline shaders
                 var materials = renderer.sharedMaterials.ToList();
 
@@ -310,9 +310,11 @@ namespace ChrisNolet
 
         protected void Disable()
         {
-            if(renderers != null) foreach (var renderer in renderers)
-            {
+            if (renderers == null)
+                return;
 
+            foreach (var renderer in renderers)
+            {
                 // Remove outline shaders
                 var materials = renderer.sharedMaterials.ToList();
                 materials.Remove(outlineMaskMaterial);

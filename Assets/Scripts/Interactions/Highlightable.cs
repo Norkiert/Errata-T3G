@@ -9,17 +9,16 @@ public class Highlightable : Outline
 
     protected new void Awake()
     {
-        if (isEnabled)
-        {
-            base.firstTime = false;
-        }
+        triggerEnable = false;
+
         base.Awake();
         needsUpdate = false;
         base.UpdateMaterialProperties();
-        if (!isEnabled)
-        {
+
+        if (isEnabled)
+            base.Enable();
+        else
             base.Disable();
-        }
     }
 
     protected new void OnValidate()
@@ -30,13 +29,21 @@ public class Highlightable : Outline
     protected void UpdateOnce()
     {
         if (isEnabled)
-        {
             base.Enable();
-        }
         else
-        {
             base.Disable();
-        }
+
         base.OnValidate();
+    }
+
+    private new void OnEnable()
+    {
+        if (isEnabled)
+            base.Enable();
+    }
+
+    private new void OnDisable()
+    {
+        base.Disable();
     }
 }

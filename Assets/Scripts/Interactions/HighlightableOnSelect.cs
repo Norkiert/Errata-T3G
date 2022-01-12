@@ -6,6 +6,7 @@ using UnityEngine;
 public class HighlightableOnSelect : Highlightable
 {
     private Interactable interactable;
+
     protected new void Awake()
     {
         base.Awake();
@@ -14,7 +15,7 @@ public class HighlightableOnSelect : Highlightable
 
     protected new void Update()
     {
-        if(isEnabled != interactable.IsSelected)
+        if (isEnabled != interactable.IsSelected)
         {
             isEnabled = interactable.IsSelected;
             base.UpdateOnce();
