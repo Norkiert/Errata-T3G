@@ -7,19 +7,20 @@ using System;
 public class PlayerInteractions : MonoBehaviour
 {
     [Header("Select")]
-    [SerializeField] [Required] private Transform playerCamera;
+    [SerializeField, Required] private Transform playerCamera;
     [SerializeField] private float selectRange = 10f;
     [SerializeField] private LayerMask selectLayer;
-    [field: SerializeField] [field: ReadOnly] public Interactable SelectedObject { get; private set; } = null;
+    [field: SerializeField, ReadOnly] public Interactable SelectedObject { get; private set; } = null;
 
     [Header("Hold")]
-    [SerializeField] [Required] private Transform handTransform;
-    [SerializeField] [Min(1)] private float holdingForce = 10f;
+    [SerializeField, Required] private Transform handTransform;
+    [SerializeField, Min(1)] private float holdingForce = 0.5f;
     [SerializeField] private int heldObjectLayer;
-    [field: SerializeField] [field: ReadOnly] public Liftable HeldObject { get; private set; } = null;
+    [SerializeField] [Range(0f, 90f)] private float heldClamXRotation = 45f;
+    [field: SerializeField, ReadOnly] public Liftable HeldObject { get; private set; } = null;
 
     [field: Header("Input")]
-    [field: SerializeField] [field: ReadOnly] public bool Interacting { get; private set; } = false;
+    [field: SerializeField, ReadOnly] public bool Interacting { get; private set; } = false;
 
     public event Action OnInteractionStart;
     public event Action OnInteractionEnd;
@@ -36,9 +37,8 @@ public class PlayerInteractions : MonoBehaviour
         UpdateSelectedObject();
 
         if (HeldObject)
-            UpdateHeldObject();
+            UpdateHeldObjectPosition();
     }
-
 
     #region -input-
 
@@ -81,10 +81,14 @@ public class PlayerInteractions : MonoBehaviour
 
     #region -held object-
 
-    private void UpdateHeldObject()
+    private void UpdateHeldObjectPosition()
     {
         HeldObject.Rigidbody.velocity = (handTransform.position - HeldObject.transform.position) * holdingForce;
-        HeldObject.transform.rotation = Quaternion.Euler(handTransform.rotation.eulerAngles + HeldObject.LiftDirectionOffset);
+        Vector3 handRot = handTransform.rotation.eulerAngles;
+        if (handRot.x > 180f)
+            handRot.x -= 360f;
+        handRot.x = Mathf.Clamp(handRot.x, -heldClamXRotation, heldClamXRotation);
+        HeldObject.transform.rotation = Quaternion.Euler(handRot + HeldObject.LiftDirectionOffset);
     }
     private void ChangeHeldObject()
     {
