@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
+[DisallowMultipleComponent]
 public class Interactable : MonoBehaviour
 {
     [field: SerializeField] [field: ReadOnly] public bool IsSelected { get; private set; }
