@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Logic;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Connector : MonoBehaviour
+public class Connector : MonoBehaviour, ILogicBoolOutput
 {
     public enum ConType { Male, Female }
 
@@ -20,11 +21,14 @@ public class Connector : MonoBehaviour
     public Quaternion RotationOffset => connectionPoint ? connectionPoint.localRotation : Quaternion.Euler(Vector3.zero);
 
     public bool IsConnected => ConnectedTo != null;
+    public bool LogicValue => IsConnected;
 
     private void Awake()
     {
         Rigidbody = gameObject.GetComponent<Rigidbody>();
     }
+
+    private void OnDisable() => Disconnect();
 
     public void SetAsConnectedTo(Connector secondConnector) => ConnectedTo = secondConnector;
 
