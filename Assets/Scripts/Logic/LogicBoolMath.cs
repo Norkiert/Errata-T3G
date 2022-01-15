@@ -51,7 +51,7 @@ namespace Logic
         private bool IsValid()
         {
             foreach (var input in inputs)
-                if (!input.TryGetComponent(out ILogicBoolOutput _))
+                if (input == null || !input.TryGetComponent(out ILogicBoolOutput _))
                     return false;
             return true;
         }
