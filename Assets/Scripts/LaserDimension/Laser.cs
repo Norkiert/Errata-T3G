@@ -7,17 +7,20 @@ using NaughtyAttributes;
 [RequireComponent(typeof(LineRenderer))]
 public class Laser : Interactable, ILogicBoolOutput
 {
-    [SerializeField] [Min(1)] private float maxLaserLength = 100f;
+    [SerializeField, Range(0f, 1f)] private float laserSize = 0.1f;
+    [SerializeField, Min(1)] private float maxLaserLength = 100f;
+    [SerializeField, ReadOnly] private bool targetHit = false;
 
     private LineRenderer laser;
-    [SerializeField,ReadOnly] private bool targetHit = false;
-    private List<Vector3> laserIndices = new List<Vector3>();
+    private readonly List<Vector3> laserIndices = new List<Vector3>();
 
     public bool LogicValue => targetHit;
 
     private void Start()
     {
         laser = gameObject.GetComponent<LineRenderer>();
+        laser.startWidth = laserSize;
+        laser.endWidth = laserSize;
     }
 
     private void Update()
@@ -27,8 +30,10 @@ public class Laser : Interactable, ILogicBoolOutput
 
     private void LaserUpdate()
     {
-        CastRay(transform.position, transform.right);
+        targetHit = false;
         laserIndices.Clear();
+        CastRay(transform.position, transform.right);
+        UpdateLaserBeam();
     }
 
     private void CastRay(Vector3 position, Vector3 direction)
@@ -43,7 +48,6 @@ public class Laser : Interactable, ILogicBoolOutput
         else
         {
             laserIndices.Add(ray.GetPoint(maxLaserLength));
-            UpdateLaserBeam();
         }
     }
 
@@ -51,23 +55,19 @@ public class Laser : Interactable, ILogicBoolOutput
     {
         if (hitInfo.collider.gameObject.TryGetComponent(out LaserMirror _))
         {
-            Vector3 pos = hitInfo.point;
-            Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
-            CastRay(pos, dir);
+            Vector3 hitPosition = hitInfo.point - direction * laserSize * 0.1f;
+            Debug.DrawLine(hitPosition, hitInfo.point, Color.blue);
+            Vector3 newDirection = Vector3.Reflect(direction, hitInfo.normal);
+            CastRay(hitPosition, newDirection);
+            return;
         }
 
         if (hitInfo.collider.gameObject.TryGetComponent(out LaserTarget _))
         {
-            Debug.Log("Weszlo tu");
             targetHit = true;
-            laserIndices.Add(hitInfo.point);
-            UpdateLaserBeam();
         }
-        else
-        {
-            laserIndices.Add(hitInfo.point);
-            UpdateLaserBeam();
-        }
+        
+        laserIndices.Add(hitInfo.point);
     }
 
     private void UpdateLaserBeam()
