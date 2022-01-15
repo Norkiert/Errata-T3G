@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Logic;
+using NaughtyAttributes;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Laser : Interactable
+public class Laser : Interactable, ILogicBoolOutput
 {
     [SerializeField] [Min(1)] private float maxLaserLength = 100f;
 
     private LineRenderer laser;
+    [SerializeField,ReadOnly] private bool targetHit = false;
     private List<Vector3> laserIndices = new List<Vector3>();
+
+    public bool LogicValue => targetHit;
 
     private void Start()
     {
@@ -53,6 +58,8 @@ public class Laser : Interactable
 
         if (hitInfo.collider.gameObject.TryGetComponent(out LaserTarget _))
         {
+            Debug.Log("Weszlo tu");
+            targetHit = true;
             laserIndices.Add(hitInfo.point);
             UpdateLaserBeam();
         }

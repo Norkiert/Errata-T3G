@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
 public class LaserMirror : Interactable
 {
     [SerializeField] private KeyCode rotateKey = KeyCode.Mouse0;
 
     [SerializeField] private float rotationSpeed = 20;
-    [SerializeField] private CameraController cController;
-
+    private CameraController cController;
+    private void Start()
+    {
+        cController = FindObjectOfType<CameraController>();
+    }
     private void Update()
     {
         if (IsSelected && Input.GetKey(rotateKey))
