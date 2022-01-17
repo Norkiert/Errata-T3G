@@ -110,9 +110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsSelected>k__BackingField: 0
-  rotateKey: 323
+  rotateHorizontal: 1
+  rotateVertical: 0
   rotationSpeed: 20
-  cController: {fileID: 4786394937728070140, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
 --- !u!114 &3140978516663971872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 5
+  triggerEnable: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

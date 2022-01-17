@@ -4,25 +4,27 @@ using UnityEngine;
 using DG.Tweening;
 public class LaserMirror : Interactable
 {
-    [SerializeField] private KeyCode rotateKey = KeyCode.Mouse0;
-
+    [SerializeField] private bool rotateHorizontal = true;
+    [SerializeField] private bool rotateVertical = false;
     [SerializeField] private float rotationSpeed = 20;
+
+    private PlayerInteractions player;
     private CameraController cController;
+
     private void Start()
     {
         cController = FindObjectOfType<CameraController>();
+        player = FindObjectOfType<PlayerInteractions>();
     }
     public override void Select()
     {
         base.Select();
-        PlayerInteractions player = FindObjectOfType<PlayerInteractions>();
         player.OnInteractionStart += StartRotateMirror;
         player.OnInteractionEnd += EndRotateMirror;
     }
     public override void Deselect()
     {
         base.Deselect();
-        PlayerInteractions player = FindObjectOfType<PlayerInteractions>();
         if(player)
         {
             player.OnInteractionStart -= StartRotateMirror;
@@ -43,7 +45,7 @@ public class LaserMirror : Interactable
         while(!cController.enabled)
         {
             yield return null;
-            transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * rotationSpeed * Time.deltaTime);
+            transform.Rotate(new Vector3(0, rotateHorizontal?Input.GetAxis("Mouse X"):0, rotateVertical?Input.GetAxis("Mouse Y"):0) * rotationSpeed * Time.deltaTime);
         }
     }
 }
