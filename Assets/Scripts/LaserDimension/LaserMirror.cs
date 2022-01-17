@@ -12,13 +12,38 @@ public class LaserMirror : Interactable
     {
         cController = FindObjectOfType<CameraController>();
     }
-    private void Update()
+    public override void Select()
     {
-        if (IsSelected && Input.GetKey(rotateKey))
+        base.Select();
+        PlayerInteractions player = FindObjectOfType<PlayerInteractions>();
+        player.OnInteractionStart += StartRotateMirror;
+        player.OnInteractionEnd += EndRotateMirror;
+    }
+    public override void Deselect()
+    {
+        base.Deselect();
+        PlayerInteractions player = FindObjectOfType<PlayerInteractions>();
+        if(player)
         {
-            cController.enabled = false;
+            player.OnInteractionStart -= StartRotateMirror;
+            player.OnInteractionEnd -= EndRotateMirror;
+        }
+    }
+    private void StartRotateMirror()
+    {
+        cController.enabled = false;
+        StartCoroutine(RotateMirror());
+    }
+    private void EndRotateMirror()
+    {
+        cController.enabled = true;
+    }
+    private IEnumerator RotateMirror()
+    {
+        while(!cController.enabled)
+        {
+            yield return null;
             transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * rotationSpeed * Time.deltaTime);
         }
-        else cController.enabled = true;
     }
 }
