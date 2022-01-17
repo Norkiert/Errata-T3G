@@ -28,6 +28,7 @@ public class PlayerInteractions : MonoBehaviour
     private void Start()
     {
         OnInteractionStart += ChangeHeldObject;
+        OnInteractionStart += ClickSelected;
     }
 
     private void Update()
@@ -107,6 +108,20 @@ public class PlayerInteractions : MonoBehaviour
         HeldObject = null;
         obj.Drop();
     }
+
+    #endregion
+
+    #region -clickables-
+
+
+    protected void ClickSelected()
+    {
+        if (SelectedObject && SelectedObject is Clickable clickable)
+        {
+            clickable.Click();
+        }
+    }
+
 
     #endregion
 }
