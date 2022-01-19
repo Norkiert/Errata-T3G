@@ -78,4 +78,8 @@ public class Laser : Interactable, ILogicBoolOutput
         for (int i = 0; i < length; i++)
             laser.SetPosition(i, laserIndices[i]);
     }
+    private void OnDisable()
+    {
+        targetHit = false;
+    }
 }
