@@ -175,6 +175,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 0a6792582d9e751458fc635ffd741fb8, type: 3}
+--- !u!114 &273711317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273711312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddbc342db4f3b24ba4bc7f00266802e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &432208476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -559,6 +571,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1232332146}
     m_Modifications:
+    - target: {fileID: 663357502200008040, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1398133648268586802, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -607,6 +623,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalLaser
       objectReference: {fileID: 0}
+    - target: {fileID: 1398133648268586805, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+      propertyPath: laserSize
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3872986329296569922, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -617,7 +641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4924742615568194950, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
@@ -839,6 +863,7 @@ GameObject:
   - component: {fileID: 1232332145}
   - component: {fileID: 1232332144}
   - component: {fileID: 1232332143}
+  - component: {fileID: 1232332147}
   m_Layer: 0
   m_Name: Lasers
   m_TagString: Untagged
@@ -853,7 +878,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232332142}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40346e239d11c3043a4024bffe3fb3c0, type: 3}
   m_Name: 
@@ -867,7 +892,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232332142}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5af3f451ec5ca384d9c6786fcfc62faf, type: 3}
   m_Name: 
@@ -884,7 +909,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232332142}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40346e239d11c3043a4024bffe3fb3c0, type: 3}
   m_Name: 
@@ -909,6 +934,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1232332147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232332142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40346e239d11c3043a4024bffe3fb3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 1468280607}
+  objectToSet: {fileID: 1543178855}
 --- !u!1001 &1303914598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1092,6 +1131,17 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0e34ebeb127afc74db4567f4d5b39ded, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cad47b2d6c898f46835aa5739d6b609, type: 3}
+--- !u!114 &1468280607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+  m_PrefabInstance: {fileID: 1621511118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9d25bebbe72504ba3d1cf4c3c5df61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1513752250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1177,6 +1227,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
+--- !u!1 &1543178855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1398133648268586805, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+  m_PrefabInstance: {fileID: 790482037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1543178856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1398133648268586802, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
@@ -1334,7 +1389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398133648268586805, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: maxLaserLength
@@ -1544,7 +1599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398133648268586805, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: maxLaserLength
