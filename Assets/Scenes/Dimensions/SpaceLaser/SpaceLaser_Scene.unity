@@ -128,22 +128,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
   m_PrefabInstance: {fileID: 716510130}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &99593381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 99593377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
 --- !u!64 &99593382
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -170,7 +154,6 @@ GameObject:
   - component: {fileID: 219322325}
   - component: {fileID: 219322324}
   - component: {fileID: 219322323}
-  - component: {fileID: 219322322}
   m_Layer: 0
   m_Name: Black_crystal_6
   m_TagString: Untagged
@@ -185,29 +168,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219322320}
-  m_LocalRotation: {x: -0.95909125, y: 0.21948503, z: -0.1742965, w: 0.039887205}
+  m_LocalRotation: {x: -0.983885, y: 0, z: -0.17880228, w: 0}
   m_LocalPosition: {x: -3.37, y: 1.77, z: -22.1}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 431778397}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: -180, y: -20.6, z: 25.78}
---- !u!114 &219322322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 219322320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: -20.6, z: 0}
 --- !u!64 &219322323
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -713,7 +680,6 @@ GameObject:
   - component: {fileID: 319287474}
   - component: {fileID: 319287473}
   - component: {fileID: 319287472}
-  - component: {fileID: 319287471}
   m_Layer: 0
   m_Name: Black_crystal_7
   m_TagString: Untagged
@@ -728,29 +694,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319287469}
-  m_LocalRotation: {x: -0.957374, y: 0.21909206, z: -0.1834948, w: 0.041992214}
+  m_LocalRotation: {x: -0.9821234, y: 0, z: -0.1882384, w: 0}
   m_LocalPosition: {x: -7.88, y: 1.77, z: -29.38}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 431778397}
   m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: -180, y: -21.7, z: 25.78}
---- !u!114 &319287471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319287469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: -21.7, z: 0}
 --- !u!64 &319287472
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -826,7 +776,6 @@ GameObject:
   - component: {fileID: 350906949}
   - component: {fileID: 350906948}
   - component: {fileID: 350906947}
-  - component: {fileID: 350906946}
   m_Layer: 0
   m_Name: Black_crystal_4
   m_TagString: Untagged
@@ -841,29 +790,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350906944}
-  m_LocalRotation: {x: -0.96312916, y: 0.2204091, z: 0.15039147, w: -0.03441662}
+  m_LocalRotation: {x: -0.9880273, y: 0, z: 0.15427929, w: 0}
   m_LocalPosition: {x: -15.670001, y: 1.77, z: -39.24}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 431778397}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: -180, y: 17.75, z: 25.78}
---- !u!114 &350906946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350906944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: 17.75, z: 0}
 --- !u!64 &350906947
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1585,7 +1518,6 @@ GameObject:
   - component: {fileID: 670563944}
   - component: {fileID: 670563943}
   - component: {fileID: 670563942}
-  - component: {fileID: 670563941}
   m_Layer: 0
   m_Name: Black_crystal_2
   m_TagString: Untagged
@@ -1600,29 +1532,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670563939}
-  m_LocalRotation: {x: -0.8574816, y: 0.19623198, z: -0.46363854, w: 0.10610223}
+  m_LocalRotation: {x: -0.87964857, y: 0, z: -0.4756242, w: 0}
   m_LocalPosition: {x: -29.2, y: 1.77, z: -49.11}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 431778397}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -180, y: -56.8, z: 25.78}
---- !u!114 &670563941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670563939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: -56.8, z: 0}
 --- !u!64 &670563942
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2063,19 +1979,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.04593207
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.9538559
+      value: -0.97444856
       objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.19927093
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.21986435
+      value: -0.22461097
       objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2087,7 +2003,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -23.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3272106112100924687, guid: 038354027ebe39a4084e98a480a7c9f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2431,7 +2347,6 @@ GameObject:
   - component: {fileID: 1089364147}
   - component: {fileID: 1089364146}
   - component: {fileID: 1089364145}
-  - component: {fileID: 1089364144}
   m_Layer: 0
   m_Name: Black_crystal_3
   m_TagString: Untagged
@@ -2446,29 +2361,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089364142}
-  m_LocalRotation: {x: -0.7244177, y: 0.16578072, z: 0.6522687, w: -0.14926966}
+  m_LocalRotation: {x: -0.7431448, y: 0, z: 0.6691307, w: 0}
   m_LocalPosition: {x: -15.670001, y: 1.77, z: -42.980003}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 431778397}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -180, y: 84, z: 25.78}
---- !u!114 &1089364144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089364142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: 84, z: 0}
 --- !u!64 &1089364145
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2544,7 +2443,6 @@ GameObject:
   - component: {fileID: 1143772480}
   - component: {fileID: 1143772479}
   - component: {fileID: 1143772478}
-  - component: {fileID: 1143772477}
   m_Layer: 0
   m_Name: Black_crystal_3
   m_TagString: Untagged
@@ -2559,29 +2457,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143772475}
-  m_LocalRotation: {x: -0.7244177, y: 0.16578072, z: 0.6522687, w: -0.14926966}
+  m_LocalRotation: {x: -0.7431448, y: 0, z: 0.6691307, w: 0}
   m_LocalPosition: {x: 1.53, y: 1.77, z: 19.63}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 2082251623}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -180, y: 84, z: 25.78}
---- !u!114 &1143772477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143772475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: 84, z: 0}
 --- !u!64 &1143772478
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2808,7 +2690,6 @@ GameObject:
   - component: {fileID: 1281018224}
   - component: {fileID: 1281018223}
   - component: {fileID: 1281018222}
-  - component: {fileID: 1281018221}
   m_Layer: 0
   m_Name: Black_crystal_2
   m_TagString: Untagged
@@ -2823,29 +2704,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281018219}
-  m_LocalRotation: {x: -0.8756966, y: 0.20040043, z: 0.42824158, w: -0.09800174}
+  m_LocalRotation: {x: -0.8983345, y: 0, z: 0.43931216, w: 0}
   m_LocalPosition: {x: -12, y: 1.77, z: 13.31}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 2082251623}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -180, y: 52.12, z: 25.78}
---- !u!114 &1281018221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281018219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: 52.12, z: 0}
 --- !u!64 &1281018222
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4113,7 +3978,6 @@ GameObject:
   - component: {fileID: 1868415513}
   - component: {fileID: 1868415512}
   - component: {fileID: 1868415511}
-  - component: {fileID: 1868415510}
   m_Layer: 0
   m_Name: Black_crystal_1
   m_TagString: Untagged
@@ -4128,29 +3992,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868415508}
-  m_LocalRotation: {x: -0.8756966, y: 0.20040043, z: 0.42824158, w: -0.09800174}
+  m_LocalRotation: {x: -0.8983345, y: 0, z: 0.43931216, w: 0}
   m_LocalPosition: {x: -7.56, y: 1.77, z: 27.11}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 2082251623}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -180, y: 52.12, z: 25.78}
---- !u!114 &1868415510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868415508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: 52.12, z: 0}
 --- !u!64 &1868415511
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4226,7 +4074,6 @@ GameObject:
   - component: {fileID: 1884690304}
   - component: {fileID: 1884690303}
   - component: {fileID: 1884690302}
-  - component: {fileID: 1884690301}
   m_Layer: 0
   m_Name: Black_crystal_1
   m_TagString: Untagged
@@ -4241,29 +4088,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884690299}
-  m_LocalRotation: {x: -0.80432075, y: 0.18406628, z: -0.55072993, w: 0.12603281}
+  m_LocalRotation: {x: -0.82511353, y: 0, z: -0.56496704, w: 0}
   m_LocalPosition: {x: -34.69, y: 1.77, z: -39.36}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 431778397}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -180, y: -68.8, z: 25.78}
---- !u!114 &1884690301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884690299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: -68.8, z: 0}
 --- !u!64 &1884690302
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4511,7 +4342,6 @@ GameObject:
   - component: {fileID: 2088412228}
   - component: {fileID: 2088412227}
   - component: {fileID: 2088412226}
-  - component: {fileID: 2088412225}
   m_Layer: 0
   m_Name: Black_crystal_5
   m_TagString: Untagged
@@ -4526,29 +4356,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088412223}
-  m_LocalRotation: {x: -0.7041606, y: 0.16114496, z: -0.6740869, w: 0.15426269}
+  m_LocalRotation: {x: -0.72236407, y: 0, z: -0.691513, w: 0}
   m_LocalPosition: {x: -15.670001, y: 1.77, z: -9.08}
   m_LocalScale: {x: 100, y: 100, z: 155.73657}
   m_Children: []
   m_Father: {fileID: 431778397}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: -180, y: -87.5, z: 25.78}
---- !u!114 &2088412225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088412223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b703e6920d3986244b871462e6c312b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  rotateHorizontal: 1
-  rotateVertical: 0
-  rotationSpeed: 20
+  m_LocalEulerAnglesHint: {x: -180, y: -87.5, z: 0}
 --- !u!64 &2088412226
 MeshCollider:
   m_ObjectHideFlags: 0
