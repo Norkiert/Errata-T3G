@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public static class CameraUtility {
+public static class CameraUtility
+{
     static readonly Vector3[] cubeCornerOffsets = {
         new Vector3 (1, 1, 1),
         new Vector3 (-1, 1, 1),
@@ -13,26 +14,28 @@ public static class CameraUtility {
     };
 
     // http://wiki.unity3d.com/index.php/IsVisibleFrom
-    public static bool VisibleFromCamera (Renderer renderer, Camera camera) {
+    public static bool VisibleFromCamera (Renderer renderer, Camera camera)
+    {
         Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes (camera);
         return GeometryUtility.TestPlanesAABB (frustumPlanes, renderer.bounds);
     }
 
-    public static bool BoundsOverlap (MeshFilter nearObject, MeshFilter farObject, Camera camera) {
-
+    public static bool BoundsOverlap (MeshFilter nearObject, MeshFilter farObject, Camera camera)
+    {
         var near = GetScreenRectFromBounds (nearObject, camera);
         var far = GetScreenRectFromBounds (farObject, camera);
 
         // ensure far object is indeed further away than near object
-        if (far.zMax > near.zMin) {
+        if (far.zMax > near.zMin)
+        {
             // Doesn't overlap on x axis
-            if (far.xMax < near.xMin || far.xMin > near.xMax) {
+            if (far.xMax < near.xMin || far.xMin > near.xMax)
                 return false;
-            }
+
             // Doesn't overlap on y axis
-            if (far.yMax < near.yMin || far.yMin > near.yMax) {
+            if (far.yMax < near.yMin || far.yMin > near.yMax)
                 return false;
-            }
+
             // Overlaps
             return true;
         }
@@ -40,21 +43,24 @@ public static class CameraUtility {
     }
 
     // With thanks to http://www.turiyaware.com/a-solution-to-unitys-camera-worldtoscreenpoint-causing-ui-elements-to-display-when-object-is-behind-the-camera/
-    public static MinMax3D GetScreenRectFromBounds (MeshFilter renderer, Camera mainCamera) {
+    public static MinMax3D GetScreenRectFromBounds (MeshFilter renderer, Camera mainCamera)
+    {
         MinMax3D minMax = new MinMax3D (float.MaxValue, float.MinValue);
 
         Vector3[] screenBoundsExtents = new Vector3[8];
         var localBounds = renderer.sharedMesh.bounds;
         bool anyPointIsInFrontOfCamera = false;
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
+        {
             Vector3 localSpaceCorner = localBounds.center + Vector3.Scale (localBounds.extents, cubeCornerOffsets[i]);
             Vector3 worldSpaceCorner = renderer.transform.TransformPoint (localSpaceCorner);
             Vector3 viewportSpaceCorner = mainCamera.WorldToViewportPoint (worldSpaceCorner);
 
-            if (viewportSpaceCorner.z > 0) {
+            if (viewportSpaceCorner.z > 0)
                 anyPointIsInFrontOfCamera = true;
-            } else {
+            else
+            {
                 // If point is behind camera, it gets flipped to the opposite side
                 // So clamp to opposite edge to correct for this
                 viewportSpaceCorner.x = (viewportSpaceCorner.x <= 0.5f) ? 1 : 0;
@@ -73,7 +79,8 @@ public static class CameraUtility {
         return minMax;
     }
 
-    public struct MinMax3D {
+    public struct MinMax3D
+    {
         public float xMin;
         public float xMax;
         public float yMin;
@@ -81,7 +88,8 @@ public static class CameraUtility {
         public float zMin;
         public float zMax;
 
-        public MinMax3D (float min, float max) {
+        public MinMax3D (float min, float max)
+        {
             this.xMin = min;
             this.xMax = max;
             this.yMin = min;
@@ -90,7 +98,8 @@ public static class CameraUtility {
             this.zMax = max;
         }
 
-        public void AddPoint (Vector3 point) {
+        public void AddPoint (Vector3 point)
+        {
             xMin = Mathf.Min (xMin, point.x);
             xMax = Mathf.Max (xMax, point.x);
             yMin = Mathf.Min (yMin, point.y);
