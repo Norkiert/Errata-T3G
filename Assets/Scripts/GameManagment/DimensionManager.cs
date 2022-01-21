@@ -38,7 +38,6 @@ namespace GameManagment
             LoadDimension(Dimension.Main);
         }
 
-        public static void UnloadLoadedDimension() => LoadDimension(Dimension.Main);
         public static void LoadDimension(Dimension dimension)
         {
             instance.dimensionToLoad = dimension;
@@ -87,9 +86,9 @@ namespace GameManagment
 
                 LoadedDimension = dimensionToLoad;
                 Debug.Log($"Loaded {LoadedDimension}");
-                FindObjectOfType<MainCamera>()?.GetPortals();
             }
 
+            yield return null;
             dimenionChanger = null;
 
             // fix if changed dimensionToLoad 
@@ -97,6 +96,8 @@ namespace GameManagment
                 LoadDimension(dimensionToLoad);
             else
                 ActiveDimension(LoadedDimension);
+
+            FindObjectOfType<MainCamera>()?.GetPortals();
         }
 
         private string DimensionName(Dimension dimension)
@@ -114,8 +115,7 @@ namespace GameManagment
         {
             Debug.Log($"Active {dimension}");
 
-            // przeniesæ do przechodenia przez portale
-            //SceneManager.SetActiveScene(SceneManager.GetSceneByName(DimensionName(dimension)));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(DimensionName(dimension)));
 
             DimensionCore dimensionCore = GetDimensionCore(dimension);
             if (dimensionCore == null)
@@ -143,7 +143,7 @@ namespace GameManagment
         private DimensionCore GetDimensionCore(Dimension dimension)
         {
             foreach (DimensionCore dimCore in FindObjectsOfType<DimensionCore>())
-                if (dimCore.ThisDimension == Dimension.Main)
+                if (dimCore.ThisDimension == dimension)
                     return dimCore;
 
             return null;
