@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectionPoint: {fileID: 3349211289524064771}
   <ConnectionType>k__BackingField: 1
-  makeConnectionKinematic: 1
+  makeConnectionKinematic: 0
   <ConnectedTo>k__BackingField: {fileID: 0}
 --- !u!114 &2485877539104650813
 MonoBehaviour:
@@ -311,6 +311,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 56a27d5011c3e4644a04a8e7de57f005, type: 3}
       propertyPath: m_Name
       value: Hub_FlorrCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 56a27d5011c3e4644a04a8e7de57f005, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56a27d5011c3e4644a04a8e7de57f005, type: 3}
