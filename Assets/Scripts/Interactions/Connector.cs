@@ -11,6 +11,10 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
 
     [SerializeField] private Transform connectionPoint;
     [field: SerializeField] public ConType ConnectionType { get; private set; } = ConType.Male;
+
+    [SerializeField] private bool makeConnectionKinematic = false;
+    private bool wasConnectionKinematic;
+
     [field: SerializeField] [field: ReadOnly] public Connector ConnectedTo { get; private set; }
 
     private FixedJoint fixedJoint;
@@ -23,6 +27,8 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     public bool IsConnected => ConnectedTo != null;
     public bool LogicValue => IsConnected;
 
+    
+
     private void Awake()
     {
         Rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -30,7 +36,11 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
 
     private void OnDisable() => Disconnect();
 
-    public void SetAsConnectedTo(Connector secondConnector) => ConnectedTo = secondConnector;
+    public void SetAsConnectedTo(Connector secondConnector)
+    {
+        ConnectedTo = secondConnector;
+        wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
+    }
 
     public void Connect(Connector secondConnector)
     {
@@ -50,6 +60,9 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         fixedJoint.connectedBody = secondConnector.Rigidbody;
 
         secondConnector.SetAsConnectedTo(this);
+        wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
+        if (makeConnectionKinematic)
+            secondConnector.Rigidbody.isKinematic = true;
         ConnectedTo = secondConnector;
     }
 
@@ -63,6 +76,8 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         // important to dont make recusrion
         Connector toDisconect = ConnectedTo;
         ConnectedTo = null;
+        if (makeConnectionKinematic)
+            toDisconect.Rigidbody.isKinematic = wasConnectionKinematic;
         toDisconect.Disconnect(this);
     }
 }
