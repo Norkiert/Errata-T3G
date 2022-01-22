@@ -97,8 +97,13 @@ namespace GameManagment
             else
                 ActiveDimension(LoadedDimension);
 
-            FindObjectOfType<MainCamera>()?.GetPortals();
+            yield return null;
+            UpdateCamera();
+            yield return new WaitForSeconds(1f);
+            UpdateCamera();
         }
+
+        private void UpdateCamera() => FindObjectOfType<MainCamera>()?.GetPortals();
 
         private string DimensionName(Dimension dimension)
         {
