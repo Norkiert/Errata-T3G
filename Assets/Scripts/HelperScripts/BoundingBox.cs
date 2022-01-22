@@ -10,6 +10,7 @@ using UnityEditor;
 public class BoundingBox : MonoBehaviour
 {
     [SerializeField] protected bool drawBox = true;
+    [SerializeField] protected bool drawOnlyOnSelection = true;
     [SerializeField] protected Color color = Color.green;
 
     [SerializeField] [ReadOnly] protected Vector3 center;
@@ -63,15 +64,18 @@ public class BoundingBox : MonoBehaviour
     }
     protected void DrawBox()
     {
-        var array = Selection.GetFiltered<BoundingBox>(SelectionMode.Assets);
-        foreach(var selection in array)
+        if (drawOnlyOnSelection)
         {
-            if(selection == this)
+            var array = Selection.GetFiltered<BoundingBox>(SelectionMode.Assets);
+            foreach (var selection in array)
             {
-                goto doDrawing;
+                if (selection == this)
+                {
+                    goto doDrawing;
+                }
             }
+            return;
         }
-        return;
     doDrawing:
         if (displayAsRelative)
         {
