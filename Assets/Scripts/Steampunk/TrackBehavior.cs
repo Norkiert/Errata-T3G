@@ -19,7 +19,7 @@ public class TrackBehavior : Clickable
     }
     #region -Tracks Editor-
 
-    private List<TrackBehavior> connectionsBackup;
+    private List<TrackBehavior> connectionsBackup = new List<TrackBehavior>();
 
     public void UpdateConnections()
     {
