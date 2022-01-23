@@ -8,10 +8,16 @@ namespace Portals
 
         private void Awake()
         {
-            GetPortals();
+            UpdatePortals();
         }
 
-        public void GetPortals() => portals = FindObjectsOfType<Portal>();
+        public void UpdatePortals()
+        {
+            portals = FindObjectsOfType<Portal>();
+            Camera camera = GetComponent<Camera>();
+            foreach (Portal portal in portals)
+                portal.SetPlayerCamera(camera);
+        }
 
         private void LateUpdate()
         {

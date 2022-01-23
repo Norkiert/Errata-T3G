@@ -84,6 +84,12 @@ namespace Portals
             this.enabled = linkedPortal != null;
         }
 
+        public void SetPlayerCamera(Camera camera)
+        {
+            playerCam = camera;
+            viewTexture = null;
+        }
+
         /// <summary>
         /// Called before any portal cameras are rendered for the current frame
         /// </summary>

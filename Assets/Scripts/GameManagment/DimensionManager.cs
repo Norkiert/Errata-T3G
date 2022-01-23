@@ -104,7 +104,9 @@ namespace GameManagment
         private void UpdateCamera()
         {
             foreach (MainCamera camera in FindObjectsOfType<MainCamera>())
-                camera.GetPortals();
+            {
+                camera.UpdatePortals();
+            }
         }
 
         private string DimensionName(Dimension dimension)
