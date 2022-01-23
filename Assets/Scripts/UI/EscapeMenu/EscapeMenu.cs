@@ -5,23 +5,24 @@ using UnityEngine;
 public class EscapeMenu : MonoBehaviour
 {
     [SerializeField] private Canvas escMenu;
-    [SerializeField] private CameraController camController;
+
+    private PlayerController playerController;
+
     private void Start()
     {
         Time.timeScale = 1f;
-        GameObject temporaryPlayer = GameObject.Find("Player");
         escMenu.enabled = false;
-        camController = temporaryPlayer.GetComponent<CameraController>();
-        camController.FreezCamera = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        playerController = FindObjectOfType<PlayerController>();
+        playerController.FreezCamera = false;
     }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
             Time.timeScale = Time.timeScale==0f? 1f:0f;
             escMenu.enabled = !escMenu.enabled;
-            camController.FreezCamera = !camController.FreezCamera;
+            playerController.FreezCamera = !playerController.FreezCamera;
 
             if (escMenu.enabled)
             {

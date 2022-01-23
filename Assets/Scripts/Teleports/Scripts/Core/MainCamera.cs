@@ -4,7 +4,7 @@ namespace Portals
 {
     public class MainCamera : MonoBehaviour
     {
-        private Portal[] portals;
+        [SerializeField] private Portal[] portals;
 
         private void Awake()
         {

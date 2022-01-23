@@ -9,11 +9,11 @@ public class LaserMirror : Interactable
     [SerializeField] private float rotationSpeed = 20;
 
     private PlayerInteractions player;
-    private CameraController cController;
+    private PlayerController playerController;
 
     private void Start()
     {
-        cController = FindObjectOfType<CameraController>();
+        playerController = FindObjectOfType<PlayerController>();
         player = FindObjectOfType<PlayerInteractions>();
     }
     public override void Select()
@@ -33,16 +33,16 @@ public class LaserMirror : Interactable
     }
     private void StartRotateMirror()
     {
-        cController.enabled = false;
+        playerController.enabled = false;
         StartCoroutine(RotateMirror());
     }
     private void EndRotateMirror()
     {
-        cController.enabled = true;
+        playerController.enabled = true;
     }
     private IEnumerator RotateMirror()
     {
-        while(!cController.enabled)
+        while(!playerController.enabled)
         {
             yield return null;
             transform.Rotate(new Vector3(0, rotateHorizontal?Input.GetAxis("Mouse X"):0, rotateVertical?Input.GetAxis("Mouse Y"):0) * rotationSpeed * Time.deltaTime);

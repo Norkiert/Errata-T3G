@@ -72,7 +72,7 @@ namespace GameManagment
 
                 Debug.Log($"Unloaded {dimensionToLoad}");
                 LoadedDimension = Dimension.None;
-                FindObjectOfType<MainCamera>()?.GetPortals();
+                UpdateCamera();
             }
 
             // load new
@@ -99,11 +99,13 @@ namespace GameManagment
 
             yield return null;
             UpdateCamera();
-            yield return new WaitForSeconds(1f);
-            UpdateCamera();
         }
 
-        private void UpdateCamera() => FindObjectOfType<MainCamera>()?.GetPortals();
+        private void UpdateCamera()
+        {
+            foreach (MainCamera camera in FindObjectsOfType<MainCamera>())
+                camera.GetPortals();
+        }
 
         private string DimensionName(Dimension dimension)
         {
