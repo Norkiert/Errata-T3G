@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
     [Header("Menus")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject settingsMenu;
@@ -19,45 +18,53 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button creditsButton;
     [SerializeField] private Button quitButton;
 
-    [SerializeField] private int sceneToLoad;
+
 
     private void Start()
     {
-        playButton.onClick.AddListener(playGame);
-        loadButton.onClick.AddListener(loadGame);
-        settingsButton.onClick.AddListener(goToSettings);
-        creditsButton.onClick.AddListener(goToCredits);
-        quitButton.onClick.AddListener(quitGame);
+        playButton.onClick.AddListener(PlayGame);
+        loadButton.onClick.AddListener(LoadGame);
+        settingsButton.onClick.AddListener(OpenSettings);
+        creditsButton.onClick.AddListener(OpenCredits);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
-    void playGame()
+    private void PlayGame()
     {
-        SceneManager.LoadScene(sceneToLoad);
+        //SceneManager.LoadScene(sceneToLoad);
     }
 
-    void loadGame()
+    private void LoadGame()
     {
-        Debug.Log("Load");
+        Debug.Log("TODO: Load");
     }
 
-    void goToSettings()
+    private void OpenSettings()
     {
-        mainMenu.SetActive(false);
+        CloseAllPanels();
         settingsMenu.SetActive(true);
     }
 
-    void goToCredits()
+    private void OpenCredits()
     {
-        mainMenu.SetActive(false);
+        CloseAllPanels();
         creditsMenu.SetActive(true);
     }
 
-    void quitGame()
+    private void QuitGame()
     {
+        Debug.Log("Quit game");
 #if UNITY_EDITOR 
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
+    }
+
+
+    private void CloseAllPanels()
+    {
+        settingsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
     }
 }
