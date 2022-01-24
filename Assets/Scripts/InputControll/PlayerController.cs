@@ -20,11 +20,6 @@ public class PlayerController : PortalTraveller
 
     private float yaw;
     private float pitch;
-    private float smoothYaw;
-    private float smoothPitch;
-
-    private float yawSmoothV;
-    private float pitchSmoothV;
 
     #endregion
 
@@ -115,8 +110,6 @@ public class PlayerController : PortalTraveller
 
         yaw = transform.eulerAngles.y;
         pitch = playerCamera.transform.localEulerAngles.x;
-        smoothYaw = yaw;
-        smoothPitch = pitch;
     }
 
     private void Update()
@@ -228,18 +221,16 @@ public class PlayerController : PortalTraveller
         yaw += inputMouse.x * mouseSensitivity;
         pitch -= inputMouse.y * mouseSensitivity;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
-        smoothPitch = Mathf.SmoothDampAngle(smoothPitch, pitch, ref pitchSmoothV, 0);
-        smoothYaw = Mathf.SmoothDampAngle(smoothYaw, yaw, ref yawSmoothV, 0);
 
-        transform.eulerAngles = Vector3.up * smoothYaw;
-        playerCamera.transform.localEulerAngles = Vector3.right * smoothPitch;
+        transform.eulerAngles = Vector3.up * yaw;
+        playerCamera.transform.localEulerAngles = Vector3.right * pitch;
     }
 
     private void MovePlayer()
     {
         Vector3 inputDir = new Vector3(inputMove.x, 0, inputMove.y).normalized;
         Vector3 worldInputDir = transform.TransformDirection(inputDir);
-
+        
         Vector3 targetVelocity = worldInputDir * currentSpeed;
         velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
 
@@ -258,14 +249,38 @@ public class PlayerController : PortalTraveller
         controller.Move(velocity * Time.deltaTime);
     }
 
+
+    public void SetPosition(Vector3 position)
+    {
+        controller.enabled = false;
+        transform.position = position;
+        velocity = Vector3.zero;
+        smoothV = Vector3.zero;
+        verticalVelocity = 0;
+        controller.enabled = true;
+    }
+
+    public void SetRotation(float rotX, float rotY)
+    {
+        if (rotX > 180)
+            rotX -= 360;
+
+        inputMouse.y = 0;
+        pitch = rotX;
+        playerCamera.transform.localEulerAngles = Vector3.right * rotX;
+
+        inputMouse.x = 0;
+        yaw = rotY;
+        transform.eulerAngles = Vector3.up * rotY;
+    }
+
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
         transform.position = pos;
         Vector3 eulerRot = rot.eulerAngles;
-        float delta = Mathf.DeltaAngle(smoothYaw, eulerRot.y);
+        float delta = Mathf.DeltaAngle(yaw, eulerRot.y);
         yaw += delta;
-        smoothYaw += delta;
-        transform.eulerAngles = Vector3.up * smoothYaw;
+        transform.eulerAngles = Vector3.up * yaw;
         velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
         Physics.SyncTransforms();
     }

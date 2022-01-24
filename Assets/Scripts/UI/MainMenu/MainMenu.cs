@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using GameManagment;
 
 public class MainMenu : MonoBehaviour
 {
@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
 
     private void PlayGame()
     {
-        //SceneManager.LoadScene(sceneToLoad);
+        GameManager.instance.LoadFirstGame();
     }
 
     private void LoadGame()
