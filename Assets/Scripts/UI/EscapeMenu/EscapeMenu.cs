@@ -18,7 +18,7 @@ public class EscapeMenu : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P)||Input.GetKeyDown(KeyCode.Escape))
         {
             Time.timeScale = Time.timeScale==0f? 1f:0f;
             escMenu.enabled = !escMenu.enabled;
