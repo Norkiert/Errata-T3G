@@ -47,7 +47,6 @@ namespace Logic
             }
         }
 
-#if UNITY_EDITOR
         private bool IsValid()
         {
             foreach (var input in inputs)
@@ -56,5 +55,4 @@ namespace Logic
             return true;
         }
     }
-#endif
 }

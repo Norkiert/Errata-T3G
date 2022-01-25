@@ -21,11 +21,9 @@ namespace Logic
                 objectToSet?.SetActive(logic.LogicValue);
         }
 
-#if UNITY_EDITOR
         private bool IsValid()
         {
             return input != null && input.TryGetComponent(out ILogicBoolOutput _);
         }
-#endif
     }
 }
