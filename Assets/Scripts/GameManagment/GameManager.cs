@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using NaughtyAttributes;
 
 namespace GameManagment
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private GameObject loadingScreen;
+        [SerializeField, Required] private GameObject loadingScreen;
+        [SerializeField, Required] private Slider loadingBar;
 
         public static GameManager instance;
 
@@ -41,13 +44,17 @@ namespace GameManagment
         private IEnumerator loadFirstGameC;
         private IEnumerator LoadFirstGameC(string sceneName)
         {
+            loadingBar.value = 0;
             loadingScreen.SetActive(true);
 
             Debug.Log($"Loading {sceneName}");
             AsyncOperation loadingDimension = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 
             while (!loadingDimension.isDone)
+            {
+                loadingBar.value = loadingDimension.progress / 0.9f * 0.5f;
                 yield return null;
+            }    
 
             Debug.Log($"Loaded {sceneName}");
 
@@ -57,8 +64,16 @@ namespace GameManagment
                 yield return null;
 
 
-            yield return new WaitForSeconds(0.1f);
+            const float loadingTime = 0.2f;
+            float waitTime = 0;
+            while(waitTime <= loadingTime)
+            {
+                waitTime += Time.unscaledDeltaTime;
+                loadingBar.value = waitTime / loadingTime * 0.5f + 0.5f;
+                yield return null;
+            }
             loadingScreen.SetActive(false);
+
 
             // set player position
             GameObject spawnPoint = GameObject.Find("PlayerSpawnPoint");
