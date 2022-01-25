@@ -42,10 +42,12 @@ public class LaserMirror : Interactable
     }
     private IEnumerator RotateMirror()
     {
+        float reverseRotating = 1f;
         while(!playerController.enabled)
         {
+            reverseRotating = (transform.position.x>player.transform.position.x)?-1f:1f;
             yield return null;
-            transform.Rotate(new Vector3(0, rotateHorizontal?Input.GetAxis("Mouse X"):0, rotateVertical?Input.GetAxis("Mouse Y"):0) * rotationSpeed * Time.deltaTime);
+            transform.Rotate(new Vector3(0, rotateHorizontal?Input.GetAxis("Mouse X")*reverseRotating:0, rotateVertical?Input.GetAxis("Mouse Y"):0) * rotationSpeed * Time.deltaTime);
         }
     }
 }
