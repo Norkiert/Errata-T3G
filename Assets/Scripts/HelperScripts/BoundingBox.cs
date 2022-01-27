@@ -11,6 +11,7 @@ public class BoundingBox : MonoBehaviour
 {
     [SerializeField] protected bool drawBox = true;
     [SerializeField] protected bool drawOnlyOnSelection = true;
+    [SerializeField] protected bool ignoreScale = true;
     [SerializeField] protected Color color = Color.green;
 
     [SerializeField] [ReadOnly] protected Vector3 center;
@@ -26,11 +27,16 @@ public class BoundingBox : MonoBehaviour
     [SerializeField] [ReadOnly] protected Vector3 XmYmZp;
     [SerializeField] [ReadOnly] protected Vector3 XmYmZm;
 
+    public Vector3 Extents { get { return XpYpZp; } private set { } }
+
     protected void Update()
     {
         UpdatePositions();
+#if UNITY_EDITOR
         if (drawBox)
             DrawBox();
+#endif
+        UpdateForDisplay();
     }
     protected void UpdatePositions()
     {
@@ -39,29 +45,42 @@ public class BoundingBox : MonoBehaviour
         center = bounds.center;
         Vector3 extents = bounds.extents;
 
+        XpYpZp = new Vector3(center.x + extents.x, center.y + extents.y, center.z + extents.z);
+        XpYpZm = new Vector3(center.x + extents.x, center.y + extents.y, center.z - extents.z);
+        XpYmZp = new Vector3(center.x + extents.x, center.y - extents.y, center.z + extents.z);
+        XpYmZm = new Vector3(center.x + extents.x, center.y - extents.y, center.z - extents.z);
+        XmYpZp = new Vector3(center.x - extents.x, center.y + extents.y, center.z + extents.z);
+        XmYpZm = new Vector3(center.x - extents.x, center.y + extents.y, center.z - extents.z);
+        XmYmZp = new Vector3(center.x - extents.x, center.y - extents.y, center.z + extents.z);
+        XmYmZm = new Vector3(center.x - extents.x, center.y - extents.y, center.z - extents.z);
+    }
+    protected void UpdateForDisplay()
+    {
         if (displayAsRelative)
         {
-            XpYpZp = new Vector3(+extents.x, +extents.y, +extents.z);
-            XpYpZm = new Vector3(+extents.x, +extents.y, -extents.z);
-            XpYmZp = new Vector3(+extents.x, -extents.y, +extents.z);
-            XpYmZm = new Vector3(+extents.x, -extents.y, -extents.z);
-            XmYpZp = new Vector3(-extents.x, +extents.y, +extents.z);
-            XmYpZm = new Vector3(-extents.x, +extents.y, -extents.z);
-            XmYmZp = new Vector3(-extents.x, -extents.y, +extents.z);
-            XmYmZm = new Vector3(-extents.x, -extents.y, -extents.z);
+            XpYpZp -= center;
+            XpYpZm -= center;
+            XpYmZp -= center;
+            XpYmZm -= center;
+            XmYpZp -= center;
+            XmYpZm -= center;
+            XmYmZp -= center;
+            XmYmZm -= center;
         }
-        else
+        if (ignoreScale)
         {
-            XpYpZp = new Vector3(center.x + extents.x, center.y + extents.y, center.z + extents.z);
-            XpYpZm = new Vector3(center.x + extents.x, center.y + extents.y, center.z - extents.z);
-            XpYmZp = new Vector3(center.x + extents.x, center.y - extents.y, center.z + extents.z);
-            XpYmZm = new Vector3(center.x + extents.x, center.y - extents.y, center.z - extents.z);
-            XmYpZp = new Vector3(center.x - extents.x, center.y + extents.y, center.z + extents.z);
-            XmYpZm = new Vector3(center.x - extents.x, center.y + extents.y, center.z - extents.z);
-            XmYmZp = new Vector3(center.x - extents.x, center.y - extents.y, center.z + extents.z);
-            XmYmZm = new Vector3(center.x - extents.x, center.y - extents.y, center.z - extents.z);
+            XpYpZp = new Vector3(XpYpZp.x / transform.lossyScale.x, XpYpZp.y / transform.lossyScale.y, XpYpZp.z / transform.lossyScale.z);
+            XpYpZm = new Vector3(XpYpZm.x / transform.lossyScale.x, XpYpZm.y / transform.lossyScale.y, XpYpZm.z / transform.lossyScale.z);
+            XpYmZp = new Vector3(XpYmZp.x / transform.lossyScale.x, XpYmZp.y / transform.lossyScale.y, XpYmZp.z / transform.lossyScale.z);
+            XpYmZm = new Vector3(XpYmZm.x / transform.lossyScale.x, XpYmZm.y / transform.lossyScale.y, XpYmZm.z / transform.lossyScale.z);
+            XmYpZp = new Vector3(XmYpZp.x / transform.lossyScale.x, XmYpZp.y / transform.lossyScale.y, XmYpZp.z / transform.lossyScale.z);
+            XmYpZm = new Vector3(XmYpZm.x / transform.lossyScale.x, XmYpZm.y / transform.lossyScale.y, XmYpZm.z / transform.lossyScale.z);
+            XmYmZp = new Vector3(XmYmZp.x / transform.lossyScale.x, XmYmZp.y / transform.lossyScale.y, XmYmZp.z / transform.lossyScale.z);
+            XmYmZm = new Vector3(XmYmZm.x / transform.lossyScale.x, XmYmZm.y / transform.lossyScale.y, XmYmZm.z / transform.lossyScale.z);
+
         }
     }
+#if UNITY_EDITOR
     protected void DrawBox()
     {
         if (drawOnlyOnSelection)
@@ -77,41 +96,21 @@ public class BoundingBox : MonoBehaviour
             return;
         }
     doDrawing:
-        if (displayAsRelative)
-        {
-            // X lines
-            Debug.DrawLine(XpYpZp + center, XmYpZp + center, color);
-            Debug.DrawLine(XpYpZm + center, XmYpZm + center, color);
-            Debug.DrawLine(XpYmZp + center, XmYmZp + center, color);
-            Debug.DrawLine(XpYmZm + center, XmYmZm + center, color);
-            // Y lines
-            Debug.DrawLine(XpYpZp + center, XpYmZp + center, color);
-            Debug.DrawLine(XpYpZm + center, XpYmZm + center, color);
-            Debug.DrawLine(XmYpZp + center, XmYmZp + center, color);
-            Debug.DrawLine(XmYpZm + center, XmYmZm + center, color);
-            // Z lines
-            Debug.DrawLine(XpYpZp + center, XpYpZm + center, color);
-            Debug.DrawLine(XpYmZp + center, XpYmZm + center, color);
-            Debug.DrawLine(XmYpZp + center, XmYpZm + center, color);
-            Debug.DrawLine(XmYmZp + center, XmYmZm + center, color);
-        }
-        else
-        {
-            // X lines
-            Debug.DrawLine(XpYpZp, XmYpZp, color);
-            Debug.DrawLine(XpYpZm, XmYpZm, color);
-            Debug.DrawLine(XpYmZp, XmYmZp, color);
-            Debug.DrawLine(XpYmZm, XmYmZm, color);
-            // Y lines
-            Debug.DrawLine(XpYpZp, XpYmZp, color);
-            Debug.DrawLine(XpYpZm, XpYmZm, color);
-            Debug.DrawLine(XmYpZp, XmYmZp, color);
-            Debug.DrawLine(XmYpZm, XmYmZm, color);
-            // Z lines
-            Debug.DrawLine(XpYpZp, XpYpZm, color);
-            Debug.DrawLine(XpYmZp, XpYmZm, color);
-            Debug.DrawLine(XmYpZp, XmYpZm, color);
-            Debug.DrawLine(XmYmZp, XmYmZm, color);
-        }
+        // X lines
+        Debug.DrawLine(XpYpZp, XmYpZp, color);
+        Debug.DrawLine(XpYpZm, XmYpZm, color);
+        Debug.DrawLine(XpYmZp, XmYmZp, color);
+        Debug.DrawLine(XpYmZm, XmYmZm, color);
+        // Y lines
+        Debug.DrawLine(XpYpZp, XpYmZp, color);
+        Debug.DrawLine(XpYpZm, XpYmZm, color);
+        Debug.DrawLine(XmYpZp, XmYmZp, color);
+        Debug.DrawLine(XmYpZm, XmYmZm, color);
+        // Z lines
+        Debug.DrawLine(XpYpZp, XpYpZm, color);
+        Debug.DrawLine(XpYmZp, XpYmZm, color);
+        Debug.DrawLine(XmYpZp, XmYpZm, color);
+        Debug.DrawLine(XmYmZp, XmYmZm, color);
     }
+#endif
 }
