@@ -12,7 +12,7 @@ public class CylinderOpacity : MonoBehaviour
     private void Start()
     {
         material.color = new Color(1, 1, 1, 0);
-        radiusOfCylinder = GameObject.Find("Cylinder").transform.localScale.x/2;
+        radiusOfCylinder = GameObject.Find("TerrainDisappearCylinder").transform.localScale.x/2;
         player = GameObject.Find("Player").transform;
         Debug.Log(radiusOfCylinder);
     }
