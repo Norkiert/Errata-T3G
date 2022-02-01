@@ -7,15 +7,17 @@ public class MovementLoop : MonoBehaviour
     [Header("Borders for player (on X)")]
     [SerializeField] private float rightBorder = 220f;
     [SerializeField] private float leftBorder = -220f;
+
     [Header("Borders for player (on Z)")]
     [SerializeField] private float topBorder = 220f;
     [SerializeField] private float bottomBorder = -240f;
+
     private Transform playerPosition;
     private PlayerController playerControll;
     void Start()
     {
-        playerPosition = GameObject.Find("Player").GetComponent<Transform>();
-        playerControll = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerPosition = GameObject.Find("Player").transform;
+        playerControll = FindObjectOfType<PlayerController>();
     }
     void Update()
     {

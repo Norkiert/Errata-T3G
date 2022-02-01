@@ -64,7 +64,7 @@ namespace GameManagment
                 yield return null;
 
 
-            const float loadingTime = 0.2f;
+            const float loadingTime = 0.7f;
             float waitTime = 0;
             while(waitTime <= loadingTime)
             {
