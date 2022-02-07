@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class MovementLoop : MonoBehaviour
 {
-    [Header("Borders for player (on X)")]
-    [SerializeField] private float rightBorder = 220f;
-    [SerializeField] private float leftBorder = -220f;
-
-    [Header("Borders for player (on Z)")]
-    [SerializeField] private float topBorder = 220f;
-    [SerializeField] private float bottomBorder = -240f;
+    [Header("Radius of player loop")]
+    [SerializeField] private float radius = 190f;
 
     private Transform playerPosition;
     private PlayerController playerControll;
@@ -21,21 +16,12 @@ public class MovementLoop : MonoBehaviour
     }
     void Update()
     {
-        if (playerPosition.position.x > rightBorder)
+        float distance = Mathf.Sqrt(Mathf.Pow(playerPosition.position.x, 2) + Mathf.Pow(playerPosition.position.z, 2));
+        if (distance>radius)
         {
-            playerControll.SetPosition(new Vector3(leftBorder + 2, playerPosition.position.y, -playerPosition.position.z));
-        }
-        if (playerPosition.position.x < leftBorder)
-        {
-            playerControll.SetPosition(new Vector3(rightBorder - 2, playerPosition.position.y, -playerPosition.position.z));
-        }
-        if (playerPosition.position.z > topBorder)
-        {
-            playerControll.SetPosition(new Vector3(-playerPosition.position.x, playerPosition.position.y, bottomBorder+2));
-        }
-        if (playerPosition.position.z < bottomBorder)
-        {
-            playerControll.SetPosition(new Vector3(-playerPosition.position.x, playerPosition.position.y, topBorder-2));
+            float newX = playerPosition.position.x > 0 ? -playerPosition.position.x + 2 : -playerPosition.position.x - 2;
+            float newZ = playerPosition.position.z > 0 ? -playerPosition.position.z + 2 : -playerPosition.position.z - 2;
+            playerControll.SetPosition(new Vector3(newX, playerPosition.position.y, newZ));
         }
     }
 }
