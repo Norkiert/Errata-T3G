@@ -251,7 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b168199276aa0634ba1c6213bd0c1df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 8eddf32ccf57acd48a339b46bf4fb1b2, type: 2}
 --- !u!114 &75274972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,10 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a7b77455f5ffa4fb5da1941d41124c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightBorder: 190
-  leftBorder: -190
-  topBorder: 190
-  bottomBorder: -190
+  radius: 190
 --- !u!1 &424771971
 GameObject:
   m_ObjectHideFlags: 0
@@ -5325,10 +5321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a7b77455f5ffa4fb5da1941d41124c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightBorder: 220
-  leftBorder: -210
-  topBorder: 230
-  bottomBorder: -220
+  radius: 190
 --- !u!1 &1309328969
 GameObject:
   m_ObjectHideFlags: 0
@@ -24956,8 +24949,8 @@ PrefabInstance:
       objectReference: {fileID: 1704472533}
     - target: {fileID: 818988742262634999, guid: 595a09e062449734da4e573af347d198, type: 3}
       propertyPath: <ThisDimension>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: a86d89d5d53f49e43a7e45498ba79084, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 595a09e062449734da4e573af347d198, type: 3}
 --- !u!1 &1961248764
