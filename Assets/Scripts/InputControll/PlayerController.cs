@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using NaughtyAttributes;
 using Portals;
+using GameManagment;
 
 public class PlayerController : PortalTraveller
 {
@@ -103,6 +104,10 @@ public class PlayerController : PortalTraveller
 
     private void Start()
     {
+
+        GameManager.OnPauseGame += () => SetEnable(true);
+        GameManager.OnResumeGame += () => SetEnable(false);
+
         SetMode(Mods.Default);
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -283,6 +288,18 @@ public class PlayerController : PortalTraveller
         playerCamera.backgroundColor = color;
     }
 
+    public void SetEnable(bool enableState)
+    {
+        if(enableState)
+        {
+            FreezCamera = true;
+            enabled = false;
+        }else
+        {
+            FreezCamera = false;
+            enabled = true;
+        }
+    }
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
         transform.position = pos;

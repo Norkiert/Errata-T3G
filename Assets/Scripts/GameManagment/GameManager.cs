@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,9 +12,11 @@ namespace GameManagment
     {
         [SerializeField, Required] private GameObject loadingScreen;
         [SerializeField, Required] private Slider loadingBar;
+        public static event Action OnPauseGame;
+        public static event Action OnResumeGame;
+        public static bool IsGamePaused { get; private set; } = false;
 
         public static GameManager instance;
-
         private void Awake()
         {
             if (instance != null)
@@ -26,12 +29,14 @@ namespace GameManagment
 
             DontDestroyOnLoad(gameObject);
         }
-
         private void Start()
         {
+            IsGamePaused = false;
+            OnResumeGame += () => { IsGamePaused = false; SetCursorState(true); };
+            OnPauseGame += () => { IsGamePaused = true; SetCursorState(false); };
             loadingScreen.SetActive(false);
         }
-
+        
         public void LoadFirstGame()
         {
             if (loadFirstGameC != null)
@@ -89,6 +94,25 @@ namespace GameManagment
             }
 
             loadFirstGameC = null;
+        }
+
+        // Escape menu handling
+        public static void PauseGame() => OnPauseGame.Invoke();
+        public static void ResumeGame() => OnResumeGame.Invoke();
+        public static void SetCursorState(bool isLock)
+        {
+            if (isLock)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
     }
 }
