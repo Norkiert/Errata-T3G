@@ -9,7 +9,7 @@ namespace GameManagment
     public class DimensionCore : MonoBehaviour
     {
         [field: SerializeField, Required]
-        public DimensionSO ThisDimension { get; private set; } = null;
+        public DimensionSO DimensionSO { get; private set; } = null;
 
 
         [field: SerializeField, Required]

@@ -132,8 +132,8 @@ namespace GameManagment
 
                 // set cameras background
                 PlayerController playerController = FindObjectOfType<PlayerController>();
-                DimensionSO dimensionSO = dimensionCore.ThisDimension;
-                switch (dimensionCore.ThisDimension.CameraBackground)
+                DimensionSO dimensionSO = dimensionCore.DimensionSO;
+                switch (dimensionCore.DimensionSO.CameraBackground)
                 {
                     case DimensionSO.CameraBackgroundType.SkyBox:
                         dimensionCore.MainPortal.SetCameraBackgroundOnSkyBox();
@@ -157,7 +157,7 @@ namespace GameManagment
         private DimensionCore GetDimensionCore(DimensionSO dimension)
         {
             foreach (DimensionCore dimCore in FindObjectsOfType<DimensionCore>())
-                if (dimCore.ThisDimension == dimension)
+                if (dimCore.DimensionSO == dimension)
                     return dimCore;
 
             return null;
