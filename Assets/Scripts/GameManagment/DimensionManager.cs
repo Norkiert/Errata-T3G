@@ -126,8 +126,24 @@ namespace GameManagment
                 Debug.LogError("Dimension main portal not found!");
             else
             {
+                // link portals
                 dimensionCore.MainPortal.SetLinkedPortal(mainHubPortal);
                 mainHubPortal.SetLinkedPortal(dimensionCore.MainPortal);
+
+                // set cameras background
+                PlayerController playerController = FindObjectOfType<PlayerController>();
+                DimensionSO dimensionSO = dimensionCore.ThisDimension;
+                switch (dimensionCore.ThisDimension.CameraBackground)
+                {
+                    case DimensionSO.CameraBackgroundType.SkyBox:
+                        dimensionCore.MainPortal.SetCameraBackgroundOnSkyBox();
+                        playerController?.SetCameraBackgroundOnSkyBox();
+                        break;
+                    case DimensionSO.CameraBackgroundType.SolidColor:
+                        dimensionCore.MainPortal.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor);
+                        playerController?.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor);
+                        break;
+                }
             }
         }
 

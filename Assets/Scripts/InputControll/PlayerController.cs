@@ -13,7 +13,7 @@ public class PlayerController : PortalTraveller
     #region -camera-
 
     [Header("Camera controll")]
-    [SerializeField] private Transform playerCamera;
+    [SerializeField] private Camera playerCamera;
     [SerializeField] public float mouseSensitivity = 8f;
     [SerializeField, Range(0, -90)] private float minPitch = -90f;
     [SerializeField, Range(0, 90)] private float maxPitch = 90f;
@@ -259,7 +259,6 @@ public class PlayerController : PortalTraveller
         verticalVelocity = 0;
         controller.enabled = true;
     }
-
     public void SetRotation(float rotX, float rotY)
     {
         if (rotX > 180)
@@ -272,6 +271,16 @@ public class PlayerController : PortalTraveller
         inputMouse.x = 0;
         yaw = rotY;
         transform.eulerAngles = Vector3.up * rotY;
+    }
+
+    public void SetCameraBackgroundOnSkyBox()
+    {
+        playerCamera.clearFlags = CameraClearFlags.Skybox;
+    }
+    public void SetCameraBackgroundOnSolidColor(Color color)
+    {
+        playerCamera.clearFlags = CameraClearFlags.SolidColor;
+        playerCamera.backgroundColor = color;
     }
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)

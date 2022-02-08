@@ -20,7 +20,6 @@ namespace Portals
         private RenderTexture viewTexture;
         private Camera portalCam;
         private Camera playerCam;
-        private Material firstRecursionMat;
         private List<PortalTraveller> trackedTravellers;
         private MeshFilter screenMeshFilter;
 
@@ -89,6 +88,18 @@ namespace Portals
             playerCam = camera;
             viewTexture = null;
         }
+
+        public void SetCameraBackgroundOnSkyBox()
+        {
+            portalCam.clearFlags = CameraClearFlags.Skybox;
+        }
+        public void SetCameraBackgroundOnSolidColor(Color color)
+        {
+            portalCam.clearFlags = CameraClearFlags.SolidColor;
+            portalCam.backgroundColor = color;
+        }
+
+        #region -render-
 
         /// <summary>
         /// Called before any portal cameras are rendered for the current frame
@@ -327,6 +338,8 @@ namespace Portals
             else
                 portalCam.projectionMatrix = playerCam.projectionMatrix;
         }
+
+        #endregion
 
         private void OnTravellerEnterPortal(PortalTraveller traveller)
         {
