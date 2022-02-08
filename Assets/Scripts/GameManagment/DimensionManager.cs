@@ -10,19 +10,16 @@ namespace GameManagment
 {
     public class DimensionManager : MonoBehaviour
     {
-        public enum Dimension { None, Main, SpaceLaser, Steampunk }
-
-
         [SerializeField, Required] private Portal mainHubPortal;
+        [SerializeField, Required] private DimensionSO defaultDimension;
 
-
-        private Dimension dimensionToLoad;
+        private DimensionSO dimensionToLoad;
         private IEnumerator dimenionChanger;
 
 
         private static DimensionManager instance;
-        public static Dimension LoadedDimension { get; private set; } = Dimension.None;
-
+        public static DimensionSO LoadedDimension { get; private set; } = null;
+        public static DimensionSO DefaultDimension => instance.defaultDimension;
 
         private void Awake()
         {
@@ -38,10 +35,10 @@ namespace GameManagment
 
         private void Start()
         {
-            LoadDimension(Dimension.Main);
+            LoadDimension(defaultDimension);
         }
 
-        public static void LoadDimension(Dimension dimension)
+        public static void LoadDimension(DimensionSO dimension)
         {
             instance.dimensionToLoad = dimension;
 
@@ -62,27 +59,27 @@ namespace GameManagment
             }
 
             // unload current dimension
-            if (LoadedDimension != Dimension.None)
+            if (LoadedDimension != null)
             {
                 DesactiveDimension(LoadedDimension);
                 yield return null;
 
                 Debug.Log($"Unloading {dimensionToLoad}");
-                AsyncOperation unloadingDimension = SceneManager.UnloadSceneAsync(DimensionName(LoadedDimension));
+                AsyncOperation unloadingDimension = SceneManager.UnloadSceneAsync(LoadedDimension.SceneName);
 
                 while (!unloadingDimension.isDone)
                     yield return null;
 
                 Debug.Log($"Unloaded {dimensionToLoad}");
-                LoadedDimension = Dimension.None;
+                LoadedDimension = null;
                 UpdateCamera();
             }
 
             // load new
-            if (dimensionToLoad != Dimension.None)
+            if (dimensionToLoad != null)
             {
                 Debug.Log($"Loading {dimensionToLoad}");
-                AsyncOperation loadingDimension = SceneManager.LoadSceneAsync(DimensionName(dimensionToLoad), LoadSceneMode.Additive);
+                AsyncOperation loadingDimension = SceneManager.LoadSceneAsync(dimensionToLoad.SceneName, LoadSceneMode.Additive);
 
                 while (!loadingDimension.isDone)
                     yield return null;
@@ -112,22 +109,11 @@ namespace GameManagment
             }
         }
 
-        private string DimensionName(Dimension dimension)
-        {
-            return dimension switch
-            {
-                Dimension.Main => "MainDimension_Scene",
-                Dimension.SpaceLaser => "SpaceLaser_Scene",
-                Dimension.Steampunk => "Steampunk_Scene",
-                _ => ""
-            };
-        }
-
-        private void ActiveDimension(Dimension dimension)
+        private void ActiveDimension(DimensionSO dimension)
         {
             Debug.Log($"Active {dimension}");
 
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(DimensionName(dimension)));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(dimension.SceneName));
 
             DimensionCore dimensionCore = GetDimensionCore(dimension);
             if (dimensionCore == null)
@@ -145,14 +131,14 @@ namespace GameManagment
             }
         }
 
-        private void DesactiveDimension(Dimension dimension)
+        private void DesactiveDimension(DimensionSO dimension)
         {
             Debug.Log($"Desactive {dimension}");
 
             mainHubPortal.SetLinkedPortal(null);
         }
 
-        private DimensionCore GetDimensionCore(Dimension dimension)
+        private DimensionCore GetDimensionCore(DimensionSO dimension)
         {
             foreach (DimensionCore dimCore in FindObjectsOfType<DimensionCore>())
                 if (dimCore.ThisDimension == dimension)

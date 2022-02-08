@@ -42,7 +42,7 @@ namespace GameManagment
             {
                 yield return new WaitForSeconds(1f);
 
-                DimensionManager.Dimension selectedDimension = DimensionManager.Dimension.Main;
+                DimensionSO selectedDimension = DimensionManager.DefaultDimension;
                 foreach (ConnectCube connectCube in cubesConnect)
                 {
                     if (!connectCube.Connector)
@@ -58,7 +58,7 @@ namespace GameManagment
 
                 if (DimensionManager.LoadedDimension != selectedDimension)
                 {
-                    if (selectedDimension == DimensionManager.Dimension.Main)
+                    if (selectedDimension == DimensionManager.DefaultDimension)
                         UpdateAllCubesMovement();
 
                     DimensionManager.LoadDimension(selectedDimension);
@@ -213,8 +213,8 @@ namespace GameManagment
             public Transform Transform { get; private set; }
 
 
-            [field: SerializeField, ValidateInput(nameof(IsValidThisDimension), "Dimenion can't be None or Main")]
-            public DimensionManager.Dimension Dimension { get; private set; } = DimensionManager.Dimension.None;
+            [field: SerializeField, Required]
+            public DimensionSO Dimension { get; private set; } = null;
 
 
             public int X { get; private set; }
@@ -231,8 +231,6 @@ namespace GameManagment
                 if (Connector == null)
                     Debug.LogError($"ConnectCube at {x}, {y} has no {nameof(Connector)} script!");
             }
-
-            private bool IsValidThisDimension() => Dimension != DimensionManager.Dimension.None && Dimension != DimensionManager.Dimension.Main;
         }
     }
 }

@@ -10866,6 +10866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainHubPortal: {fileID: 8679524915928208054}
+  defaultDimension: {fileID: 11400000, guid: a86d89d5d53f49e43a7e45498ba79084, type: 2}
 --- !u!4 &365359017
 Transform:
   m_ObjectHideFlags: 0
@@ -19722,9 +19723,9 @@ MonoBehaviour:
   cubeParentTL: {fileID: 347999474}
   cubesConnect:
   - <Transform>k__BackingField: {fileID: 526504663667514785}
-    <Dimension>k__BackingField: 3
+    <Dimension>k__BackingField: {fileID: 11400000, guid: 76cc78ceeda3dd14592cfcf8ec029a48, type: 2}
   - <Transform>k__BackingField: {fileID: 383907897}
-    <Dimension>k__BackingField: 2
+    <Dimension>k__BackingField: {fileID: 11400000, guid: 1293f0dba0dc167468aa4d3b8cf3a363, type: 2}
   minCubeYPos: -0.3
   maxCubeYPos: 1
   conCubeImpact: 6
@@ -37737,6 +37738,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3823449685065584807, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927564750488645403, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4391739547166506830, guid: af903a2daa7962a4389569e98e50a56b, type: 3}

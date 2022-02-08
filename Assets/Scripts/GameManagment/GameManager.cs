@@ -60,7 +60,7 @@ namespace GameManagment
 
 
             // wait for load main dimension
-            while(DimensionManager.LoadedDimension != DimensionManager.Dimension.Main)
+            while(DimensionManager.LoadedDimension != DimensionManager.DefaultDimension)
                 yield return null;
 
 
