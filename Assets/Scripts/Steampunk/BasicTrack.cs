@@ -4,15 +4,40 @@ using UnityEngine;
 using System;
 using NaughtyAttributes;
 
+public static class NeighborLevelExtensions
+{
+    public static TrackMapPosition ToPosition(this BasicTrack.NeighborLevel level)
+    {
+        switch (level)
+        {
+            case BasicTrack.NeighborLevel.same: return (0, 0, 0);
+            default:                            return (0, 0, 0);
+        }
+    }
+}
+public static class NeighborPositionExtenstions
+{
+    public static TrackMapPosition ToPosition(this BasicTrack.NeighborPosition position)
+    {
+        switch (position)
+        {
+            case BasicTrack.NeighborPosition.Xplus:     return (1, 0, 0);
+            case BasicTrack.NeighborPosition.Xminus:    return (-1, 0, 0);
+            case BasicTrack.NeighborPosition.Zplus:     return (0, 0, 1);
+            case BasicTrack.NeighborPosition.Zminus:    return (0, 0, -1);
+            default:                                    return (0, 0, 0);
+        }
+    }
+}
 
-#if UNITY_EDITOR
-[RequireComponent(typeof(BoundingBox))]
-#endif
 public abstract class BasicTrack : Clickable
 #if UNITY_EDITOR
     , ISerializationCallbackReceiver
 #endif
 {
+    [SerializeField] [ReadOnly] public TrackMapController trackMapController;
+    public TrackMapPosition position;
+
     public const float length = 0;
     public const float height = 0;
     public const float width = 0;
@@ -49,7 +74,7 @@ public abstract class BasicTrack : Clickable
     {
         same,
         end
-    } 
+    }
     public enum NeighborPosition
     {
         Xplus,
@@ -59,30 +84,10 @@ public abstract class BasicTrack : Clickable
         end
     }
 
-    public BasicTrack[,] neighborTracks = new BasicTrack[(int)NeighborLevel.end, (int)NeighborPosition.end];
-#if UNITY_EDITOR
-    [SerializeField] [HideInInspector] public BasicTrack[] _neighborTracks = new BasicTrack[(int)NeighborLevel.end * (int)NeighborPosition.end];
-#endif
+    public BasicTrack[,] NeighborTracks => trackMapController.GetNeighbors(position);
     public TrackConnectionInfo connectedTrack1;
     public TrackConnectionInfo connectedTrack2;
     public BoundingBox boundingBox;
-#if UNITY_EDITOR
-    public void OnBeforeSerialize()
-    {
-        for(int i = 0; i < _neighborTracks.Length; ++i)
-        {
-            _neighborTracks[i] = neighborTracks[i / (int)NeighborPosition.end, i % (int)NeighborPosition.end];
-        }
-    }
-    public void OnAfterDeserialize()
-    {
-        for(int i = 0; i < _neighborTracks.Length; ++i)
-        {
-            neighborTracks[i / (int)NeighborPosition.end, i % (int)NeighborPosition.end] = _neighborTracks[i];
-        }
-        UpdateConnections();
-    }
-#endif
     protected new void Awake()
     {
         if(Rotateable)
@@ -135,4 +140,19 @@ public abstract class BasicTrack : Clickable
             return toReturn;
         }
     }
+
+#if UNITY_EDITOR // backup
+    [SerializeField] public int _posX;
+    [SerializeField] public int _posY;
+    [SerializeField] public int _posZ;
+    public void OnBeforeSerialize()
+    {
+        (_posX, _posY, _posZ) = position;   
+    }
+    public void OnAfterDeserialize()
+    {
+        position = (_posX, _posY, _posZ);
+        UpdateConnections();
+    }
+#endif
 }

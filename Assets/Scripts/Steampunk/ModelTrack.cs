@@ -8,5 +8,6 @@ public class ModelTrack
     public const float height = StraightTrack.height;
     public const float width = StraightTrack.width;
     public const float trackMapCellSize = length;
+    public const float scale = 5f;
     public const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightTrack.prefab";
 }
