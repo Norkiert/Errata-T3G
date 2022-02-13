@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StraightTrack : BasicTrack
 {
-    public new const float length = 0.2705f * 2;
+    public new const float length = 0.27f * 2;
     public new const float height = 0.05333013f * 2;
     public new const float width = 0.1085f * 2;
 
