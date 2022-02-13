@@ -68,10 +68,10 @@ public class TrackMapController : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    [SerializeField] [ReadOnly] List<int> trackMapX = new List<int>();
-    [SerializeField] [ReadOnly] List<int> trackMapY = new List<int>();
-    [SerializeField] [ReadOnly] List<int> trackMapZ = new List<int>();
-    [SerializeField] [ReadOnly] List<BasicTrack> trackMapTracks = new List<BasicTrack>();
+    [SerializeField] [HideInInspector] List<int> trackMapX = new List<int>();
+    [SerializeField] [HideInInspector] List<int> trackMapY = new List<int>();
+    [SerializeField] [HideInInspector] List<int> trackMapZ = new List<int>();
+    [SerializeField] [HideInInspector] List<BasicTrack> trackMapTracks = new List<BasicTrack>();
     public void OnBeforeSerialize()
     {
         trackMapX.Clear();
