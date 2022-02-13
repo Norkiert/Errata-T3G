@@ -41,6 +41,11 @@ public class TrackEditor : EditorWindow
             defaultPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(ModelTrack.prefabPath);
     }
 
+    protected void OnInspectorUpdate()
+    {
+        Repaint();
+    }
+
     private int selectedLevel = (int)BasicTrack.NeighborLevel.same;
     private Vector3 creationPoint = new Vector3(0, 0, 0);
     public void OnGUI()
@@ -127,7 +132,7 @@ public class TrackEditor : EditorWindow
 
             #region -Track Info-
 
-            EditorGUILayout.LabelField($"Position in TrackGroup: (X: {SelectedTrack.position.x}, Y: {SelectedTrack.position.y}, Z: {SelectedTrack.position.z})", labelStyle);
+            EditorGUILayout.LabelField($"Position in TrackGroup: (X: {SelectedTrack.position.x}, Y: {SelectedTrack.position.y}, Z: {SelectedTrack.position.z})", labelStyle, GUILayout.MinHeight(30));
 
             #endregion
 
@@ -139,131 +144,631 @@ public class TrackEditor : EditorWindow
                 buttonType[position] = SelectedTrack.NeighborTracks[selectedLevel, position] == null;
             }
 
-            #region -Add/Remove Track Xplus-
-
-            GUILayout.BeginHorizontal();
-
-            GUILayout.FlexibleSpace();
-            if (buttonType[0]) // add track
+            BasicTrack.NeighborPosition cameraRotation = BasicTrack.NeighborPosition.end;
+            var scene = SceneView.lastActiveSceneView;
+            if (scene)
             {
-                if (GUILayout.Button("Add Track", addButtonStyle))
+                var cameraAngle = scene.camera.transform.rotation.eulerAngles.y;
+
+                if (cameraAngle > 45f && cameraAngle <= 135f) // Xplus
                 {
-                    AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                    cameraRotation = BasicTrack.NeighborPosition.Xplus;
                 }
-            }
-            else // remove track
-            {
-                GUILayout.BeginVertical();
-                if (GUILayout.Button("Remove Track", removeButtonStyle))
+                else if (cameraAngle > 135f && cameraAngle <= 225f) // Zminus
                 {
-                    RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                    cameraRotation = BasicTrack.NeighborPosition.Zminus;
                 }
-                GUI.enabled = false;
-                EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
-                GUI.enabled = true;
-                GUILayout.EndVertical();
-            }
-            GUILayout.FlexibleSpace();
-
-            GUILayout.EndHorizontal();
-
-            #endregion
-
-            GUILayout.BeginHorizontal();
-
-            #region -Add/Remove Track Zplus- 
-
-            if (buttonType[3]) // add track
-            {
-                if (GUILayout.Button("Add Track", addButtonStyle))
+                else if (cameraAngle > 225f && cameraAngle <= 315f) // Xminus
                 {
-                    AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                    cameraRotation = BasicTrack.NeighborPosition.Xminus;
                 }
-            }
-            else // remove track
-            {
-                var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                else if (cameraAngle > 315f || cameraAngle <= 45f) // Zplus
                 {
-                    fixedHeight = buttonWidthHeight,
-                    fixedWidth = buttonWidthHeight / 2
-                };
-                if (GUILayout.Button("Remove\nTrack", verticalRemoveButtonStyle))
-                {
-                    RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
-                }
-                GUI.enabled = false;
-                EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
-                GUI.enabled = true;
-            }
-
-            #endregion
-
-            #region -Selected/Locked track GameObject-
-
-            GUI.enabled = false;
-            EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
-            GUI.enabled = true;
-
-            #endregion
-
-            #region -Add/Remove Track Zminus- 
-
-            if (buttonType[1]) // add track
-            {
-                if (GUILayout.Button("Add Track", addButtonStyle))
-                {
-                    AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
-                }
-            }
-            else // remove track
-            {
-                var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
-                {
-                    fixedHeight = buttonWidthHeight,
-                    fixedWidth = buttonWidthHeight / 2
-                };
-                GUI.enabled = false;
-                EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
-                GUI.enabled = true;
-                if (GUILayout.Button("Remove\nTrack", verticalRemoveButtonStyle))
-                {
-                    RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                    cameraRotation = BasicTrack.NeighborPosition.Zplus;
                 }
             }
 
-            #endregion
-
-            GUILayout.EndHorizontal();
-
-            #region -Add/Remove Track Xminus-
-
-            GUILayout.BeginHorizontal();
-
-            GUILayout.FlexibleSpace();
-            if (buttonType[2]) // add track
+            switch (cameraRotation)
             {
-                if (GUILayout.Button("Add Track", addButtonStyle))
-                {
-                    AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
-                }
-            }
-            else // remove track
-            {
-                GUILayout.BeginVertical();
-                GUI.enabled = false;
-                EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
-                GUI.enabled = true;
-                if (GUILayout.Button("Remove Track", removeButtonStyle))
-                {
-                    RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
-                }
-                GUILayout.EndVertical();
-            }
-            GUILayout.FlexibleSpace();
+                case BasicTrack.NeighborPosition.Xplus: // 315..45 degrees
+                    {
+                        #region -Add/Remove Track Xplus-
 
-            GUILayout.EndHorizontal();
+                        GUILayout.BeginHorizontal();
 
-            #endregion
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            if (GUILayout.Button("Remove Track\nX+", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+
+                        GUILayout.BeginHorizontal();
+
+                        #region -Add/Remove Track Zplus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            if (GUILayout.Button("Remove\nTrack\nZ+", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                        }
+
+                        #endregion
+
+                        #region -Selected/Locked track GameObject-
+
+                        GUI.enabled = false;
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        GUI.enabled = true;
+
+                        #endregion
+
+                        #region -Add/Remove Track Zminus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove\nTrack\nZ-", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+
+                        #endregion
+
+                        GUILayout.EndHorizontal();
+
+                        #region -Add/Remove Track Xminus-
+
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove Track\nX-", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+                    }
+                    break;
+                case BasicTrack.NeighborPosition.Zminus: // 45..135 degrees
+                    {
+                        #region -Add/Remove Track Zminus-
+
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            if (GUILayout.Button("Remove Track\nZ-", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+
+                        GUILayout.BeginHorizontal();
+
+                        #region -Add/Remove Track Xplus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove\nTrack\nX+", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+
+                        #endregion
+
+                        #region -Selected/Locked track GameObject-
+
+                        GUI.enabled = false;
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        GUI.enabled = true;
+
+                        #endregion
+
+                        #region -Add/Remove Track Xminus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            if (GUILayout.Button("Remove\nTrack\nX-", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                        }
+
+                        #endregion
+
+                        GUILayout.EndHorizontal();
+
+                        #region -Add/Remove Track Zplus-
+
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove Track\nZ+", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+                    }
+                    break;
+                case BasicTrack.NeighborPosition.Xminus: // 135..225 degrees
+                    {
+                        #region -Add/Remove Track Xminus-
+
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            if (GUILayout.Button("Remove Track\nX-", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+
+                        GUILayout.BeginHorizontal();
+
+                        #region -Add/Remove Track Zminus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            if (GUILayout.Button("Remove\nTrack\nZ-", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                        }
+
+                        #endregion
+
+                        #region -Selected/Locked track GameObject-
+
+                        GUI.enabled = false;
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        GUI.enabled = true;
+
+                        #endregion
+
+                        #region -Add/Remove Track Zplus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove\nTrack\nZ+", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+
+                        #endregion
+
+                        GUILayout.EndHorizontal();
+
+                        #region -Add/Remove Track Xplus-
+
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove Track\nX+", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+                    }
+                    break;
+                case BasicTrack.NeighborPosition.Zplus: // 225..315 degrees
+                    {
+                        #region -Add/Remove Track Zplus-
+
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            if (GUILayout.Button("Remove Track\nZ+", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zplus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+
+                        GUILayout.BeginHorizontal();
+
+                        #region -Add/Remove Track Xminus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove\nTrack\nX-", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+
+                        #endregion
+
+                        #region -Selected/Locked track GameObject-
+
+                        GUI.enabled = false;
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        GUI.enabled = true;
+
+                        #endregion
+
+                        #region -Add/Remove Track Xplus- 
+
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Xplus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nX+", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            var verticalRemoveButtonStyle = new GUIStyle(removeButtonStyle)
+                            {
+                                fixedHeight = buttonWidthHeight,
+                                fixedWidth = buttonWidthHeight / 2
+                            };
+                            if (GUILayout.Button("Remove\nTrack\nX+", verticalRemoveButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
+                                OnGUI();
+                                return;
+                            }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
+                        }
+
+                        #endregion
+
+                        GUILayout.EndHorizontal();
+
+                        #region -Add/Remove Track Zminus-
+
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.FlexibleSpace();
+                        if (buttonType[(int)BasicTrack.NeighborPosition.Zminus]) // add track
+                        {
+                            if (GUILayout.Button("Add Track\nZ-", addButtonStyle))
+                            {
+                                AddTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                return;
+                            }
+                        }
+                        else // remove track
+                        {
+                            GUILayout.BeginVertical();
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Zminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
+                            GUI.enabled = true;
+                            if (GUILayout.Button("Remove Track\nZ-", removeButtonStyle))
+                            {
+                                RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Zminus));
+                                OnGUI();
+                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
+                                return;
+                            }
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.EndHorizontal();
+
+                        #endregion
+                    }
+                    break;
+            }
+
+            
 
             #endregion
         }
