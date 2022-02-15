@@ -8,7 +8,7 @@ public class BallBehavior : ObjectGroundChecker
 {
     [SerializeField] protected float timeLimit = 5f;
     [SerializeField] [field: ReadOnly] protected float timeElapsed = 0f;
-    [SerializeField] protected bool timerRunning = true;
+    [SerializeField] protected bool groudTimerRunning = true;
 
     [SerializeField] protected bool isDestroying = false;
     [SerializeField] protected float destructionSpeed = 0.005f;
@@ -24,13 +24,15 @@ public class BallBehavior : ObjectGroundChecker
 
     protected void Update()
     {
+        #region -Ground Destruction-
+
         if (isDestroying)
         {
             Destroy();
         }
         else if (isGrounded)
         {
-            if (timerRunning)
+            if (groudTimerRunning)
             {
                 UpdateTime();
             }
@@ -44,6 +46,10 @@ public class BallBehavior : ObjectGroundChecker
         {
             timeElapsed = 0f;
         }
+
+        #endregion
+
+        
     }
 
     protected void UpdateTime()

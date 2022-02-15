@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class StraightTrack : BasicTrack
 {
-    public new const float length = 0.27f * 2;
-    public new const float height = 0.05333013f * 2;
-    public new const float width = 0.1085f * 2;
+    public new const float length = ModelTrack.length;
+    public new const float height = ModelTrack.height;
+    public new const float width = ModelTrack.width;
 
     protected static TrackConnectionInfo defaultConnection1 = new TrackConnectionInfo(NeighborLevel.same, NeighborPosition.Xplus);
     protected static TrackConnectionInfo defaultConnection2 = new TrackConnectionInfo(NeighborLevel.same, NeighborPosition.Xminus);
+
     protected new void Awake()
     {
         base.Awake();
@@ -29,7 +31,13 @@ public class StraightTrack : BasicTrack
     }
     public override void SetRollingPath()
     {
-        // bruh
+        rollingPath = new List<Vector3>();
+
+        var firstPoint = defaultConnection1.ToPosition();
+        var secondPoint = defaultConnection2.ToPosition();
+
+        rollingPath.Add(new Vector3(length / 2f * firstPoint.x, 0, length / 2f * firstPoint.z));
+        rollingPath.Add(new Vector3(length / 2f * secondPoint.x, 0, length / 2f * secondPoint.z));
     }
     public override void AlignTo(TrackConnectionInfo tci)
     {

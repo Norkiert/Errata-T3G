@@ -75,6 +75,8 @@ public class TrackEditor : EditorWindow
             if (GUILayout.Button(lockedTrack ? "Unlock track" : "Lock track", localButtonStyle))
             {
                 lockedTrack = !lockedTrack;
+                OnSelectionChange();
+                return;
             }
 
             #endregion

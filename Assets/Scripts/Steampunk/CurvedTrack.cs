@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CurvedTrack : BasicTrack
 {
-    public new const float length = 0.1895f * 2;
-    public new const float height = 0.05333013f * 2;
+    public new const float length = (ModelTrack.length + ModelTrack.width) / 2;
+    public new const float height = ModelTrack.height;
     public new const float width = length;
 
     public new void Awake()

@@ -42,7 +42,7 @@ public abstract class BasicTrack : Clickable
     public const float height = 0;
     public const float width = 0;
 
-    [SerializeField] [ReadOnly] public List<Vector3> rollingPath;
+    public List<Vector3> rollingPath;   
     [SerializeField] public float rollingSpeed = 0.05f;
 
     [SerializeField] [ReadOnly] protected NeighborPosition rotation = NeighborPosition.Xplus;
@@ -132,12 +132,16 @@ public abstract class BasicTrack : Clickable
             level = 0;
             position = 0;
         }
-        public static TrackConnectionInfo Mirror(TrackConnectionInfo tci)
+        public TrackConnectionInfo Mirror()
         {
             TrackConnectionInfo toReturn = new TrackConnectionInfo();
-            toReturn.position = (NeighborPosition)((int)(tci.position + (int)NeighborPosition.end / 2) % (int)NeighborPosition.end);
-            toReturn.level = (NeighborLevel)((int)(tci.level + (int)NeighborLevel.end / 2) % (int)NeighborLevel.end);
+            toReturn.position = (NeighborPosition)((int)(position + (int)NeighborPosition.end / 2) % (int)NeighborPosition.end);
+            toReturn.level = (NeighborLevel)((int)(level + (int)NeighborLevel.end / 2) % (int)NeighborLevel.end);
             return toReturn;
+        }
+        public TrackMapPosition ToPosition()
+        {
+            return level.ToPosition() + position.ToPosition();
         }
     }
 
