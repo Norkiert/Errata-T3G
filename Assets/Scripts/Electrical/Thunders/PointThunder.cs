@@ -11,6 +11,7 @@ public class PointThunder : MonoBehaviour
     [SerializeField, ReadOnly] private ParticleSystem groundBeam;
 
     [Header("Thunder options")]
+    [SerializeField] private float beamDelay = 0.2f;
     [SerializeField] private float particlesLifetime = 0.3f;
     [SerializeField] private float minRandomThunderSpawnTime = 5f;
     [SerializeField] private float maxRandomThunderSpawnTime = 10f;
@@ -28,9 +29,9 @@ public class PointThunder : MonoBehaviour
     }
     IEnumerator ThunderStart(Vector3 target)
     {
-        transform.position = target;
+        transform.position = new Vector3(target.x,target.y*2,target.z);
         thunder.Play();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(beamDelay);
         thunderBeam.Play();
         groundBeam.Play();
         yield return new WaitForSeconds(particlesLifetime);

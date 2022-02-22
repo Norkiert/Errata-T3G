@@ -28,7 +28,7 @@ public class ThunderHandler : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds((Random.value*100)%(max-min)+min);
+            yield return new WaitForSeconds((Random.value*1000)%(max-min)+min);
             PickNextThunderPosition();
             thundersParticleSystem.Play();
             yield return new WaitForSeconds(thunderLifeTime);
