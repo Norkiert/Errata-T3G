@@ -12,6 +12,7 @@ namespace GameManagment
     {
         [SerializeField, Required] private Portal mainHubPortal;
         [SerializeField, Required] private DimensionSO defaultDimension;
+        [SerializeField, Required] private GameObject switchingPlane;
 
         private DimensionSO dimensionToLoad;
         private IEnumerator dimenionChanger;
@@ -58,6 +59,14 @@ namespace GameManagment
                 yield break;
             }
 
+            MeshRenderer planeRenderer = switchingPlane.GetComponent<MeshRenderer>();
+
+            while (planeRenderer.material.color.a < 1)
+            {
+                planeRenderer.material.color = new Color(planeRenderer.material.color.r, planeRenderer.material.color.g, planeRenderer.material.color.b, planeRenderer.material.color.a + 0.01f);
+                yield return null;
+            }
+
             // unload current dimension
             if (LoadedDimension != null)
             {
@@ -99,6 +108,12 @@ namespace GameManagment
 
             yield return null;
             UpdateCamera();
+
+            while (planeRenderer.material.color.a > 0)
+            {
+                planeRenderer.material.color = new Color(planeRenderer.material.color.r, planeRenderer.material.color.g, planeRenderer.material.color.b, planeRenderer.material.color.a - 0.01f);
+                yield return null;
+            }
         }
 
         private void UpdateCamera()
