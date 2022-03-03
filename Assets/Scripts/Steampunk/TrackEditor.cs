@@ -379,15 +379,15 @@ public class TrackEditor : EditorWindow
                                 fixedHeight = buttonWidthHeight,
                                 fixedWidth = buttonWidthHeight / 2
                             };
-                            GUI.enabled = false;
-                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
-                            GUI.enabled = true;
                             if (GUILayout.Button("Remove\nTrack\nX+", verticalRemoveButtonStyle))
                             {
                                 RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
                                 OnGUI();
                                 return;
                             }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
                         }
 
                         #endregion
@@ -418,15 +418,15 @@ public class TrackEditor : EditorWindow
                                 fixedHeight = buttonWidthHeight,
                                 fixedWidth = buttonWidthHeight / 2
                             };
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
                             if (GUILayout.Button("Remove\nTrack\nX-", verticalRemoveButtonStyle))
                             {
                                 RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
                                 OnGUI();
                                 return;
                             }
-                            GUI.enabled = false;
-                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
-                            GUI.enabled = true;
                         }
 
                         #endregion
@@ -677,15 +677,15 @@ public class TrackEditor : EditorWindow
                                 fixedHeight = buttonWidthHeight,
                                 fixedWidth = buttonWidthHeight / 2
                             };
-                            GUI.enabled = false;
-                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
-                            GUI.enabled = true;
                             if (GUILayout.Button("Remove\nTrack\nX-", verticalRemoveButtonStyle))
                             {
                                 RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xminus));
                                 OnGUI();
                                 return;
                             }
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xminus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
                         }
 
                         #endregion
@@ -716,15 +716,15 @@ public class TrackEditor : EditorWindow
                                 fixedHeight = buttonWidthHeight,
                                 fixedWidth = buttonWidthHeight / 2
                             };
+                            GUI.enabled = false;
+                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
+                            GUI.enabled = true;
                             if (GUILayout.Button("Remove\nTrack\nX+", verticalRemoveButtonStyle))
                             {
                                 RemoveTrack(new BasicTrack.TrackConnectionInfo(SelectedTrack, (BasicTrack.NeighborLevel)selectedLevel, BasicTrack.NeighborPosition.Xplus));
                                 OnGUI();
                                 return;
                             }
-                            GUI.enabled = false;
-                            EditorGUILayout.ObjectField(SelectedTrack.NeighborTracks[selectedLevel, (int)BasicTrack.NeighborPosition.Xplus].gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight / 2));
-                            GUI.enabled = true;
                         }
 
                         #endregion
