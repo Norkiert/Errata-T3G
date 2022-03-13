@@ -8,6 +8,7 @@ public class TrackMapController : MonoBehaviour
     , ISerializationCallbackReceiver
 #endif
 {
+    public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();
     public int Count => trackMap.Count;
     public void Add(BasicTrack track, TrackMapPosition position)

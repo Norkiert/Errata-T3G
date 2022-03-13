@@ -48,6 +48,7 @@ public class TrackEditor : EditorWindow
 
     private int selectedLevel = (int)BasicTrack.NeighborLevel.same;
     private Vector3 creationPoint = new Vector3(0, 0, 0);
+    private Vector3Int selection = new Vector3Int(0, 0, 0);
     public void OnGUI()
     {
         if (!trackEditor)
@@ -245,9 +246,20 @@ public class TrackEditor : EditorWindow
 
                         #region -Selected/Locked track GameObject-
 
+                        EditorGUILayout.BeginVertical();
+
                         GUI.enabled = false;
-                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
                         GUI.enabled = true;
+
+                        if (GUILayout.Button("Remove Track", removeButtonStyle))
+                        {
+                            RemoveTrack(SelectedTrack);
+                            OnGUI();
+                            return;
+                        }
+
+                        EditorGUILayout.EndVertical();
 
                         #endregion
 
@@ -394,9 +406,20 @@ public class TrackEditor : EditorWindow
 
                         #region -Selected/Locked track GameObject-
 
+                        EditorGUILayout.BeginVertical();
+
                         GUI.enabled = false;
-                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
                         GUI.enabled = true;
+
+                        if (GUILayout.Button("Remove Track", removeButtonStyle))
+                        {
+                            RemoveTrack(SelectedTrack);
+                            OnGUI();
+                            return;
+                        }
+
+                        EditorGUILayout.EndVertical();
 
                         #endregion
 
@@ -543,9 +566,20 @@ public class TrackEditor : EditorWindow
 
                         #region -Selected/Locked track GameObject-
 
+                        EditorGUILayout.BeginVertical();
+
                         GUI.enabled = false;
-                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
                         GUI.enabled = true;
+
+                        if (GUILayout.Button("Remove Track", removeButtonStyle))
+                        {
+                            RemoveTrack(SelectedTrack);
+                            OnGUI();
+                            return;
+                        }
+
+                        EditorGUILayout.EndVertical();
 
                         #endregion
 
@@ -692,9 +726,20 @@ public class TrackEditor : EditorWindow
 
                         #region -Selected/Locked track GameObject-
 
+                        EditorGUILayout.BeginVertical();
+
                         GUI.enabled = false;
-                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight), GUILayout.Width(buttonWidthHeight));
+                        EditorGUILayout.ObjectField(SelectedTrack.gameObject, typeof(GameObject), true, GUILayout.Height(buttonWidthHeight / 2), GUILayout.Width(buttonWidthHeight));
                         GUI.enabled = true;
+
+                        if (GUILayout.Button("Remove Track", removeButtonStyle))
+                        {
+                            RemoveTrack(SelectedTrack);
+                            OnGUI();
+                            return;
+                        }
+
+                        EditorGUILayout.EndVertical();
 
                         #endregion
 
@@ -799,9 +844,23 @@ public class TrackEditor : EditorWindow
                     if (!defaultPrefab)
                         defaultPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(ModelTrack.prefabPath);
                     BasicTrack addedTrack = ((GameObject)PrefabUtility.InstantiatePrefab(defaultPrefab, selectedTrackMapController.transform)).GetComponent<BasicTrack>();
+                    addedTrack.transform.localPosition = Vector3.zero;
                     selectedTrackMapController.Add(addedTrack, (0, 0, 0));
                     Selection.activeObject = addedTrack;
                 }
+            }
+            else if (selectedTrackMapController && selectedTrackMapController.Count != 0)
+            {
+                selection = EditorGUILayout.Vector3IntField("Track Position:", selection);
+                var newSelection = selectedTrackMapController.Get((selection.x, selection.y, selection.z));
+                if (!newSelection)
+                    GUI.enabled = false;
+                if (GUILayout.Button("Select Track", buttonStyle))
+                {
+                    Selection.activeGameObject = newSelection.gameObject;
+                }
+                if (!newSelection)
+                    GUI.enabled = true;
             }
             else if (!selectedTrackMapController)
             {
@@ -811,6 +870,10 @@ public class TrackEditor : EditorWindow
                     GameObject trackGroup = new GameObject("TrackGroup", typeof(TrackMapController));
                     trackGroup.transform.localScale = Vector3.one * ModelTrack.scale;
                     trackGroup.transform.position = creationPoint;
+                    GameObject zeroPoint = new GameObject("ZeroPoint");
+                    zeroPoint.transform.parent = trackGroup.transform;
+                    zeroPoint.transform.localPosition = Vector3.zero;
+                    trackGroup.GetComponent<TrackMapController>().zeroPoint = zeroPoint.transform;
                     Selection.activeGameObject = trackGroup;
                 }
             }
@@ -845,6 +908,12 @@ public class TrackEditor : EditorWindow
         tci.track.trackMapController.Remove(objTemp);
         DestroyImmediate(objTemp.gameObject);
         tci.track.UpdateConnections();
+    }
+
+    public void RemoveTrack(BasicTrack caller)
+    {
+        caller.trackMapController.Remove(caller);
+        DestroyImmediate(caller.gameObject);
     }
 }
 

@@ -42,7 +42,6 @@ public abstract class BasicTrack : Clickable
     public const float height = 0;
     public const float width = 0;
 
-    public List<Vector3> rollingPath;   
     [SerializeField] public float rollingSpeed = 0.05f;
 
     [SerializeField] [ReadOnly] protected NeighborPosition rotation = NeighborPosition.Xplus;
@@ -92,7 +91,6 @@ public abstract class BasicTrack : Clickable
     {
         if(Rotateable)
             OnClick += Rotate;
-        SetRollingPath();
         base.Awake();
     }
     public void Rotate()
@@ -106,7 +104,13 @@ public abstract class BasicTrack : Clickable
     // Aligns this track to track given in TrackConnectionInfo(relatively to given's)
     public abstract void AlignTo(TrackConnectionInfo tci);
     public abstract void UpdateConnections();
-    public abstract void SetRollingPath();
+    // transform.position is always not correct
+    public Vector3 GetPosition()
+    {
+        Vector3 toReturn = trackMapController.zeroPoint.position;
+        toReturn += new Vector3(position.x, position.y, position.z) * ModelTrack.trackMapCellSize;
+        return toReturn;
+    }
     public class TrackConnectionInfo
     {
         public static implicit operator BasicTrack(TrackConnectionInfo tci) => tci.track;
