@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class Pathfinding : MonoBehaviour
 {
-    public float neighboursDistance = 30f;
+    [SerializeField] private float maxNeighbourDistance = 60f;
+    [SerializeField] private bool showConnections = false;
 
     [SerializeField] Point start;
     [SerializeField] Point end;
@@ -12,83 +14,147 @@ public class Pathfinding : MonoBehaviour
     private Point[] allPoints;
     private CubeController cube;
 
-    private List<Point> openList = new List<Point>();
-    private List<Point> closedList = new List<Point>();
-    private List<Point> Path = new List<Point>();
 
-    private struct pointWithCost
+    [Button("UpdatePoints")]
+    private void ButtonUdatePoints() => UpdatePoints();
+
+    [Button("FindPath")]
+    private void ButtonFindPath() => FindPath(start, end);
+
+
+    private static Pathfinding instance;
+    private static Pathfinding Instance
     {
-        public Point obj;
-        public float fCost;
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<Pathfinding>();
+            return instance;
+        }
     }
-    void Start()
+
+    public static float MaxNeighbourDistance => Instance.maxNeighbourDistance;
+    public static bool ShowConnections => Instance.showConnections;
+
+    private void Start()
     {
         cube = FindObjectOfType<CubeController>();
-        allPoints = FindObjectsOfType<Point>();
-        FindPathToPoint(start, end);
-        Debug.Log(Path);
+        UpdatePoints();
+        FindPath(start, end);
     }
-    public void FindStartAndEndPoints(Vector3 target)
+
+    private void UpdatePoints()
+    {
+        allPoints = FindObjectsOfType<Point>();
+        foreach (Point point in allPoints)
+            point.FindNeighbours(allPoints);
+    }
+
+    private void FindStartAndEndPoints(Vector3 target)
     {
         Point startPoint = FindClosestPoint(transform.position);
         Point endPoint = FindClosestPoint(target);
-        FindPathToPoint(startPoint, endPoint);
+        FindPath(startPoint, endPoint);
         cube.GoToPoint(startPoint.transform.position);
     }
 
     private Point FindClosestPoint(Vector3 position)
     {
-        float minDist = 10000f;
-        if (allPoints.Length != 0)
-        {
-            Point nearestPoint = allPoints[0];
-            foreach (Point point in allPoints)
-            {
-                if (Vector3.Distance(point.transform.position, position) < minDist)
-                {
-                    nearestPoint = point;
-                    minDist = Vector3.Distance(point.transform.position, transform.position);
-                }
-            }
-            return nearestPoint;
-        }
-        return null;
+        if (allPoints.Length == 0)
+            return null;
 
+        Point nearestPoint = allPoints[0];
+        float minDist = Dist(nearestPoint);
+        for (int i = 1; i < allPoints.Length; i++)
+        {
+            float dist = Dist(allPoints[i]);
+            if (dist < minDist)
+            {
+                nearestPoint = allPoints[i];
+                minDist = dist;
+            }
+        }
+        return nearestPoint;
+
+        float Dist(Point point) => Vector3.Distance(point.transform.position, position);
     }
-    public void FindPathToPoint(Point startPoint, Point endPoint)
+
+
+    public static List<Point> FindPath(Point startPoint, Point endPoint)
     {
+        if (CreatePath(startPoint, endPoint) == false)
+        {
+            Debug.LogWarning("Dont found valid path");
+            return null;
+        }
+
+        return RecreatePath(startPoint, endPoint);
+    }
+    private static bool CreatePath(Point startPoint, Point endPoint)
+    {
+        List<Point> openSet = new List<Point>();
+        HashSet<Point> closeSet = new HashSet<Point>();
+
         startPoint.gCost = 0;
-        closedList.Add(startPoint);
-        FindNextPoint(startPoint, endPoint);
+        startPoint.hCost = 0;
+        startPoint.lastPoint = null;
+        openSet.Add(startPoint);
+
+        while (openSet.Count > 0)
+        {
+            Point currPoint = openSet[0];
+            openSet.RemoveAt(0);
+
+            closeSet.Add(currPoint);
+
+            if (currPoint == endPoint)
+                return true;
+
+
+            foreach (Point neighbour in currPoint.neighbours)
+            {
+                if (closeSet.Contains(neighbour) || openSet.Contains(neighbour))
+                    continue;
+
+                // set consts
+                neighbour.gCost = currPoint.gCost + Vector3.Distance(currPoint.transform.position, neighbour.transform.position);
+                neighbour.hCost = Vector3.Distance(neighbour.transform.position, endPoint.transform.position);
+                neighbour.fCost = neighbour.hCost + neighbour.gCost;
+                neighbour.lastPoint = currPoint;
+
+                // add to open set
+                int inserIndex = 0;
+                for (int i = openSet.Count - 1; i >= 0; i--)
+                {
+                    if (neighbour.fCost >= openSet[i].fCost)
+                    {
+                        inserIndex = i + 1;
+                        break;
+                    }
+                }
+                openSet.Insert(inserIndex, neighbour);
+            }
+        }
+
+        return false;
     }
-    private void FindNextPoint(Point point, Point endPoint)
+    private static List<Point> RecreatePath(Point startPoint, Point endPoint)
     {
-        foreach (Point node in point.neighbours)
+        List<Point> points = new List<Point>() { startPoint };
+
+        Point point = endPoint;
+        while (startPoint != point)
         {
-            if (node.transform.position == endPoint.transform.position)
+            if (points == null || points.Contains(point))
             {
-                Path.Add(endPoint);
-                return;
+                Debug.LogWarning("Path is invalid");
+                return null;
             }
-            node.gCost = Vector3.Distance(point.transform.position,node.transform.position);
-            node.hCost = Vector3.Distance(node.transform.position, endPoint.transform.position);
-            node.fCost = node.hCost + node.gCost;
+
+            points.Insert(1, point);
+            point = point.lastPoint; 
         }
-        pointWithCost temp = new pointWithCost();
-        temp.obj = point;
-        temp.fCost = 2000f;
-        foreach(Point node in point.neighbours)
-        {
-            if(node.fCost<temp.fCost)
-            {
-                temp.fCost = node.fCost;
-                temp.obj = node;
-            }
-        }
-        temp.obj.lastPoint = point;
-        closedList.Add(temp.obj);
-        Path.Add(temp.obj);
-        FindNextPoint(temp.obj,endPoint);
+        return points;
     }
 }
     

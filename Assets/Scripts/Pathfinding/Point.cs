@@ -4,45 +4,47 @@ using UnityEngine;
 
 public class Point : MonoBehaviour
 {
-    [Header("Fields necessery in pathfinding")]
-    public float fCost; // summary cost
-    public float gCost; // distance from start
-    public float hCost; // distance from end
+    [HideInInspector] public float fCost; // summary cost
+    [HideInInspector] public float gCost; // distance from start
+    [HideInInspector] public float hCost; // distance from end
 
+    [HideInInspector] public Point lastPoint;
+    public readonly List<Point> neighbours = new List<Point>();
 
-    public Point lastPoint;
-    public List<Point> neighbours = new List<Point>();
-
-    private Pathfinding pathfinding;
-
-
-    void Start()
+    public void FindNeighbours(Point[] allPoints)
     {
-        pathfinding = FindObjectOfType<Pathfinding>();
-        FindNeighbours();
-    }
-
-    private void FindNeighbours()
-    {
-        Point[] allPoints;
-        allPoints = FindObjectsOfType<Point>();
+        neighbours.Clear();
         foreach (Point point in allPoints)
         {
-            if(point.transform.position == transform.position)
-            {
+            if (point == this)
                 continue;
-            }
-            if(Vector3.Distance(transform.position, point.transform.position)<=pathfinding.neighboursDistance)
+
+            float dist = Vector3.Distance(transform.position, point.transform.position);
+            if (dist <= Pathfinding.MaxNeighbourDistance)
             {
-                RaycastHit hit;
                 Ray ray = new Ray(transform.position, (point.transform.position - transform.position));
-                Physics.Raycast(ray, out hit, pathfinding.neighboursDistance);
-                if (hit.collider == null || Vector2.Distance(new Vector2(hit.collider.transform.position.x, hit.collider.transform.position.z),new Vector2(transform.position.x,transform.position.z))> Vector3.Distance(transform.position, point.transform.position))
-                {
+                Physics.Raycast(ray, out RaycastHit hit, dist);
+
+                if (hit.collider == null)
                     neighbours.Add(point);
-                    Debug.DrawLine(transform.position, point.transform.position, Color.red, 300f);
-                }
             }
         }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        if (Pathfinding.ShowConnections)
+        {
+            Gizmos.color = Color.yellow;
+            foreach (Point point in neighbours)
+                Gizmos.DrawLine(transform.position, point.transform.position);
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        foreach (Point point in neighbours)
+            Gizmos.DrawLine(transform.position, point.transform.position);
     }
 }
