@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Audio;
 
 public class PointThunder : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class PointThunder : MonoBehaviour
     [SerializeField] private float minRandomThunderSpawnTime = 5f;
     [SerializeField] private float maxRandomThunderSpawnTime = 10f;
     [SerializeField] private List<GameObject> targetsToHit;
+
+    [Header("Sounds")]
+    [SerializeField] List<AudioClipSO> clips = new List<AudioClipSO>();
 
     private int targetsCount;
     void Start()
@@ -38,6 +42,7 @@ public class PointThunder : MonoBehaviour
         thunder.Stop();
         thunderBeam.Stop();
         groundBeam.Stop();
+        PlayStormSound();
         float time = (Random.value * 100000) % (maxRandomThunderSpawnTime - minRandomThunderSpawnTime) + minRandomThunderSpawnTime;
         StartCoroutine(TimerToNextRandomThunder(time));
     }
@@ -52,6 +57,12 @@ public class PointThunder : MonoBehaviour
     {
         int num = (int)(Mathf.Ceil((Random.value*100000)%targetsCount))-1;
         return targetsToHit[num].transform.position;
+    }
+    
+    private void PlayStormSound()
+    {
+        int numb = Mathf.CeilToInt((Random.value * 1000) % (clips.Count - 1));
+        AudioManager.PlaySFX(clips[numb]);
     }
 
     #region -public functions-

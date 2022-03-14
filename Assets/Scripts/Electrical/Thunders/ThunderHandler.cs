@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Audio;
 
 public class ThunderHandler : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ThunderHandler : MonoBehaviour
     [SerializeField] private float minimumTimeSinceLastThunder=0.9f;
     [SerializeField] private float maximumTimeSinceLastThunder = 1.4f;
 
+    [Header("Sounds")]
+    [SerializeField] List<AudioClipSO> clips = new List<AudioClipSO>();
     private void Start()
     {
         StartCoroutine(WaitForNextThunder(minimumTimeSinceLastThunder,maximumTimeSinceLastThunder));
@@ -33,6 +36,7 @@ public class ThunderHandler : MonoBehaviour
             thundersParticleSystem.Play();
             yield return new WaitForSeconds(thunderLifeTime);
             thundersParticleSystem.Stop();
+            PlayStormSound();
         }
     }
     private void PickNextThunderPosition()
@@ -42,5 +46,10 @@ public class ThunderHandler : MonoBehaviour
         xCoord = xCoord < 0 ? xCoord - nonThunderAreaSize/2 : xCoord + nonThunderAreaSize/2;
         zCoord = zCoord < 0 ? zCoord - nonThunderAreaSize/2 : zCoord + nonThunderAreaSize/2;
         transform.position = new Vector3(xCoord,transform.position.y,zCoord);
+    }
+    private void PlayStormSound()
+    {
+        int numb = Mathf.CeilToInt((Random.value * 1000) % (clips.Count - 1));
+        AudioManager.PlaySFX(clips[numb]);
     }
 }
