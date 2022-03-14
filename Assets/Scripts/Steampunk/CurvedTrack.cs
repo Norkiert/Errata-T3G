@@ -16,10 +16,6 @@ public class CurvedTrack : BasicTrack
     {
         
     }
-    public override void SetRollingPath()
-    {
-        
-    }
     public override void AlignTo(TrackConnectionInfo tci)
     {
         if (tci.track.transform.parent != transform.parent)

@@ -29,16 +29,6 @@ public class StraightTrack : BasicTrack
         connectedTrack1.track = NeighborTracks[(int)connectedTrack1.level, (int)connectedTrack1.position];  
         connectedTrack2.track = NeighborTracks[(int)connectedTrack2.level, (int)connectedTrack2.position];
     }
-    public override void SetRollingPath()
-    {
-        rollingPath = new List<Vector3>();
-
-        var firstPoint = defaultConnection1.ToPosition();
-        var secondPoint = defaultConnection2.ToPosition();
-
-        rollingPath.Add(new Vector3(length / 2f * firstPoint.x, 0, length / 2f * firstPoint.z));
-        rollingPath.Add(new Vector3(length / 2f * secondPoint.x, 0, length / 2f * secondPoint.z));
-    }
     public override void AlignTo(TrackConnectionInfo tci)
     {
         if(tci.track.transform.parent != transform.parent)
