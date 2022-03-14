@@ -14,8 +14,9 @@ public class CubeController : MonoBehaviour
     [SerializeField] private float flyingUpTime = 1f;
     [SerializeField] private float flyingUpDistance = 1f;
 
-    [Header("Following")]
+    [Header("Movement")]
     [SerializeField] private Vector3 followOffset = new Vector3(-1, 1, 0);
+    [SerializeField] private float flyingSpeed = 5f;
 
     private PlayerController player;
     private Vector3 idlePointPosition;
@@ -77,6 +78,17 @@ public class CubeController : MonoBehaviour
         SwitchState(CubeStates.Follow);
     }
 
+    public IEnumerator GoToPoint(Vector3 targetPosition)
+    {
+        transform.LookAt(targetPosition);
+        while(transform.position!=targetPosition)
+        {
+            transform.position += Vector3.forward * flyingSpeed;
+            yield return null;
+        }
+        StopCoroutine(GoToPoint(Vector3.zero));
+    }
+
     //Idle Coroutine
     private IEnumerator IdleStateBehavior()
     {
@@ -100,7 +112,7 @@ public class CubeController : MonoBehaviour
             yield return null;
         }
     }
-    //Follow Coroutine
+    ///Follow Coroutine
     private IEnumerator FollowPlayer()
     {
         while(true)
