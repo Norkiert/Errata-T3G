@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7749387058943055680}
   - component: {fileID: 7749387058943055683}
   - component: {fileID: 7749387058943055682}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StraightTrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,16 +114,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 1
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: -2.5628846, y: 1.8341804, z: -4.1223073}
+  center: {x: 0.0023075342, y: 0.83418024, z: 0.0021153688}
   displayAsRelative: 1
-  XpYpZp: {x: 0.10850003, y: 0.053330135, z: 0.27050003}
-  XpYpZm: {x: 0.10850003, y: 0.053330135, z: -0.27050003}
-  XpYmZp: {x: 0.10850003, y: -0.053330135, z: 0.27050003}
-  XpYmZm: {x: 0.10850003, y: -0.053330135, z: -0.27050003}
-  XmYpZp: {x: -0.10850003, y: 0.053330135, z: 0.27050003}
-  XmYpZm: {x: -0.10850003, y: 0.053330135, z: -0.27050003}
-  XmYmZp: {x: -0.10850003, y: -0.053330135, z: 0.27050003}
-  XmYmZm: {x: -0.10850003, y: -0.053330135, z: -0.27050003}
+  XpYpZp: {x: 0.27049997, y: 0.053330112, z: 0.10849999}
+  XpYpZm: {x: 0.27049997, y: 0.053330112, z: -0.10849999}
+  XpYmZp: {x: 0.27049997, y: -0.053330112, z: 0.10849999}
+  XpYmZm: {x: 0.27049997, y: -0.053330112, z: -0.10849999}
+  XmYpZp: {x: -0.27049997, y: 0.053330112, z: 0.10849999}
+  XmYpZm: {x: -0.27049997, y: 0.053330112, z: -0.10849999}
+  XmYmZp: {x: -0.27049997, y: -0.053330112, z: 0.10849999}
+  XmYmZm: {x: -0.27049997, y: -0.053330112, z: -0.10849999}
 --- !u!114 &7749387058943055682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +137,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsSelected>k__BackingField: 0
-  rollingPath: []
-  rollingSpeed: 0.05
+  trackMapController: {fileID: 0}
+  rollingSpeed: 2
   rotation: 0
+  rotateable: 1
   boundingBox: {fileID: 0}
+  _posX: 0
+  _posY: 0
+  _posZ: 0

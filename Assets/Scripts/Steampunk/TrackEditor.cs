@@ -907,7 +907,6 @@ public class TrackEditor : EditorWindow
         var objTemp = tci.track.NeighborTracks[(int)tci.level, (int)tci.position];
         tci.track.trackMapController.Remove(objTemp);
         DestroyImmediate(objTemp.gameObject);
-        tci.track.UpdateConnections();
     }
 
     public void RemoveTrack(BasicTrack caller)

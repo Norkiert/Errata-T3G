@@ -7,17 +7,24 @@ using UnityEngine;
 public class BallBehavior : ObjectGroundChecker
 {
     [SerializeField] protected float timeLimit = 5f;
-    [SerializeField] [field: ReadOnly] protected float timeElapsed = 0f;
+    [SerializeField] [ReadOnly] protected float timeElapsed = 0f;
     [SerializeField] protected bool groudTimerRunning = true;
 
     [SerializeField] protected bool isDestroying = false;
     [SerializeField] protected float destructionSpeed = 0.005f;
 
-    protected SphereCollider ballCollider;
-    protected float realRadius;
+    public SphereCollider ballCollider;
+    public Rigidbody ballRigidbody;
+    public float realRadius;
+
+    [SerializeField] protected LayerMask trackLayer;
+    [SerializeField] [ReadOnly] protected BasicTrack currentTrack;
+    [SerializeField] [ReadOnly] protected bool onTrack;
+    [SerializeField] public float rollingSpeed = 1f;
     
     protected void Awake()
     {
+        ballRigidbody = GetComponent<Rigidbody>();
         ballCollider = GetComponent<SphereCollider>();
         realRadius = ballCollider.bounds.size.y / 2f;
     }
@@ -48,8 +55,28 @@ public class BallBehavior : ObjectGroundChecker
         }
 
         #endregion
+    }
 
-        
+    protected void OnCollisionStay(Collision collision)
+    {
+        if ((1 << collision.gameObject.layer & trackLayer.value) != 0)
+        {
+            if (!currentTrack)
+                currentTrack = collision.gameObject.GetComponent<BasicTrack>();
+            currentTrack.MoveBall(this);
+        }
+    }
+
+    protected new void OnCollisionExit(Collision collision)
+    {
+        if ((1 << collision.gameObject.layer & trackLayer.value) != 0)
+        {
+            onTrack = false;
+            currentTrack = null;
+            ballRigidbody.WakeUp();
+        }
+        else
+            base.OnCollisionExit(collision);
     }
 
     protected void UpdateTime()

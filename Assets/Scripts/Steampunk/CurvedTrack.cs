@@ -7,12 +7,13 @@ public class CurvedTrack : BasicTrack
     public new const float length = (ModelTrack.length + ModelTrack.width) / 2;
     public new const float height = ModelTrack.height;
     public new const float width = length;
+    //public const float radius = 
 
     public new void Awake()
     {
         base.Awake();
     }
-    public override void UpdateConnections()
+    public override void MoveBall(BallBehavior ball)
     {
         
     }

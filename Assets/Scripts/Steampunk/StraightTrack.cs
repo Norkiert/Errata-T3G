@@ -9,25 +9,14 @@ public class StraightTrack : BasicTrack
     public new const float height = ModelTrack.height;
     public new const float width = ModelTrack.width;
 
-    protected static TrackConnectionInfo defaultConnection1 = new TrackConnectionInfo(NeighborLevel.same, NeighborPosition.Xplus);
-    protected static TrackConnectionInfo defaultConnection2 = new TrackConnectionInfo(NeighborLevel.same, NeighborPosition.Xminus);
 
     protected new void Awake()
     {
         base.Awake();
     }
-    public override void UpdateConnections()
+    public override void MoveBall(BallBehavior ball)
     {
-        if (trackMapController == null)   
-            return;
-        connectedTrack1 = new TrackConnectionInfo();
-        connectedTrack2 = new TrackConnectionInfo();
-        connectedTrack1.position = (NeighborPosition)(((int)defaultConnection1.position + (int)rotation) % (int)NeighborPosition.end);
-        connectedTrack2.position = (NeighborPosition)(((int)defaultConnection2.position + (int)rotation) % (int)NeighborPosition.end);
-        connectedTrack1.level = defaultConnection1.level;
-        connectedTrack2.level = defaultConnection2.level;
-        connectedTrack1.track = NeighborTracks[(int)connectedTrack1.level, (int)connectedTrack1.position];  
-        connectedTrack2.track = NeighborTracks[(int)connectedTrack2.level, (int)connectedTrack2.position];
+        ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * rotation.ToPosition().ToVector3();
     }
     public override void AlignTo(TrackConnectionInfo tci)
     {
@@ -63,9 +52,6 @@ public class StraightTrack : BasicTrack
                 case NeighborLevel.same:
                     break;
             }
-
-            UpdateConnections();
-            tci.track.UpdateConnections();
         }
     }
 }

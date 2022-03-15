@@ -27,6 +27,8 @@ public struct TrackMapPosition
     }
     public static implicit operator (int, int, int)(TrackMapPosition v) => (v.x, v.y, v.z);
     public static implicit operator TrackMapPosition((int, int, int) v) => new TrackMapPosition(v);
+    public Vector3 ToVector3() => new Vector3(x, y, z);
+    public Vector3 ToVector3Int() => new Vector3Int(x, y, z);
     public static TrackMapPosition operator +(TrackMapPosition lhs, TrackMapPosition rhs)
     {
         lhs.x += rhs.x;

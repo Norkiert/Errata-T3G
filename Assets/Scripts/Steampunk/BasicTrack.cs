@@ -42,10 +42,10 @@ public abstract class BasicTrack : Clickable
     public const float height = 0;
     public const float width = 0;
 
-    [SerializeField] public float rollingSpeed = 0.05f;
+    [SerializeField] public float rollingSpeed = 1f;
 
-    [SerializeField] [ReadOnly] protected NeighborPosition rotation = NeighborPosition.Xplus;
-    [SerializeField] [ReadOnly] protected bool rotateable = true;
+    [SerializeField] [ReadOnly] public NeighborPosition rotation = NeighborPosition.Xplus;
+    [SerializeField] [ReadOnly] public bool rotateable = true;
     public bool Rotateable 
     { 
         get 
@@ -68,7 +68,6 @@ public abstract class BasicTrack : Clickable
             }
         } 
     }
-
     public enum NeighborLevel
     {
         same,
@@ -84,8 +83,6 @@ public abstract class BasicTrack : Clickable
     }
 
     public BasicTrack[,] NeighborTracks => trackMapController.GetNeighbors(position);
-    public TrackConnectionInfo connectedTrack1;
-    public TrackConnectionInfo connectedTrack2;
     public BoundingBox boundingBox;
     protected new void Awake()
     {
@@ -99,11 +96,10 @@ public abstract class BasicTrack : Clickable
         ++rotation;
         if (rotation == NeighborPosition.end)
             rotation = 0;
-        UpdateConnections();
     }
+    public abstract void MoveBall(BallBehavior ball);
     // Aligns this track to track given in TrackConnectionInfo(relatively to given's)
     public abstract void AlignTo(TrackConnectionInfo tci);
-    public abstract void UpdateConnections();
     // transform.position is always not correct
     public Vector3 GetPosition()
     {
@@ -150,9 +146,9 @@ public abstract class BasicTrack : Clickable
     }
 
 #if UNITY_EDITOR // backup
-    [SerializeField] public int _posX;
-    [SerializeField] public int _posY;
-    [SerializeField] public int _posZ;
+    [SerializeField] [ReadOnly] public int _posX;
+    [SerializeField] [ReadOnly] public int _posY;
+    [SerializeField] [ReadOnly] public int _posZ;
     public void OnBeforeSerialize()
     {
         (_posX, _posY, _posZ) = position;   
@@ -160,7 +156,6 @@ public abstract class BasicTrack : Clickable
     public void OnAfterDeserialize()
     {
         position = (_posX, _posY, _posZ);
-        UpdateConnections();
     }
 #endif
 }
