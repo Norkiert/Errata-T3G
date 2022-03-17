@@ -5,18 +5,25 @@ using NaughtyAttributes;
 
 public class StraightTrack : BasicTrack
 {
-    public new const float length = ModelTrack.length;
-    public new const float height = ModelTrack.height;
-    public new const float width = ModelTrack.width;
-
-
+    public new const float length = 0.27f * 2;
+    public new const float height = 0.053f * 2;
+    public new const float width = length * 0.4f;
+    public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightTrack.prefab";
     protected new void Awake()
     {
         base.Awake();
     }
+    public override void RotateRight()
+    {
+        transform.Rotate(Vector3.up * 90);
+    }
+    public override void RotateLeft()
+    {
+        transform.Rotate(Vector3.down * 90);
+    }
     public override void MoveBall(BallBehavior ball)
     {
-        ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * rotation.ToPosition().ToVector3();
+        ball.ballRigidbody.velocity = ball.rollingSpeed * rollingSpeed * transform.right;
     }
     public override void AlignTo(TrackConnectionInfo tci)
     {
@@ -35,16 +42,16 @@ public class StraightTrack : BasicTrack
             switch (tci.position)
             {
                 case NeighborPosition.Xplus:
-                    transform.localPosition += ModelTrack.length * Vector3.right;
+                    transform.localPosition += length * Vector3.right;
                     break;
                 case NeighborPosition.Zminus:
-                    transform.localPosition += ModelTrack.length * Vector3.back;
+                    transform.localPosition += length * Vector3.back;
                     break;
                 case NeighborPosition.Xminus:
-                    transform.localPosition += ModelTrack.length * Vector3.left;
+                    transform.localPosition += length * Vector3.left;
                     break;
                 case NeighborPosition.Zplus:
-                    transform.localPosition += ModelTrack.length * Vector3.forward;
+                    transform.localPosition += length * Vector3.forward;
                     break;
             }
             switch (tci.level)
