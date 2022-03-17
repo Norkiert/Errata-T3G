@@ -130,6 +130,12 @@ public class TrackEditor : EditorWindow
                 },
                 fixedHeight = buttonWidthHeight / 2
             };
+            GUIStyle rotateButtonStyle = new GUIStyle(GUI.skin.button)
+            {
+                fixedHeight = buttonWidthHeight,
+                fixedWidth = buttonWidthHeight,
+                fontSize = 100
+            };
 
             #endregion
 
@@ -139,7 +145,7 @@ public class TrackEditor : EditorWindow
 
             #endregion
 
-            #region -Neighbor Track Management-
+            #region -Track Management-
 
             bool[] buttonType = new bool[(int)BasicTrack.NeighborPosition.end];
             for(int position = 0; position != (int)BasicTrack.NeighborPosition.end; ++position)
@@ -179,7 +185,12 @@ public class TrackEditor : EditorWindow
 
                         GUILayout.BeginHorizontal();
 
-                        GUILayout.FlexibleSpace();
+                        if (GUILayout.Button("\u21B6", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateLeft();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
+
                         if (buttonType[(int)BasicTrack.NeighborPosition.Xplus]) // add track
                         {
                             if (GUILayout.Button("Add Track\nX+", addButtonStyle))
@@ -205,7 +216,12 @@ public class TrackEditor : EditorWindow
                             GUI.enabled = true;
                             GUILayout.EndVertical();
                         }
-                        GUILayout.FlexibleSpace();
+
+                        if (GUILayout.Button("\u21B7", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateRight();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
 
                         GUILayout.EndHorizontal();
 
@@ -339,7 +355,12 @@ public class TrackEditor : EditorWindow
 
                         GUILayout.BeginHorizontal();
 
-                        GUILayout.FlexibleSpace();
+                        if (GUILayout.Button("\u21B6", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateLeft();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
+
                         if (buttonType[(int)BasicTrack.NeighborPosition.Zminus]) // add track
                         {
                             if (GUILayout.Button("Add Track\nZ-", addButtonStyle))
@@ -365,7 +386,12 @@ public class TrackEditor : EditorWindow
                             GUI.enabled = true;
                             GUILayout.EndVertical();
                         }
-                        GUILayout.FlexibleSpace();
+
+                        if (GUILayout.Button("\u21B7", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateRight();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
 
                         GUILayout.EndHorizontal();
 
@@ -499,7 +525,12 @@ public class TrackEditor : EditorWindow
 
                         GUILayout.BeginHorizontal();
 
-                        GUILayout.FlexibleSpace();
+                        if (GUILayout.Button("\u21B6", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateLeft();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
+
                         if (buttonType[(int)BasicTrack.NeighborPosition.Xminus]) // add track
                         {
                             if (GUILayout.Button("Add Track\nX-", addButtonStyle))
@@ -525,7 +556,12 @@ public class TrackEditor : EditorWindow
                             GUI.enabled = true;
                             GUILayout.EndVertical();
                         }
-                        GUILayout.FlexibleSpace();
+
+                        if (GUILayout.Button("\u21B7", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateRight();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
 
                         GUILayout.EndHorizontal();
 
@@ -659,7 +695,12 @@ public class TrackEditor : EditorWindow
 
                         GUILayout.BeginHorizontal();
 
-                        GUILayout.FlexibleSpace();
+                        if (GUILayout.Button("\u21B6", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateLeft();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
+
                         if (buttonType[(int)BasicTrack.NeighborPosition.Zplus]) // add track
                         {
                             if (GUILayout.Button("Add Track\nZ+", addButtonStyle))
@@ -685,7 +726,12 @@ public class TrackEditor : EditorWindow
                             GUI.enabled = true;
                             GUILayout.EndVertical();
                         }
-                        GUILayout.FlexibleSpace();
+
+                        if (GUILayout.Button("\u21B7", rotateButtonStyle))
+                        {
+                            SelectedTrack.RotateRight();
+                            EditorUtility.SetDirty(SelectedTrack);
+                        }
 
                         GUILayout.EndHorizontal();
 
