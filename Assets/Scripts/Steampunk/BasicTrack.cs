@@ -41,11 +41,11 @@ public abstract class BasicTrack : Clickable
     public const float length = 0;
     public const float height = 0;
     public const float width = 0;
+    public const string prefabPath = "";
 
     [SerializeField] public float rollingSpeed = 1f;
 
-    [SerializeField] [ReadOnly] public NeighborPosition rotation = NeighborPosition.Xplus;
-    [SerializeField] [ReadOnly] public bool rotateable = true;
+    [SerializeField] public bool rotateable = true;
     public bool Rotateable 
     { 
         get 
@@ -59,11 +59,11 @@ public abstract class BasicTrack : Clickable
                 rotateable = value;
                 if (value)
                 {
-                    OnClick += Rotate;  
+                    OnClick += RotateRight;  
                 }
                 else
                 {
-                    OnClick -= Rotate;
+                    OnClick -= RotateRight;
                 }
             }
         } 
@@ -87,16 +87,11 @@ public abstract class BasicTrack : Clickable
     protected new void Awake()
     {
         if(Rotateable)
-            OnClick += Rotate;
+            OnClick += RotateRight;
         base.Awake();
     }
-    public void Rotate()
-    {
-        transform.Rotate(Vector3.up * 90);
-        ++rotation;
-        if (rotation == NeighborPosition.end)
-            rotation = 0;
-    }
+    public abstract void RotateRight();
+    public abstract void RotateLeft();
     public abstract void MoveBall(BallBehavior ball);
     // Aligns this track to track given in TrackConnectionInfo(relatively to given's)
     public abstract void AlignTo(TrackConnectionInfo tci);
@@ -146,12 +141,14 @@ public abstract class BasicTrack : Clickable
     }
 
 #if UNITY_EDITOR // backup
-    [SerializeField] [ReadOnly] public int _posX;
-    [SerializeField] [ReadOnly] public int _posY;
-    [SerializeField] [ReadOnly] public int _posZ;
+    [SerializeField] [HideInInspector] private int _posX;
+    [SerializeField] [HideInInspector] private int _posY;
+    [SerializeField] [HideInInspector] private int _posZ;
+    [SerializeField] [HideInInspector] private bool _rotateable;
+    [SerializeField] [HideInInspector] private NeighborPosition _rotation;
     public void OnBeforeSerialize()
     {
-        (_posX, _posY, _posZ) = position;   
+        (_posX, _posY, _posZ) = position;
     }
     public void OnAfterDeserialize()
     {
