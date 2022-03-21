@@ -119,6 +119,9 @@ public class PlayerController : PortalTraveller
 
     private void Update()
     {
+
+        if (DialogueManager.GetInstance().isDialoguePlaying) return;
+
         float radius = controller.radius * 0.9f;
         Vector3 groundCheck = controller.bounds.center - (controller.bounds.extents.y - radius + 0.2f) * Vector3.up;
         isGrounded = Physics.CheckSphere(groundCheck, radius, groundMask);
