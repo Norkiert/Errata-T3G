@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using PathfindingScripts;
 public class Point : MonoBehaviour
 {
     [HideInInspector] public float fCost; // summary cost
@@ -11,7 +11,7 @@ public class Point : MonoBehaviour
     [HideInInspector] public Point lastPoint;
     public readonly List<Point> neighbours = new List<Point>();
 
-    public void FindNeighbours(Point[] allPoints)
+    public void FindNeighbours(List<Point> allPoints)
     {
         neighbours.Clear();
         foreach (Point point in allPoints)
