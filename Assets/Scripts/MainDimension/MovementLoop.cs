@@ -7,21 +7,26 @@ public class MovementLoop : MonoBehaviour
     [Header("Radius of player loop")]
     [SerializeField] private float radius = 190f;
 
-    private Transform playerPosition;
     private PlayerController playerControll;
-    void Start()
+
+    private void Start()
     {
-        playerPosition = GameObject.Find("Player").transform;
         playerControll = FindObjectOfType<PlayerController>();
+        if (playerControll == null)
+        {
+            Debug.LogWarning($"{name}: dont found player!");
+            enabled = false;
+        }
     }
-    void Update()
+
+    private void Update()
     {
-        float distance = Mathf.Sqrt(Mathf.Pow(playerPosition.position.x, 2) + Mathf.Pow(playerPosition.position.z, 2));
+        float distance = Mathf.Sqrt(Mathf.Pow(playerControll.transform.position.x, 2) + Mathf.Pow(playerControll.transform.position.z, 2));
         if (distance>radius)
         {
-            float newX = playerPosition.position.x > 0 ? -playerPosition.position.x + 2 : -playerPosition.position.x - 2;
-            float newZ = playerPosition.position.z > 0 ? -playerPosition.position.z + 2 : -playerPosition.position.z - 2;
-            playerControll.SetPosition(new Vector3(newX, playerPosition.position.y, newZ));
+            float newX = playerControll.transform.position.x > 0 ? -playerControll.transform.position.x + 2 : -playerControll.transform.position.x - 2;
+            float newZ = playerControll.transform.position.z > 0 ? -playerControll.transform.position.z + 2 : -playerControll.transform.position.z - 2;
+            playerControll.SetPosition(new Vector3(newX, playerControll.transform.position.y, newZ));
         }
     }
 }
