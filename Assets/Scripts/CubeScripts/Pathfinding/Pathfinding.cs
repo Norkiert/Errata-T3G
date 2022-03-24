@@ -29,7 +29,7 @@ namespace PathFinding
         }
 
         public static float MaxNeighbourDistance => Instance.maxNeighbourDistance;
-        public static bool ShowConnections => Instance.showConnections;
+        public static bool ShowConnections => Instance == null ? false : Instance.showConnections;
 
         private void Start()
         {
