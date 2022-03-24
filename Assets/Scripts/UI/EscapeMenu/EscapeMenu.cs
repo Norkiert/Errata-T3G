@@ -27,29 +27,39 @@ public class EscapeMenu : MonoBehaviour
         settingsPanel.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)||Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameManager.IsGamePaused)
             {
-                settingsPanel.SetActive(false);
+                Close();
                 GameManager.ResumeGame();
-                escMenu.enabled = false;
             }
             else
             {
+                Open();
                 GameManager.PauseGame();
-                escMenu.enabled = true;
             }
         }
     }
+
+    private void Open()
+    {
+        escMenu.enabled = true;
+        settingsPanel.SetActive(false);
+    }
+    private void Close()
+    {
+        escMenu.enabled = false;
+    }
+
     #region -Buttons functionality-
+
     private void ResumeGame()
     {
-        settingsPanel.SetActive(false);
+        Close();
         GameManager.ResumeGame();
-        escMenu.enabled = false;
     }
     private void BackToLobby()
     {
@@ -67,5 +77,6 @@ public class EscapeMenu : MonoBehaviour
     {
         Debug.Log("ESC MENU: Back to main menu");
     }
+
     #endregion
 }

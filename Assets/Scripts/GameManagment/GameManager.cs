@@ -31,9 +31,6 @@ namespace GameManagment
         }
         private void Start()
         {
-            IsGamePaused = false;
-            OnResumeGame += () => { IsGamePaused = false; SetCursorState(true); };
-            OnPauseGame += () => { IsGamePaused = true; SetCursorState(false); };
             loadingScreen.SetActive(false);
         }
         
@@ -97,8 +94,18 @@ namespace GameManagment
         }
 
         // Escape menu handling
-        public static void PauseGame() => OnPauseGame.Invoke();
-        public static void ResumeGame() => OnResumeGame.Invoke();
+        public static void PauseGame()
+        {
+            IsGamePaused = true;
+            SetCursorState(true);
+            OnPauseGame.Invoke();
+        }
+        public static void ResumeGame()
+        {
+            IsGamePaused = false;
+            SetCursorState(false);
+            OnResumeGame.Invoke();
+        }
         public static void SetCursorState(bool isLock)
         {
             if (isLock)
