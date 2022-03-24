@@ -65,7 +65,7 @@ public class EscapeMenu : MonoBehaviour
     {
         Debug.Log("ESC MENU: back to lobby");
     }
-    void LoadGame()
+    private void LoadGame()
     {
         Debug.Log("ESC MENU: load game");
     }
