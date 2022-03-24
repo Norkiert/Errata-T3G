@@ -83,7 +83,10 @@ public class CubeController : MonoBehaviour
             SwitchState(CubeStates.Flying);
         }
         path = Pathfinding.FindPath(transform.position, target);
-        StartCoroutine(GoToPoint(path));
+        if(path!=null)
+        {
+            StartCoroutine(GoToPoint(path));
+        }
     }
 
     /// <summary>

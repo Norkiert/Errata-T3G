@@ -48,17 +48,30 @@ namespace PathfindingScripts
 
         private void UpdatePoints()
         {
-            foreach(Point point in FindObjectsOfType<Point>())
-                allPoints.Add(point);
-            foreach (Point point in allPoints)
-                point.FindNeighbours(allPoints);
+            if (FindObjectsOfType<Point>().Length<1)
+            {
+                Debug.LogWarning("Cannot find any object of type Point");
+            }
+            else
+            {
+                foreach (Point point in FindObjectsOfType<Point>())
+                    allPoints.Add(point);
+                foreach (Point point in allPoints)
+                    point.FindNeighbours(allPoints);
+            }
         }
         public static List<Point> FindPath(Vector3 startPosition, Vector3 endPosition)
         {
             Instance.UpdatePoints();
-            Instance.start = Instance.FindClosestPoint(startPosition);
-            Instance.end = Instance.FindClosestPoint(endPosition);
-            return FindFinalPath(Instance.start, Instance.end);
+            if (Instance.allPoints.Count > 1)
+            {
+                Instance.start = Instance.FindClosestPoint(startPosition);
+                Instance.end = Instance.FindClosestPoint(endPosition);
+                return FindFinalPath(Instance.start, Instance.end);
+            }
+            else
+                return null;
+            
         }
         private Point FindClosestPoint(Vector3 position)
         {
