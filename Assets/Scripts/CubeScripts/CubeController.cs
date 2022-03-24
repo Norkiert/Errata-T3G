@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using DG.Tweening;
-using PathfindingScripts;
+using PathFinding;
 
 public class CubeController : MonoBehaviour
 {

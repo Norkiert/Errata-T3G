@@ -1,50 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathfindingScripts;
-public class Point : MonoBehaviour
+
+namespace PathFinding
 {
-    [HideInInspector] public float fCost; // summary cost
-    [HideInInspector] public float gCost; // distance from start
-    [HideInInspector] public float hCost; // distance from end
-
-    [HideInInspector] public Point lastPoint;
-    public readonly List<Point> neighbours = new List<Point>();
-
-    public void FindNeighbours(List<Point> allPoints)
+    public class Point : MonoBehaviour
     {
-        neighbours.Clear();
-        foreach (Point point in allPoints)
+        [HideInInspector] public float fCost; // summary cost
+        [HideInInspector] public float gCost; // distance from start
+        [HideInInspector] public float hCost; // distance from end
+
+        [HideInInspector] public Point lastPoint;
+        public List<Point> neighbours = new List<Point>();
+
+        public void FindNeighbours(Point[] allPoints)
         {
-            if (point == this)
-                continue;
+            if (neighbours != null)
+                neighbours.Clear();
+            else
+                neighbours = new List<Point>();
 
-            float dist = Vector3.Distance(transform.position, point.transform.position);
-            if (dist <= Pathfinding.MaxNeighbourDistance)
+            foreach (Point point in allPoints)
             {
-                Ray ray = new Ray(transform.position, (point.transform.position - transform.position));
-                Physics.Raycast(ray, out RaycastHit hit, dist);
+                if (point == this)
+                    continue;
 
-                if (hit.collider == null)
-                    neighbours.Add(point);
+                float dist = Vector3.Distance(transform.position, point.transform.position);
+                if (dist <= Pathfinding.MaxNeighbourDistance)
+                {
+                    Ray ray = new Ray(transform.position, (point.transform.position - transform.position));
+                    Physics.Raycast(ray, out RaycastHit hit, dist);
+
+                    if (hit.collider == null)
+                        neighbours.Add(point);
+                }
             }
         }
-    }
 
 
-    private void OnDrawGizmos()
-    {
-        if (Pathfinding.ShowConnections)
+        private void OnDrawGizmos()
         {
-            Gizmos.color = Color.yellow;
+            if (Pathfinding.ShowConnections)
+            {
+                Gizmos.color = Color.yellow;
+                foreach (Point point in neighbours)
+                    if (point)
+                        Gizmos.DrawLine(transform.position, point.transform.position);
+
+                Gizmos.DrawSphere(transform.position, 0.3f);
+            }
+        }
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
             foreach (Point point in neighbours)
-                Gizmos.DrawLine(transform.position, point.transform.position);
+                if (point)
+                    Gizmos.DrawLine(transform.position, point.transform.position);
+
+            Gizmos.DrawSphere(transform.position, 0.3f);
         }
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        foreach (Point point in neighbours)
-            Gizmos.DrawLine(transform.position, point.transform.position);
-    }
 }
+

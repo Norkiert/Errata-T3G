@@ -3,26 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-namespace PathfindingScripts
+namespace PathFinding
 {
     public class Pathfinding : MonoBehaviour
     {
-        [SerializeField] private float maxNeighbourDistance = 60f;
+        [SerializeField, Min(1)] private float maxNeighbourDistance = 60f;
         [SerializeField] private bool showConnections = false;
 
-        [SerializeField] Point start;
-        [SerializeField] Point end;
-
-        private List<Point> allPoints = new List<Point>();
-        private CubeController cube;
-        private CharacterController player;
+        private Point[] allPoints;
 
 
         [Button("UpdatePoints")]
         private void ButtonUdatePoints() => UpdatePoints();
-
-        [Button("FindPath")]
-        private void ButtonFindPath() => FindFinalPath(start, end);
 
 
         private static Pathfinding instance;
@@ -41,33 +33,23 @@ namespace PathfindingScripts
 
         private void Start()
         {
-            player = FindObjectOfType<CharacterController>();
-            cube = FindObjectOfType<CubeController>();
             UpdatePoints();
         }
 
         private void UpdatePoints()
         {
-            if (FindObjectsOfType<Point>().Length<1)
-            {
-                Debug.LogWarning("Cannot find any object of type Point");
-            }
-            else
-            {
-                foreach (Point point in FindObjectsOfType<Point>())
-                    allPoints.Add(point);
-                foreach (Point point in allPoints)
-                    point.FindNeighbours(allPoints);
-            }
+            allPoints = FindObjectsOfType<Point>();
+            foreach (Point point in allPoints)
+                point.FindNeighbours(allPoints);
         }
         public static List<Point> FindPath(Vector3 startPosition, Vector3 endPosition)
         {
             Instance.UpdatePoints();
-            if (Instance.allPoints.Count > 1)
+            if (Instance.allPoints.Length > 1)
             {
-                Instance.start = Instance.FindClosestPoint(startPosition);
-                Instance.end = Instance.FindClosestPoint(endPosition);
-                return FindFinalPath(Instance.start, Instance.end);
+                Point start = Instance.FindClosestPoint(startPosition);
+                Point end = Instance.FindClosestPoint(endPosition);
+                return FindFinalPath(start, end);
             }
             else
                 return null;
@@ -75,12 +57,12 @@ namespace PathfindingScripts
         }
         private Point FindClosestPoint(Vector3 position)
         {
-            if (allPoints.Count == 0)
+            if (allPoints.Length == 0)
                 return null;
 
             Point nearestPoint = allPoints[0];
             float minDist = Dist(nearestPoint);
-            for (int i = 1; i < allPoints.Count; i++)
+            for (int i = 1; i < allPoints.Length; i++)
             {
                 float dist = Dist(allPoints[i]);
                 if (dist < minDist)
