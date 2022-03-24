@@ -16,14 +16,14 @@ public class CubeTriggerOptions : MonoBehaviour
         if(other.gameObject.TryGetComponent(out PlayerController _))
         {
             Vector3 targetPos = idlePoint.position;
-            cube.SetNewIdlePoint(targetPos);
+            //cube.EnterIdleTrigger(targetPos);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.TryGetComponent(out PlayerController _))
         {
-            cube.StartFollowing();
+            //cube.ExitIdleTrigger();
         }
     }
 }
