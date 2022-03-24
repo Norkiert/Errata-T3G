@@ -7,9 +7,9 @@ using PathFinding;
 
 public class CubeController : MonoBehaviour
 {
-    public enum CubeStates {None, Idle, Flying, Questions}
+    public enum CubeStates {None, Idle, FlyToTarget, Questions}
 
-    [SerializeField, ReadOnly] private CubeStates actualState = CubeStates.None;
+    [SerializeField, ReadOnly] private CubeStates currentState = CubeStates.None;
 
     [Header("Idle")]
     [SerializeField] private float rotateSpeed = 0.9f;
@@ -19,73 +19,65 @@ public class CubeController : MonoBehaviour
 
     [Header("Flying attributes")]
     [SerializeField] private float flyingSpeed = 5f;
-    [SerializeField] private float maxDistanceFromPlayer = 20f;
-    [SerializeField] private bool enableRotatingWhileFlying = true;
+    [SerializeField, Min(1)] private float maxDistanceFromPlayer = 20f;
+    [SerializeField] private bool roateDuringFly = true;
 
-
-    private List<Point> path = new List<Point>();
+    private Vector3 target;
+    private IEnumerator rotating;
     private PlayerController player;
-    private Vector3 PortalPoint;
 
-    private float timer = 0f;
-    private Quaternion rotating;
-    void Start()
+    private void Start()
     {
         player = FindObjectOfType<PlayerController>();
         SwitchState(CubeStates.Idle);
+
         StartCoroutine(DistanceCheck());
     }
 
     private void SwitchState(CubeStates newState)
     {
-        if (newState == actualState)
+        if (newState == currentState)
             return;
-        switch(newState)
+
+        //Debug.Log($"Select state {newState}");
+        bool rotate = false;
+
+        currentState = newState;
+        switch (newState)
         {
             case CubeStates.Idle:
                 {
-                    StartCoroutine(SelfMoving());
+                    StartCoroutine(Idle());
+                    rotate = true;
                     break;
                 }
-            case CubeStates.Flying:
+            case CubeStates.FlyToTarget:
                 {
-                    StopCoroutine(SelfMoving());
-                    break;
-                }
-            case CubeStates.Questions:
-                {
-                    //QuestionsCode
+                    StartCoroutine(FlyToTarget());
+                    if (roateDuringFly)
+                        rotate = true;
                     break;
                 }
             default:
                 {
-                    Debug.LogWarning("State switch error occur");
+                    Debug.LogWarning($"{newState} State was not declared!");
                     break;
                 }
         }
-        actualState = newState;
-    }
 
-    /// <summary>
-    /// Function that checks how Cube should reach given position, then it find path and in loop call GoToPoint function to reach given target
-    /// </summary>
-    /// <param name="target">
-    /// Target is vector3 that cube should reach at the end of function
-    /// </param>
-    private void FindPathAndReachTarget(Vector3 target)
-    {
-        if (actualState == CubeStates.Flying)
+        if (rotate != (rotating != null))
         {
-            StopCoroutine(GoToPoint(new List<Point>())) ;
-        }
-        else
-        {
-            SwitchState(CubeStates.Flying);
-        }
-        path = Pathfinding.FindPath(transform.position, target);
-        if(path!=null)
-        {
-            StartCoroutine(GoToPoint(path));
+            if (rotate)
+            {
+                rotating = Rotate();
+                StartCoroutine(rotating);
+            }
+            else
+            {
+                StopCoroutine(rotating);
+                rotating = null;
+            }
+                
         }
     }
 
@@ -95,71 +87,127 @@ public class CubeController : MonoBehaviour
     /// <param name="pointsToGo">
     /// PointsToGo is a list of Points which contains all points calculated by pathfinding scripts, that Cube should travel to, to finally reach given target
     /// </param>
-    public IEnumerator GoToPoint(List<Point> pointsToGo)
+    public IEnumerator FlyToTarget()
     {
-        SwitchState(CubeStates.Flying);
-        for (int i =0; i<pointsToGo.Count;i++)
+        List<Vector3> path = new List<Vector3>();
+        Vector3 oldTarget = transform.position;
+
+        int currentPathIndex = 0;
+        while (currentState == CubeStates.FlyToTarget)
         {
-            while (Vector2.Distance(new Vector2(pointsToGo[i].transform.position.x, pointsToGo[i].transform.position.z), new Vector2(transform.position.x, transform.position.z)) > 0.3f)
+            if (Vector3.Distance(transform.position, target) < maxDistanceFromPlayer)
             {
-                transform.position = new Vector3(Vector3.MoveTowards(transform.position, pointsToGo[i].transform.position, Time.deltaTime * flyingSpeed).x,transform.position.y, Vector3.MoveTowards(transform.position, pointsToGo[i].transform.position, Time.deltaTime * flyingSpeed).z);
-                yield return null;
+                SwitchState(CubeStates.Idle);
+                yield break;
             }
+
+            // update path aftar target changed
+            if (Vector3.Distance(target, oldTarget) > 2)
+            {
+                //Debug.Log($"Reques new path target: {target} old target: {oldTarget}");
+                oldTarget = target;
+                path = Pathfinding.FindPath(transform.position, target);
+
+                //Debug.Log($"{path.Count} {Vector3.Distance(path[0], target)} {Vector3.Distance(path[path.Count - 1], target)}");
+                if (path.Count > 1 && Vector3.Distance(path[0], target) > Vector3.Distance(path[1], target))
+                    currentPathIndex = 1;
+                else
+                    currentPathIndex = 0;
+
+                // debug
+                Vector3 lastPos = transform.position;
+                for (int i = currentPathIndex; i < path.Count; i++)
+                {
+                    Vector3 curPos = path[i];
+                    Debug.DrawLine(lastPos, curPos, Color.red, 3);
+                    lastPos = curPos;
+                }
+            }
+
+            float distanceDisFrame = Time.deltaTime * flyingSpeed;
+            float distanceToCurrentPoint = Vector3.Distance(transform.position, path[currentPathIndex]);
+            
+            // change index when is near to current target point
+            if (distanceDisFrame > distanceToCurrentPoint)
+            {
+                currentPathIndex++;
+
+                if (currentPathIndex == path.Count)
+                {
+                    //Debug.LogWarning($"{name}: End of path!");
+                    SwitchState(CubeStates.Idle);
+                    yield break;
+                }
+
+                continue;
+            }
+
+            Vector3 direction = (path[currentPathIndex] - transform.position).normalized;
+            transform.position += direction * distanceDisFrame;
+
+            yield return null;
         }
-        SwitchState(CubeStates.Idle);
     }
+
     /// <summary>
     /// Coroutine that provides upside-down movement of Cube in Idle state
     /// </summary>
-    private IEnumerator SelfMoving()
+    private IEnumerator Idle()
     {
-        bool direction = false;
-        while(true)
+        float moveTime = 0;
+        bool dir = true;
+        Tween move = null;
+
+        while (currentState == CubeStates.Idle)
         {
-            if(direction)
+            moveTime -= Time.deltaTime;
+            if (moveTime <= 0)
             {
-                transform.DOMoveY(transform.position.y + flyingUpDistance, flyingUpTime);
-            }else
-            {
-                transform.DOMoveY(transform.position.y - flyingUpDistance, flyingUpTime);
+                moveTime = flyingUpTime;
+                move = transform.DOMoveY(transform.position.y + (dir ? flyingUpDistance : -flyingUpDistance), flyingUpTime).SetEase(Ease.InQuad);
+                dir = !dir;
             }
-            yield return new WaitForSeconds(flyingUpTime);
-            direction = !direction;
+
+            yield return null;
+        }
+
+        if (move != null)
+            move.Kill();
+    }
+
+    private IEnumerator Rotate()
+    {
+        float rotationTimer = 0;
+        Quaternion targetRotation = transform.rotation;
+
+        while (true)
+        {
+            rotationTimer -= Time.deltaTime;
+            if (rotationTimer <= 0)
+            {
+                targetRotation = Quaternion.Euler(new Vector3(Random.Range(-720, 720), Random.Range(-720, 720), Random.Range(-720, 720)));
+                rotationTimer = timeToChangeRotation;
+            }
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);
+
+            yield return null;
         }
     }
+
     /// <summary>
     /// Coroutine DistanceCheck checks distance between player and Cube each second, and call function to move cube to player if that distance is higher than given
     /// </summary>
     private IEnumerator DistanceCheck()
     {
-        while(true)
+        while (true)
         {
-            if(actualState != CubeStates.Flying)
+            if (Vector3.Distance(transform.position, player.transform.position) > maxDistanceFromPlayer + 1 + flyingUpDistance)
             {
-                if (Vector3.Distance(transform.position, player.transform.position) > maxDistanceFromPlayer)
-                {
-                    FindPathAndReachTarget(player.transform.position);
-                }
+                target = player.transform.position;
+                SwitchState(CubeStates.FlyToTarget);
             }
-            yield return new WaitForSeconds(1f);
-        }
-    }
 
-    /// <summary>
-    /// Update is only for rotating cube
-    /// </summary>
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if(timer<timeToChangeRotation)
-        {
-            if (!enableRotatingWhileFlying && actualState == CubeStates.Flying) { }
-            else
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotating, Time.deltaTime * rotateSpeed);
-        }else
-        {
-            rotating = Quaternion.Euler(new Vector3(Random.Range(-720, 720), Random.Range(-720, 720), Random.Range(-720, 720)));
-            timer = 0f;
+            yield return new WaitForSeconds(1f);
         }
     }
 }

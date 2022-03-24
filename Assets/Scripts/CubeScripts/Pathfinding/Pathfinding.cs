@@ -42,13 +42,34 @@ namespace PathFinding
             foreach (Point point in allPoints)
                 point.FindNeighbours(allPoints);
         }
-        public static List<Point> FindPath(Vector3 startPosition, Vector3 endPosition)
+        public static List<Vector3> FindPath(Vector3 startPosition, Vector3 targetPosition)
         {
             Instance.UpdatePoints();
             if (Instance.allPoints.Length > 1)
             {
                 Point start = Instance.FindClosestPoint(startPosition);
-                Point end = Instance.FindClosestPoint(endPosition);
+                Point end = Instance.FindClosestPoint(targetPosition);
+
+                if (start == end)
+                {
+                    float shortestDist = float.MaxValue;
+                    Point bestPoint = null;
+                    foreach (Point secondPoint in end.neighbours)
+                    {
+                        float dist = DistanceToShiftedPoint(secondPoint);
+                        if (dist < shortestDist)
+                        {
+                            shortestDist = dist;
+                            bestPoint = secondPoint;
+                        }
+                    }
+
+                    if (DistanceToShiftedPoint(bestPoint) < Vector3.Distance(end.transform.position, targetPosition))
+                        end = bestPoint;
+
+                    float DistanceToShiftedPoint(Point secondPoint) => Vector3.Distance(end.transform.position + (secondPoint.transform.position - end.transform.position).normalized, targetPosition);
+                }
+
                 return FindFinalPath(start, end);
             }
             else
@@ -77,7 +98,7 @@ namespace PathFinding
         }
 
 
-        public static List<Point> FindFinalPath(Point startPoint, Point endPoint)
+        private static List<Vector3> FindFinalPath(Point startPoint, Point endPoint)
         {
             if (CreatePath(startPoint, endPoint) == false)
             {
@@ -135,20 +156,22 @@ namespace PathFinding
 
             return false;
         }
-        private static List<Point> RecreatePath(Point startPoint, Point endPoint)
+        private static List<Vector3> RecreatePath(Point startPoint, Point endPoint)
         {
-            List<Point> points = new List<Point>() { startPoint };
+            List<Vector3> points = new List<Vector3>() { startPoint.transform.position };
+            HashSet<Point> checkedPoints = new HashSet<Point>();
 
             Point point = endPoint;
             while (startPoint != point)
             {
-                if (points == null || points.Contains(point))
+                if (points == null || checkedPoints.Contains(point))
                 {
                     Debug.LogWarning("Path is invalid");
                     return null;
                 }
 
-                points.Insert(1, point);
+                points.Insert(1, point.transform.position);
+                checkedPoints.Add(point);
                 point = point.lastPoint;
             }
             return points;
