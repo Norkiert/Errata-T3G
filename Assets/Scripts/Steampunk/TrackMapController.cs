@@ -8,6 +8,12 @@ public class TrackMapController : MonoBehaviour
     , ISerializationCallbackReceiver
 #endif
 {
+    public enum TrackType
+    {
+        Straight,
+        RightCurved,
+        LeftCurved
+    }
     public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();
     public int Count => trackMap.Count;
@@ -17,11 +23,14 @@ public class TrackMapController : MonoBehaviour
             Debug.LogError($"Tried to add track at occupied position: {position}.");
         else if (Contains(track))
             Debug.LogError("Tried to add track that is already in this TrackGroup.");
+        else if (track.trackMapController)
+            Debug.LogError("Tried to add track that is already in some TrackGroup.");
         else
         {
             trackMap[position] = track;
-            track.position = position;
             track.trackMapController = this;
+            track.position = position;
+            track.InitPos(position);
         }
     }
     public void Remove(BasicTrack track)

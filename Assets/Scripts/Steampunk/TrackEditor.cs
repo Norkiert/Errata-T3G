@@ -139,6 +139,50 @@ public class TrackEditor : EditorWindow
 
             #endregion
 
+            #region -Track Type Selection-
+
+            EditorGUILayout.LabelField("Selected Track type:", labelStyle);
+            string[] types = Enum.GetNames(typeof(TrackMapController.TrackType));
+            labelStyle = new GUIStyle("toggle")
+            {
+                fontSize = 20
+            };
+            var trackTypeCopy = SelectedTrack.TrackType;
+            SelectedTrack.TrackType = (TrackMapController.TrackType)GUILayout.SelectionGrid((int)SelectedTrack.TrackType, types, 1, labelStyle);
+            if(SelectedTrack.TrackType != trackTypeCopy) // type changed
+            {
+                var rollingSpeedCopy = SelectedTrack.rollingSpeed;
+                var rotateableCopy = SelectedTrack.rotateable;
+                var positionCopy = SelectedTrack.position;
+                var localPositionCopy = SelectedTrack.transform.localPosition;
+                var rotationCopy = SelectedTrack.transform.localRotation;
+                var parentTransform = SelectedTrack.transform.parent;
+                trackTypeCopy = SelectedTrack.TrackType;
+                var trackMapController = SelectedTrack.trackMapController;
+                RemoveTrack(SelectedTrack);
+                string prefabPath = trackTypeCopy switch
+                {
+                    TrackMapController.TrackType.Straight => StraightTrack.prefabPath,
+                    TrackMapController.TrackType.RightCurved => RightCurvedTrack.prefabPath,
+                    TrackMapController.TrackType.LeftCurved => LeftCurvedTrack.prefabPath,
+                    _ => ""
+                };
+                BasicTrack newTrack = ((GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath), parentTransform)).GetComponent<BasicTrack>();
+                trackMapController.Add(newTrack, positionCopy);
+                newTrack.rotateable = rotateableCopy;
+                newTrack.rollingSpeed = rollingSpeedCopy;
+                newTrack.transform.localRotation = rotationCopy;
+                newTrack.TrackType = trackTypeCopy;
+                Selection.activeGameObject = newTrack.gameObject;
+                return;
+            }
+            labelStyle = new GUIStyle(GUI.skin.label)
+            {
+                fontSize = 20
+            };
+
+            #endregion
+
             #region -Track Info-
 
             EditorGUILayout.LabelField($"Position in TrackGroup: (X: {SelectedTrack.position.x}, Y: {SelectedTrack.position.y}, Z: {SelectedTrack.position.z})", labelStyle, GUILayout.MinHeight(30));
