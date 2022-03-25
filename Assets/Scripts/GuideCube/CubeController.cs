@@ -89,44 +89,51 @@ public class CubeController : MonoBehaviour
     /// </param>
     public IEnumerator FlyToTarget()
     {
-        List<Vector3> path = new List<Vector3>();
+        List<Point> path = new List<Point>();
+
         Vector3 oldTarget = transform.position;
+
+        Vector3 fixedTarget = target;
+        float validDistance = maxDistanceFromPlayer;
 
         int currentPathIndex = 0;
         while (currentState == CubeStates.FlyToTarget)
         {
-            if (Vector3.Distance(transform.position, target) < maxDistanceFromPlayer)
-            {
-                SwitchState(CubeStates.Idle);
-                yield break;
-            }
-
             // update path aftar target changed
             if (Vector3.Distance(target, oldTarget) > 2)
             {
-                //Debug.Log($"Reques new path target: {target} old target: {oldTarget}");
+                //Debug.Log($"Reques new path target: {fixedTarget} old target: {oldTarget}");
                 oldTarget = target;
-                path = Pathfinding.FindPath(transform.position, target);
 
-                //Debug.Log($"{path.Count} {Vector3.Distance(path[0], target)} {Vector3.Distance(path[path.Count - 1], target)}");
-                if (path.Count > 1 && Vector3.Distance(path[0], target) > Vector3.Distance(path[1], target))
+                (path, fixedTarget) = Pathfinding.FindPath(transform.position, target);
+                validDistance = Mathf.Max(maxDistanceFromPlayer - Vector3.Distance(fixedTarget, target), 1);
+                
+                //Debug.Log($"{path.Count} {Vector3.Distance(path[0].Position, target)} {Vector3.Distance(path[path.Count - 1].Position, target)}");
+                if (path.Count > 1 && Vector3.Distance(path[0].Position, fixedTarget) > Vector3.Distance(path[1].Position, fixedTarget))
                     currentPathIndex = 1;
                 else
                     currentPathIndex = 0;
 
                 // debug
                 Vector3 lastPos = transform.position;
-                for (int i = currentPathIndex; i < path.Count; i++)
+                for (int i = currentPathIndex; i < path.Count - 1; i++)
                 {
-                    Vector3 curPos = path[i];
-                    Debug.DrawLine(lastPos, curPos, Color.red, 3);
-                    lastPos = curPos;
+                    Debug.DrawLine(lastPos, path[i].Position, Color.red, 3);
+                    lastPos = path[i].Position;
                 }
+                Debug.DrawLine(lastPos, fixedTarget, Color.red, 3);
             }
 
             float distanceDisFrame = Time.deltaTime * flyingSpeed;
-            float distanceToCurrentPoint = Vector3.Distance(transform.position, path[currentPathIndex]);
-            
+            float distanceToCurrentPoint = Vector3.Distance(transform.position, path[currentPathIndex].Position);
+
+            // check if achieve target
+            if (Vector3.Distance(transform.position, fixedTarget) < Mathf.Max(distanceDisFrame, validDistance))
+            {
+                SwitchState(CubeStates.Idle);
+                yield break;
+            }
+
             // change index when is near to current target point
             if (distanceDisFrame > distanceToCurrentPoint)
             {
@@ -142,7 +149,7 @@ public class CubeController : MonoBehaviour
                 continue;
             }
 
-            Vector3 direction = (path[currentPathIndex] - transform.position).normalized;
+            Vector3 direction = (path[currentPathIndex].Position - transform.position).normalized;
             transform.position += direction * distanceDisFrame;
 
             yield return null;
@@ -201,7 +208,7 @@ public class CubeController : MonoBehaviour
     {
         while (true)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) > maxDistanceFromPlayer + 1 + flyingUpDistance)
+            if (Vector3.Distance(target, player.transform.position) > maxDistanceFromPlayer + 1 + flyingUpDistance)
             {
                 target = player.transform.position;
                 SwitchState(CubeStates.FlyToTarget);

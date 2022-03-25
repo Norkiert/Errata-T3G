@@ -37,6 +37,7 @@ namespace PathFinding
             }
         }
 
+        public Vector3 Position => transform.position;
 
         private void OnDrawGizmos()
         {

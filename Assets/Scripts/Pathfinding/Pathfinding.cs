@@ -42,7 +42,7 @@ namespace PathFinding
             foreach (Point point in allPoints)
                 point.FindNeighbours(allPoints);
         }
-        public static List<Vector3> FindPath(Vector3 startPosition, Vector3 targetPosition)
+        public static (List<Point> path, Vector3 fixedTarget) FindPath(Vector3 startPosition, Vector3 targetPosition)
         {
             Instance.UpdatePoints();
             if (Instance.allPoints.Length > 1)
@@ -50,6 +50,7 @@ namespace PathFinding
                 Point start = Instance.FindClosestPoint(startPosition);
                 Point end = Instance.FindClosestPoint(targetPosition);
 
+                // try find better end point
                 if (start == end)
                 {
                     float shortestDist = float.MaxValue;
@@ -70,10 +71,36 @@ namespace PathFinding
                     float DistanceToShiftedPoint(Point secondPoint) => Vector3.Distance(end.transform.position + (secondPoint.transform.position - end.transform.position).normalized, targetPosition);
                 }
 
-                return FindFinalPath(start, end);
+                List<Point> path = FindFinalPath(start, end);
+
+                // fix target position
+                if (path.Count > 1)
+                {
+                    Vector3 fp = path[path.Count - 2].Position;
+                    Vector3 sp = path[path.Count - 1].Position;
+                    Vector3 dir = (fp - sp).normalized;
+                    Vector3 fixedTarget = sp;
+                    float closesetDistance = Vector3.Distance(fixedTarget, targetPosition); 
+                    while (true)
+                    {
+                        fixedTarget += dir;
+                        float dist = Vector3.Distance(fixedTarget, targetPosition);
+                        if (dist > closesetDistance)
+                        {
+                            fixedTarget -= dir;
+                            break;
+                        }
+
+                        closesetDistance = dist;
+                    }
+                    //Debug.Log($"Fixed target {targetPosition} => {fixedTarget}");
+                    targetPosition = fixedTarget;
+                }
+
+                return (path, targetPosition);
             }
             else
-                return null;
+                return (null, targetPosition);
             
         }
         private Point FindClosestPoint(Vector3 position)
@@ -98,7 +125,7 @@ namespace PathFinding
         }
 
 
-        private static List<Vector3> FindFinalPath(Point startPoint, Point endPoint)
+        private static List<Point> FindFinalPath(Point startPoint, Point endPoint)
         {
             if (CreatePath(startPoint, endPoint) == false)
             {
@@ -156,22 +183,20 @@ namespace PathFinding
 
             return false;
         }
-        private static List<Vector3> RecreatePath(Point startPoint, Point endPoint)
+        private static List<Point> RecreatePath(Point startPoint, Point endPoint)
         {
-            List<Vector3> points = new List<Vector3>() { startPoint.transform.position };
-            HashSet<Point> checkedPoints = new HashSet<Point>();
+            List<Point> points = new List<Point>() { startPoint };
 
             Point point = endPoint;
             while (startPoint != point)
             {
-                if (points == null || checkedPoints.Contains(point))
+                if (points == null || points.Contains(point))
                 {
                     Debug.LogWarning("Path is invalid");
                     return null;
                 }
 
-                points.Insert(1, point.transform.position);
-                checkedPoints.Add(point);
+                points.Insert(1, point);
                 point = point.lastPoint;
             }
             return points;
