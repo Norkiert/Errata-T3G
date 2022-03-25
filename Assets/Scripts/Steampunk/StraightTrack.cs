@@ -5,9 +5,9 @@ using NaughtyAttributes;
 
 public class StraightTrack : BasicTrack
 {
-    public new const float length = 0.27f * 2;
-    public new const float height = 0.053f * 2;
-    public new const float width = length * 0.4f;
+    public new const float length = 0.5f * 2;
+    public new const float height = 0.12f * 2;
+    public new const float width = 0.24f * 2;
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightTrack.prefab";
     protected new void Awake()
     {
@@ -23,7 +23,8 @@ public class StraightTrack : BasicTrack
     }
     public override void MoveBall(BallBehavior ball)
     {
-        ball.ballRigidbody.velocity = ball.rollingSpeed * rollingSpeed * transform.right;
+        var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * Vector3.forward);
+        ball.ballRigidbody.velocity = moveVector;
     }
     public override void AlignTo(TrackConnectionInfo tci)
     {
@@ -60,5 +61,10 @@ public class StraightTrack : BasicTrack
                     break;
             }
         }
+    }
+    public override void InitPos(TrackMapPosition tmp)
+    {
+        position = tmp;
+        transform.localPosition = GetLocalPosition();
     }
 }

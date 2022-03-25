@@ -7,10 +7,8 @@ public abstract class CurvedTrack : BasicTrack
     public new const float length = (ModelTrack.length + ModelTrack.width) / 2;
     public new const float height = ModelTrack.height;
     public new const float width = length;
-    public new const string prefabPath = "";
-    public const float radius = length - ModelTrack.width / 2;
-    public const float realLength = 0.5f * Mathf.PI * radius;
-    
+
+    [SerializeField] public Transform rotationPoint;
 
     public new void Awake()
     {
@@ -18,11 +16,11 @@ public abstract class CurvedTrack : BasicTrack
     }
     public override void RotateRight()
     {
-        transform.RotateAround(GetPosition(), Vector3.up, 90);
+        transform.Rotate(Vector3.up * 90);
     }
     public override void RotateLeft()
     {
-        transform.RotateAround(GetPosition(), Vector3.up, -90);
+        transform.Rotate(Vector3.up * -90);
     }
     public override void AlignTo(TrackConnectionInfo tci)
     {

@@ -83,7 +83,6 @@ public abstract class BasicTrack : Clickable
     }
 
     public BasicTrack[,] NeighborTracks => trackMapController.GetNeighbors(position);
-    public BoundingBox boundingBox;
     protected new void Awake()
     {
         if(Rotateable)
@@ -95,6 +94,8 @@ public abstract class BasicTrack : Clickable
     public abstract void MoveBall(BallBehavior ball);
     // Aligns this track to track given in TrackConnectionInfo(relatively to given's)
     public abstract void AlignTo(TrackConnectionInfo tci);
+    public abstract void InitPos(TrackMapPosition tmp);
+    [field: SerializeField] [HideInInspector] public TrackMapController.TrackType TrackType { get; set; }
     // transform.position is always not correct
     public Vector3 GetPosition()
     {
@@ -102,10 +103,14 @@ public abstract class BasicTrack : Clickable
         toReturn += new Vector3(position.x, position.y, position.z) * ModelTrack.trackMapCellSize;
         return toReturn;
     }
+    public Vector3 GetLocalPosition()
+    {
+        Vector3 toReturn = trackMapController.zeroPoint.localPosition;
+        toReturn += new Vector3(position.x, position.y, position.z) * ModelTrack.trackMapCellSize;
+        return toReturn;
+    }
     public class TrackConnectionInfo
     {
-        public static implicit operator BasicTrack(TrackConnectionInfo tci) => tci.track;
-
         public BasicTrack track;
         public NeighborLevel level;
         public NeighborPosition position;
@@ -144,8 +149,6 @@ public abstract class BasicTrack : Clickable
     [SerializeField] [HideInInspector] private int _posX;
     [SerializeField] [HideInInspector] private int _posY;
     [SerializeField] [HideInInspector] private int _posZ;
-    [SerializeField] [HideInInspector] private bool _rotateable;
-    [SerializeField] [HideInInspector] private NeighborPosition _rotation;
     public void OnBeforeSerialize()
     {
         (_posX, _posY, _posZ) = position;
