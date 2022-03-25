@@ -12,7 +12,7 @@ public class LaserMirror : Interactable
     [SerializeField] private float rotationSpeed = 20;
     [SerializeField] private bool rotateBySteps = false;
     [SerializeField, ShowIf(nameof(rotateBySteps))] float degreesPerStep = 30f;
-    [SerializeField, ShowIf(nameof(rotateBySteps))] float mouseMoveDelayOfStepRotation = 8f;
+    [SerializeField, ShowIf(nameof(rotateBySteps))] float minMouseMoveToRotate = 8f;
 
     private PlayerInteractions player;
     private PlayerController playerController;
@@ -63,7 +63,7 @@ public class LaserMirror : Interactable
                     if (Input.GetAxis("Mouse X") < 0 && stepCheckHorizontal > 0)
                         stepCheckHorizontal = 0f - Input.GetAxis("Mouse X");
 
-                    if (stepCheckHorizontal > mouseMoveDelayOfStepRotation || stepCheckHorizontal < -mouseMoveDelayOfStepRotation)
+                    if (stepCheckHorizontal > minMouseMoveToRotate || stepCheckHorizontal < -minMouseMoveToRotate)
                     {
                         transform.Rotate(new Vector3(0, (degreesPerStep * (stepCheckHorizontal < 0 ? -1 : 1)*reverseRotating), 0));
                         stepCheckHorizontal = 0f;
@@ -78,7 +78,7 @@ public class LaserMirror : Interactable
                     if (Input.GetAxis("Mouse Y") < 0 && stepCheckVertical > 0)
                         stepCheckVertical = 0f - Input.GetAxis("Mouse Y");
 
-                    if (stepCheckVertical > mouseMoveDelayOfStepRotation || stepCheckVertical < -mouseMoveDelayOfStepRotation)
+                    if (stepCheckVertical > minMouseMoveToRotate || stepCheckVertical < -minMouseMoveToRotate)
                     {
                         transform.Rotate(new Vector3(0, 0, (degreesPerStep * (stepCheckVertical < 0 ? -1 : 1) * reverseRotating)));
                         stepCheckVertical = 0f;
