@@ -106,6 +106,14 @@ public class CubeController : MonoBehaviour
                 oldTarget = target;
 
                 (path, fixedTarget) = Pathfinding.FindPath(transform.position, target);
+
+                if (path == null)
+                {
+                    Debug.LogWarning($"{name}: Dont found path!");
+                    SwitchState(CubeStates.Idle);
+                    yield break;
+                }
+
                 validDistance = Mathf.Max(maxDistanceFromPlayer - Vector3.Distance(fixedTarget, target), 1);
 
                 currentPathIndex = 0;
@@ -166,7 +174,7 @@ public class CubeController : MonoBehaviour
                 // use portal
                 if (path[currentPathIndex - 1] is PointWithPortal pointWithPortal && path[currentPathIndex] == pointWithPortal.ConnectedPortalPoint)
                 {
-                    Debug.Log("Using portal");
+                    //Debug.Log("Using portal");
                     transform.position = pointWithPortal.ConnectedPortalPoint.Position;
                 }
 

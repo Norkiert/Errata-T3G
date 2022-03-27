@@ -13,6 +13,10 @@ namespace PathFinding
         [HideInInspector] public float hCost; // distance to end
 
 
+        [SerializeField] private bool hasCustomMaxNeighbourDistance = false;
+        [SerializeField, Min(0), ShowIf(nameof(hasCustomMaxNeighbourDistance))] float customMaxNeighbourDistance = 10f;
+
+
         [SerializeField, ReadOnly] protected List<Point> connectedPoints = new List<Point>();
         public List<Point> ConnectedPoints => connectedPoints;
         public virtual void FindNeighbours(Point[] allPoints)
@@ -22,22 +26,28 @@ namespace PathFinding
             else
                 connectedPoints = new List<Point>();
 
+            float maxDistance = hasCustomMaxNeighbourDistance ? customMaxNeighbourDistance : Pathfinding.MaxNeighbourDistance;
+
             foreach (Point point in allPoints)
             {
                 if (point == this)
                     continue;
 
                 float dist = Vector3.Distance(transform.position, point.transform.position);
-                if (dist <= Pathfinding.MaxNeighbourDistance)
+                if (dist <= maxDistance)
                 {
                     Ray ray = new Ray(transform.position, (point.transform.position - transform.position));
-                    Physics.Raycast(ray, out RaycastHit hit, dist);
+                    Physics.Raycast(ray, out RaycastHit hit, dist - 0.5f);
 
                     if (hit.collider == null)
                         connectedPoints.Add(point);
                 }
             }
         }
+
+
+        [Button("Update Points")]
+        private void ButtonUdatePoints() => Pathfinding.UpdatePoints();
 
         public virtual float Distance(Point secondPoint) => Vector3.Distance(Position, secondPoint.Position);
 
