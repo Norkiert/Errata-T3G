@@ -14,25 +14,33 @@ public class LaserMirror : Interactable
     [SerializeField, ShowIf(nameof(rotateBySteps))] float degreesPerStep = 30f;
     [SerializeField, ShowIf(nameof(rotateBySteps))] float minMouseMoveToRotate = 8f;
 
+    private GameObject tipCanvas;
     private PlayerInteractions player;
     private PlayerController playerController;
 
+    public new void Awake()
+    {
+        tipCanvas = GameObject.Find("MirrorTipUI");
+    }
     private void Start()
     {
+        tipCanvas.SetActive(false);
         playerController = FindObjectOfType<PlayerController>();
         player = FindObjectOfType<PlayerInteractions>();
     }
     public override void Select()
     {
         base.Select();
+        ShowUI();
         player.OnInteractionStart += StartRotateMirror;
         player.OnInteractionEnd += EndRotateMirror;
     }
     public override void Deselect()
     {
         base.Deselect();
-        if(player)
+        if (player)
         {
+            HideUI();
             player.OnInteractionStart -= StartRotateMirror;
             player.OnInteractionEnd -= EndRotateMirror;
         }
@@ -96,5 +104,13 @@ public class LaserMirror : Interactable
                 transform.Rotate(new Vector3(0, rotateHorizontal?Input.GetAxis("Mouse X")*reverseRotating:0, rotateVertical?Input.GetAxis("Mouse Y"):0) * rotationSpeed * Time.deltaTime);
             }
         }
+    }
+    private void ShowUI()
+    {
+        tipCanvas.SetActive(true);
+    }
+    private void HideUI()
+    {
+        tipCanvas.SetActive(false);
     }
 }
