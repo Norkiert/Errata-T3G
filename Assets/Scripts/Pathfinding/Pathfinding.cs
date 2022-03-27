@@ -15,7 +15,7 @@ namespace PathFinding
         private static Point[] allPoints;
 
 
-        [Button("UpdatePoints")]
+        [Button("Update Points")]
         private void ButtonUdatePoints() => UpdatePoints();
 
 
@@ -59,7 +59,10 @@ namespace PathFinding
 
 
             if (start == null || end == null)
-                return (null, targetPosition); 
+            {
+                Debug.LogWarning($"Dont found start or end path! (start: {startPosition} target: {targetPosition})");
+                return (null, targetPosition);
+            }   
 
 
             if (start == end && endSecondPoint != null)
@@ -72,30 +75,40 @@ namespace PathFinding
 
             List<Point> path = CreatePath(start, end);
 
+
+            if (path == null)
+                return (null, targetPosition);
+
+
             if (endSecondPoint != null && !path.Contains(endSecondPoint))
                 path.Add(endSecondPoint);
 
+
             // fix target position
-            if (path.Count > 1)
+            if (path.Count == 1)
+                targetPosition = path[path.Count - 1].Position;
+            else if (path.Count > 1)
             {
-                Vector3 fp = path[path.Count - 2].Position;
-                Vector3 sp = path[path.Count - 1].Position;
-                Vector3 dir = (fp - sp).normalized;
-                Vector3 fixedTarget = sp;
+                Vector3 previousPoint = path[path.Count - 2].Position;
+                Vector3 endPoint = path[path.Count - 1].Position;
+                Vector3 dir = endPoint - previousPoint;
+                Vector3 step = dir.normalized * 0.5f;
+                Vector3 fixedTarget = previousPoint;
                 float closesetDistance = Vector3.Distance(fixedTarget, targetPosition);
-                while (true)
+                int steps = Mathf.FloorToInt(dir.magnitude / step.magnitude);
+                for (int i = 0; i < steps; i++)
                 {
-                    fixedTarget += dir;
+                    fixedTarget += step;
                     float dist = Vector3.Distance(fixedTarget, targetPosition);
                     if (dist > closesetDistance)
                     {
-                        fixedTarget -= dir;
+                        fixedTarget -= step;
                         break;
                     }
 
                     closesetDistance = dist;
                 }
-                //Debug.Log($"Fixed target {targetPosition} => {fixedTarget}");
+                //Debug.Log($"Fixed target {targetPosition} => {fp} => {fixedTarget}");
                 targetPosition = fixedTarget;
             }
 

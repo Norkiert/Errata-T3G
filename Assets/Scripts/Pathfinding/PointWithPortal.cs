@@ -9,13 +9,16 @@ namespace PathFinding
     {
         [SerializeField, Required] private PointWithPortal connectedPortalPoint;
 
+        [Button("Update Points")]
+        private void ButtonUdatePoints() => Pathfinding.UpdatePoints();
+
         public PointWithPortal ConnectedPortalPoint => connectedPortalPoint;
 
         public override void FindNeighbours(Point[] allPoints)
         {
             base.FindNeighbours(allPoints);
 
-            if (!connectedPoints.Contains(connectedPortalPoint))
+            if (connectedPortalPoint != null &&!connectedPoints.Contains(connectedPortalPoint))
                 connectedPoints.Add(connectedPortalPoint);
         }
 
@@ -25,6 +28,15 @@ namespace PathFinding
                 return 0;
 
             return base.Distance(secondPoint);
+        }
+
+        private void OnValidate()
+        {
+            if (connectedPortalPoint == this)
+            {
+                connectedPortalPoint = null;
+                Debug.LogWarning($"{name}: cant set {nameof(connectedPortalPoint)} at itself!");
+            }
         }
 
         protected override void OnDrawGizmos()
