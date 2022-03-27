@@ -99,6 +99,6 @@ public class BallBehavior : ObjectGroundChecker
     protected void InitDestruction()
     {
         ballCollider.enabled = false;
-        GetComponent<Rigidbody>().useGravity = false;
+        ballRigidbody.useGravity = false;
     }
 }

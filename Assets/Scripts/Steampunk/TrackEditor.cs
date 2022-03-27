@@ -201,21 +201,21 @@ public class TrackEditor : EditorWindow
             var scene = SceneView.lastActiveSceneView;
             if (scene)
             {
-                var cameraAngle = scene.camera.transform.rotation.eulerAngles.y;
+                var cameraRelativeAngle = (scene.camera.transform.rotation * Quaternion.Inverse(SelectedTrack.transform.parent.rotation)).eulerAngles.y;
 
-                if (cameraAngle > 45f && cameraAngle <= 135f) // Xplus
+                if (cameraRelativeAngle > 45f && cameraRelativeAngle <= 135f) // Xplus
                 {
                     cameraRotation = BasicTrack.NeighborPosition.Xplus;
                 }
-                else if (cameraAngle > 135f && cameraAngle <= 225f) // Zminus
+                else if (cameraRelativeAngle > 135f && cameraRelativeAngle <= 225f) // Zminus
                 {
                     cameraRotation = BasicTrack.NeighborPosition.Zminus;
                 }
-                else if (cameraAngle > 225f && cameraAngle <= 315f) // Xminus
+                else if (cameraRelativeAngle > 225f && cameraRelativeAngle <= 315f) // Xminus
                 {
                     cameraRotation = BasicTrack.NeighborPosition.Xminus;
                 }
-                else if (cameraAngle > 315f || cameraAngle <= 45f) // Zplus
+                else if (cameraRelativeAngle > 315f || cameraRelativeAngle <= 45f) // Zplus
                 {
                     cameraRotation = BasicTrack.NeighborPosition.Zplus;
                 }
