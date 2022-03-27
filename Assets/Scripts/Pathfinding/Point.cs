@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace PathFinding
 {
     public class Point : MonoBehaviour
     {
-        [HideInInspector] public float fCost; // summary cost
-        [HideInInspector] public float gCost; // distance from start
-        [HideInInspector] public float hCost; // distance from end
-
         [HideInInspector] public Point lastPoint;
-        public List<Point> neighbours = new List<Point>();
+        [HideInInspector] public float fCost; // summary cost
+        [HideInInspector] public float gCost; // distance to start
+        [HideInInspector] public float hCost; // distance to end
 
-        public void FindNeighbours(Point[] allPoints)
+
+        [SerializeField, ReadOnly] protected List<Point> connectedPoints = new List<Point>();
+        public List<Point> ConnectedPoints => connectedPoints;
+        public virtual void FindNeighbours(Point[] allPoints)
         {
-            if (neighbours != null)
-                neighbours.Clear();
+            if (connectedPoints != null)
+                connectedPoints.Clear();
             else
-                neighbours = new List<Point>();
+                connectedPoints = new List<Point>();
 
             foreach (Point point in allPoints)
             {
@@ -32,33 +34,38 @@ namespace PathFinding
                     Physics.Raycast(ray, out RaycastHit hit, dist);
 
                     if (hit.collider == null)
-                        neighbours.Add(point);
+                        connectedPoints.Add(point);
                 }
             }
         }
 
+        public virtual float Distance(Point secondPoint) => Vector3.Distance(Position, secondPoint.Position);
+
         public Vector3 Position => transform.position;
 
-        private void OnDrawGizmos()
+
+        protected virtual void OnDrawGizmos()
         {
             if (Pathfinding.ShowConnections)
             {
                 Gizmos.color = Color.yellow;
-                foreach (Point point in neighbours)
-                    if (point)
-                        Gizmos.DrawLine(transform.position, point.transform.position);
 
-                Gizmos.DrawSphere(transform.position, 0.3f);
+                foreach (Point point in connectedPoints)
+                    if (point)
+                        Gizmos.DrawLine(Position, point.Position);
+
+                Gizmos.DrawSphere(Position, 0.3f);
             }
         }
-        private void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
-            foreach (Point point in neighbours)
-                if (point)
-                    Gizmos.DrawLine(transform.position, point.transform.position);
 
-            Gizmos.DrawSphere(transform.position, 0.3f);
+            foreach (Point point in connectedPoints)
+                if (point)
+                    Gizmos.DrawLine(Position, point.Position);
+
+            Gizmos.DrawSphere(Position, 0.4f);
         }
     }
 }

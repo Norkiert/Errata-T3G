@@ -107,25 +107,40 @@ public class CubeController : MonoBehaviour
 
                 (path, fixedTarget) = Pathfinding.FindPath(transform.position, target);
                 validDistance = Mathf.Max(maxDistanceFromPlayer - Vector3.Distance(fixedTarget, target), 1);
-                
-                //Debug.Log($"{path.Count} {Vector3.Distance(path[0].Position, target)} {Vector3.Distance(path[path.Count - 1].Position, target)}");
-                if (path.Count > 1 && Vector3.Distance(path[0].Position, fixedTarget) > Vector3.Distance(path[1].Position, fixedTarget))
-                    currentPathIndex = 1;
-                else
-                    currentPathIndex = 0;
+
+                currentPathIndex = 0;
+
+                // fix retreat to the first point if it is unnecessary
+                if (path.Count > 1)
+                {
+                    const float dirError = 0.2f;
+                    Vector3 firstDir = (path[0].Position - transform.position).normalized;
+                    Vector3 secondDir = (path[1].Position - path[0].Position).normalized;
+                    Vector3 toTargetDir = (fixedTarget - transform.position).normalized;
+                    //Debug.Log($"firstDir: {firstDir} secondDir: {secondDir} dif= {Vector3.Distance(firstDir, secondDir)} < {dirError} ?");
+                    if (Vector3.Distance(firstDir, toTargetDir) > dirError && Vector3.Distance(-firstDir, secondDir) < dirError)
+                        currentPathIndex = 1;
+                }
+                    
 
                 // debug
+                /*
+                Debug.Log($"path (started from {transform.position} index: {currentPathIndex}):");
+                for (int i = 0; i < path.Count; i++)
+                    Debug.Log($"{path[i].name} {path[i].Position}");
+                Debug.Log($"fixed target: {fixedTarget}");
+                */
                 Vector3 lastPos = transform.position;
                 for (int i = currentPathIndex; i < path.Count - 1; i++)
                 {
                     Debug.DrawLine(lastPos, path[i].Position, Color.red, 3);
                     lastPos = path[i].Position;
+                    
                 }
                 Debug.DrawLine(lastPos, fixedTarget, Color.red, 3);
             }
 
             float distanceDisFrame = Time.deltaTime * flyingSpeed;
-            float distanceToCurrentPoint = Vector3.Distance(transform.position, path[currentPathIndex].Position);
 
             // check if achieve target
             if (Vector3.Distance(transform.position, fixedTarget) < Mathf.Max(distanceDisFrame, validDistance))
@@ -134,21 +149,31 @@ public class CubeController : MonoBehaviour
                 yield break;
             }
 
-            // change index when is near to current target point
-            if (distanceDisFrame > distanceToCurrentPoint)
+            // change index when is near to next path point
+            float distanceToNextPathPoint = Vector3.Distance(transform.position, path[currentPathIndex].Position);
+            if (distanceDisFrame > distanceToNextPathPoint)
             {
                 currentPathIndex++;
 
+                // check if has avaialbe next path points
                 if (currentPathIndex == path.Count)
                 {
-                    //Debug.LogWarning($"{name}: End of path!");
+                    Debug.LogWarning($"{name}: End of path!");
                     SwitchState(CubeStates.Idle);
                     yield break;
+                }
+
+                // use portal
+                if (path[currentPathIndex - 1] is PointWithPortal pointWithPortal && path[currentPathIndex] == pointWithPortal.ConnectedPortalPoint)
+                {
+                    Debug.Log("Using portal");
+                    transform.position = pointWithPortal.ConnectedPortalPoint.Position;
                 }
 
                 continue;
             }
 
+            // move
             Vector3 direction = (path[currentPathIndex].Position - transform.position).normalized;
             transform.position += direction * distanceDisFrame;
 

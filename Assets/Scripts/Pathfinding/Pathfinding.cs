@@ -7,10 +7,12 @@ namespace PathFinding
 {
     public class Pathfinding : MonoBehaviour
     {
+        private const float distanceToEndMtltiplier = 0.4f; // min 0
+
         [SerializeField, Min(1)] private float maxNeighbourDistance = 60f;
         [SerializeField] private bool showConnections = false;
 
-        private Point[] allPoints;
+        private static Point[] allPoints;
 
 
         [Button("UpdatePoints")]
@@ -36,74 +38,146 @@ namespace PathFinding
             UpdatePoints();
         }
 
-        private void UpdatePoints()
+        public static void UpdatePoints()
         {
             allPoints = FindObjectsOfType<Point>();
             foreach (Point point in allPoints)
                 point.FindNeighbours(allPoints);
         }
+
         public static (List<Point> path, Vector3 fixedTarget) FindPath(Vector3 startPosition, Vector3 targetPosition)
         {
-            Instance.UpdatePoints();
-            if (Instance.allPoints.Length > 1)
-            {
-                Point start = Instance.FindClosestPoint(startPosition);
-                Point end = Instance.FindClosestPoint(targetPosition);
+            UpdatePoints();
 
-                // try find better end point
-                if (start == end)
+
+            if (allPoints.Length <= 1)
+                return (null, targetPosition);
+
+
+            (Point start, _) = FindClosestLine(startPosition);
+            (Point end, Point endSecondPoint) = FindClosestLine(targetPosition);
+
+
+            if (start == null || end == null)
+                return (null, targetPosition); 
+
+
+            if (start == end && endSecondPoint != null)
+            {
+                // swap end and endSecondPoint
+                Point t = end;
+                end = endSecondPoint;
+                endSecondPoint = t;
+            }
+
+            List<Point> path = CreatePath(start, end);
+
+            if (endSecondPoint != null && !path.Contains(endSecondPoint))
+                path.Add(endSecondPoint);
+
+            // fix target position
+            if (path.Count > 1)
+            {
+                Vector3 fp = path[path.Count - 2].Position;
+                Vector3 sp = path[path.Count - 1].Position;
+                Vector3 dir = (fp - sp).normalized;
+                Vector3 fixedTarget = sp;
+                float closesetDistance = Vector3.Distance(fixedTarget, targetPosition);
+                while (true)
                 {
-                    float shortestDist = float.MaxValue;
-                    Point bestPoint = null;
-                    foreach (Point secondPoint in end.neighbours)
+                    fixedTarget += dir;
+                    float dist = Vector3.Distance(fixedTarget, targetPosition);
+                    if (dist > closesetDistance)
                     {
-                        float dist = DistanceToShiftedPoint(secondPoint);
-                        if (dist < shortestDist)
-                        {
-                            shortestDist = dist;
-                            bestPoint = secondPoint;
-                        }
+                        fixedTarget -= dir;
+                        break;
                     }
 
-                    if (DistanceToShiftedPoint(bestPoint) < Vector3.Distance(end.transform.position, targetPosition))
-                        end = bestPoint;
+                    closesetDistance = dist;
+                }
+                //Debug.Log($"Fixed target {targetPosition} => {fixedTarget}");
+                targetPosition = fixedTarget;
+            }
 
-                    float DistanceToShiftedPoint(Point secondPoint) => Vector3.Distance(end.transform.position + (secondPoint.transform.position - end.transform.position).normalized, targetPosition);
+            return (path, targetPosition);
+        }
+        private static List<Point> CreatePath(Point startPoint, Point endPoint)
+        {
+            List<Point> openSet = new List<Point>();
+            HashSet<Point> closeSet = new HashSet<Point>();
+
+            startPoint.gCost = 0;
+            startPoint.hCost = 0;
+            startPoint.lastPoint = null;
+            openSet.Add(startPoint);
+
+            bool found = false;
+
+            while (openSet.Count > 0)
+            {
+                Point currPoint = openSet[0];
+                openSet.RemoveAt(0);
+
+                closeSet.Add(currPoint);
+
+                if (currPoint == endPoint)
+                {
+                    found = true;
+                    break;
                 }
 
-                List<Point> path = FindFinalPath(start, end);
-
-                // fix target position
-                if (path.Count > 1)
+                foreach (Point neighbour in currPoint.ConnectedPoints)
                 {
-                    Vector3 fp = path[path.Count - 2].Position;
-                    Vector3 sp = path[path.Count - 1].Position;
-                    Vector3 dir = (fp - sp).normalized;
-                    Vector3 fixedTarget = sp;
-                    float closesetDistance = Vector3.Distance(fixedTarget, targetPosition); 
-                    while (true)
+                    if (closeSet.Contains(neighbour) || openSet.Contains(neighbour))
+                        continue;
+
+                    // set consts
+                    neighbour.gCost = currPoint.gCost + currPoint.Distance(neighbour);
+                    neighbour.hCost = Vector3.Distance(neighbour.transform.position, endPoint.transform.position);
+                    neighbour.fCost = neighbour.hCost * distanceToEndMtltiplier + neighbour.gCost;
+                    neighbour.lastPoint = currPoint;
+
+                    // add to open set
+                    int inserIndex = 0;
+                    for (int i = openSet.Count - 1; i >= 0; i--)
                     {
-                        fixedTarget += dir;
-                        float dist = Vector3.Distance(fixedTarget, targetPosition);
-                        if (dist > closesetDistance)
+                        if (neighbour.fCost >= openSet[i].fCost)
                         {
-                            fixedTarget -= dir;
+                            inserIndex = i + 1;
                             break;
                         }
-
-                        closesetDistance = dist;
                     }
-                    //Debug.Log($"Fixed target {targetPosition} => {fixedTarget}");
-                    targetPosition = fixedTarget;
+                    openSet.Insert(inserIndex, neighbour);
                 }
+            }
 
-                return (path, targetPosition);
+            if (found)
+            {
+                // recrate path
+                List<Point> points = new List<Point>() { startPoint };
+                Point point = endPoint;
+                while (startPoint != point)
+                {
+                    if (points == null || points.Contains(point))
+                    {
+                        Debug.LogWarning("Path is invalid");
+                        return null;
+                    }
+
+                    points.Insert(1, point);
+                    point = point.lastPoint;
+                }
+                return points;
             }
             else
-                return (null, targetPosition);
-            
+            {
+                Debug.LogWarning($"Dont found valid path from {startPoint.name} to {endPoint.name}");
+                return null;
+            }
         }
-        private Point FindClosestPoint(Vector3 position)
+
+
+        private static Point FindClosestPoint(Vector3 position)
         {
             if (allPoints.Length == 0)
                 return null;
@@ -123,83 +197,67 @@ namespace PathFinding
 
             float Dist(Point point) => Vector3.Distance(point.transform.position, position);
         }
-
-
-        private static List<Point> FindFinalPath(Point startPoint, Point endPoint)
+        private static (Point closestPoint, Point secondLinePoint) FindClosestLine(Vector3 position)
         {
-            if (CreatePath(startPoint, endPoint) == false)
+            Point firstLinePoint = null;
+            Point secondLinePoint = null;
+            float shortestDistance = float.MaxValue;
+            float maxCheckedDistance = Instance.maxNeighbourDistance;
+            foreach (Point firstpoint in allPoints)
             {
-                Debug.LogWarning("Dont found valid path");
-                return null;
-            }
+                float distanceToFPoint = Vector3.Distance(position, firstpoint.Position);
+                if (distanceToFPoint > maxCheckedDistance)
+                    continue;
 
-            return RecreatePath(startPoint, endPoint);
-        }
-        private static bool CreatePath(Point startPoint, Point endPoint)
-        {
-            List<Point> openSet = new List<Point>();
-            HashSet<Point> closeSet = new HashSet<Point>();
-
-            startPoint.gCost = 0;
-            startPoint.hCost = 0;
-            startPoint.lastPoint = null;
-            openSet.Add(startPoint);
-
-            while (openSet.Count > 0)
-            {
-                Point currPoint = openSet[0];
-                openSet.RemoveAt(0);
-
-                closeSet.Add(currPoint);
-
-                if (currPoint == endPoint)
-                    return true;
-
-
-                foreach (Point neighbour in currPoint.neighbours)
+                foreach (Point secondPoint in firstpoint.ConnectedPoints)
                 {
-                    if (closeSet.Contains(neighbour) || openSet.Contains(neighbour))
-                        continue;
-
-                    // set consts
-                    neighbour.gCost = currPoint.gCost + Vector3.Distance(currPoint.transform.position, neighbour.transform.position);
-                    neighbour.hCost = Vector3.Distance(neighbour.transform.position, endPoint.transform.position);
-                    neighbour.fCost = neighbour.hCost + neighbour.gCost;
-                    neighbour.lastPoint = currPoint;
-
-                    // add to open set
-                    int inserIndex = 0;
-                    for (int i = openSet.Count - 1; i >= 0; i--)
+                    if (firstpoint is PointWithPortal pointWithPortal && secondPoint == pointWithPortal.ConnectedPortalPoint)
                     {
-                        if (neighbour.fCost >= openSet[i].fCost)
+                        if (distanceToFPoint < shortestDistance)
                         {
-                            inserIndex = i + 1;
-                            break;
+                            firstLinePoint = firstpoint;
+                            secondLinePoint = null;
                         }
+                        continue;
                     }
-                    openSet.Insert(inserIndex, neighbour);
+
+                    float distanceToLine = DistanceToLine(position, firstpoint.Position, secondPoint.Position);
+                    if (distanceToLine < shortestDistance)
+                    {
+                        shortestDistance = distanceToLine;
+                        firstLinePoint = firstpoint;
+                        secondLinePoint = secondPoint;
+                    }
                 }
             }
 
-            return false;
+            if (firstLinePoint == null)
+                return (null, null);
+
+            if (secondLinePoint == null)
+                return (firstLinePoint, null);
+
+            if (Vector3.Distance(position, firstLinePoint.Position) < Vector3.Distance(position, secondLinePoint.Position))
+                return (firstLinePoint, secondLinePoint);
+            else
+                return (secondLinePoint, firstLinePoint);
         }
-        private static List<Point> RecreatePath(Point startPoint, Point endPoint)
+
+
+        private static float DistanceToLine(Vector3 point, Vector3 lineA, Vector3 lineB)
         {
-            List<Point> points = new List<Point>() { startPoint };
+            Vector3 ab = lineB - lineA;
+            Vector3 av = point - lineA;
 
-            Point point = endPoint;
-            while (startPoint != point)
-            {
-                if (points == null || points.Contains(point))
-                {
-                    Debug.LogWarning("Path is invalid");
-                    return null;
-                }
+            if (Vector3.Dot(av, ab) <= 0f)
+                return av.magnitude;
 
-                points.Insert(1, point);
-                point = point.lastPoint;
-            }
-            return points;
+            Vector3 bv = point - lineB;
+
+            if (Vector3.Dot(bv, ab) >= 0f)
+                return bv.magnitude;
+
+            return (Vector3.Cross(ab, av)).magnitude / (ab).magnitude;
         }
     }
 }
