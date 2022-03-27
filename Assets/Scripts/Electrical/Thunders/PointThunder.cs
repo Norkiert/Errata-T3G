@@ -47,6 +47,20 @@ public class PointThunder : MonoBehaviour
         StartCoroutine(TimerToNextRandomThunder(time));
     }
 
+    public IEnumerator SingleThunder(Vector3 target)
+    {
+        transform.position = new Vector3(target.x, target.y * 2, target.z);
+        thunder.Play();
+        yield return new WaitForSeconds(beamDelay);
+        thunderBeam.Play();
+        groundBeam.Play();
+        yield return new WaitForSeconds(particlesLifetime);
+        thunder.Stop();
+        thunderBeam.Stop();
+        groundBeam.Stop();
+        PlayStormSound();
+    }
+
     IEnumerator TimerToNextRandomThunder(float time)
     {
         yield return new WaitForSeconds(time);
