@@ -14,6 +14,7 @@ public class LaserMirror : Interactable
     [SerializeField, ShowIf(nameof(rotateBySteps))] float degreesPerStep = 30f;
     [SerializeField, ShowIf(nameof(rotateBySteps))] float minMouseMoveToRotate = 8f;
 
+    private float showUIDelay = 1f;
     private GameObject tipCanvas;
     private PlayerInteractions player;
     private PlayerController playerController;
@@ -31,12 +32,13 @@ public class LaserMirror : Interactable
     public override void Select()
     {
         base.Select();
-        ShowUI();
+        StartCoroutine("ShowUI");
         player.OnInteractionStart += StartRotateMirror;
         player.OnInteractionEnd += EndRotateMirror;
     }
     public override void Deselect()
     {
+        HideUI();
         base.Deselect();
         if (player)
         {
@@ -105,12 +107,15 @@ public class LaserMirror : Interactable
             }
         }
     }
-    private void ShowUI()
+    private IEnumerator ShowUI()
     {
+        yield return new WaitForSeconds(showUIDelay);
         tipCanvas.SetActive(true);
+        yield return null;
     }
     private void HideUI()
     {
+        StopCoroutine("ShowUI");
         tipCanvas.SetActive(false);
     }
 }
