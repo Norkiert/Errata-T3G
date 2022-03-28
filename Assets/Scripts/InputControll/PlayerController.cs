@@ -96,6 +96,7 @@ public class PlayerController : PortalTraveller
     private CharacterController controller;
     private DG.Tweening.Tweener hightModifier;
 
+    public static Action OnPlayerEnterPortal;
 
     private void Awake()
     {
@@ -309,5 +310,7 @@ public class PlayerController : PortalTraveller
         transform.eulerAngles = Vector3.up * yaw;
         velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
         Physics.SyncTransforms();
+
+        OnPlayerEnterPortal?.Invoke();
     }
 }
