@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2485877539104650815}
   - component: {fileID: 2485877539104650813}
   - component: {fileID: 2485877539104650754}
-  - component: {fileID: 2485877539104650755}
   m_Layer: 0
   m_Name: Hub_FlorrCube_Conect
   m_TagString: Untagged
@@ -117,19 +116,6 @@ MonoBehaviour:
   bakeKeys: []
   bakeValues: []
   isEnabled: 0
---- !u!114 &2485877539104650755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2485877539104650809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab64a5085aec6247beba5d5f12341d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
 --- !u!1 &3349211289081137017
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 56a27d5011c3e4644a04a8e7de57f005, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56a27d5011c3e4644a04a8e7de57f005, type: 3}
