@@ -12,6 +12,9 @@ namespace PathFinding
         [SerializeField, Min(1)] private float maxNeighbourDistance = 60f;
         [SerializeField] private bool showConnections = false;
 
+        private const int defultPathBlockers = 1 << 3;
+        [SerializeField] private LayerMask pathBlockers = defultPathBlockers;
+
         private static Point[] allPoints;
 
 
@@ -31,6 +34,8 @@ namespace PathFinding
         }
 
         public static float MaxNeighbourDistance => Instance.maxNeighbourDistance;
+        public static LayerMask PathBlockers => Instance == null ? (LayerMask)defultPathBlockers : Instance.pathBlockers;
+
         public static bool ShowConnections => Instance == null ? false : Instance.showConnections;
 
         private void Start()
@@ -60,7 +65,7 @@ namespace PathFinding
 
             if (start == null || end == null)
             {
-                Debug.LogWarning($"Dont found start or end path! (start: {startPosition} target: {targetPosition})");
+                Debug.LogWarning($"Dont found {(start == null ? "start" : "end")} path! (start: {startPosition} target: {targetPosition})");
                 return (null, targetPosition);
             }   
 
@@ -133,6 +138,7 @@ namespace PathFinding
 
                 closeSet.Add(currPoint);
 
+                //Debug.Log($"Pathfinfing checking {currPoint.Name} (target: {endPoint.Name})");
                 if (currPoint == endPoint)
                 {
                     found = true;
@@ -184,7 +190,7 @@ namespace PathFinding
             }
             else
             {
-                Debug.LogWarning($"Dont found valid path from {startPoint.name} to {endPoint.name}");
+                Debug.LogWarning($"Dont found valid path from {startPoint.Name} to {endPoint.Name}");
                 return null;
             }
         }
@@ -245,7 +251,7 @@ namespace PathFinding
             }
 
             if (firstLinePoint == null)
-                return (null, null);
+                return (FindClosestPoint(position), null);
 
             if (secondLinePoint == null)
                 return (firstLinePoint, null);

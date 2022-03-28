@@ -27,6 +27,7 @@ namespace PathFinding
                 connectedPoints = new List<Point>();
 
             float maxDistance = hasCustomMaxNeighbourDistance ? customMaxNeighbourDistance : Pathfinding.MaxNeighbourDistance;
+            LayerMask pathBlockers = Pathfinding.PathBlockers;
 
             foreach (Point point in allPoints)
             {
@@ -37,7 +38,7 @@ namespace PathFinding
                 if (dist <= maxDistance)
                 {
                     Ray ray = new Ray(transform.position, (point.transform.position - transform.position));
-                    Physics.Raycast(ray, out RaycastHit hit, dist - 0.5f);
+                    Physics.Raycast(ray, out RaycastHit hit, dist - 0.5f, pathBlockers);
 
                     if (hit.collider == null)
                         connectedPoints.Add(point);
@@ -52,6 +53,7 @@ namespace PathFinding
         public virtual float Distance(Point secondPoint) => Vector3.Distance(Position, secondPoint.Position);
 
         public Vector3 Position => transform.position;
+        public string Name => $"{name}({transform.parent.name})";
 
 
         protected virtual void OnDrawGizmos()
