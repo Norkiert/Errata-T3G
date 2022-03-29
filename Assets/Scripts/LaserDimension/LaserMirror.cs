@@ -25,7 +25,7 @@ public class LaserMirror : Interactable
     }
     private void Start()
     {
-        tipCanvas.SetActive(false);
+        tipCanvas?.SetActive(false);
         playerController = FindObjectOfType<PlayerController>();
         player = FindObjectOfType<PlayerInteractions>();
     }
@@ -110,12 +110,12 @@ public class LaserMirror : Interactable
     private IEnumerator ShowUI()
     {
         yield return new WaitForSeconds(showUIDelay);
-        tipCanvas.SetActive(true);
+        tipCanvas?.SetActive(true);
         yield return null;
     }
     private void HideUI()
     {
         StopCoroutine("ShowUI");
-        tipCanvas.SetActive(false);
+        tipCanvas?.SetActive(false);
     }
 }
