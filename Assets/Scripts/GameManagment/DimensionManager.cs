@@ -10,13 +10,16 @@ namespace GameManagment
 {
     public class DimensionManager : MonoBehaviour
     {
+        [Header("Portal")]
         [SerializeField, Required] private Portal mainHubPortal;
+        [SerializeField, Required] private MeshRenderer mainHubSwitchingPlane;
+        [SerializeField, Min(0.01f)] private float mainHubSwitchingTime = 1f;
+
+        [Header("Dimension")]
         [SerializeField, Required] private DimensionSO defaultDimension;
-        [SerializeField, Required] private GameObject switchingPlane;
 
         private DimensionSO dimensionToLoad;
         private IEnumerator dimenionChanger;
-
 
         private static DimensionManager instance;
         public static DimensionSO LoadedDimension { get; private set; } = null;
@@ -59,20 +62,26 @@ namespace GameManagment
                 yield break;
             }
 
-            MeshRenderer planeRenderer = switchingPlane.GetComponent<MeshRenderer>();
+            // desactive current dimension
+            if (LoadedDimension != null)
+                DesactiveDimension(LoadedDimension);
 
-            while (planeRenderer.material.color.a < 1)
+            // close portal
             {
-                planeRenderer.material.color = new Color(planeRenderer.material.color.r, planeRenderer.material.color.g, planeRenderer.material.color.b, planeRenderer.material.color.a + 0.01f);
-                yield return null;
+                Color shitchingColor = mainHubSwitchingPlane.material.color;
+                float switchPercent = shitchingColor.a;
+                while (switchPercent < 1)
+                {
+                    switchPercent += Time.deltaTime / mainHubSwitchingTime;
+                    shitchingColor.a = switchPercent;
+                    mainHubSwitchingPlane.material.color = shitchingColor;
+                    yield return null;
+                }
             }
 
             // unload current dimension
             if (LoadedDimension != null)
             {
-                DesactiveDimension(LoadedDimension);
-                yield return null;
-
                 Debug.Log($"Unloading {dimensionToLoad}");
                 AsyncOperation unloadingDimension = SceneManager.UnloadSceneAsync(LoadedDimension.SceneName);
 
@@ -109,10 +118,18 @@ namespace GameManagment
             yield return null;
             UpdateCamera();
 
-            while (planeRenderer.material.color.a > 0)
+
+            // open portal
             {
-                planeRenderer.material.color = new Color(planeRenderer.material.color.r, planeRenderer.material.color.g, planeRenderer.material.color.b, planeRenderer.material.color.a - 0.01f);
-                yield return null;
+                Color shitchingColor = mainHubSwitchingPlane.material.color;
+                float switchPercent = shitchingColor.a;
+                while (switchPercent > 0)
+                {
+                    switchPercent -= Time.deltaTime / mainHubSwitchingTime;
+                    shitchingColor.a = switchPercent;
+                    mainHubSwitchingPlane.material.color = shitchingColor;
+                    yield return null;
+                }
             }
         }
 
