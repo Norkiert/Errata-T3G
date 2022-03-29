@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-namespace PathFinding
+namespace Pathfinding
 {
     public class PointWithPortal : Point
     {
         [SerializeField, Required] private PointWithPortal connectedPortalPoint;
 
         [Button("Update Points")]
-        private void ButtonUdatePoints() => Pathfinding.UpdatePoints();
+        private void ButtonUdatePoints() => Pathfinder.UpdatePoints();
 
         public PointWithPortal ConnectedPortalPoint => connectedPortalPoint;
+        public void SetConnectedPortalPoint(PointWithPortal point) => connectedPortalPoint = point;
 
-        public override void FindNeighbours(Point[] allPoints)
+        public override void FindConnectedPoints(Point[] allPoints)
         {
-            base.FindNeighbours(allPoints);
+            base.FindConnectedPoints(allPoints);
 
             if (connectedPortalPoint != null &&!connectedPoints.Contains(connectedPortalPoint))
                 connectedPoints.Add(connectedPortalPoint);
@@ -41,7 +42,7 @@ namespace PathFinding
 
         protected override void OnDrawGizmos()
         {
-            if (Pathfinding.ShowConnections)
+            if (Pathfinder.ShowConnections)
             {
                 Gizmos.color = Color.yellow;
 

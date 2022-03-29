@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-namespace PathFinding
+namespace Pathfinding
 {
     public class Point : MonoBehaviour
     {
@@ -13,21 +13,19 @@ namespace PathFinding
         [HideInInspector] public float hCost; // distance to end
 
 
-        [SerializeField] private bool hasCustomMaxNeighbourDistance = false;
-        [SerializeField, Min(0), ShowIf(nameof(hasCustomMaxNeighbourDistance))] float customMaxNeighbourDistance = 10f;
+        [SerializeField, Min(0)] float maxNeighbourDistance = 60f;
 
 
         [SerializeField, ReadOnly] protected List<Point> connectedPoints = new List<Point>();
         public List<Point> ConnectedPoints => connectedPoints;
-        public virtual void FindNeighbours(Point[] allPoints)
+        public virtual void FindConnectedPoints(Point[] allPoints)
         {
             if (connectedPoints != null)
                 connectedPoints.Clear();
             else
                 connectedPoints = new List<Point>();
 
-            float maxDistance = hasCustomMaxNeighbourDistance ? customMaxNeighbourDistance : Pathfinding.MaxNeighbourDistance;
-            LayerMask pathBlockers = Pathfinding.PathBlockers;
+            LayerMask pathBlockers = Pathfinder.PathBlockers;
 
             foreach (Point point in allPoints)
             {
@@ -35,7 +33,7 @@ namespace PathFinding
                     continue;
 
                 float dist = Vector3.Distance(transform.position, point.transform.position);
-                if (dist <= maxDistance)
+                if (dist <= maxNeighbourDistance)
                 {
                     Ray ray = new Ray(transform.position, (point.transform.position - transform.position));
                     Physics.Raycast(ray, out RaycastHit hit, dist - 0.5f, pathBlockers);
@@ -45,10 +43,19 @@ namespace PathFinding
                 }
             }
         }
+        public virtual void FixConnectedPoints()
+        {
+            for (int i = 0; i < connectedPoints.Count; i++)
+                if (!connectedPoints[i].connectedPoints.Contains(this))
+                {
+                    connectedPoints.RemoveAt(i);
+                    i--;
+                }
+        }
 
 
         [Button("Update Points")]
-        private void ButtonUdatePoints() => Pathfinding.UpdatePoints();
+        private void ButtonUdatePoints() => Pathfinder.UpdatePoints();
 
         public virtual float Distance(Point secondPoint) => Vector3.Distance(Position, secondPoint.Position);
 
@@ -58,7 +65,7 @@ namespace PathFinding
 
         protected virtual void OnDrawGizmos()
         {
-            if (Pathfinding.ShowConnections)
+            if (Pathfinder.ShowConnections)
             {
                 Gizmos.color = Color.yellow;
 

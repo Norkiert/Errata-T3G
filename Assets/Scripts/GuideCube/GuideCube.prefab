@@ -206,10 +206,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cf0eb3d9fa2e64a805a1b3a3bb6177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualState: 0
+  currentState: 0
+  rotateSpeed: 0.9
+  timeToChangeRotation: 2
   flyingUpTime: 2
   flyingUpDistance: 0.4
-  followOffset: {x: -1.5, y: 2, z: 0}
+  flyingSpeed: 8
+  maxDistanceFromPlayer: 10
+  roateDuringFly: 1
 --- !u!1 &9127373411074388635
 GameObject:
   m_ObjectHideFlags: 0

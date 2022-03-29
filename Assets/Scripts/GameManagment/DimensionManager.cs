@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using DG.Tweening;
 using NaughtyAttributes;
 using Portals;
-using DG.Tweening;
+using Pathfinding;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameManagment
 {
@@ -12,8 +12,13 @@ namespace GameManagment
     {
         [Header("Portal")]
         [SerializeField, Required] private Portal mainHubPortal;
-        [SerializeField, Required] private MeshRenderer mainHubSwitchingPlane;
-        [SerializeField, Min(0.01f)] private float mainHubSwitchingTime = 1f;
+
+        [Header("Dimension changing")]
+        [SerializeField, Required] private MeshRenderer mainPortalSwitchingPlane;
+        [SerializeField, Min(0.01f)] private float mainPortalSwitchingTime = 1f;
+
+        [Header("Pathfinding")]
+        [SerializeField, Required] private PointWithPortal mainPortalPathindingPoint;
 
         [Header("Dimension")]
         [SerializeField, Required] private DimensionSO defaultDimension;
@@ -68,13 +73,13 @@ namespace GameManagment
 
             // close portal
             {
-                Color shitchingColor = mainHubSwitchingPlane.material.color;
+                Color shitchingColor = mainPortalSwitchingPlane.material.color;
                 float switchPercent = shitchingColor.a;
                 while (switchPercent < 1)
                 {
-                    switchPercent += Time.deltaTime / mainHubSwitchingTime;
+                    switchPercent += Time.deltaTime / mainPortalSwitchingTime;
                     shitchingColor.a = switchPercent;
-                    mainHubSwitchingPlane.material.color = shitchingColor;
+                    mainPortalSwitchingPlane.material.color = shitchingColor;
                     yield return null;
                 }
             }
@@ -121,13 +126,13 @@ namespace GameManagment
 
             // open portal
             {
-                Color shitchingColor = mainHubSwitchingPlane.material.color;
+                Color shitchingColor = mainPortalSwitchingPlane.material.color;
                 float switchPercent = shitchingColor.a;
                 while (switchPercent > 0)
                 {
-                    switchPercent -= Time.deltaTime / mainHubSwitchingTime;
+                    switchPercent -= Time.deltaTime / mainPortalSwitchingTime;
                     shitchingColor.a = switchPercent;
-                    mainHubSwitchingPlane.material.color = shitchingColor;
+                    mainPortalSwitchingPlane.material.color = shitchingColor;
                     yield return null;
                 }
             }
@@ -155,7 +160,7 @@ namespace GameManagment
             }
 
             if (dimensionCore.MainPortal == null)
-                Debug.LogError("Dimension main portal not found!");
+                Debug.LogError("Dont found dimension main portal!");
             else
             {
                 // link portals
@@ -177,13 +182,22 @@ namespace GameManagment
                         break;
                 }
             }
-        }
 
+            if (dimensionCore.MainPathfindingPortalPoint == null)
+                Debug.LogWarning("Dont found dimension main pathfinding portal point!");
+            else
+            {
+                dimensionCore.MainPathfindingPortalPoint.SetConnectedPortalPoint(mainPortalPathindingPoint);
+                mainPortalPathindingPoint.SetConnectedPortalPoint(dimensionCore.MainPathfindingPortalPoint);
+            }
+        }
         private void DesactiveDimension(DimensionSO dimension)
         {
             Debug.Log($"Desactive {dimension}");
 
             mainHubPortal.SetLinkedPortal(null);
+
+            mainPortalPathindingPoint.SetConnectedPortalPoint(null);
         }
 
         private DimensionCore GetDimensionCore(DimensionSO dimension)

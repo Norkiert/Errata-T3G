@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using DG.Tweening;
-using PathFinding;
+using Pathfinding;
 
 public class CubeController : MonoBehaviour
 {
@@ -105,7 +105,7 @@ public class CubeController : MonoBehaviour
                 //Debug.Log($"Reques new path target: {fixedTarget} old target: {oldTarget}");
                 oldTarget = target;
 
-                (path, fixedTarget) = Pathfinding.FindPath(transform.position, target);
+                (path, fixedTarget) = Pathfinder.FindPath(transform.position, target);
 
                 if (path == null)
                 {

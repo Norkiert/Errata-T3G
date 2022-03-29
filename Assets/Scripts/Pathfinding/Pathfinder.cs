@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-namespace PathFinding
+namespace Pathfinding
 {
-    public class Pathfinding : MonoBehaviour
+    public class Pathfinder : MonoBehaviour
     {
         private const float distanceToEndMtltiplier = 0.4f; // min 0
+        private const float checkedDistanceInLineFinding = 100f;
 
-        [SerializeField, Min(1)] private float maxNeighbourDistance = 60f;
         [SerializeField] private bool showConnections = false;
 
         private const int defultPathBlockers = 1 << 3;
@@ -22,20 +22,18 @@ namespace PathFinding
         private void ButtonUdatePoints() => UpdatePoints();
 
 
-        private static Pathfinding instance;
-        private static Pathfinding Instance
+        private static Pathfinder instance;
+        private static Pathfinder Instance
         {
             get
             {
                 if (instance == null)
-                    instance = FindObjectOfType<Pathfinding>();
+                    instance = FindObjectOfType<Pathfinder>();
                 return instance;
             }
         }
 
-        public static float MaxNeighbourDistance => Instance.maxNeighbourDistance;
         public static LayerMask PathBlockers => Instance == null ? (LayerMask)defultPathBlockers : Instance.pathBlockers;
-
         public static bool ShowConnections => Instance == null ? false : Instance.showConnections;
 
         private void Start()
@@ -47,7 +45,10 @@ namespace PathFinding
         {
             allPoints = FindObjectsOfType<Point>();
             foreach (Point point in allPoints)
-                point.FindNeighbours(allPoints);
+                point.FindConnectedPoints(allPoints);
+
+            foreach (Point point in allPoints)
+                point.FixConnectedPoints();
         }
 
         public static (List<Point> path, Vector3 fixedTarget) FindPath(Vector3 startPosition, Vector3 targetPosition)
@@ -221,11 +222,10 @@ namespace PathFinding
             Point firstLinePoint = null;
             Point secondLinePoint = null;
             float shortestDistance = float.MaxValue;
-            float maxCheckedDistance = Instance.maxNeighbourDistance;
             foreach (Point firstpoint in allPoints)
             {
                 float distanceToFPoint = Vector3.Distance(position, firstpoint.Position);
-                if (distanceToFPoint > maxCheckedDistance)
+                if (distanceToFPoint > checkedDistanceInLineFinding)
                     continue;
 
                 foreach (Point secondPoint in firstpoint.ConnectedPoints)
