@@ -55,6 +55,7 @@ public class LaserMirror : Interactable
     }
     private IEnumerator RotateMirror()
     {
+        mirrorUI.StopMirrorUI();
         float stepCheckHorizontal = 0f;
         float stepCheckVertical = 0f;
         float reverseRotating = 1f;
