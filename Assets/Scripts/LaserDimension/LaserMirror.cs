@@ -18,27 +18,24 @@ public class LaserMirror : Interactable
     private GameObject tipCanvas;
     private PlayerInteractions player;
     private PlayerController playerController;
+    private UIBehaviour mirrorUI;
 
-    public new void Awake()
-    {
-        tipCanvas = GameObject.Find("MirrorTipUI");
-    }
     private void Start()
     {
-        tipCanvas?.SetActive(false);
+        mirrorUI = GameObject.Find("MirrorTipUI").GetComponent<UIBehaviour>();
         playerController = FindObjectOfType<PlayerController>();
         player = FindObjectOfType<PlayerInteractions>();
     }
     public override void Select()
     {
         base.Select();
-        StartCoroutine("ShowUI");
+        showUI = ShowUI();
+        StartCoroutine(showUI);
         player.OnInteractionStart += StartRotateMirror;
         player.OnInteractionEnd += EndRotateMirror;
     }
     public override void Deselect()
     {
-        HideUI();
         base.Deselect();
         if (player)
         {
@@ -107,15 +104,20 @@ public class LaserMirror : Interactable
             }
         }
     }
+
+    private IEnumerator showUI;
     private IEnumerator ShowUI()
     {
         yield return new WaitForSeconds(showUIDelay);
-        tipCanvas?.SetActive(true);
+        mirrorUI.StartMirrorUI(rotateHorizontal,rotateVertical);
         yield return null;
     }
     private void HideUI()
     {
-        StopCoroutine("ShowUI");
-        tipCanvas?.SetActive(false);
+        if(showUI!=null)
+        {
+            StopCoroutine(showUI);
+        }
+        mirrorUI.StopMirrorUI();
     }
 }
