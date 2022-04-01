@@ -49,5 +49,6 @@ public class CanvasVertical : MonoBehaviour
         yield return new WaitForSeconds(2 * slideTime);
         mouseLMB.transform.DOMoveY(mouseLMB.transform.position.y + slideRange, slideTime);
         yield return new WaitForSeconds(slideTime);
+        this.gameObject.SetActive(false);
     }
 }
