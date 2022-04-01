@@ -22,7 +22,8 @@ public class LaserMirror : Interactable
 
     private void Start()
     {
-        mirrorUI = GameObject.Find("MirrorTipUI").GetComponent<UIBehaviour>();
+        if(FindObjectOfType<UIBehaviour>()!=null)
+            mirrorUI = GameObject.Find("MirrorTipUI").GetComponent<UIBehaviour>();
         playerController = FindObjectOfType<PlayerController>();
         player = FindObjectOfType<PlayerInteractions>();
     }
