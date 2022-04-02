@@ -174,11 +174,11 @@ namespace GameManagment
                 {
                     case DimensionSO.CameraBackgroundType.SkyBox:
                         dimensionCore.MainPortal.SetCameraBackgroundOnSkyBox();
-                        playerController?.SetCameraBackgroundOnSkyBox();
+                        playerController?.SetCameraBackgroundOnSkyBox(dimensionSO.cameraViewRange);
                         break;
                     case DimensionSO.CameraBackgroundType.SolidColor:
                         dimensionCore.MainPortal.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor);
-                        playerController?.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor);
+                        playerController?.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor, dimensionSO.cameraViewRange);
                         break;
                 }
             }

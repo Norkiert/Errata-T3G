@@ -279,12 +279,14 @@ public class PlayerController : PortalTraveller
         transform.eulerAngles = Vector3.up * rotY;
     }
 
-    public void SetCameraBackgroundOnSkyBox()
+    public void SetCameraBackgroundOnSkyBox(float viewRange)
     {
         playerCamera.clearFlags = CameraClearFlags.Skybox;
+        playerCamera.farClipPlane = viewRange;
     }
-    public void SetCameraBackgroundOnSolidColor(Color color)
+    public void SetCameraBackgroundOnSolidColor(Color color, float viewRange)
     {
+        playerCamera.farClipPlane = viewRange;
         playerCamera.clearFlags = CameraClearFlags.SolidColor;
         playerCamera.backgroundColor = color;
     }

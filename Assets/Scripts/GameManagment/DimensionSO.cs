@@ -16,6 +16,7 @@ namespace GameManagment
 
         [field: SerializeField] public CameraBackgroundType CameraBackground { get; private set; } = CameraBackgroundType.SkyBox;
         [field: SerializeField, ShowIf(nameof(IsShownCameraBackgroundColor))] public Color CameraBackgroundColor { get; private set; } = Color.white;
+        [field: SerializeField] public float cameraViewRange { get; private set; } = 1000f;
 
 
         #region -inspektor methods-
