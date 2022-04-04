@@ -6,7 +6,7 @@ using GameManagment;
 
 public class EscapeMenu : MonoBehaviour
 {
-    [SerializeField] private Canvas escMenu;
+    [SerializeField] private GameObject escMenu;
     [SerializeField] private GameObject settingsPanel;
 
     [SerializeField] private Button resumeGameButton;
@@ -23,7 +23,7 @@ public class EscapeMenu : MonoBehaviour
         loadGameButton.onClick.AddListener(LoadGame);
         settingsButton.onClick.AddListener(OpenSettings);
         backToMenuButton.onClick.AddListener(BackToMenu);
-        escMenu.enabled = false;
+        escMenu.SetActive(false);
         settingsPanel.SetActive(false);
     }
 
@@ -46,12 +46,13 @@ public class EscapeMenu : MonoBehaviour
 
     private void Open()
     {
-        escMenu.enabled = true;
+        escMenu.SetActive(true);
         settingsPanel.SetActive(false);
     }
     private void Close()
     {
-        escMenu.enabled = false;
+        escMenu.SetActive(false);
+        settingsPanel.SetActive(false);
     }
 
     #region -Buttons functionality-
