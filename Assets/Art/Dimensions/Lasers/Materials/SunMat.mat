@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SunMat
+  m_Shader: {fileID: -6465566751694194690, guid: fdf76191b8f2a824a82aabab3f88f224, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_0c00afda2a3f4095b9a527fa82ea143d: 1.5
+    - Vector1_4e46c5b685b74145abb0fa3431f46ef9: 2
+    - Vector1_eeb9871eba954cafaf22415b634872b3: 400
+    - Vector1_f287b9bef18b4f88b4665e3da533a04d: 8
+    m_Colors:
+    - Color_39926f9953a94637bfe05f6abee6bdcf: {r: 0.4245283, g: 0.051936973, b: 0, a: 1}
+    - Color_446dc302407a4bd7b39f3b2860e47b38: {r: 0.6804308, g: 0.48449525, b: 0.14606106, a: 0.972549}
+  m_BuildTextureStacks: []
