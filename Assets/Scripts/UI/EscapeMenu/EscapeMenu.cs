@@ -10,7 +10,6 @@ public class EscapeMenu : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
 
     [SerializeField] private Button resumeGameButton;
-    [SerializeField] private Button backToLobbyButton;
     [SerializeField] private Button loadGameButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button backToMenuButton;
@@ -19,7 +18,6 @@ public class EscapeMenu : MonoBehaviour
     private void Start()
     {
         resumeGameButton.onClick.AddListener(ResumeGame);
-        backToLobbyButton.onClick.AddListener(BackToLobby);
         loadGameButton.onClick.AddListener(LoadGame);
         settingsButton.onClick.AddListener(OpenSettings);
         backToMenuButton.onClick.AddListener(BackToMenu);
@@ -61,10 +59,6 @@ public class EscapeMenu : MonoBehaviour
     {
         Close();
         GameManager.ResumeGame();
-    }
-    private void BackToLobby()
-    {
-        Debug.Log("ESC MENU: back to lobby");
     }
     private void LoadGame()
     {
