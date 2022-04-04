@@ -23,8 +23,8 @@ public class EscapeMenu : MonoBehaviour
         loadGameButton.onClick.AddListener(LoadGame);
         settingsButton.onClick.AddListener(OpenSettings);
         backToMenuButton.onClick.AddListener(BackToMenu);
-        escMenu.SetActive(false);
-        settingsPanel.SetActive(false);
+
+        Close();
     }
 
     private void Update()
