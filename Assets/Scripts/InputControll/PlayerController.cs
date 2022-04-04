@@ -305,6 +305,8 @@ public class PlayerController : PortalTraveller
     }
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
+        OnPlayerEnterPortal?.Invoke();
+
         transform.position = pos;
         Vector3 eulerRot = rot.eulerAngles;
         float delta = Mathf.DeltaAngle(yaw, eulerRot.y);
@@ -312,7 +314,5 @@ public class PlayerController : PortalTraveller
         transform.eulerAngles = Vector3.up * yaw;
         velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
         Physics.SyncTransforms();
-
-        OnPlayerEnterPortal?.Invoke();
     }
 }

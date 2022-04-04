@@ -25,10 +25,19 @@ public class PlayerInteractions : MonoBehaviour
     public event Action OnInteractionStart;
     public event Action OnInteractionEnd;
 
-    private void Start()
+    private void OnEnable()
     {
         OnInteractionStart += ChangeHeldObject;
         OnInteractionStart += ClickSelected;
+
+        PlayerController.OnPlayerEnterPortal += CheckHeldObjectOnTeleport;
+    }
+    private void OnDisable()
+    {
+        OnInteractionStart -= ChangeHeldObject;
+        OnInteractionStart -= ClickSelected;
+
+        PlayerController.OnPlayerEnterPortal -= CheckHeldObjectOnTeleport;
     }
 
     private void Update()
@@ -100,13 +109,33 @@ public class PlayerInteractions : MonoBehaviour
     }
     private void PickUpObject(Liftable obj)
     {
+        if (obj == null)
+        {
+            Debug.LogWarning($"{nameof(PlayerInteractions)}: Attempted to pick up null object!");
+            return;
+        }
+
         HeldObject = obj;
         obj.PickUp(heldObjectLayer);
     }
     private void DropObject(Liftable obj)
     {
+        if (obj == null)
+        {
+            Debug.LogWarning($"{nameof(PlayerInteractions)}: Attempted to drop null object!");
+            return;
+        }
+
         HeldObject = null;
         obj.Drop();
+    }
+
+    private void CheckHeldObjectOnTeleport()
+    {
+        // TODO: check if can teleport with portal
+
+        if (HeldObject != null)
+            DropObject(HeldObject);
     }
 
     #endregion
