@@ -191,7 +191,7 @@ namespace Pathfinding
             }
             else
             {
-                Debug.LogWarning($"Dont found valid path from {startPoint.Name} to {endPoint.Name}");
+                Debug.LogWarning($"Dont found valid path from {startPoint.Name} to {endPoint.Name}", endPoint);
                 return null;
             }
         }

@@ -87,13 +87,13 @@ namespace GameManagment
             // unload current dimension
             if (LoadedDimension != null)
             {
-                Debug.Log($"Unloading {dimensionToLoad}");
+                Debug.Log($"Unloading {LoadedDimension}");
                 AsyncOperation unloadingDimension = SceneManager.UnloadSceneAsync(LoadedDimension.SceneName);
 
                 while (!unloadingDimension.isDone)
                     yield return null;
 
-                Debug.Log($"Unloaded {dimensionToLoad}");
+                Debug.Log($"Unloaded {LoadedDimension}");
                 LoadedDimension = null;
                 UpdateCamera();
             }
