@@ -30,7 +30,7 @@ namespace Audio
         private static readonly List<AudioSource> unusedAudioSources = new List<AudioSource>();
 
 
-        private const string keyGeneralVolume = "SFXVolume";
+        private const string keyGeneralVolume = "GeneralVolume";
         public static float GeneralVolume => PlayerPrefs.GetFloat(keyGeneralVolume, 1f);
         public static void SetGeneralVolume(float volume) => PlayerPrefs.SetFloat(keyGeneralVolume, volume);
 
