@@ -43,6 +43,7 @@ public class CanvasHorizontal : MonoBehaviour
         yield return new WaitForSeconds(clickDelay);
         mouseDefault.SetActive(false);
         mouseLMB.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
         mouseLMB.transform.DOMoveX(mouseLMB.transform.position.x + slideRange, slideTime);
         yield return new WaitForSeconds(slideTime);
         mouseLMB.transform.DOMoveX(mouseLMB.transform.position.x - 2 * slideRange, 2 * slideTime);
