@@ -145,7 +145,7 @@ namespace GuideCube
                     currentPathIndex = 0;
 
                     // fix retreat to the first point if it is unnecessary
-                    if (path.Count > 1)
+                    if (path.Count > 1 && !(path[0] is PointWithPortal portalPoint && portalPoint.ConnectedPortalPoint == path[1]))
                     {
                         const float dirError = 0.2f;
                         Vector3 firstDir = (path[0].Position - transform.position).normalized;
