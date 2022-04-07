@@ -73,7 +73,7 @@ namespace Pathfinding
                     if (point)
                         Gizmos.DrawLine(Position, point.Position);
 
-                Gizmos.DrawSphere(Position, 0.3f);
+                Gizmos.DrawSphere(Position, 0.2f);
             }
         }
         protected virtual void OnDrawGizmosSelected()
@@ -84,7 +84,7 @@ namespace Pathfinding
                 if (point)
                     Gizmos.DrawLine(Position, point.Position);
 
-            Gizmos.DrawSphere(Position, 0.4f);
+            Gizmos.DrawSphere(Position, 0.3f);
         }
     }
 }

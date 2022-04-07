@@ -202,7 +202,56 @@ namespace GuideCube
                     if (path[currentPathIndex - 1] is PointWithPortal pointWithPortal && path[currentPathIndex] == pointWithPortal.ConnectedPortalPoint)
                     {
                         //Debug.Log("Using portal");
-                        transform.position = pointWithPortal.ConnectedPortalPoint.Position;
+
+                        // use in offset
+                        if (pointWithPortal.PortalOffset != null)
+                        {
+                            Vector3 localTarget = pointWithPortal.PortalOffset.position;
+                            float distance = Vector3.Distance(transform.position, localTarget);
+                            float ddf = Time.deltaTime * flyingSpeed;
+                            while (distance > ddf)
+                            {
+                                distance = Vector3.Distance(transform.position, localTarget);
+                                ddf = Time.deltaTime * flyingSpeed;
+
+                                Vector3 dir = (localTarget - transform.position).normalized;
+                                transform.position += dir * ddf;
+
+                                yield return null;
+                            }
+
+                            yield return null;
+                            transform.position = localTarget;
+                            yield return null;
+                        }
+
+                        // use out offset
+                        if (pointWithPortal.ConnectedPortalPoint.PortalOffset != null)
+                        {
+                            // teleport
+                            transform.position = pointWithPortal.ConnectedPortalPoint.PortalOffset.position;
+
+                            Vector3 localTarget = pointWithPortal.ConnectedPortalPoint.Position;
+                            float distance = Vector3.Distance(transform.position, localTarget);
+                            float ddf = Time.deltaTime * flyingSpeed;
+                            while (distance > ddf)
+                            {
+                                distance = Vector3.Distance(transform.position, localTarget);
+                                ddf = Time.deltaTime * flyingSpeed;
+
+                                Vector3 dir = (localTarget - transform.position).normalized;
+                                transform.position += dir * ddf;
+
+                                yield return null;
+                            }
+
+                            yield return null;
+                            transform.position = localTarget;
+                            yield return null;
+                        }
+                        // teleport
+                        else
+                            transform.position = pointWithPortal.ConnectedPortalPoint.Position;
                     }
 
                     continue;

@@ -8,11 +8,13 @@ namespace Pathfinding
     public class PointWithPortal : Point
     {
         [SerializeField, Required] private PointWithPortal connectedPortalPoint;
+        [SerializeField] private Transform portalOffset;
 
         [Button("Update Points")]
         private void ButtonUdatePoints() => Pathfinder.UpdatePoints();
 
         public PointWithPortal ConnectedPortalPoint => connectedPortalPoint;
+        public Transform PortalOffset => portalOffset;
         public void SetConnectedPortalPoint(PointWithPortal point) => connectedPortalPoint = point;
 
         public override void FindConnectedPoints(Point[] allPoints)
@@ -51,13 +53,19 @@ namespace Pathfinding
                         Gizmos.DrawLine(Position, point.Position);
 
                 Gizmos.color = Color.magenta;
-                Gizmos.DrawSphere(Position, 0.5f);
+                Gizmos.DrawSphere(Position, 0.2f);
 
                 if (connectedPortalPoint != null)
                 {
                     Gizmos.color = Color.magenta;
                     Gizmos.DrawLine(Position, connectedPortalPoint.Position);
-                } 
+                }
+
+                if (portalOffset != null)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawLine(Position, portalOffset.position);
+                }
             }
         }
         protected override void OnDrawGizmosSelected()
@@ -68,7 +76,7 @@ namespace Pathfinding
                 if (point && point != connectedPortalPoint)
                     Gizmos.DrawLine(Position, point.Position);
 
-            Gizmos.DrawSphere(Position, 0.6f);
+            Gizmos.DrawSphere(Position, 0.3f);
 
             if (connectedPortalPoint != null)
             {
@@ -77,7 +85,12 @@ namespace Pathfinding
                 Gizmos.color = Color.magenta;
                 Gizmos.DrawLine(Position, connectedPortalPoint.Position);
             }
-                
+
+            if (portalOffset != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(Position, portalOffset.position);
+            }
         }
     }
 }
