@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2689619302e075d478cd9107688e7796, type: 2}
+  - {fileID: 2100000, guid: 0eacf85d5310c144e9c228e7a5520501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,7 +140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9f08cfaee33bfa545adc51495296c5c7, type: 2}
+  - {fileID: 2100000, guid: 8e084f57aa62cb94a8bf40fcb905a878, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -206,14 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cf0eb3d9fa2e64a805a1b3a3bb6177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   rotateSpeed: 0.9
   timeToChangeRotation: 2
   flyingUpTime: 2
   flyingUpDistance: 0.4
   flyingSpeed: 8
   maxDistanceFromPlayer: 10
-  roateDuringFly: 1
 --- !u!1 &9127373411074388635
 GameObject:
   m_ObjectHideFlags: 0
