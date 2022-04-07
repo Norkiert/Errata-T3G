@@ -23,7 +23,14 @@ public class StraightTrack : BasicTrack
     }
     public override void MoveBall(BallBehavior ball)
     {
-        var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * Vector3.forward);
+        if(ball.pathID == -1)
+            InitBallPath(ball);
+        var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
+        {
+            0 => Vector3.forward,
+            1 => Vector3.back,
+            _ => Vector3.zero
+        });
         ball.ballRigidbody.velocity = moveVector;
     }
     public override void AlignTo(TrackConnectionInfo tci)

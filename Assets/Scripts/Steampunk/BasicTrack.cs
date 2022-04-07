@@ -44,6 +44,7 @@ public abstract class BasicTrack : Clickable
     public const string prefabPath = "";
 
     [SerializeField] public float rollingSpeed = 1f;
+    [SerializeField] public List<Transform> pathBeginPoints;
 
     [SerializeField] public bool rotateable = true;
     public bool Rotateable 
@@ -91,6 +92,22 @@ public abstract class BasicTrack : Clickable
     }
     public abstract void RotateRight();
     public abstract void RotateLeft();
+    public void InitBallPath(BallBehavior ball)
+    {
+        if (ball.pathID == -1)
+        {
+            float closestDistance = float.MaxValue;
+            for(int i = 0; i != pathBeginPoints.Count; ++i)
+            {
+                float distanceOfCurrent = Vector3.Distance(ball.transform.position, pathBeginPoints[i].position);
+                if(distanceOfCurrent < closestDistance)
+                {
+                    closestDistance = distanceOfCurrent;
+                    ball.pathID = i;
+                }
+            }
+        }
+    }
     public abstract void MoveBall(BallBehavior ball);
     // Aligns this track to track given in TrackConnectionInfo(relatively to given's)
     public abstract void AlignTo(TrackConnectionInfo tci);

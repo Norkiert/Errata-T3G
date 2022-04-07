@@ -123,6 +123,66 @@ MonoBehaviour:
   XmYpZm: {x: -0.48000008, y: 0.24000025, z: -1.0010005}
   XmYmZp: {x: -0.48000008, y: -0.24000025, z: 1.0010005}
   XmYmZm: {x: -0.48000008, y: -0.24000025, z: -1.0010005}
+--- !u!1 &2329678953218722630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9217319714809826442}
+  m_Layer: 10
+  m_Name: PathBeginPoint_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9217319714809826442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329678953218722630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9193861660528322761}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2517948728729566799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8293030344206882019}
+  m_Layer: 10
+  m_Name: PathBeginPoint_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8293030344206882019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2517948728729566799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9193861660528322761}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6502181510351898566
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +336,8 @@ Transform:
   m_Children:
   - {fileID: 4993367023408405090}
   - {fileID: 946872169462045402}
+  - {fileID: 8293030344206882019}
+  - {fileID: 9217319714809826442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -294,9 +356,11 @@ MonoBehaviour:
   <IsSelected>k__BackingField: 0
   trackMapController: {fileID: 0}
   rollingSpeed: 2
+  pathBeginPoints:
+  - {fileID: 8293030344206882019}
+  - {fileID: 9217319714809826442}
   rotateable: 1
+  <TrackType>k__BackingField: 0
   _posX: 0
   _posY: 0
   _posZ: 0
-  _rotateable: 0
-  _rotation: 0

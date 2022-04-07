@@ -22,6 +22,7 @@ public class BallBehavior : ObjectGroundChecker
     [SerializeField] [ReadOnly] protected bool onTrack;
     [SerializeField] public float rollingSpeed = 1f;
     [SerializeField] [ReadOnly] public float velocity;
+    [SerializeField] [ReadOnly] public int pathID = -1;
 
     protected void Awake()
     {
@@ -77,6 +78,7 @@ public class BallBehavior : ObjectGroundChecker
             onTrack = false;
             currentTrack = null;
             ballRigidbody.WakeUp();
+            pathID = -1;
         }
         else
             base.OnCollisionExit(collision);
