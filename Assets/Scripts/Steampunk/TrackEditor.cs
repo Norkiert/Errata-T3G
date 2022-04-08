@@ -163,8 +163,7 @@ public class TrackEditor : EditorWindow
                 string prefabPath = trackTypeCopy switch
                 {
                     TrackMapController.TrackType.Straight => StraightTrack.prefabPath,
-                    TrackMapController.TrackType.RightCurved => RightCurvedTrack.prefabPath,
-                    TrackMapController.TrackType.LeftCurved => LeftCurvedTrack.prefabPath,
+                    TrackMapController.TrackType.Curved => CurvedTrack.prefabPath,
                     _ => ""
                 };
                 BasicTrack newTrack = ((GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath), parentTransform)).GetComponent<BasicTrack>();
