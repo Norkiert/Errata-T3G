@@ -164,6 +164,7 @@ public class TrackEditor : EditorWindow
                 {
                     TrackMapController.TrackType.Straight => StraightTrack.prefabPath,
                     TrackMapController.TrackType.Curved => CurvedTrack.prefabPath,
+                    TrackMapController.TrackType.Merger => MergerTrack.prefabPath,
                     _ => ""
                 };
                 BasicTrack newTrack = ((GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath), parentTransform)).GetComponent<BasicTrack>();
