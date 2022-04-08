@@ -3998,12 +3998,12 @@ GameObject:
   - component: {fileID: 746431198}
   - component: {fileID: 746431200}
   - component: {fileID: 746431199}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &746431198
 Transform:
@@ -4038,7 +4038,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e4d2055240bb14f4eafe3cdfd036b8bd, type: 2}
+  - {fileID: 2100000, guid: 325b1d677613d6b44b16bde154b08142, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4170,7 +4170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: laserSize
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3872986329296569922, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8121,7 +8121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166593, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_RootOrder
@@ -9036,6 +9036,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+      propertyPath: laserSize
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: maxLaserLength
       value: 1500
       objectReference: {fileID: 0}
@@ -9737,6 +9741,10 @@ PrefabInstance:
     - target: {fileID: 1398133648268586805, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+      propertyPath: laserSize
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: maxLaserLength
@@ -12674,6 +12682,10 @@ PrefabInstance:
     - target: {fileID: 1398133648268586805, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_Name
       value: LaserRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+      propertyPath: laserSize
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: maxLaserLength
