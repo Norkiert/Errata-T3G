@@ -23,7 +23,7 @@ namespace Logic
 
         private bool IsValid()
         {
-            return input != null && input.TryGetComponent(out ILogicBoolOutput _);
+            return input != null && input.GetComponent<ILogicBoolOutput>() != null;
         }
     }
 }
