@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
 
-public class StraightTrack : BasicTrack
+public class StraightUpwardsTrack : BasicTrack
 {
     public new const float length = 0.5f * 2;
     public new const float height = 0.12f * 2;
     public new const float width = 0.24f * 2;
-    public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightTrack.prefab";
+    public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightUpwardsTrack.prefab";
     protected new void Awake()
     {
         base.Awake();
@@ -23,8 +22,7 @@ public class StraightTrack : BasicTrack
     }
     public override void MoveBall(BallBehavior ball)
     {
-        if(ball.pathID == -1)
-            InitBallPath(ball);
+        InitBallPath(ball);
         var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
         {
             0 => Vector3.forward,

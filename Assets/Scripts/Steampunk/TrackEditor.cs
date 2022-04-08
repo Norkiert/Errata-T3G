@@ -165,6 +165,7 @@ public class TrackEditor : EditorWindow
                     TrackMapController.TrackType.Straight => StraightTrack.prefabPath,
                     TrackMapController.TrackType.Curved => CurvedTrack.prefabPath,
                     TrackMapController.TrackType.Merger => MergerTrack.prefabPath,
+                    TrackMapController.TrackType.StraightUpwards => StraightUpwardsTrack.prefabPath,
                     _ => ""
                 };
                 BasicTrack newTrack = ((GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath), parentTransform)).GetComponent<BasicTrack>();
@@ -988,7 +989,6 @@ public class TrackEditor : EditorWindow
             defaultPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(ModelTrack.prefabPath);
         BasicTrack addedTrack = ((GameObject)PrefabUtility.InstantiatePrefab(defaultPrefab, tci.track.transform.parent)).GetComponent<BasicTrack>();
         tci.track.trackMapController.Add(addedTrack, tci.track.position + tci.level.ToPosition() + tci.position.ToPosition());
-        addedTrack.AlignTo(tci);
         if(!lockedTrack)
             Selection.activeObject = addedTrack;
     }

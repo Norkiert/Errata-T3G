@@ -12,7 +12,8 @@ public class TrackMapController : MonoBehaviour
     {
         Straight,
         Curved,
-        Merger
+        Merger,
+        StraightUpwards
     }
     public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();

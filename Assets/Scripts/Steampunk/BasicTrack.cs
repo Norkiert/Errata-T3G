@@ -109,8 +109,6 @@ public abstract class BasicTrack : Clickable
         }
     }
     public abstract void MoveBall(BallBehavior ball);
-    // Aligns this track to track given in TrackConnectionInfo(relatively to given's)
-    public abstract void AlignTo(TrackConnectionInfo tci);
     public abstract void InitPos(TrackMapPosition tmp);
     [field: SerializeField] [HideInInspector] public TrackMapController.TrackType TrackType { get; set; }
     // transform.position is always not correct

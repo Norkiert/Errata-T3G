@@ -43,40 +43,4 @@ public class CurvedTrack : BasicTrack
         position = tmp;
         transform.localPosition = GetLocalPosition();
     }
-    public override void AlignTo(TrackConnectionInfo tci)
-    {
-        if (tci.track.transform.parent != transform.parent)
-        {
-            Debug.LogError("Cannot align to track with different parent!");
-        }
-        else if (tci.track.NeighborTracks[(int)tci.level, (int)tci.position] != this && tci.track.NeighborTracks[(int)tci.level, (int)tci.position])
-        {
-            Debug.LogError($"Cannot align to track at that position: {{{(int)tci.level}}}, {{{(int)tci.position}}}");
-        }
-        else
-        {
-            transform.position = new Vector3(tci.track.transform.position.x, tci.track.transform.position.y, tci.track.transform.position.z);
-            transform.localPosition = new Vector3(tci.track.transform.localPosition.x, tci.track.transform.localPosition.y, tci.track.transform.localPosition.z);
-            switch (tci.position)
-            {
-                case NeighborPosition.Xplus:
-                    transform.localPosition += length * Vector3.right;
-                    break;
-                case NeighborPosition.Zminus:
-                    transform.localPosition += length * Vector3.back;
-                    break;
-                case NeighborPosition.Xminus:
-                    transform.localPosition += length * Vector3.left;
-                    break;
-                case NeighborPosition.Zplus:
-                    transform.localPosition += length * Vector3.forward;
-                    break;
-            }
-            switch (tci.level)
-            {
-                case NeighborLevel.same:
-                    break;
-            }
-        }
-    }
 }
