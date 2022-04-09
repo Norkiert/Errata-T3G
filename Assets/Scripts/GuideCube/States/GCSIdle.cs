@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GuideCube.States
+namespace GuideCube
 {
     public class GCSIdle : GCubeState
     {

@@ -4,7 +4,6 @@ using UnityEngine;
 using NaughtyAttributes;
 using DG.Tweening;
 using Pathfinding;
-using GuideCube.States;
 
 namespace GuideCube
 {
@@ -26,10 +25,10 @@ namespace GuideCube
 
         private PlayerController player;
 
-        private void Start()
+        private void Awake()
         {
             player = FindObjectOfType<PlayerController>();
-            defaultState = new GCSFollowPlayer(this, player, maxDistanceFromPlayer);
+            defaultState = new GCSIdle(this);
             SetState(defaultState);
         }
 
@@ -82,6 +81,9 @@ namespace GuideCube
         }
 
 
+        public void SetFollowPlayer() => SetState(new GCSFollowPlayer(this, player, maxDistanceFromPlayer));
+
+
         #region -target following-
 
         private Vector3 target;
@@ -115,7 +117,7 @@ namespace GuideCube
         public bool IsOnTheWay => targetFollowing != null;
         private IEnumerator FollowTarget(float avaDistanceToTarget)
         {
-            List<Point> path = new List<Point>();
+            List<Point> path = null;
 
             Vector3 oldTarget = transform.position;
 
@@ -126,7 +128,7 @@ namespace GuideCube
             while (true)
             {
                 // update path aftar target changed
-                if (Vector3.Distance(target, oldTarget) > 2)
+                if (path == null || Vector3.Distance(target, oldTarget) > 2)
                 {
                     //Debug.Log($"Reques new path target: {fixedTarget} old target: {oldTarget}");
                     oldTarget = target;
