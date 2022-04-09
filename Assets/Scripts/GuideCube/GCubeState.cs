@@ -14,7 +14,10 @@ namespace GuideCube
         }
 
         public virtual void Start() { }
+        public virtual void End() { }
 
         public virtual void Update() { }
+
+        public virtual void OnClicked() { }
     }
 }

@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject pressSpaceText;
+    [SerializeField] private float textDisplayDelay = 0.04f;
 
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
@@ -19,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     private Story currentStory;
     public bool isDialoguePlaying { get; private set; }
 
-    private static DialogueManager instance;
+    public static DialogueManager instance;
 
     private void Awake()
     {
@@ -27,11 +28,6 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
 
         instance = this;
-    }
-
-    public static DialogueManager GetInstance()
-    {
-        return instance;
     }
 
     private void Start()
@@ -69,20 +65,20 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text = "";
             string text = currentStory.Continue();
 
-            int length = text.Length;
             int index = 0;
-            while (dialogueText.text != text)
+            while (dialogueText.text != text && index < text.Length)
             {
                 dialogueText.text += text[index];
-                yield return new WaitForSeconds(0.04f);
                 index++;
+                yield return new WaitForSeconds(textDisplayDelay);
             }
 
             DisplayChoices();
         }
         else
         {
-            StartCoroutine(ExitDialogueMode());
+            yield return new WaitForSeconds(0.2f);
+            ExitDialogueMode();
         }
     }
 
@@ -101,10 +97,8 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(ContinueStory());
     }
 
-    private IEnumerator ExitDialogueMode()
+    public void ExitDialogueMode()
     {
-        yield return new WaitForSeconds(0.2f);
-
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";

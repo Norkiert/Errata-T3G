@@ -17,27 +17,44 @@ namespace GuideCube
 
         [Header("Flying attributes")]
         [SerializeField] private float flyingSpeed = 5f;
-        [SerializeField, Min(1)] private float maxDistanceFromPlayer = 20f;
+
+        [Header("Distances")]
+        [SerializeField, Min(1)] private float maxDistFollowPlayer = 20f;
+        [SerializeField, Min(1)] private float maxDistDialogue = 20f;
+        public float MaxDistFollowPlayer => maxDistFollowPlayer;
+        public float MaxDistDialogue => maxDistDialogue;
+
 
         private GCubeState currentState;
         private GCubeState defaultState;
         private readonly List<GCubeState> nextStates = new List<GCubeState>();
 
-        private PlayerController player;
+        public PlayerController Player { get; private set; }
+        private HighlightableOnSelect highlightable;
+        private Clickable clickable;
+
 
         private void Awake()
         {
-            player = FindObjectOfType<PlayerController>();
+            Player = FindObjectOfType<PlayerController>();
+            highlightable = GetComponent<HighlightableOnSelect>();
+            clickable = GetComponent<Clickable>();
+
             defaultState = new GCSIdle(this);
             SetState(defaultState);
         }
+
+        private void OnEnable() => clickable.OnClick += OnClicked;
+        private void OnDisable() => clickable.OnClick -= OnClicked;
 
         private void Update()
         {
             currentState?.Update();
         }
 
-        public void SetState(GCubeState state, List<GCubeState> nextStates=null)
+        public void SetState(GCubeState state) => SetState(state, (List<GCubeState>)null);
+        public void SetState(GCubeState state, GCubeState nextState) => SetState(state, new List<GCubeState> { nextState });
+        public void SetState(GCubeState state, List<GCubeState> nextStates)
         {
             if (state == null)
             {
@@ -62,6 +79,9 @@ namespace GuideCube
             SetRotating(false);
             SetVerticalOscylation(false);
             CancelTarget();
+            SetHightlithing(false);
+
+            currentState?.End();
 
             currentState = null;
         }
@@ -81,7 +101,7 @@ namespace GuideCube
         }
 
 
-        public void SetFollowPlayer() => SetState(new GCSFollowPlayer(this, player, maxDistanceFromPlayer));
+        public Vector3 Position => transform.position;
 
 
         #region -target following-
@@ -331,5 +351,13 @@ namespace GuideCube
         }
 
         #endregion
+
+        public void SetHightlithing(bool value)
+        {
+            if (highlightable)
+                highlightable.enabled = value;
+        }
+
+        private void OnClicked() => currentState?.OnClicked();
     }
 }

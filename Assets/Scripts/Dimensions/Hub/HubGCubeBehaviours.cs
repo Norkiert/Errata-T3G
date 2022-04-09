@@ -8,10 +8,15 @@ using NaughtyAttributes;
 public class HubGCubeBehaviours : MonoBehaviour
 {
     [SerializeField, Required] private Point cubeDockingPoint;
+
+    [Header("Dialogue")]
+    [SerializeField] private bool startFirstDialogue = true;
     [SerializeField, Required] private Point cubeDialoguePoint;
+    [SerializeField, Required] private TextAsset dialogueText;
+
 
     private GCubeController cubeController;
-    private bool startFirstDialogue = true;
+
 
     private void Awake()
     {
@@ -25,12 +30,7 @@ public class HubGCubeBehaviours : MonoBehaviour
             if (startFirstDialogue)
                 StartFirstDialogue();
             else
-            {
-                cubeController.SetState(new GCSGoTo(cubeController, cubeDockingPoint.Position), new List<GCubeState>
-                {
-                    new GCSIdle(cubeController)
-                });
-            }
+                cubeController.SetState(new GCSGoTo(cubeController, cubeDockingPoint.Position), new GCSIdle(cubeController));
         }
     }
 
@@ -38,13 +38,17 @@ public class HubGCubeBehaviours : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PlayerController>())
         {
-            cubeController.SetFollowPlayer();
+            cubeController.SetState(new GCSFollowPlayer(cubeController));
         }
     }
 
     private void StartFirstDialogue()
     {
         startFirstDialogue = false;
-        cubeController.SetState(new GCSGoTo(cubeController, cubeDialoguePoint.Position));
+        cubeController.SetState(new GCSGoTo(cubeController, cubeDialoguePoint.Position),
+            new List<GCubeState> {
+            new GCSDialogue(cubeController, dialogueText, 50f),
+            new GCSFollowPlayer(cubeController)
+            });
     }
 }
