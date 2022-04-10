@@ -108,6 +108,7 @@ public abstract class BasicTrack : Clickable
             }
         }
     }
+    public abstract void InitBallMovement(BallBehavior ball);
     public abstract void MoveBall(BallBehavior ball);
     public abstract void InitPos(TrackMapPosition tmp);
     [field: SerializeField] [HideInInspector] public TrackMapController.TrackType TrackType { get; set; }

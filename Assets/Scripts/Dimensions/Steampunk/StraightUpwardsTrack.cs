@@ -20,7 +20,7 @@ public class StraightUpwardsTrack : BasicTrack
     {
         transform.Rotate(Vector3.down * 90);
     }
-    public override void MoveBall(BallBehavior ball)
+    public override void InitBallMovement(BallBehavior ball)
     {
         InitBallPath(ball);
         var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
@@ -30,6 +30,10 @@ public class StraightUpwardsTrack : BasicTrack
             _ => Vector3.zero
         });
         ball.ballRigidbody.velocity = moveVector;
+    }
+    public override void MoveBall(BallBehavior ball)
+    {
+        ball.ballRigidbody.velocity = ball.rollingSpeed * rollingSpeed * ball.ballRigidbody.velocity.normalized;
     }
     public override void InitPos(TrackMapPosition tmp)
     {

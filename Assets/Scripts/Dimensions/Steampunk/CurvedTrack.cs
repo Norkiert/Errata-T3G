@@ -23,7 +23,7 @@ public class CurvedTrack : BasicTrack
     {
         transform.Rotate(Vector3.up * -90);
     }
-    public override void MoveBall(BallBehavior ball)
+    public override void InitBallMovement(BallBehavior ball)
     {
         InitBallPath(ball);
         var deltaX = (rotationPoint.position.x - ball.transform.position.x);
@@ -37,6 +37,10 @@ public class CurvedTrack : BasicTrack
         })) * rollingSpeed * ball.rollingSpeed;
         moveVector.x *= -1;
         ball.ballRigidbody.velocity = moveVector;
+    }
+    public override void MoveBall(BallBehavior ball)
+    {
+        ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * ball.ballRigidbody.velocity.normalized;
     }
     public override void InitPos(TrackMapPosition tmp)
     {

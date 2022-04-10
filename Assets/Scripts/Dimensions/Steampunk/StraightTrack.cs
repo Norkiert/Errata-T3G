@@ -21,10 +21,9 @@ public class StraightTrack : BasicTrack
     {
         transform.Rotate(Vector3.down * 90);
     }
-    public override void MoveBall(BallBehavior ball)
+    public override void InitBallMovement(BallBehavior ball)
     {
-        if(ball.pathID == -1)
-            InitBallPath(ball);
+        InitBallPath(ball);
         var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
         {
             0 => Vector3.forward,
@@ -32,6 +31,10 @@ public class StraightTrack : BasicTrack
             _ => Vector3.zero
         });
         ball.ballRigidbody.velocity = moveVector;
+    }
+    public override void MoveBall(BallBehavior ball)
+    {
+        ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * ball.ballRigidbody.velocity.normalized;
     }
     public override void InitPos(TrackMapPosition tmp)
     {

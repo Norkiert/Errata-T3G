@@ -25,7 +25,7 @@ public class MergerTrack : BasicTrack
     {
         transform.Rotate(Vector3.down * 90);
     }
-    public override void MoveBall(BallBehavior ball)
+    public override void InitBallMovement(BallBehavior ball)
     {
         InitBallPath(ball);
         var rotationPoint = ball.pathID switch
@@ -45,5 +45,9 @@ public class MergerTrack : BasicTrack
         })) * rollingSpeed * ball.rollingSpeed;
         moveVector.x *= -1;
         ball.ballRigidbody.velocity = moveVector;
+    }
+    public override void MoveBall(BallBehavior ball)
+    {
+        ball.ballRigidbody.velocity = ball.rollingSpeed * rollingSpeed * ball.ballRigidbody.velocity.normalized;
     }
 }

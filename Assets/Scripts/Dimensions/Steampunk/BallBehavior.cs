@@ -64,8 +64,10 @@ public class BallBehavior : ObjectGroundChecker
         if ((1 << collision.gameObject.layer & trackLayer.value) != 0)
         {
             if (!currentTrack)
+            {
                 currentTrack = collision.gameObject.transform.parent.gameObject.GetComponent<BasicTrack>();
-            //Debug.Log(collision.transform.parent.gameObject);
+                currentTrack.InitBallMovement(this);
+            }
             currentTrack.MoveBall(this);
             velocity = ballRigidbody.velocity.magnitude;
         }
@@ -81,7 +83,9 @@ public class BallBehavior : ObjectGroundChecker
             pathID = -1;
         }
         else
+        {
             base.OnCollisionExit(collision);
+        }
     }
 
     protected void UpdateTime()
