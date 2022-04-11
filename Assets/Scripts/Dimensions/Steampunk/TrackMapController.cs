@@ -13,25 +13,36 @@ public class TrackMapController : MonoBehaviour
         Straight,
         Curved,
         Merger,
+        Splitter,
         StraightUpwards
     }
     public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();
     public int Count => trackMap.Count;
-    public void Add(BasicTrack track, TrackMapPosition position)
+    public bool Add(BasicTrack track, TrackMapPosition position)
     {
         if (Contains(position))
+        {
             Debug.LogError($"Tried to add track at occupied position: {position}.");
+            return false;
+        }
         else if (Contains(track))
+        {
             Debug.LogError("Tried to add track that is already in this TrackGroup.");
+            return false;
+        }
         else if (track.trackMapController)
+        {
             Debug.LogError("Tried to add track that is already in some TrackGroup.");
+            return false;
+        }
         else
         {
             trackMap[position] = track;
             track.trackMapController = this;
             track.position = position;
             track.InitPos(position);
+            return true;
         }
     }
     public void Remove(BasicTrack track)
