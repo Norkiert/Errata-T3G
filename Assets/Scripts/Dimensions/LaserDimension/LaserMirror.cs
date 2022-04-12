@@ -13,10 +13,16 @@ public class LaserMirror : Interactable
     [SerializeField] private bool rotateBySteps = false;
     [SerializeField, ShowIf(nameof(rotateBySteps))] float degreesPerStep = 30f;
     [SerializeField, ShowIf(nameof(rotateBySteps))] float minMouseMoveToRotate = 8f;
+    [Header ("Rotation limits")]
+    [SerializeField] private bool LimitRotation = false;
+    [Header("Right Rotation limit need to be negative!"), ShowIf(nameof(LimitRotation))]
+    [SerializeField] float rightLimit = -60f;
+    [SerializeField, ShowIf(nameof(LimitRotation))] float leftLimit = 60f;
 
     private PlayerInteractions player;
     private PlayerController playerController;
     private UIBehaviour mirrorUI;
+    private float actualRotate;
 
     private void Start()
     {
@@ -24,6 +30,7 @@ public class LaserMirror : Interactable
             mirrorUI = GameObject.Find("MirrorTipUI").GetComponent<UIBehaviour>();
         playerController = FindObjectOfType<PlayerController>();
         player = FindObjectOfType<PlayerInteractions>();
+        actualRotate = 0f;
     }
     public override void Select()
     {
@@ -54,12 +61,23 @@ public class LaserMirror : Interactable
     private IEnumerator RotateMirror()
     {
         mirrorUI.StopMirrorUI();
+        bool bul = true;
         float stepCheckHorizontal = 0f;
         float stepCheckVertical = 0f;
         float reverseRotating = 1f;
         while(!playerController.enabled)
         {
-            if (rotateBySteps)
+           // Debug.Log(Input.GetAxis("Mouse X"));
+            if(LimitRotation)
+            {
+                if (((Input.GetAxis("Mouse X") * reverseRotating > 0) && (actualRotate + Input.GetAxis("Mouse X") * reverseRotating * rotationSpeed * Time.deltaTime) > leftLimit) || ((Input.GetAxis("Mouse X") * reverseRotating < 0) && (actualRotate + Input.GetAxis("Mouse X") * reverseRotating * rotationSpeed * Time.deltaTime) < rightLimit))
+                {
+                    bul = false;
+                }
+                else
+                    bul = true;
+            }
+            if (rotateBySteps&&bul)
             {
                 reverseRotating = (transform.position.x > player.transform.position.x) ? -1f : 1f;
                 if (rotateHorizontal)
@@ -87,20 +105,20 @@ public class LaserMirror : Interactable
                     if (stepCheckVertical > minMouseMoveToRotate || stepCheckVertical < -minMouseMoveToRotate)
                     {
                         transform.Rotate(new Vector3(0, 0, (degreesPerStep * (stepCheckVertical < 0 ? -1 : 1) * reverseRotating)));
+                        actualRotate += (degreesPerStep * (stepCheckVertical < 0 ? -1 : 1) * reverseRotating);
                         stepCheckVertical = 0f;
                     }
                     else
                         stepCheckVertical += Input.GetAxis("Mouse Y");
                 }
-               
-                yield return null;
             }
-            else
+            else if(bul)
             {
                 reverseRotating = (transform.position.x>player.transform.position.x)?-1f:1f;
-                yield return null;
                 transform.Rotate(new Vector3(0, rotateHorizontal?Input.GetAxis("Mouse X")*reverseRotating:0, rotateVertical?Input.GetAxis("Mouse Y"):0) * rotationSpeed * Time.deltaTime);
+                actualRotate += Input.GetAxis("Mouse X") * reverseRotating*rotationSpeed * Time.deltaTime;
             }
+            yield return null;
         }
     }
     private void ShowUI()
