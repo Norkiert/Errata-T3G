@@ -8,17 +8,13 @@ public class CableRender : MonoBehaviour
     [SerializeField] bool drawLines = false;
     [SerializeField, ShowIf(nameof(drawLines))] private GameObject targetTower;
 
-    private GameObject[] targets;
-    private GameObject[] towerPoints;
-    private LineRenderer[] lines;
-
-    private void Awake()
+    private void Start()
     {
         if(drawLines)
         {
-            targets = new GameObject[6];
-            towerPoints = new GameObject[6];
-            lines = new LineRenderer[6];
+            GameObject[] targets = new GameObject[6];
+            GameObject[] towerPoints = new GameObject[6];
+            LineRenderer[] lines = new LineRenderer[6];
             for (int i = 1; i <= 6; i++)
             {
                 targets[i - 1] = targetTower.transform.Find(("Target" + i).ToString()).gameObject;
@@ -29,9 +25,5 @@ public class CableRender : MonoBehaviour
                 lines[i - 1].SetPosition(1, targets[i - 1].transform.position);
             }
         }
-    }
-    void Start()
-    {
-
     }
 }
