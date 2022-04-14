@@ -11,6 +11,7 @@ public class SplitterTrack : BasicTrack
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/SplitterTrack.prefab";
 
     [SerializeField] [ReadOnly] public bool hammerFacingRight = true;
+    [SerializeField] public SplitterTrackMovingElement hammer;
 
     public override void RotateRight()
     {
@@ -34,7 +35,14 @@ public class SplitterTrack : BasicTrack
     }
     public override void MoveBall(BallBehavior ball)
     {
-        ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * ball.ballRigidbody.velocity.normalized;
+        if (hammer.Rotating)
+        {
+            ball.ballRigidbody.velocity = transform.rotation * Vector3.forward * rollingSpeed * ball.rollingSpeed;
+        }
+        else
+        {
+            ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * ball.ballRigidbody.velocity.normalized;
+        }
     }
     public override void InitPos(TrackMapPosition tmp)
     {
