@@ -97,14 +97,14 @@ public class TrackEditor : EditorWindow
             {
                 fontSize = 20
             };
-            EditorGUILayout.LabelField("Selected level:", labelStyle);
-            string[] values = Enum.GetNames(typeof(BasicTrack.NeighborLevel));
-            values = values.Take(values.Length - 1).ToArray();
+            //EditorGUILayout.LabelField("Selected level:", labelStyle);
+            //string[] values = Enum.GetNames(typeof(BasicTrack.NeighborLevel));
+            //values = values.Take(values.Length - 1).ToArray();
             labelStyle = new GUIStyle("toggle")
             {
                 fontSize = 20
             };
-            selectedLevel = GUILayout.SelectionGrid(selectedLevel, values, values.Length, labelStyle);
+            //selectedLevel = GUILayout.SelectionGrid(selectedLevel, values, values.Length, labelStyle);
             labelStyle = new GUIStyle(GUI.skin.label)
             {
                 fontSize = 20
@@ -907,7 +907,43 @@ public class TrackEditor : EditorWindow
                     break;
             }
 
-            
+
+
+            #endregion
+
+            #region -Track Specific Settings-
+
+            if(SelectedTrack is SplitterTrack)
+            {
+                EditorGUILayout.LabelField("Hammer facing:", labelStyle);
+                string[] buttonStrings =
+                {
+                    "Left",
+                    "Right"
+                };
+                labelStyle = new GUIStyle("toggle")
+                {
+                    fontSize = 20
+                };
+                SplitterTrack splitterTrack = (SplitterTrack)SelectedTrack;
+                var hammerFacingCopy = splitterTrack.hammerFacingRight;
+                splitterTrack.hammerFacingRight = GUILayout.SelectionGrid(splitterTrack.hammerFacingRight ? 1 : 0, buttonStrings, 2, labelStyle) == 1;
+                if(hammerFacingCopy != splitterTrack.hammerFacingRight)
+                {
+                    if (splitterTrack.hammerFacingRight)
+                    {
+                        splitterTrack.hammer.RotateRightInstant();
+                    }
+                    else if (!splitterTrack.hammerFacingRight)
+                    {
+                        splitterTrack.hammer.RotateLeftInstant();
+                    }
+                }
+                labelStyle = new GUIStyle(GUI.skin.label)
+                {
+                    fontSize = 20
+                };
+            }
 
             #endregion
         }
