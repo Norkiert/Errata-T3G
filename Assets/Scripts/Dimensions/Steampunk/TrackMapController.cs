@@ -14,6 +14,7 @@ public class TrackMapController : MonoBehaviour
         Curved,
         Merger,
         Splitter,
+        Cross,
         StraightUpwards
     }
     public Transform zeroPoint;

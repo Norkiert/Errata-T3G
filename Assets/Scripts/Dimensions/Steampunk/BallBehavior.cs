@@ -23,6 +23,8 @@ public class BallBehavior : ObjectGroundChecker
     [SerializeField] public float rollingSpeed = 1f;
     [SerializeField] [ReadOnly] public float velocity;
     [SerializeField] [ReadOnly] public int pathID = -1;
+    [SerializeField] [HideInInspector] private int pathIDCopy;
+    [SerializeField] [HideInInspector] private BasicTrack lastTrack;
 
     protected void Awake()
     {
@@ -66,7 +68,17 @@ public class BallBehavior : ObjectGroundChecker
             if (!currentTrack)
             {
                 currentTrack = collision.gameObject.transform.parent.gameObject.GetComponent<BasicTrack>();
-                currentTrack.InitBallMovement(this);
+                if(currentTrack != lastTrack)
+                {
+                    currentTrack.InitBallMovement(this);
+
+                    lastTrack = currentTrack;
+                    pathIDCopy = pathID;
+                }
+                else
+                {
+                    pathID = pathIDCopy;
+                }
             }
             currentTrack.MoveBall(this);
             velocity = ballRigidbody.velocity.magnitude;

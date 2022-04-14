@@ -166,6 +166,7 @@ public class TrackEditor : EditorWindow
                     TrackMapController.TrackType.Curved => CurvedTrack.prefabPath,
                     TrackMapController.TrackType.Merger => MergerTrack.prefabPath,
                     TrackMapController.TrackType.Splitter => SplitterTrack.prefabPath,
+                    TrackMapController.TrackType.Cross => CrossTrack.prefabPath,
                     TrackMapController.TrackType.StraightUpwards => StraightUpwardsTrack.prefabPath,
                     _ => ""
                 };
