@@ -1461,7 +1461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5912960129825703834, guid: 8852678ac6335ec49a037c570a4ff1ab, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5912960129825703834, guid: 8852678ac6335ec49a037c570a4ff1ab, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1516,6 +1516,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 592821073}
     m_Modifications:
+    - target: {fileID: 4984262202971749651, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
+      propertyPath: rotationSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8080544193186149003, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2376,6 +2380,8 @@ MonoBehaviour:
   rollingSpeed: 1
   velocity: 0
   pathID: -1
+  pathIDCopy: 0
+  lastTrack: {fileID: 0}
 --- !u!54 &1364943037
 Rigidbody:
   m_ObjectHideFlags: 0

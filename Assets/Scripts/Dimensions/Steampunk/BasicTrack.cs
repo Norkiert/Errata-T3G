@@ -116,7 +116,7 @@ public abstract class BasicTrack : Clickable
     public Vector3 GetPosition()
     {
         Vector3 toReturn = trackMapController.zeroPoint.position;
-        toReturn += new Vector3(position.x, position.y, position.z) * ModelTrack.trackMapCellSize;
+        toReturn += new Vector3(position.x * transform.parent.lossyScale.x, position.y * transform.parent.lossyScale.y, position.z * transform.parent.lossyScale.z) * ModelTrack.trackMapCellSize;
         return toReturn;
     }
     public Vector3 GetLocalPosition()

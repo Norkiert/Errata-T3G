@@ -49,8 +49,66 @@ public class TrackEditor : EditorWindow
     private int selectedLevel = (int)BasicTrack.NeighborLevel.same;
     private Vector3 creationPoint = new Vector3(0, 0, 0);
     private Vector3Int selection = new Vector3Int(0, 0, 0);
+    private bool debugPositionGrid = false;
+    private bool updated = false;
+    public void Update()
+    {
+        if (hasFocus && updated)
+        {
+            OnGUI();
+            updated = true;
+        }
+        else if (!hasFocus)
+        {
+            updated = false;
+        }
+        if (debugPositionGrid && selectedTrackMapController)
+        {
+            foreach(var pair in selectedTrackMapController.TrackMap)
+            {
+                var track = pair.Value;
+                var trackTransform = track.transform;
+
+                var point0 = track.GetPosition();
+                var point1 = track.GetPosition();
+                var point2 = track.GetPosition();
+                var point3 = track.GetPosition();
+                point0 += trackTransform.rotation * (Vector3.back + Vector3.left);
+                point1 += trackTransform.rotation * (Vector3.back + Vector3.right);
+                point2 += trackTransform.rotation * (Vector3.forward + Vector3.right);
+                point3 += trackTransform.rotation * (Vector3.forward + Vector3.left);
+
+                Debug.DrawLine(point0, point1, Color.green);
+                Debug.DrawLine(point1, point2, Color.green);
+                Debug.DrawLine(point2, point3, Color.green);
+                Debug.DrawLine(point3, point0, Color.green);
+            }
+        }
+    }
     public void OnGUI()
     {
+        if (debugPositionGrid && selectedTrackMapController)
+        {
+            foreach (var pair in selectedTrackMapController.TrackMap)
+            {
+                var track = pair.Value;
+                var trackTransform = track.transform;
+
+                var point0 = track.GetPosition();
+                var point1 = track.GetPosition();
+                var point2 = track.GetPosition();
+                var point3 = track.GetPosition();
+                point0 += trackTransform.rotation * (Vector3.back + Vector3.left);
+                point1 += trackTransform.rotation * (Vector3.back + Vector3.right);
+                point2 += trackTransform.rotation * (Vector3.forward + Vector3.right);
+                point3 += trackTransform.rotation * (Vector3.forward + Vector3.left);
+
+                Debug.DrawLine(point0, point1, Color.green);
+                Debug.DrawLine(point1, point2, Color.green);
+                Debug.DrawLine(point2, point3, Color.green);
+                Debug.DrawLine(point3, point0, Color.green);
+            }
+        }
         if (!trackEditor)
         {
             Init();
@@ -59,6 +117,8 @@ public class TrackEditor : EditorWindow
 
         if (SelectedTrack) // one-track mode
         {
+            selectedTrackMapController = SelectedTrack.trackMapController;
+
             #region -Lock/Unlock button-
             GUIStyle localButtonStyle = new GUIStyle(GUI.skin.button)
             {
@@ -136,6 +196,15 @@ public class TrackEditor : EditorWindow
                 fixedWidth = buttonWidthHeight,
                 fontSize = 100
             };
+
+            #endregion
+
+            #region -Debug-
+
+            debugPositionGrid = GUILayout.Toggle(debugPositionGrid, "Show Position Grid", new GUIStyle("toggle")
+            {
+                fontSize = 20
+            });
 
             #endregion
 

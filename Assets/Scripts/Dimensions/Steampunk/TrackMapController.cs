@@ -19,6 +19,7 @@ public class TrackMapController : MonoBehaviour
     }
     public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();
+    public Dictionary<TrackMapPosition, BasicTrack> TrackMap { get { return trackMap; } private set { } }
     public int Count => trackMap.Count;
     public bool Add(BasicTrack track, TrackMapPosition position)
     {
