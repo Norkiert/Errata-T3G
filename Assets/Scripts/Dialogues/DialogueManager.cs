@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject pressSpaceText;
     [SerializeField] private float textDisplayDelay = 0.04f;
+    [SerializeField] GameObject __cube;
 
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
@@ -91,6 +92,11 @@ public class DialogueManager : MonoBehaviour
         }
 
         currentStory = new Story(inkJSON.text);
+
+        currentStory.BindExternalFunction("test", (string color) => {
+            SetCubeColor(color);
+        });
+
         isDialoguePlaying = true;
         dialoguePanel.SetActive(true);
 
@@ -135,5 +141,19 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
         StartCoroutine(ContinueStory());
+    }
+    
+    private void SetCubeColor(string color)
+    {
+        Color c = new Color(255,255,255);
+        switch (color) {
+            case "yellow":
+                c = new Color(255, 255, 0);
+                break;
+            case "red":
+                c = new Color(255, 0, 0);
+                break;
+        }
+        __cube.GetComponent<MeshRenderer>().material.color = c;
     }
 }

@@ -1,21 +1,16 @@
 -> main
 
+EXTERNAL test(message)
+
 === main ===
-Wybierz cos
-    + [1]
-        -> chosen(1)
-    + [2]
-        -> chosen(2)
-        
+Wybierz kolor
+    + [red]
+        -> chosen("red")
+    + [yellow]
+        -> chosen("yellow")
+
+
 === chosen(thing) ===
-Znow cos wybierz
-    + [2]
-        -> chosen2(thing, 2)
-    + [3]
-        -> chosen2(thing, 3)
-
-
-=== chosen2(thing1, thing2) ===
-{thing1} * {thing2} = {thing1 * thing2}
+~ test(thing)
 
 -> END
