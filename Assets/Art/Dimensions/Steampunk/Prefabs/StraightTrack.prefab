@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981682535796081162}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9193861660528322761}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8854184130239548381
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981682535796081162}
-  m_Mesh: {fileID: -2477511411847689622, guid: f3a08f49737cf514d92ddb134410a70f, type: 3}
+  m_Mesh: {fileID: -2477511411847689622, guid: ea07b3b1e9a4b5c44955d7d062c922f7, type: 3}
 --- !u!23 &7907468564987708431
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -2477511411847689622, guid: f3a08f49737cf514d92ddb134410a70f, type: 3}
+  m_Mesh: {fileID: -2477511411847689622, guid: ea07b3b1e9a4b5c44955d7d062c922f7, type: 3}
 --- !u!114 &8655233511338463019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,16 +113,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 0, y: 0.7599999, z: -0.0010000467}
+  center: {x: 4, y: 0.76, z: 19.999}
   displayAsRelative: 1
-  XpYpZp: {x: 0.48000008, y: 0.24000025, z: 1.0010005}
-  XpYpZm: {x: 0.48000008, y: 0.24000025, z: -1.0010005}
-  XpYmZp: {x: 0.48000008, y: -0.24000025, z: 1.0010005}
-  XpYmZm: {x: 0.48000008, y: -0.24000025, z: -1.0010005}
-  XmYpZp: {x: -0.48000008, y: 0.24000025, z: 1.0010005}
-  XmYpZm: {x: -0.48000008, y: 0.24000025, z: -1.0010005}
-  XmYmZp: {x: -0.48000008, y: -0.24000025, z: 1.0010005}
-  XmYmZm: {x: -0.48000008, y: -0.24000025, z: -1.0010005}
+  XpYpZp: {x: 0.48000002, y: 0.24000001, z: 1.0009995}
+  XpYpZm: {x: 0.48000002, y: 0.24000001, z: -1.0009995}
+  XpYmZp: {x: 0.48000002, y: -0.24000001, z: 1.0009995}
+  XpYmZm: {x: 0.48000002, y: -0.24000001, z: -1.0009995}
+  XmYpZp: {x: -0.48000002, y: 0.24000001, z: 1.0009995}
+  XmYpZm: {x: -0.48000002, y: 0.24000001, z: -1.0009995}
+  XmYmZp: {x: -0.48000002, y: -0.24000001, z: 1.0009995}
+  XmYmZm: {x: -0.48000002, y: -0.24000001, z: -1.0009995}
 --- !u!1 &2329678953218722630
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,13 +210,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502181510351898566}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9193861660528322761}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4095334015038357593
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502181510351898566}
-  m_Mesh: {fileID: 8385836491182413749, guid: f3a08f49737cf514d92ddb134410a70f, type: 3}
+  m_Mesh: {fileID: 8385836491182413749, guid: ea07b3b1e9a4b5c44955d7d062c922f7, type: 3}
 --- !u!23 &1079513927463000128
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 8385836491182413749, guid: f3a08f49737cf514d92ddb134410a70f, type: 3}
+  m_Mesh: {fileID: 8385836491182413749, guid: ea07b3b1e9a4b5c44955d7d062c922f7, type: 3}
 --- !u!114 &8655233511338463013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,16 +296,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: -0.00000035762787, y: 0.73614836, z: -0.0010501146}
+  center: {x: 3.9999995, y: 0.7361485, z: 19.99895}
   displayAsRelative: 1
-  XpYpZp: {x: 0.5279473, y: 0.26385188, z: 1.001193}
-  XpYpZm: {x: 0.5279473, y: 0.26385188, z: -1.001193}
-  XpYmZp: {x: 0.5279473, y: -0.26385185, z: 1.001193}
-  XpYmZm: {x: 0.5279473, y: -0.26385185, z: -1.001193}
-  XmYpZp: {x: -0.5279473, y: 0.26385188, z: 1.001193}
-  XmYpZm: {x: -0.5279473, y: 0.26385188, z: -1.001193}
-  XmYmZp: {x: -0.5279473, y: -0.26385185, z: 1.001193}
-  XmYmZm: {x: -0.5279473, y: -0.26385185, z: -1.001193}
+  XpYpZp: {x: 0.5279474, y: 0.26385152, z: 1.0011921}
+  XpYpZm: {x: 0.5279474, y: 0.26385152, z: -1.0011921}
+  XpYmZp: {x: 0.5279474, y: -0.26385152, z: 1.0011921}
+  XpYmZm: {x: 0.5279474, y: -0.26385152, z: -1.0011921}
+  XmYpZp: {x: -0.5279474, y: 0.26385152, z: 1.0011921}
+  XmYpZm: {x: -0.5279474, y: 0.26385152, z: -1.0011921}
+  XmYmZp: {x: -0.5279474, y: -0.26385152, z: 1.0011921}
+  XmYmZm: {x: -0.5279474, y: -0.26385152, z: -1.0011921}
 --- !u!1 &8420878995099218547
 GameObject:
   m_ObjectHideFlags: 0
