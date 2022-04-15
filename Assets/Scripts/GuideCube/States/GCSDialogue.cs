@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dialogues;
 
 namespace GuideCube
 {
@@ -29,17 +30,19 @@ namespace GuideCube
 
         public override void Update()
         {
-            Debug.Log(Vector3.Distance(controller.Position, controller.Player.transform.position));
-            if (Vector3.Distance(controller.Position, controller.Player.transform.position) > distanceToCloseDialogue)
+            if (
+                !DialogueManager.instance.IsDialoguePlaying
+                || Vector3.Distance(controller.Position, controller.Player.transform.position) > distanceToCloseDialogue
+                )
             {
-                DialogueManager.instance.ExitDialogueMode();
                 controller.EndCurrentState();
-            }
+            }    
         }
 
         public override void End()
         {
-            DialogueManager.instance.ExitDialogueMode();
+            if (DialogueManager.instance.IsDialoguePlaying)
+                DialogueManager.instance.CloseDialoguePanel();
         }
     }
 }

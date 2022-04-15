@@ -10,12 +10,16 @@ public class HubGCubeBehaviours : MonoBehaviour
     [SerializeField, Required] private Point cubeDockingPoint;
 
     [Header("Dialogue")]
-    [SerializeField] private bool startFirstDialogue = true;
+    [SerializeField] private bool startFirstDialogue = false;
+    [SerializeField] private float firstDialoguedealy = 1f;
     [SerializeField, Required] private Point cubeDialoguePoint;
     [SerializeField, Required] private TextAsset dialogueText;
 
 
     private GCubeController cubeController;
+
+
+    public void SetStartDialuge(bool value) => startFirstDialogue = value;
 
 
     private void Awake()
@@ -28,7 +32,7 @@ public class HubGCubeBehaviours : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>())
         {
             if (startFirstDialogue)
-                StartFirstDialogue();
+                Invoke(nameof(StartFirstDialogue), firstDialoguedealy);
             else
                 cubeController.SetState(new GCSGoTo(cubeController, cubeDockingPoint.Position), new GCSIdle(cubeController));
         }

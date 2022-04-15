@@ -4,156 +4,194 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Ink.Runtime;
 using TMPro;
+using DG.Tweening;
 
-public class DialogueManager : MonoBehaviour
+namespace Dialogues
 {
-    [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private GameObject pressSpaceText;
-    [SerializeField] private float textDisplayDelay = 0.04f;
-    [SerializeField] GameObject __cube;
-
-    [SerializeField] private GameObject[] choices;
-    private TextMeshProUGUI[] choicesText;
-
-    public TextAsset inkJSONTest;
-
-    private Story currentStory;
-    public bool isDialoguePlaying { get; private set; }
-
-    public static DialogueManager instance;
-
-    private void Awake()
+    public class DialogueManager : MonoBehaviour
     {
-        if (instance != null)
-            Destroy(gameObject);
+        [SerializeField] private GameObject dialoguePanel;
+        [SerializeField, Min(0)] private float openTime = 0.2f;
+        [SerializeField, Min(0)] private float closeTime = 0.2f;
+        [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private GameObject pressSpaceText;
+        [SerializeField, Min(0)] private float textDisplayDelay = 0.04f;
+        [SerializeField, Min(0)] private int maxNumberOfLetterInLine = 100;
+        [SerializeField, Min(0)] private float lineHeight = 45f;
+        [SerializeField, Min(0)] private float defalutPanelHeight = 155f;
 
-        instance = this;
-    }
+        [SerializeField] GameObject __cube;
 
-    private void Start()
-    {
-        isDialoguePlaying = false;
-        dialoguePanel.SetActive(false);
+        [SerializeField] private GameObject[] choices;
+        private TextMeshProUGUI[] choicesText;
 
-        choicesText = new TextMeshProUGUI[choices.Length];
-        int index = 0;
-        foreach (GameObject choice in choices)
+        public TextAsset inkJSONTest;
+
+        private Story currentStory;
+        public bool IsDialoguePlaying { get; private set; }
+
+        public static DialogueManager instance;
+
+        private void Awake()
         {
-            choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
-            index++;
+            if (instance != null)
+                Destroy(gameObject);
+
+            instance = this;
         }
-    }
 
-    private void Update()
-    {
-        if (!isDialoguePlaying) return;
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) MakeChoice(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) MakeChoice(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) MakeChoice(2);
-
-        if (currentStory.currentChoices.Count == 0 && Input.GetKeyDown(KeyCode.Space))
+        private void Start()
         {
-            StartCoroutine(ContinueStory());
-        }
-    }
+            ExitDialogueMode();
 
-    private IEnumerator ContinueStory()
-    {
-        if (currentStory.canContinue)
-        {
-            dialogueText.text = "";
-            string text = currentStory.Continue();
-
+            choicesText = new TextMeshProUGUI[choices.Length];
             int index = 0;
-            while (dialogueText.text != text && index < text.Length)
+            foreach (GameObject choice in choices)
             {
-                dialogueText.text += text[index];
+                choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
                 index++;
-                yield return new WaitForSeconds(textDisplayDelay);
+            }
+        }
+
+        private void Update()
+        {
+            if (!IsDialoguePlaying) return;
+
+            if (Input.GetKeyDown(KeyCode.Alpha1) && currentStory.currentChoices.Count >= 1) MakeChoice(0);
+            if (Input.GetKeyDown(KeyCode.Alpha2) && currentStory.currentChoices.Count >= 2) MakeChoice(1);
+            if (Input.GetKeyDown(KeyCode.Alpha3) && currentStory.currentChoices.Count >= 3) MakeChoice(2);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                StartCoroutine(ContinueStory());
+        }
+
+        private IEnumerator ContinueStory(float waitTime = 0)
+        {
+            if (currentStory.canContinue)
+            {
+                string text = currentStory.Continue();
+
+                DisplayChoices();
+
+                int index = 0;
+                dialogueText.text = "";
+
+                float height = defalutPanelHeight + Mathf.CeilToInt(text.Length / (float)maxNumberOfLetterInLine) * lineHeight;
+                RectTransform dialoguePanelRT = dialoguePanel.GetComponent<RectTransform>();
+                dialoguePanelRT.sizeDelta = new Vector2(dialoguePanelRT.sizeDelta.x, height);
+
+                yield return new WaitForSeconds(waitTime);
+
+                while (dialogueText.text != text && index < text.Length)
+                {
+                    dialogueText.text += text[index];
+                    index++;
+                    yield return new WaitForSeconds(textDisplayDelay);
+                }
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.2f);
+                CloseDialoguePanel();
+            }
+        }
+
+        public void EnterDialogueMode(TextAsset inkJSON)
+        {
+            if (IsDialoguePlaying)
+            {
+                Debug.LogError("Another dialogue is already playing");
+                return;
             }
 
-            DisplayChoices();
+            currentStory = new Story(inkJSON.text);
+
+            currentStory.BindExternalFunction("test", (string color) => {
+                SetCubeColor(color);
+            });
+
+            IsDialoguePlaying = true;
+            dialogueText.text = "";
+            dialoguePanel.SetActive(true);
+            for (int index = 0; index < choices.Length; index++)
+                choices[index].gameObject.SetActive(false);
+
+            // anim open
+            CanvasGroup cg = dialoguePanel.GetComponent<CanvasGroup>();
+            dialoguePanel.transform.localScale = Vector3.zero;
+            DOTween.Sequence()
+                .Append(DOVirtual.Float(0, 1, openTime, (v) => cg.alpha = v).SetEase(Ease.InQuad))
+                .Join(dialoguePanel.transform.DOScale(Vector3.one, openTime).SetEase(Ease.InQuad))
+                ;
+
+            StartCoroutine(ContinueStory(openTime));
         }
-        else
+
+        public void CloseDialoguePanel(bool anim = true)
         {
-            yield return new WaitForSeconds(0.2f);
-            ExitDialogueMode();
+            if (anim)
+            {
+                CanvasGroup cg = dialoguePanel.GetComponent<CanvasGroup>();
+                DOTween.Sequence()
+                    .Append(DOVirtual.Float(1, 0, closeTime, (v) => cg.alpha = v).SetEase(Ease.InQuad))
+                    .Join(dialoguePanel.transform.DOScale(Vector3.zero, closeTime).SetEase(Ease.InQuad))
+                    .OnComplete(ExitDialogueMode)
+                    ;
+            }
+            else
+            {
+                ExitDialogueMode();
+            }
         }
-    }
-
-    public void EnterDialogueMode(TextAsset inkJSON)
-    {
-        if (isDialoguePlaying)
+        private void ExitDialogueMode()
         {
-            Debug.LogError("Another dialogue is already playing");
-            return;
+            IsDialoguePlaying = false;
+            dialoguePanel.SetActive(false);
+            dialogueText.text = "";
         }
 
-        currentStory = new Story(inkJSON.text);
-
-        currentStory.BindExternalFunction("test", (string color) => {
-            SetCubeColor(color);
-        });
-
-        isDialoguePlaying = true;
-        dialoguePanel.SetActive(true);
-
-        StartCoroutine(ContinueStory());
-    }
-
-    public void ExitDialogueMode()
-    {
-        isDialoguePlaying = false;
-        dialoguePanel.SetActive(false);
-        dialogueText.text = "";
-    }
-
-    private void DisplayChoices()
-    {
-        List<Choice> currentChoices = currentStory.currentChoices;
-
-        if (currentChoices.Count == 0) pressSpaceText.SetActive(true);
-        else pressSpaceText.SetActive(false);
-
-        if (currentChoices.Count > choices.Length)
+        private void DisplayChoices()
         {
-            Debug.LogError("More choices were given than the UI can support. Number of choices given: "
-                + currentChoices.Count);
+            List<Choice> currentChoices = currentStory.currentChoices;
+
+            pressSpaceText.SetActive(currentChoices.Count == 0);
+
+            if (currentChoices.Count > choices.Length)
+            {
+                Debug.LogWarning("More choices were given than the UI can support. Number of choices given: "
+                    + currentChoices.Count);
+            }
+
+            int index = 0;
+            for (; index < Mathf.Min(currentChoices.Count, choices.Length); index++)
+            {
+                choices[index].gameObject.SetActive(true);
+                choicesText[index].text = (index + 1).ToString() + ". " + currentChoices[index].text;
+            }
+            for (; index < choices.Length; index++)
+                choices[index].gameObject.SetActive(false);
         }
 
-        int index = 0;
-        foreach (Choice choice in currentChoices)
+        public void MakeChoice(int choiceIndex)
         {
-            choices[index].gameObject.SetActive(true);
-            choicesText[index].text = (index+1).ToString() + ". " + choice.text;
-            index++;
+            currentStory.ChooseChoiceIndex(choiceIndex);
+            StartCoroutine(ContinueStory());
         }
-        for (int i = index; i < choices.Length; i++)
+
+        private void SetCubeColor(string color)
         {
-            choices[i].gameObject.SetActive(false);
+            Color c = new Color(255, 255, 255);
+            switch (color)
+            {
+                case "yellow":
+                    c = new Color(255, 255, 0);
+                    break;
+                case "red":
+                    c = new Color(255, 0, 0);
+                    break;
+            }
+            __cube.GetComponent<MeshRenderer>().material.color = c;
         }
-
     }
 
-    public void MakeChoice(int choiceIndex)
-    {
-        currentStory.ChooseChoiceIndex(choiceIndex);
-        StartCoroutine(ContinueStory());
-    }
-    
-    private void SetCubeColor(string color)
-    {
-        Color c = new Color(255,255,255);
-        switch (color) {
-            case "yellow":
-                c = new Color(255, 255, 0);
-                break;
-            case "red":
-                c = new Color(255, 0, 0);
-                break;
-        }
-        __cube.GetComponent<MeshRenderer>().material.color = c;
-    }
 }

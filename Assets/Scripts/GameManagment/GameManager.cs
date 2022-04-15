@@ -90,6 +90,13 @@ namespace GameManagment
                 player.SetRotation(spawnPoint.transform.eulerAngles.x, spawnPoint.transform.eulerAngles.y);
             }
 
+            // trun on first dialgue
+            HubGCubeBehaviours hgcb = FindObjectOfType<HubGCubeBehaviours>();
+            if (hgcb == null)
+                Debug.LogWarning($"Dont found {typeof(HubGCubeBehaviours)} object! Can't play first dialogue");
+            else
+                hgcb.SetStartDialuge(true);
+
             loadFirstGameC = null;
         }
 
