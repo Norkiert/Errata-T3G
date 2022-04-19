@@ -22,6 +22,8 @@ public class PlayerController : PortalTraveller
     private float yaw;
     private float pitch;
 
+    [field: SerializeField, ReadOnly] public bool FreezCamera { get; set; } = false;
+
     #endregion
 
     #region -movment-
@@ -84,11 +86,12 @@ public class PlayerController : PortalTraveller
     [SerializeField, ReadOnly] private Mods currentMod = Mods.None;
     [SerializeField, ReadOnly] private float currentSpeed;
     [SerializeField, ReadOnly] private float currentJumpHeight;
-    [field: SerializeField, ReadOnly] public bool FreezCamera { get; set; } = false;
 
     private Vector3 smoothV;
     [SerializeField] private Vector3 velocity;
     [SerializeField] private float verticalVelocity;
+
+    [field: SerializeField, ReadOnly] public bool FreezMovement { get; set; } = false;
 
     #endregion
 
@@ -234,6 +237,9 @@ public class PlayerController : PortalTraveller
 
     private void MovePlayer()
     {
+        if (FreezMovement)
+            return;
+
         Vector3 inputDir = new Vector3(inputMove.x, 0, inputMove.y).normalized;
         Vector3 worldInputDir = transform.TransformDirection(inputDir);
         

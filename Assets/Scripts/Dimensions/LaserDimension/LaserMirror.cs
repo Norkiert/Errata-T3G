@@ -8,13 +8,16 @@ public class LaserMirror : Interactable
     [Header("Rotation types")]
     [SerializeField] private bool rotateHorizontal = true;
     [SerializeField] private bool rotateVertical = false;
+
     [Header("Rotation options")]
     [SerializeField] private float rotationSpeed = 20;
     [SerializeField] private bool rotateBySteps = false;
     [SerializeField, ShowIf(nameof(rotateBySteps))] float degreesPerStep = 30f;
     [SerializeField, ShowIf(nameof(rotateBySteps))] float minMouseMoveToRotate = 8f;
+
     [Header ("Rotation limits")]
     [SerializeField] private bool LimitRotation = false;
+
     [Header("Right Rotation limit need to be negative!"), ShowIf(nameof(LimitRotation))]
     [SerializeField] float rightLimit = -60f;
     [SerializeField, ShowIf(nameof(LimitRotation))] float leftLimit = 60f;
@@ -26,10 +29,10 @@ public class LaserMirror : Interactable
 
     private void Start()
     {
-        if(FindObjectOfType<UIBehaviour>()!=null)
-            mirrorUI = GameObject.Find("MirrorTipUI").GetComponent<UIBehaviour>();
+        mirrorUI = FindObjectOfType<UIBehaviour>();
         playerController = FindObjectOfType<PlayerController>();
-        player = FindObjectOfType<PlayerInteractions>();
+        player = playerController?.GetComponent<PlayerInteractions>();
+
         actualRotate = 0f;
     }
     public override void Select()
@@ -51,41 +54,49 @@ public class LaserMirror : Interactable
     }
     private void StartRotateMirror()
     {
-        playerController.enabled = false;
+        playerController.FreezCamera = true;
+        playerController.FreezMovement = true;
         StartCoroutine(RotateMirror());
     }
     private void EndRotateMirror()
     {
-        playerController.enabled = true;
+        playerController.FreezCamera = false;
+        playerController.FreezMovement = false;
     }
     private IEnumerator RotateMirror()
     {
-        mirrorUI.StopMirrorUI();
-        bool bul = true;
+        HideUI();
+
         float stepCheckHorizontal = 0f;
         float stepCheckVertical = 0f;
         float reverseRotating = 1f;
-        while(!playerController.enabled)
+
+        while(playerController.FreezCamera && playerController.FreezMovement)
         {
-           // Debug.Log(Input.GetAxis("Mouse X"));
-            if(LimitRotation)
+            float mx = Input.GetAxis("Mouse X");
+            float my = Input.GetAxis("Mouse Y");
+            // Debug.Log(mx);
+
+            if (LimitRotation)
             {
-                if (((Input.GetAxis("Mouse X") * reverseRotating > 0) && (actualRotate + Input.GetAxis("Mouse X") * reverseRotating * rotationSpeed * Time.deltaTime) > leftLimit) || ((Input.GetAxis("Mouse X") * reverseRotating < 0) && (actualRotate + Input.GetAxis("Mouse X") * reverseRotating * rotationSpeed * Time.deltaTime) < rightLimit))
+                if (   ((mx * reverseRotating > 0) && (actualRotate + mx * reverseRotating * rotationSpeed) > leftLimit)
+                    || ((mx * reverseRotating < 0) && (actualRotate + mx * reverseRotating * rotationSpeed) < rightLimit))
                 {
-                    bul = false;
+                    yield return null;
+                    continue;
                 }
-                else
-                    bul = true;
             }
-            if (rotateBySteps&&bul)
+
+            if (rotateBySteps)
             {
                 reverseRotating = (transform.position.x > player.transform.position.x) ? -1f : 1f;
+
                 if (rotateHorizontal)
                 {
-                    if(Input.GetAxis("Mouse X")>0&&stepCheckHorizontal<0)
-                        stepCheckHorizontal = 0f + Input.GetAxis("Mouse X");
-                    if (Input.GetAxis("Mouse X") < 0 && stepCheckHorizontal > 0)
-                        stepCheckHorizontal = 0f - Input.GetAxis("Mouse X");
+                    if (mx > 0 && stepCheckHorizontal < 0)
+                        stepCheckHorizontal = 0f + mx;
+                    if (mx < 0 && stepCheckHorizontal > 0)
+                        stepCheckHorizontal = 0f - mx;
 
                     if (stepCheckHorizontal > minMouseMoveToRotate || stepCheckHorizontal < -minMouseMoveToRotate)
                     {
@@ -93,14 +104,16 @@ public class LaserMirror : Interactable
                         stepCheckHorizontal = 0f;
                     }
                     else
-                        stepCheckHorizontal += Input.GetAxis("Mouse X");
+                        stepCheckHorizontal += mx;
                 }
-                if(rotateVertical)
+
+                if (rotateVertical)
                 {
-                    if (Input.GetAxis("Mouse Y") > 0 && stepCheckVertical < 0)
-                        stepCheckVertical = 0f + Input.GetAxis("Mouse Y");
-                    if (Input.GetAxis("Mouse Y") < 0 && stepCheckVertical > 0)
-                        stepCheckVertical = 0f - Input.GetAxis("Mouse Y");
+                    if (my > 0 && stepCheckVertical < 0)
+                        stepCheckVertical = 0f + my;
+
+                    if (my < 0 && stepCheckVertical > 0)
+                        stepCheckVertical = 0f - my;
 
                     if (stepCheckVertical > minMouseMoveToRotate || stepCheckVertical < -minMouseMoveToRotate)
                     {
@@ -109,24 +122,20 @@ public class LaserMirror : Interactable
                         stepCheckVertical = 0f;
                     }
                     else
-                        stepCheckVertical += Input.GetAxis("Mouse Y");
+                        stepCheckVertical += my;
                 }
             }
-            else if(bul)
+            else
             {
-                reverseRotating = (transform.position.x>player.transform.position.x)?-1f:1f;
-                transform.Rotate(new Vector3(0, rotateHorizontal?Input.GetAxis("Mouse X")*reverseRotating:0, rotateVertical?Input.GetAxis("Mouse Y"):0) * rotationSpeed * Time.deltaTime);
-                actualRotate += Input.GetAxis("Mouse X") * reverseRotating*rotationSpeed * Time.deltaTime;
+                reverseRotating = transform.position.x>player.transform.position.x ? -1f : 1f;
+                transform.Rotate(new Vector3(0, (rotateHorizontal ? mx *reverseRotating : 0), (rotateVertical ? my : 0)) * rotationSpeed);
+                actualRotate += mx * reverseRotating * rotationSpeed;
             }
+
             yield return null;
         }
     }
-    private void ShowUI()
-    {
-        mirrorUI.StartMirrorUI(rotateHorizontal,rotateVertical);
-    }
-    private void HideUI()
-    {
-        mirrorUI.StopMirrorUI();
-    }
+
+    private void ShowUI() => mirrorUI.StartMirrorUI(rotateHorizontal, rotateVertical);
+    private void HideUI() => mirrorUI.StopMirrorUI();
 }
