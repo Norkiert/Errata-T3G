@@ -5,7 +5,7 @@ using UnityEngine;
 public class StraightUpwardsTrack : BasicTrack
 {
     public new const float length = 0.5f * 2;
-    public new const float height = 0.12f * 2;
+    public new const float height = 0.34f * 2;
     public new const float width = 0.24f * 2;
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightUpwardsTrack.prefab";
     protected new void Awake()
@@ -22,11 +22,10 @@ public class StraightUpwardsTrack : BasicTrack
     }
     public override void InitBallMovement(BallBehavior ball)
     {
-        InitBallPath(ball);
+        ball.pathID = 0;
         var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
         {
             0 => Vector3.forward,
-            1 => Vector3.back,
             _ => Vector3.zero
         });
         ball.ballRigidbody.velocity = moveVector;
