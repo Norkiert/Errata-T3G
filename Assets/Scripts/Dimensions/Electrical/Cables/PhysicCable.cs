@@ -61,48 +61,103 @@ public class PhysicCable : MonoBehaviour
             Vector3 newPos = CountNewPointPos(lastPos);
             cPoint.transform.position = newPos;
             cPoint.transform.localScale = Vector3.one * size;
+            cPoint.transform.rotation = transform.rotation;
 
-            SpringJoint spring = cPoint.GetComponent<SpringJoint>();
-            spring.connectedBody = lasBody;
-            spring.spring = springForce;
+            SetSpirng(cPoint.GetComponent<SpringJoint>(), lasBody);
+
             lasBody = cPoint.GetComponent<Rigidbody>();
 
             cConnector.transform.position = CountConPos(lastPos, newPos);
             cConnector.transform.localScale = CountSizeOfCon(lastPos, newPos);
+            cConnector.transform.rotation = CountRoationOfCon(lastPos, newPos);
             lastPos = newPos;
         }
 
         Vector3 endPos = CountNewPointPos(lastPos);
         end.transform.position = endPos;
-        SpringJoint lastSpring = lasBody.gameObject.AddComponent<SpringJoint>();
-        lastSpring.connectedBody = end.GetComponent<Rigidbody>();
-        lastSpring.spring = springForce;
+        SetSpirng(lasBody.gameObject.AddComponent<SpringJoint>(), end.GetComponent<Rigidbody>());
 
         GameObject endConnector = CreateNewCon(numberOfPoints);
         endConnector.transform.position = CountConPos(lastPos, endPos);
+        endConnector.transform.rotation = CountRoationOfCon(lastPos, endPos);
 
-        Vector3 CountNewPointPos(Vector3 lastPos) => lastPos + Vector3.forward * space;
 
-        GameObject CreateNewPoint(int index)
-        {
-            GameObject temp = Instantiate(point0);
-            temp.name = PointName(index);
-            temp.transform.parent = transform;
-            return temp;
-        }
-        GameObject CreateNewCon(int index)
-        {
-            GameObject temp = Instantiate(connector0);
-            temp.name = ConnectorName(index);
-            temp.transform.parent = transform;
-            return temp;
-        }
+        Vector3 CountNewPointPos(Vector3 lastPos) => lastPos + transform.forward * space; 
     }
 
-    [Button("Add point to right side")]
-    private void AddPointToRightSide()
+    [Button("Add point")]
+    private void AddPoint()
     {
+        Transform lastprevPoint = transform.Find(PointName(numberOfPoints - 1));
+        if (lastprevPoint == null)
+        {
+            Debug.LogWarning("Dont found point number " + (numberOfPoints - 1));
+            return;
+        }
 
+        Rigidbody endRB = end.GetComponent<Rigidbody>();
+        foreach (var spring in lastprevPoint.GetComponents<SpringJoint>())
+            if (spring.connectedBody == endRB)
+                DestroyImmediate(spring);
+
+        GameObject cPoint = CreateNewPoint(numberOfPoints);
+        GameObject cConnector = CreateNewCon(numberOfPoints + 1);
+
+        cPoint.transform.position = end.transform.position;
+        cPoint.transform.rotation = end.transform.rotation;
+        cPoint.transform.localScale = Vector3.one * size;
+
+        SetSpirng(cPoint.GetComponent<SpringJoint>(), lastprevPoint.GetComponent<Rigidbody>());
+        SetSpirng(cPoint.AddComponent<SpringJoint>(), endRB);
+
+        // fix end
+        end.transform.position += end.transform.forward * space;
+
+        cConnector.transform.position = CountConPos(cPoint.transform.position, end.transform.position);
+        cConnector.transform.localScale = CountSizeOfCon(cPoint.transform.position, end.transform.position);
+        cConnector.transform.rotation = CountRoationOfCon(cPoint.transform.position, end.transform.position);
+
+        numberOfPoints++;
+    }
+
+    [Button("Remove point")]
+    private void RemovePoint()
+    {
+        if (numberOfPoints < 3)
+            return;
+
+        Transform lastprevPoint = transform.Find(PointName(numberOfPoints - 1));
+        if (lastprevPoint == null)
+        {
+            Debug.LogWarning("Dont found point number " + (numberOfPoints - 1));
+            return;
+        }
+
+        Transform lastprevCon = transform.Find(ConnectorName(numberOfPoints));
+        if (lastprevCon == null)
+        {
+            Debug.LogWarning("Dont found connector number " + (numberOfPoints));
+            return;
+        }
+
+        Transform lastlastprevPoint = transform.Find(PointName(numberOfPoints - 2));
+        if (lastlastprevPoint == null)
+        {
+            Debug.LogWarning("Dont found point number " + (numberOfPoints - 2));
+            return;
+        }
+
+
+        Rigidbody endRB = end.GetComponent<Rigidbody>();
+        SetSpirng(lastlastprevPoint.gameObject.AddComponent<SpringJoint>(), endRB);
+
+        end.transform.position = lastprevPoint.position;
+        end.transform.rotation = lastprevPoint.rotation;
+
+        DestroyImmediate(lastprevPoint.gameObject);
+        DestroyImmediate(lastprevCon.gameObject);
+
+        numberOfPoints--;
     }
 
 
@@ -187,18 +242,37 @@ public class PhysicCable : MonoBehaviour
 
     private Vector3 CountConPos(Vector3 start, Vector3 end) => (start + end) / 2f;
     private Vector3 CountSizeOfCon(Vector3 start, Vector3 end) => new Vector3(size, size, (start - end).magnitude / 2f);
+    private Quaternion CountRoationOfCon(Vector3 start, Vector3 end) => Quaternion.LookRotation(end - start, Vector3.right);
     private string ConnectorName(int index) => $"{cloneText}_{index}_Conn";
     private string PointName(int index) => $"{cloneText}_{index}_Point";
 
 
-    private void AddNextPoint(Transform previousPoint)
+    private void SetSpirng(SpringJoint spring, Rigidbody connectedBody)
     {
-
+        spring.connectedBody = connectedBody;
+        spring.spring = springForce;
+        spring.damper = 0.2f;
+        spring.autoConfigureConnectedAnchor = false;
+        spring.anchor = Vector3.zero;
+        spring.connectedAnchor = Vector3.zero;
+        spring.minDistance = space;
+        spring.maxDistance = space;
     }
-    private void RemovePoint(Transform point)
+    private GameObject CreateNewPoint(int index)
     {
-
+        GameObject temp = Instantiate(point0);
+        temp.name = PointName(index);
+        temp.transform.parent = transform;
+        return temp;
     }
+    private GameObject CreateNewCon(int index)
+    {
+        GameObject temp = Instantiate(connector0);
+        temp.name = ConnectorName(index);
+        temp.transform.parent = transform;
+        return temp;
+    }
+
 
     public Connector StartConnector => startConnector;
     public Connector EndConnector => endConnector;
