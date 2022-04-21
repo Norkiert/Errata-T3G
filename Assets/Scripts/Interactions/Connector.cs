@@ -8,14 +8,23 @@ using Logic;
 public class Connector : MonoBehaviour, ILogicBoolOutput
 {
     public enum ConType { Male, Female }
+    public enum CableColor { White, Red, Green, Yellow, Blue }
 
-    [SerializeField] private Transform connectionPoint;
+    [field: Header("Settings")]
+
     [field: SerializeField] public ConType ConnectionType { get; private set; } = ConType.Male;
+    [field: SerializeField, OnValueChanged(nameof(UpdateConnectorColor))] public CableColor ConnectionColor { get; private set; } = CableColor.White;
 
     [SerializeField] private bool makeConnectionKinematic = false;
     private bool wasConnectionKinematic;
 
     [field: SerializeField] [field: ReadOnly] public Connector ConnectedTo { get; private set; }
+
+
+    [Header("Object to set")]
+    [SerializeField, Required] private Transform connectionPoint;
+    [SerializeField] private MeshRenderer collorRenderer;
+
 
     private FixedJoint fixedJoint;
     public Rigidbody Rigidbody { get; private set; }
@@ -27,11 +36,16 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     public bool IsConnected => ConnectedTo != null;
     public bool LogicValue => IsConnected;
 
-    
+
 
     private void Awake()
     {
         Rigidbody = gameObject.GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        UpdateConnectorColor();
     }
 
     private void OnDisable() => Disconnect();
@@ -80,4 +94,27 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
             toDisconect.Rigidbody.isKinematic = wasConnectionKinematic;
         toDisconect.Disconnect(this);
     }
+
+
+    private void UpdateConnectorColor()
+    {
+        if (collorRenderer == null)
+            return;
+
+        Color color = MaterialColor(ConnectionColor);
+        MaterialPropertyBlock probs = new MaterialPropertyBlock();
+        collorRenderer.GetPropertyBlock(probs);
+        probs.SetColor("_BaseColor", color);
+        collorRenderer.SetPropertyBlock(probs);
+    }
+
+    private Color MaterialColor(CableColor cableColor) => cableColor switch
+    {
+        CableColor.White => Color.white,
+        CableColor.Red => Color.red,
+        CableColor.Green => Color.green,
+        CableColor.Yellow => Color.yellow,
+        CableColor.Blue => Color.blue,
+        _ => Color.clear
+    };
 }

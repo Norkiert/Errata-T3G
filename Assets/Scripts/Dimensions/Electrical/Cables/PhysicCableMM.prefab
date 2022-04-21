@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f047948b13bdbd748acfd18958d72233, type: 2}
+  - {fileID: 2100000, guid: c8622eef919c0fe43a986c7e1869984d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,7 +171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f047948b13bdbd748acfd18958d72233, type: 2}
+  - {fileID: 2100000, guid: c8622eef919c0fe43a986c7e1869984d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,7 +266,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f047948b13bdbd748acfd18958d72233, type: 2}
+  - {fileID: 2100000, guid: c8622eef919c0fe43a986c7e1869984d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -360,7 +360,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f047948b13bdbd748acfd18958d72233, type: 2}
+  - {fileID: 2100000, guid: c8622eef919c0fe43a986c7e1869984d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -444,7 +444,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f047948b13bdbd748acfd18958d72233, type: 2}
+  - {fileID: 2100000, guid: c8622eef919c0fe43a986c7e1869984d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -670,10 +670,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6220163bcbd7a49aa14e0e43b4b9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionPoint: {fileID: 5277703239302340666}
   <ConnectionType>k__BackingField: 0
+  <ConnectionColor>k__BackingField: 0
   makeConnectionKinematic: 0
   <ConnectedTo>k__BackingField: {fileID: 0}
+  connectionPoint: {fileID: 5277703239302340666}
+  collorRenderer: {fileID: 6988535809214899431}
 --- !u!114 &2574218491050525387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,7 +811,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f047948b13bdbd748acfd18958d72233, type: 2}
+  - {fileID: 2100000, guid: c8622eef919c0fe43a986c7e1869984d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -926,10 +928,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6220163bcbd7a49aa14e0e43b4b9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionPoint: {fileID: 987247878195652784}
   <ConnectionType>k__BackingField: 0
+  <ConnectionColor>k__BackingField: 0
   makeConnectionKinematic: 0
   <ConnectedTo>k__BackingField: {fileID: 0}
+  connectionPoint: {fileID: 987247878195652784}
+  collorRenderer: {fileID: 5886671855136600945}
 --- !u!114 &287349861033202104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,6 +1046,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3831752901991440727, guid: 7bba47904759e814aa35a575dba993a9, type: 3}
   m_PrefabInstance: {fileID: 6183522291440201806}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &6988535809214899431 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3831451167722394793, guid: 7bba47904759e814aa35a575dba993a9, type: 3}
+  m_PrefabInstance: {fileID: 6183522291440201806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7250131657983633368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1099,6 +1108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bba47904759e814aa35a575dba993a9, type: 3}
+--- !u!23 &5886671855136600945 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3831451167722394793, guid: 7bba47904759e814aa35a575dba993a9, type: 3}
+  m_PrefabInstance: {fileID: 7250131657983633368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5886409922193131151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3831752901991440727, guid: 7bba47904759e814aa35a575dba993a9, type: 3}

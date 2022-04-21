@@ -62,10 +62,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6220163bcbd7a49aa14e0e43b4b9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionPoint: {fileID: 3704292238373490080}
   <ConnectionType>k__BackingField: 1
+  <ConnectionColor>k__BackingField: 0
   makeConnectionKinematic: 0
   <ConnectedTo>k__BackingField: {fileID: 0}
+  connectionPoint: {fileID: 3704292238373490080}
+  collorRenderer: {fileID: 3824940032254184050}
 --- !u!54 &3704292238334986575
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93,7 +95,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.5, y: 0.5, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!114 &3704292238334986569
 MonoBehaviour:
@@ -152,6 +154,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3704292239668481541}
     m_Modifications:
+    - target: {fileID: 780988496661053237, guid: c9cad22972a13d9479279cb341a0ea7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ee2702eda221efc4e81f60de171762cd, type: 2}
     - target: {fileID: 1221847806840226557, guid: c9cad22972a13d9479279cb341a0ea7b, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -221,5 +227,10 @@ PrefabInstance:
 --- !u!4 &5252073419809952098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8584237631993308197, guid: c9cad22972a13d9479279cb341a0ea7b, type: 3}
+  m_PrefabInstance: {fileID: 4594316311563826503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3824940032254184050 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 780988496661053237, guid: c9cad22972a13d9479279cb341a0ea7b, type: 3}
   m_PrefabInstance: {fileID: 4594316311563826503}
   m_PrefabAsset: {fileID: 0}

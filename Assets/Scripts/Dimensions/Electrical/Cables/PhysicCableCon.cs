@@ -18,7 +18,7 @@ public class PhysicCableCon : Liftable
         base.Drop();
         
         Interactable selecredObject = FindObjectOfType<PlayerInteractions>().SelectedObject;
-        if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector) && secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType)
+        if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector) && CanConnect(secondConnector))
         {
             secondConnector.Connect(_connector);
         }
@@ -30,4 +30,7 @@ public class PhysicCableCon : Liftable
         if (_connector.ConnectedTo)
             _connector.Disconnect();
     }
+
+
+    private bool CanConnect(Connector secondConnector) => secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType && secondConnector.ConnectionColor == _connector.ConnectionColor;
 }

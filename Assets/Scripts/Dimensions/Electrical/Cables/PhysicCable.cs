@@ -5,17 +5,19 @@ using NaughtyAttributes;
 
 public class PhysicCable : MonoBehaviour
 {
+    [Header("Look")]
     [SerializeField] [Min(1)] private int numberOfPoints = 3;
     [SerializeField] private float space = 0.3f;
     [SerializeField] private float size = 0.3f;
 
+    [Header("Bahaviour")]
     [SerializeField] [Min(1f)] private float brakeLengthMultiplier = 2f;
     [SerializeField] [Min(0.1f)] private float minBrakeTime = 1f;
     private float brakeLength;
     private float timeToBrake = 1f;
 
     [Header("Object to set")]
-    [SerializeField] private GameObject start;
+    [SerializeField, Required] private GameObject start;
     [SerializeField] private GameObject end;
     [SerializeField] private GameObject connector0;
     [SerializeField] private GameObject point0;
@@ -23,12 +25,12 @@ public class PhysicCable : MonoBehaviour
     private List<Transform> points;
     private List<Transform> connectors;
 
-    const string cloneText = "Part";
+    private const string cloneText = "Part";
 
     private Connector startConnector;
     private Connector endConnector;
 
-    [Button]
+    [Button("Reset points")]
     private void UpdatePoints()
     {
         if (!start || !end || !point0 || !connector0)
@@ -91,6 +93,13 @@ public class PhysicCable : MonoBehaviour
             return temp;
         }
     }
+
+    [Button("Add point to right side")]
+    private void AddPointToRightSide()
+    {
+
+    }
+
 
     private void Start()
     {
@@ -175,4 +184,14 @@ public class PhysicCable : MonoBehaviour
     private Vector3 CountSizeOfCon(Vector3 start, Vector3 end) => new Vector3(size, size, (start - end).magnitude / 2f);
     private string ConnectorName(int index) => $"{cloneText}_{index}_Conn";
     private string PointName(int index) => $"{cloneText}_{index}_Point";
+
+
+    private void AddNextPoint(Transform previousPoint)
+    {
+
+    }
+    private void RemovePoint(Transform point)
+    {
+
+    }
 }
