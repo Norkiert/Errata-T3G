@@ -16,6 +16,13 @@ namespace GameManagment
         public static event Action OnResumeGame;
         public static bool IsGamePaused { get; private set; } = false;
 
+
+        [RuntimeInitializeOnLoadMethod]
+        private static void Init()
+        {
+            Application.targetFrameRate = 70;
+        }
+
         public static GameManager instance;
         private void Awake()
         {

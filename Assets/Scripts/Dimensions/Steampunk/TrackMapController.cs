@@ -15,7 +15,8 @@ public class TrackMapController : MonoBehaviour
         Merger,
         Splitter,
         Cross,
-        StraightUpwards
+        StraightUpwards,
+        Elevator,
     }
     public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();

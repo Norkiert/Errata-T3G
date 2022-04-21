@@ -94,6 +94,7 @@ public class PlayerInteractions : MonoBehaviour
     private void UpdateHeldObjectPosition()
     {
         HeldObject.Rigidbody.velocity = (handTransform.position - HeldObject.transform.position) * holdingForce;
+
         Vector3 handRot = handTransform.rotation.eulerAngles;
         if (handRot.x > 180f)
             handRot.x -= 360f;
