@@ -70,7 +70,7 @@ public class BallBehavior : ObjectGroundChecker
                 currentTrack = collision.gameObject.transform.parent.gameObject.GetComponent<BasicTrack>();
                 if(currentTrack != lastTrack)
                 {
-                    currentTrack.InitBallMovement(this);
+                    currentTrack.OnBallEnter(this);
 
                     lastTrack = currentTrack;
                     pathIDCopy = pathID;
@@ -80,7 +80,7 @@ public class BallBehavior : ObjectGroundChecker
                     pathID = pathIDCopy;
                 }
             }
-            currentTrack.MoveBall(this);
+            currentTrack.OnBallStay(this);
             velocity = ballRigidbody.velocity.magnitude;
         }
     }
@@ -89,6 +89,7 @@ public class BallBehavior : ObjectGroundChecker
     {
         if ((1 << collision.gameObject.layer & trackLayer.value) != 0)
         {
+            if(currentTrack) currentTrack.OnBallExit(this);
             onTrack = false;
             currentTrack = null;
             ballRigidbody.WakeUp();
