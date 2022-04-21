@@ -6,6 +6,7 @@ using UnityEngine;
 public class PhysicCableCon : Liftable
 {
     private Connector _connector;
+
     protected override void Awake()
     {
         base.Awake();
@@ -29,8 +30,47 @@ public class PhysicCableCon : Liftable
 
         if (_connector.ConnectedTo)
             _connector.Disconnect();
+
+
+
+        StartCoroutine(UpdatePositionOfPreviouesCable());
     }
 
+    private IEnumerator UpdatePositionOfPreviouesCable()
+    {
+        PhysicCable cable = GetComponentInParent<PhysicCable>();
+        Transform previousPoint = null;
+        if (_connector == cable.StartConnector)
+            previousPoint = cable.Points[1];
+        else if (_connector == cable.EndConnector)
+            previousPoint = cable.Points[cable.Points.Count - 2];
+
+        if (previousPoint == null)
+        {
+            Debug.LogWarning($"{name}: Cant find previous point!");
+            yield break;
+        }
+
+        Rigidbody thisRB = GetComponent<Rigidbody>();
+        Rigidbody previousRB = previousPoint.GetComponent<Rigidbody>();
+        previousRB.isKinematic = true;
+
+        SpringJoint spring = null;
+        foreach (var s in previousPoint.GetComponents<SpringJoint>())
+            if (s.connectedBody == thisRB)
+                spring = s;
+        spring.connectedBody = null;
+
+        while (IsLift)
+        {
+            if (Vector3.Distance(transform.position, previousPoint.position) > 0.1)
+                previousPoint.position += (transform.position - previousPoint.position) * Mathf.Clamp01(Time.deltaTime * 20);
+            yield return null;
+        }
+
+        previousRB.isKinematic = false;
+        spring.connectedBody = thisRB;
+    }
 
     private bool CanConnect(Connector secondConnector) => secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType && secondConnector.ConnectionColor == _connector.ConnectionColor;
 }

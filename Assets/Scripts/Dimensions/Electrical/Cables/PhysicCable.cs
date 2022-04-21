@@ -6,13 +6,14 @@ using NaughtyAttributes;
 public class PhysicCable : MonoBehaviour
 {
     [Header("Look")]
-    [SerializeField] [Min(1)] private int numberOfPoints = 3;
+    [SerializeField, Min(1)] private int numberOfPoints = 3;
     [SerializeField] private float space = 0.3f;
     [SerializeField] private float size = 0.3f;
 
     [Header("Bahaviour")]
-    [SerializeField] [Min(1f)] private float brakeLengthMultiplier = 2f;
-    [SerializeField] [Min(0.1f)] private float minBrakeTime = 1f;
+    [SerializeField, Min(1f)] private float springForce = 200;
+    [SerializeField, Min(1f)] private float brakeLengthMultiplier = 2f;
+    [SerializeField, Min(0.1f)] private float minBrakeTime = 1f;
     private float brakeLength;
     private float timeToBrake = 1f;
 
@@ -61,7 +62,9 @@ public class PhysicCable : MonoBehaviour
             cPoint.transform.position = newPos;
             cPoint.transform.localScale = Vector3.one * size;
 
-            cPoint.GetComponent<SpringJoint>().connectedBody = lasBody;
+            SpringJoint spring = cPoint.GetComponent<SpringJoint>();
+            spring.connectedBody = lasBody;
+            spring.spring = springForce;
             lasBody = cPoint.GetComponent<Rigidbody>();
 
             cConnector.transform.position = CountConPos(lastPos, newPos);
@@ -71,7 +74,9 @@ public class PhysicCable : MonoBehaviour
 
         Vector3 endPos = CountNewPointPos(lastPos);
         end.transform.position = endPos;
-        end.GetComponent<SpringJoint>().connectedBody = lasBody;
+        SpringJoint lastSpring = lasBody.gameObject.AddComponent<SpringJoint>();
+        lastSpring.connectedBody = end.GetComponent<Rigidbody>();
+        lastSpring.spring = springForce;
 
         GameObject endConnector = CreateNewCon(numberOfPoints);
         endConnector.transform.position = CountConPos(lastPos, endPos);
@@ -194,4 +199,8 @@ public class PhysicCable : MonoBehaviour
     {
 
     }
+
+    public Connector StartConnector => startConnector;
+    public Connector EndConnector => endConnector;
+    public IReadOnlyList<Transform> Points => points;
 }

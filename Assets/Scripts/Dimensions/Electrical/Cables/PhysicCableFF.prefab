@@ -557,7 +557,6 @@ GameObject:
   - component: {fileID: 7343013269600760678}
   - component: {fileID: 3450992591707085349}
   - component: {fileID: 5128321506898141142}
-  - component: {fileID: 5128321506898141141}
   - component: {fileID: 2012646754283055553}
   - component: {fileID: 7168361455103031396}
   m_Layer: 0
@@ -629,30 +628,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!145 &5128321506898141141
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5128321506898141139}
-  m_ConnectedBody: {fileID: 5128321507043484059}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  serializedVersion: 2
-  m_Spring: 200
-  m_Damper: 0.2
-  m_MinDistance: 0.3
-  m_MaxDistance: 0.3
-  m_Tolerance: 0.025
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &2012646754283055553
 MonoBehaviour:
   m_ObjectHideFlags: 0
