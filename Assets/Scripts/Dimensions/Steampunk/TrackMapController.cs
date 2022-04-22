@@ -53,7 +53,11 @@ public class TrackMapController : MonoBehaviour
         if (Contains(track))
             Remove(track.position);
     }
-    public void Remove(TrackMapPosition position) => trackMap.Remove(position);
+    public void Remove(TrackMapPosition position)
+    {
+        trackMap[position].trackMapController = null;
+        trackMap.Remove(position);
+    }
     public bool Occupied(TrackMapPosition position)
     {
         return trackMap.ContainsKey(position) && trackMap[position] != null;

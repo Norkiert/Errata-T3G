@@ -6,7 +6,7 @@ using NaughtyAttributes;
 public class ElevatorTrack : BasicTrack
 {
     public new const float length = 0.5f * 2;
-    public new const float height = 0.12f * 2;
+    public new const float height = 1.316739f;
     public new const float width = 0.24f * 2;
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/ElevatorTrack.prefab";
     
@@ -114,10 +114,13 @@ public class ElevatorTrack : BasicTrack
     }
     public override void OnBallExit(BallBehavior ball)
     {
-        currentBall = null;
-        ballDistance = float.MaxValue;
-        StartCoroutine(Retract());
-        isRetracting = true;
+        if (!isRetracting && !isExtending)
+        {
+            currentBall = null;
+            ballDistance = float.MaxValue;
+            StartCoroutine(Retract());
+            isRetracting = true;
+        }
     }
     public override void InitPos(TrackMapPosition tmp)
     {

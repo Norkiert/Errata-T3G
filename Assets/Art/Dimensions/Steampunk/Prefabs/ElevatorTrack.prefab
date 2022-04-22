@@ -188,7 +188,7 @@ MonoBehaviour:
   elevatorHeight: 1
   extensionSpeed: 0.5
   isExtending: 0
-  heightAtStart: 0
+  isRetracting: 0
   pistonRodThick: {fileID: 3464987284955269243}
   pistonRodThin: {fileID: 2163044544445079310}
   pistonTrack: {fileID: 1544049313910254452}
@@ -307,7 +307,7 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 8, y: 0.76, z: 17.96893}
+  center: {x: 8, y: 1.76, z: 17.96893}
   displayAsRelative: 1
   XpYpZp: {x: 0.47999954, y: 0.24000001, z: 1.0710697}
   XpYpZm: {x: 0.47999954, y: 0.24000001, z: -1.0710697}
@@ -461,7 +461,7 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 7.999999, y: 0.7361485, z: 17.969809}
+  center: {x: 7.999999, y: 1.7361485, z: 17.969809}
   displayAsRelative: 1
   XpYpZp: {x: 0.5279474, y: 0.26385152, z: 0.18211746}
   XpYpZm: {x: 0.5279474, y: 0.26385152, z: -0.18211746}
@@ -584,7 +584,7 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 8, y: -0.1330843, z: 18}
+  center: {x: 8, y: 0.8669157, z: 18}
   displayAsRelative: 1
   XpYpZp: {x: 0.19999981, y: 0.64691556, z: 0.20000076}
   XpYpZm: {x: 0.19999981, y: 0.64691556, z: -0.20000076}
@@ -707,7 +707,7 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 8, y: -0.5767375, z: 18}
+  center: {x: 8, y: 0.42326248, z: 18}
   displayAsRelative: 1
   XpYpZp: {x: 0.3021679, y: 0.7951697, z: 0.3021679}
   XpYpZm: {x: 0.3021679, y: 0.7951697, z: -0.3021679}
@@ -984,7 +984,7 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 8, y: -0.68308365, z: 18}
+  center: {x: 8, y: 0.31691635, z: 18}
   displayAsRelative: 1
   XpYpZp: {x: 0.7521448, y: 0.95039415, z: 0.75214386}
   XpYpZm: {x: 0.7521448, y: 0.95039415, z: -0.75214386}
@@ -1230,16 +1230,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 7.997999, y: -0.86990106, z: 18.004292}
+  center: {x: 7.997999, y: 0.13009892, z: 18.004292}
   displayAsRelative: 1
-  XpYpZp: {x: 0.97570705, y: 0.1000002, z: 0.975708}
-  XpYpZm: {x: 0.97570705, y: 0.1000002, z: -0.975708}
-  XpYmZp: {x: 0.97570705, y: -0.1000002, z: 0.975708}
-  XpYmZm: {x: 0.97570705, y: -0.1000002, z: -0.975708}
-  XmYpZp: {x: -0.97570705, y: 0.1000002, z: 0.975708}
-  XmYpZm: {x: -0.97570705, y: 0.1000002, z: -0.975708}
-  XmYmZp: {x: -0.97570705, y: -0.1000002, z: 0.975708}
-  XmYmZm: {x: -0.97570705, y: -0.1000002, z: -0.975708}
+  XpYpZp: {x: 0.97570705, y: 0.10000022, z: 0.975708}
+  XpYpZm: {x: 0.97570705, y: 0.10000022, z: -0.975708}
+  XpYmZp: {x: 0.97570705, y: -0.10000022, z: 0.975708}
+  XpYmZm: {x: 0.97570705, y: -0.10000022, z: -0.975708}
+  XmYpZp: {x: -0.97570705, y: 0.10000022, z: 0.975708}
+  XmYpZm: {x: -0.97570705, y: 0.10000022, z: -0.975708}
+  XmYmZp: {x: -0.97570705, y: -0.10000022, z: 0.975708}
+  XmYmZm: {x: -0.97570705, y: -0.10000022, z: -0.975708}
 --- !u!1 &8171690979810081176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,7 +1476,7 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 7.999999, y: 0.7361485, z: 17.968876}
+  center: {x: 7.999999, y: 1.7361485, z: 17.968876}
   displayAsRelative: 1
   XpYpZp: {x: 0.5279474, y: 0.26385152, z: 1.0712757}
   XpYpZm: {x: 0.5279474, y: 0.26385152, z: -1.0712757}
@@ -1599,13 +1599,13 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 7.997999, y: -0.000000007450581, z: 18.004292}
+  center: {x: 7.997999, y: 1, z: 18.004292}
   displayAsRelative: 1
-  XpYpZp: {x: 0.97570705, y: 0.100000225, z: 0.975708}
-  XpYpZm: {x: 0.97570705, y: 0.100000225, z: -0.975708}
-  XpYmZp: {x: 0.97570705, y: -0.100000225, z: 0.975708}
-  XpYmZm: {x: 0.97570705, y: -0.100000225, z: -0.975708}
-  XmYpZp: {x: -0.97570705, y: 0.100000225, z: 0.975708}
-  XmYpZm: {x: -0.97570705, y: 0.100000225, z: -0.975708}
-  XmYmZp: {x: -0.97570705, y: -0.100000225, z: 0.975708}
-  XmYmZm: {x: -0.97570705, y: -0.100000225, z: -0.975708}
+  XpYpZp: {x: 0.97570705, y: 0.10000026, z: 0.975708}
+  XpYpZm: {x: 0.97570705, y: 0.10000026, z: -0.975708}
+  XpYmZp: {x: 0.97570705, y: -0.10000026, z: 0.975708}
+  XpYmZm: {x: 0.97570705, y: -0.10000026, z: -0.975708}
+  XmYpZp: {x: -0.97570705, y: 0.10000026, z: 0.975708}
+  XmYpZm: {x: -0.97570705, y: 0.10000026, z: -0.975708}
+  XmYmZp: {x: -0.97570705, y: -0.10000026, z: 0.975708}
+  XmYmZm: {x: -0.97570705, y: -0.10000026, z: -0.975708}
