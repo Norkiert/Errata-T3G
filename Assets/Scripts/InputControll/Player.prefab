@@ -307,7 +307,7 @@ MonoBehaviour:
   selectRange: 15
   selectLayer:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 5121
   <SelectedObject>k__BackingField: {fileID: 0}
   handTransform: {fileID: 8231738568252587130}
   holdingForce: 10
@@ -332,6 +332,7 @@ MonoBehaviour:
   mouseSensitivity: 8
   minPitch: -90
   maxPitch: 90
+  <FreezCamera>k__BackingField: 0
   defaultSpeed: 5
   defaultHeight: 1.9
   smoothMoveTime: 0.1
@@ -357,9 +358,9 @@ MonoBehaviour:
   currentMod: 0
   currentSpeed: 0
   currentJumpHeight: 0
-  <FreezCamera>k__BackingField: 0
   velocity: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
+  <FreezMovement>k__BackingField: 0
 --- !u!1 &4027436167291194036
 GameObject:
   m_ObjectHideFlags: 0

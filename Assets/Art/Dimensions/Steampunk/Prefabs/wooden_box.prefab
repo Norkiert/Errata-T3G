@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7191777321090245868}
   - component: {fileID: 586904860954429684}
   - component: {fileID: 2775986849640610172}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wooden_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsSelected>k__BackingField: 0
   connectedTrack: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 5121
 --- !u!114 &2775986849640610172
 MonoBehaviour:
   m_ObjectHideFlags: 0
