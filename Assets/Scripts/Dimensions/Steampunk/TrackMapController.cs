@@ -17,6 +17,7 @@ public class TrackMapController : MonoBehaviour
         Cross,
         StraightUpwards,
         Elevator,
+        Q3Collector,
     }
     public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();

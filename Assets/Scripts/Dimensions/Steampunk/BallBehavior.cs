@@ -80,7 +80,7 @@ public class BallBehavior : ObjectGroundChecker
                     pathID = pathIDCopy;
                 }
             }
-            currentTrack.OnBallStay(this);
+            if(currentTrack) currentTrack.OnBallStay(this);
             velocity = ballRigidbody.velocity.magnitude;
         }
     }

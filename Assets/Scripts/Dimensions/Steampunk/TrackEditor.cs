@@ -238,6 +238,7 @@ public class TrackEditor : EditorWindow
                     TrackMapController.TrackType.Cross => CrossTrack.prefabPath,
                     TrackMapController.TrackType.StraightUpwards => StraightUpwardsTrack.prefabPath,
                     TrackMapController.TrackType.Elevator => ElevatorTrack.prefabPath,
+                    TrackMapController.TrackType.Q3Collector => Q3CollectorTrack.prefabPath,
                     _ => ""
                 };
                 BasicTrack newTrack = ((GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath), parentTransform)).GetComponent<BasicTrack>();
