@@ -5,7 +5,7 @@ using UnityEngine;
 public class StraightUpwardsTrack : BasicTrack
 {
     public new const float length = 0.5f * 2;
-    public new const float height = 0.34f * 2;
+    public new const float height = 0.12f * 2;
     public new const float width = 0.24f * 2;
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightUpwardsTrack.prefab";
     protected new void Awake()
