@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using Ink.Runtime;
 using TMPro;
 using DG.Tweening;
+using Audio;
 
 namespace Dialogues
 {
@@ -26,6 +27,8 @@ namespace Dialogues
         private TextMeshProUGUI[] choicesText;
 
         public TextAsset inkJSONTest;
+
+        [SerializeField] List<AudioClipSO> talkingSounds = new List<AudioClipSO>();
 
         private Story currentStory;
         public bool IsDialoguePlaying { get; private set; }
@@ -51,6 +54,13 @@ namespace Dialogues
                 choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
                 index++;
             }
+
+            EnterDialogueMode(inkJSONTest);
+        }
+
+        private void playTalkingSound() {
+            int n = Random.Range(0, talkingSounds.Count - 1);
+            AudioManager.PlaySFX(talkingSounds[n]);
         }
 
         private void Update()
@@ -60,34 +70,84 @@ namespace Dialogues
             if (Input.GetKeyDown(KeyCode.Alpha1) && currentStory.currentChoices.Count >= 1) MakeChoice(0);
             if (Input.GetKeyDown(KeyCode.Alpha2) && currentStory.currentChoices.Count >= 2) MakeChoice(1);
             if (Input.GetKeyDown(KeyCode.Alpha3) && currentStory.currentChoices.Count >= 3) MakeChoice(2);
+            if (Input.GetKeyDown(KeyCode.Alpha4) && currentStory.currentChoices.Count >= 4) MakeChoice(3);
+            if (Input.GetKeyDown(KeyCode.Alpha5) && currentStory.currentChoices.Count >= 5) MakeChoice(4);
 
             if (Input.GetKeyDown(KeyCode.Space))
                 StartCoroutine(ContinueStory());
         }
 
+        private IEnumerator HandleLongText(string s, float waitTime = 0) {
+            yield return new WaitForSeconds(waitTime);
+
+            string[] texts = s.Split(new string[] {"<n>"}, System.StringSplitOptions.None);
+            
+            for (int i = 0; i < texts.Length; i++)
+            {
+                if (i < texts.Length - 1) texts[i] = texts[i] + "...";
+                if (i > 0) texts[i] = "..." + texts[i];
+            }
+            
+            int current_text = 0;
+
+            playTalkingSound();
+
+            while (current_text < texts.Length) {
+
+                if (current_text == texts.Length - 1) DisplayChoices();
+
+                while (dialogueText.text != texts[current_text])
+                {
+                    dialogueText.text += texts[current_text];
+                    yield return new WaitForSeconds(textDisplayDelay);
+                }
+
+                if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                    if (current_text > 0) {
+                        current_text--;
+                        dialogueText.text = "";
+                        playTalkingSound();
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.Mouse1)) {
+                    dialogueText.text = "";
+                    current_text++;
+                    playTalkingSound();
+                }
+
+                yield return null;
+            }
+        
+            Debug.Log("koniec");
+
+        }
+
         private IEnumerator ContinueStory(float waitTime = 0)
         {
-            if (currentStory.canContinue)
+            Debug.Log(currentStory.currentChoices.Count);
+            if (currentStory.canContinue || currentStory.currentChoices.Count != 0)
             {
                 string text = currentStory.Continue();
 
-                DisplayChoices();
-
-                int index = 0;
                 dialogueText.text = "";
 
                 float height = defalutPanelHeight + Mathf.CeilToInt(text.Length / (float)maxNumberOfLetterInLine) * lineHeight;
                 RectTransform dialoguePanelRT = dialoguePanel.GetComponent<RectTransform>();
                 dialoguePanelRT.sizeDelta = new Vector2(dialoguePanelRT.sizeDelta.x, height);
 
-                yield return new WaitForSeconds(waitTime);
+                StartCoroutine(HandleLongText(text, waitTime));
 
-                while (dialogueText.text != text && index < text.Length)
-                {
-                    dialogueText.text += text[index];
-                    index++;
-                    yield return new WaitForSeconds(textDisplayDelay);
-                }
+                // yield return new WaitForSeconds(waitTime);
+
+                // while (dialogueText.text != text && index < text.Length)
+                // {
+                //     dialogueText.text += text[index];
+                //     index++;
+                //     yield return new WaitForSeconds(textDisplayDelay);
+                // }
+
+                // DisplayChoices();
             }
             else
             {

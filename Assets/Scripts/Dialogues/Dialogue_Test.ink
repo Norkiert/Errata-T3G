@@ -1,16 +1,8 @@
 -> main
 
-EXTERNAL test(message)
-
 === main ===
-Wybierz kolor
-    + [red]
-        -> chosen("red")
-    + [yellow]
-        -> chosen("yellow")
-
-
-=== chosen(thing) ===
-~ test(thing)
-
+Bul bul bul bul<n>jajcojacjo<n>elo elo
+    + [elo]
+    + [no elo]
+    
 -> END
