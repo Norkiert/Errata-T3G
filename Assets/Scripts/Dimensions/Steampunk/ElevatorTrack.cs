@@ -59,10 +59,11 @@ public class ElevatorTrack : BasicTrack
     }
     public override void OnBallEnter(BallBehavior ball)
     {
-        ball.pathID = 0;
+        InitBallPath(ball);
         var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
         {
             0 => Vector3.forward,
+            1 => Vector3.back,
             _ => Vector3.zero
         });
         ball.ballRigidbody.velocity = moveVector;
@@ -85,9 +86,6 @@ public class ElevatorTrack : BasicTrack
             {
                 ball.ballRigidbody.velocity = Vector3.zero;
                 // arrived
-                //Debug.Log(pistonTrack.transform.localPosition.y);
-                //Debug.Log(heightAtStart);
-                //Debug.Log("");
                 if (pistonTrack.transform.localPosition.y - heightAtStart >= elevatorHeight)
                 {
                     isExtending = false;
@@ -96,10 +94,12 @@ public class ElevatorTrack : BasicTrack
                     pistonRodThick.transform.localScale = new Vector3(pistonRodThick.transform.localScale.x, 1 + (elevatorHeight * rodThickScaleAddon), pistonRodThick.transform.localScale.z);
                     pistonRodThin.transform.localScale = new Vector3(pistonRodThin.transform.localScale.x, 1 + (elevatorHeight * rodThinScaleAddon), pistonRodThin.transform.localScale.z);
                     pistonTrack.transform.localPosition = new Vector3(pistonTrack.transform.localPosition.x, heightAtStart + elevatorHeight, pistonTrack.transform.localPosition.z);
+                    currentBall.transform.position = new Vector3(currentBall.transform.position.x, pistonTrack.transform.position.y + ballHeight, currentBall.transform.position.z);
 
                     var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
                     {
                         0 => Vector3.forward,
+                        1 => Vector3.back,
                         _ => Vector3.zero
                     });
                     ball.ballRigidbody.velocity = moveVector;
