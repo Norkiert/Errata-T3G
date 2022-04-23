@@ -173,16 +173,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: -0.9955001, y: 0.76866174, z: 18.9955}
+  center: {x: 0.0022499561, y: -0.11566914, z: -0.0022499561}
   displayAsRelative: 1
-  XpYpZp: {x: 3.4897213, y: 0.24866176, z: 3.4897213}
-  XpYpZm: {x: 3.4897213, y: 0.24866176, z: -3.4897213}
-  XpYmZp: {x: 3.4897213, y: -0.24866176, z: 3.4897213}
-  XpYmZm: {x: 3.4897213, y: -0.24866176, z: -3.4897213}
-  XmYpZp: {x: -3.4897213, y: 0.24866176, z: 3.4897213}
-  XmYpZm: {x: -3.4897213, y: 0.24866176, z: -3.4897213}
-  XmYmZp: {x: -3.4897213, y: -0.24866176, z: 3.4897213}
-  XmYmZm: {x: -3.4897213, y: -0.24866176, z: -3.4897213}
+  XpYpZp: {x: 1.7448606, y: 0.124330886, z: 1.7448606}
+  XpYpZm: {x: 1.7448606, y: 0.124330886, z: -1.7448606}
+  XpYmZp: {x: 1.7448606, y: -0.124330886, z: 1.7448606}
+  XpYmZm: {x: 1.7448606, y: -0.124330886, z: -1.7448606}
+  XmYpZp: {x: -1.7448606, y: 0.124330886, z: 1.7448606}
+  XmYpZm: {x: -1.7448606, y: 0.124330886, z: -1.7448606}
+  XmYmZp: {x: -1.7448606, y: -0.124330886, z: 1.7448606}
+  XmYmZm: {x: -1.7448606, y: -0.124330886, z: -1.7448606}
 --- !u!1 &3057809419338155549
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,16 +296,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: -1.0008011, y: 0.743128, z: 18.992607}
+  center: {x: -0.00040066242, y: -0.128436, z: -0.003696084}
   displayAsRelative: 1
-  XpYpZp: {x: 3.5363932, y: 0.27083117, z: 3.5363922}
-  XpYpZm: {x: 3.5363932, y: 0.27083117, z: -3.5363922}
-  XpYmZp: {x: 3.5363932, y: -0.27083117, z: 3.5363922}
-  XpYmZm: {x: 3.5363932, y: -0.27083117, z: -3.5363922}
-  XmYpZp: {x: -3.5363932, y: 0.27083117, z: 3.5363922}
-  XmYpZm: {x: -3.5363932, y: 0.27083117, z: -3.5363922}
-  XmYmZp: {x: -3.5363932, y: -0.27083117, z: 3.5363922}
-  XmYmZm: {x: -3.5363932, y: -0.27083117, z: -3.5363922}
+  XpYpZp: {x: 1.7681966, y: 0.13541558, z: 1.7681966}
+  XpYpZm: {x: 1.7681966, y: 0.13541558, z: -1.7681966}
+  XpYmZp: {x: 1.7681966, y: -0.13541558, z: 1.7681966}
+  XpYmZm: {x: 1.7681966, y: -0.13541558, z: -1.7681966}
+  XmYpZp: {x: -1.7681966, y: 0.13541558, z: 1.7681966}
+  XmYpZm: {x: -1.7681966, y: 0.13541558, z: -1.7681966}
+  XmYmZp: {x: -1.7681966, y: -0.13541558, z: 1.7681966}
+  XmYmZm: {x: -1.7681966, y: -0.13541558, z: -1.7681966}
 --- !u!1 &5085701935386135128
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5912960129825703834}
   - component: {fileID: 5680284663112968475}
+  - component: {fileID: 7574624714768836169}
   m_Layer: 10
   m_Name: CrossTrack
   m_TagString: Untagged
@@ -393,11 +394,24 @@ MonoBehaviour:
   - {fileID: 4103185886568414983}
   - {fileID: 8969952214320368497}
   - {fileID: 574999248817333304}
-  rotateable: 1
+  rotateable: 0
   <TrackType>k__BackingField: 4
   _posX: 0
   _posY: 0
   _posZ: 0
+--- !u!65 &7574624714768836169
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432509453932649760}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 0.24, z: 2}
+  m_Center: {x: 0, y: -0.12, z: 0}
 --- !u!1 &8719560961851603559
 GameObject:
   m_ObjectHideFlags: 0

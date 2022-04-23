@@ -113,16 +113,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 7.9999943, y: 1.1811714, z: 18.026316}
+  center: {x: -0.0000027120113, y: 0.09058574, z: 0.013157487}
   displayAsRelative: 1
-  XpYpZp: {x: 0.52795315, y: 0.7088747, z: 0.99035835}
-  XpYpZm: {x: 0.52795315, y: 0.7088747, z: -0.99035835}
-  XpYmZp: {x: 0.52795315, y: -0.7088747, z: 0.99035835}
-  XpYmZm: {x: 0.52795315, y: -0.7088747, z: -0.99035835}
-  XmYpZp: {x: -0.52795315, y: 0.7088747, z: 0.99035835}
-  XmYpZm: {x: -0.52795315, y: 0.7088747, z: -0.99035835}
-  XmYmZp: {x: -0.52795315, y: -0.7088747, z: 0.99035835}
-  XmYmZm: {x: -0.52795315, y: -0.7088747, z: -0.99035835}
+  XpYpZp: {x: 0.26397675, y: 0.35443732, z: 0.49517894}
+  XpYpZm: {x: 0.26397675, y: 0.35443732, z: -0.49517894}
+  XpYmZp: {x: 0.26397675, y: -0.35443732, z: 0.49517894}
+  XpYmZm: {x: 0.26397675, y: -0.35443732, z: -0.49517894}
+  XmYpZp: {x: -0.26397675, y: 0.35443732, z: 0.49517894}
+  XmYpZm: {x: -0.26397675, y: 0.35443732, z: -0.49517894}
+  XmYmZp: {x: -0.26397675, y: -0.35443732, z: 0.49517894}
+  XmYmZm: {x: -0.26397675, y: -0.35443732, z: -0.49517894}
 --- !u!1 &2961558601399339758
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,16 +236,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 7.9999995, y: 1.2007668, z: 17.98607}
+  center: {x: 0.00000010430813, y: 0.1003834, z: -0.0069649667}
   displayAsRelative: 1
-  XpYpZp: {x: 0.48000002, y: 0.6807668, z: 0.99007034}
-  XpYpZm: {x: 0.48000002, y: 0.6807668, z: -0.99007034}
-  XpYmZp: {x: 0.48000002, y: -0.6807668, z: 0.99007034}
-  XpYmZm: {x: 0.48000002, y: -0.6807668, z: -0.99007034}
-  XmYpZp: {x: -0.48000002, y: 0.6807668, z: 0.99007034}
-  XmYpZm: {x: -0.48000002, y: 0.6807668, z: -0.99007034}
-  XmYmZp: {x: -0.48000002, y: -0.6807668, z: 0.99007034}
-  XmYmZm: {x: -0.48000002, y: -0.6807668, z: -0.99007034}
+  XpYpZp: {x: 0.24000013, y: 0.3403834, z: 0.49503523}
+  XpYpZm: {x: 0.24000013, y: 0.3403834, z: -0.49503523}
+  XpYmZp: {x: 0.24000013, y: -0.3403834, z: 0.49503523}
+  XpYmZm: {x: 0.24000013, y: -0.3403834, z: -0.49503523}
+  XmYpZp: {x: -0.24000013, y: 0.3403834, z: 0.49503523}
+  XmYpZm: {x: -0.24000013, y: 0.3403834, z: -0.49503523}
+  XmYmZp: {x: -0.24000013, y: -0.3403834, z: 0.49503523}
+  XmYmZm: {x: -0.24000013, y: -0.3403834, z: -0.49503523}
 --- !u!1 &9061875479598588613
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8541621021272946815}
   - component: {fileID: 250396238135985367}
+  - component: {fileID: 6732436365452315289}
   m_Layer: 10
   m_Name: StraightUpwardsTrack
   m_TagString: Untagged
@@ -295,8 +296,21 @@ MonoBehaviour:
   trackMapController: {fileID: 0}
   rollingSpeed: 2
   pathBeginPoints: []
-  rotateable: 1
+  rotateable: 0
   <TrackType>k__BackingField: 5
   _posX: 0
   _posY: 0
   _posZ: 0
+--- !u!65 &6732436365452315289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061875479598588613}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5581442, y: 0.71524847, z: 1.0245475}
+  m_Center: {x: -0.004909456, y: 0.09328067, z: 0.012273729}

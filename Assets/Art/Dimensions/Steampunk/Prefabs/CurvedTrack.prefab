@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2942513710948558401}
   - component: {fileID: 3291415818971976346}
+  - component: {fileID: 8815732137206713886}
   m_Layer: 10
   m_Name: CurvedTrack
   m_TagString: Untagged
@@ -84,12 +85,25 @@ MonoBehaviour:
   pathBeginPoints:
   - {fileID: 5970685408179773773}
   - {fileID: 3546380673203467151}
-  rotateable: 1
+  rotateable: 0
   <TrackType>k__BackingField: 1
   _posX: 0
   _posY: 0
   _posZ: 0
   rotationPoint: {fileID: 6996270768761764639}
+--- !u!65 &8815732137206713886
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2566550469849545979}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.77, y: 0.24, z: 0.8}
+  m_Center: {x: 0.13, y: -0.12, z: -0.13}
 --- !u!1 &3933666961384397979
 GameObject:
   m_ObjectHideFlags: 0
