@@ -13,7 +13,7 @@ public class Repelling : MonoBehaviour
 
     private void Strike(Vector3 pos)
     {
-        StartCoroutine(pointThunder.SingleThunder(pos));
+        pointThunder.SpawnThunder(pos);
     }
 
     private void AddImpact(Vector3 dir, float force)

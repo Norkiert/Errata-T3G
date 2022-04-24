@@ -29,11 +29,14 @@ public class PointThunder : MonoBehaviour
         groundBeam = GameObject.Find("GroundBeam").GetComponent<ParticleSystem>();
         targetsCount = targetsToHit.Count;
 
-        StartCoroutine(TimerToNextRandomThunder(1f));
+        timerToNextRandomThunder = TimerToNextRandomThunder(1f);
+        StartCoroutine(timerToNextRandomThunder);
     }
     IEnumerator ThunderStart(Vector3 target)
     {
         transform.position = new Vector3(target.x,target.y*2,target.z);
+        if (timerToNextRandomThunder!=null)
+            StopCoroutine(timerToNextRandomThunder);
         thunder.Play();
         yield return new WaitForSeconds(beamDelay);
         thunderBeam.Play();
@@ -44,23 +47,13 @@ public class PointThunder : MonoBehaviour
         groundBeam.Stop();
         PlayStormSound();
         float time = (Random.value * 100000) % (maxRandomThunderSpawnTime - minRandomThunderSpawnTime) + minRandomThunderSpawnTime;
-        StartCoroutine(TimerToNextRandomThunder(time));
+        if (timerToNextRandomThunder != null)
+            StopCoroutine(timerToNextRandomThunder);
+        timerToNextRandomThunder = TimerToNextRandomThunder(time);
+        StartCoroutine(timerToNextRandomThunder);
     }
 
-    public IEnumerator SingleThunder(Vector3 target)
-    {
-        transform.position = new Vector3(target.x, target.y * 2, target.z);
-        thunder.Play();
-        yield return new WaitForSeconds(beamDelay);
-        thunderBeam.Play();
-        groundBeam.Play();
-        yield return new WaitForSeconds(particlesLifetime);
-        thunder.Stop();
-        thunderBeam.Stop();
-        groundBeam.Stop();
-        PlayStormSound();
-    }
-
+    private IEnumerator timerToNextRandomThunder;
     IEnumerator TimerToNextRandomThunder(float time)
     {
         yield return new WaitForSeconds(time);
@@ -82,8 +75,9 @@ public class PointThunder : MonoBehaviour
     #region -public functions-
     public void SpawnThunder(Vector3 targetPosition)
     {
-        StopCoroutine(TimerToNextRandomThunder(0));
-        StartCoroutine(ThunderStart(new Vector3(targetPosition.x,targetPosition.y+30f,targetPosition.z)));
+        if(timerToNextRandomThunder!=null)
+            StopCoroutine(timerToNextRandomThunder);
+        StartCoroutine(ThunderStart(new Vector3(targetPosition.x,targetPosition.y,targetPosition.z)));
     }
     #endregion
 }
