@@ -15,6 +15,8 @@ namespace Dialogues
         [SerializeField, Min(0)] private float openTime = 0.2f;
         [SerializeField, Min(0)] private float closeTime = 0.2f;
         [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private GameObject prevText;
+        [SerializeField] private GameObject nextText;
         [SerializeField] private GameObject pressSpaceText;
         [SerializeField, Min(0)] private float textDisplayDelay = 0.04f;
         [SerializeField, Min(0)] private int maxNumberOfLetterInLine = 100;
@@ -32,6 +34,8 @@ namespace Dialogues
 
         private Story currentStory;
         public bool IsDialoguePlaying { get; private set; }
+
+        private bool isHandlingText = false;
 
         public static DialogueManager instance;
 
@@ -75,82 +79,106 @@ namespace Dialogues
 
             if (Input.GetKeyDown(KeyCode.Space))
                 StartCoroutine(ContinueStory());
+
+            Debug.Log(isHandlingText);
         }
 
+        private void SetPanelHeight(string text) {
+            float height = defalutPanelHeight + Mathf.CeilToInt(text.Length / (float)maxNumberOfLetterInLine) * lineHeight;
+            RectTransform dialoguePanelRT = dialoguePanel.GetComponent<RectTransform>();
+            dialoguePanelRT.sizeDelta = new Vector2(dialoguePanelRT.sizeDelta.x, height);
+        }
+
+        IEnumerator TextHandler;
         private IEnumerator HandleLongText(string s, float waitTime = 0) {
+            isHandlingText = true;
+            DisplayChoices();
             yield return new WaitForSeconds(waitTime);
 
             string[] texts = s.Split(new string[] {"<n>"}, System.StringSplitOptions.None);
             
-            for (int i = 0; i < texts.Length; i++)
-            {
-                if (i < texts.Length - 1) texts[i] = texts[i] + "...";
-                if (i > 0) texts[i] = "..." + texts[i];
-            }
-            
             int current_text = 0;
 
+            if (texts.Length > 1) nextText.SetActive(true);
+            else {
+                isHandlingText = false;
+                nextText.SetActive(false);
+            }
+
+            prevText.SetActive(false);
+
             playTalkingSound();
+            SetPanelHeight(texts[0]);
 
             while (current_text < texts.Length) {
-
                 if (current_text == texts.Length - 1) DisplayChoices();
 
-                while (dialogueText.text != texts[current_text])
+                if (texts[current_text] != dialogueText.text)
                 {
-                    dialogueText.text += texts[current_text];
-                    yield return new WaitForSeconds(textDisplayDelay);
+                    dialogueText.text = "";
+                    foreach (char c in texts[current_text])
+                    {
+                        dialogueText.text += c;
+                        yield return new WaitForSeconds(textDisplayDelay);
+                    }
                 }
+                
 
                 if (Input.GetKeyDown(KeyCode.Mouse0)) {
                     if (current_text > 0) {
                         current_text--;
                         dialogueText.text = "";
                         playTalkingSound();
+
+                        SetPanelHeight(texts[current_text]);
+                        nextText.SetActive(true);
                     }
+
+                    if (current_text == 0) prevText.SetActive(false);
                 }
 
-                if (Input.GetKeyDown(KeyCode.Mouse1)) {
-                    dialogueText.text = "";
+                if (Input.GetKeyDown(KeyCode.Mouse1)) {  
+                    if (current_text < texts.Length - 1) {
+                        SetPanelHeight(texts[current_text]);
+                        dialogueText.text = "";
+                        playTalkingSound();
+                        prevText.SetActive(true);
+                    }
                     current_text++;
-                    playTalkingSound();
+
+                    if (current_text == texts.Length - 1) {
+                        isHandlingText = false;
+                        nextText.SetActive(false);
+                    }
                 }
 
                 yield return null;
             }
         
-            Debug.Log("koniec");
+            dialogueText.text = "";
+            yield break;
 
         }
 
         private IEnumerator ContinueStory(float waitTime = 0)
         {
-            Debug.Log(currentStory.currentChoices.Count);
-            if (currentStory.canContinue || currentStory.currentChoices.Count != 0)
+            if (currentStory.canContinue)
             {
+                if (isHandlingText) yield break;
                 string text = currentStory.Continue();
+                Debug.Log("CanContinue text: " + text);
 
+                
+                if (TextHandler != null) StopCoroutine(TextHandler);
                 dialogueText.text = "";
-
-                float height = defalutPanelHeight + Mathf.CeilToInt(text.Length / (float)maxNumberOfLetterInLine) * lineHeight;
-                RectTransform dialoguePanelRT = dialoguePanel.GetComponent<RectTransform>();
-                dialoguePanelRT.sizeDelta = new Vector2(dialoguePanelRT.sizeDelta.x, height);
-
-                StartCoroutine(HandleLongText(text, waitTime));
-
-                // yield return new WaitForSeconds(waitTime);
-
-                // while (dialogueText.text != text && index < text.Length)
-                // {
-                //     dialogueText.text += text[index];
-                //     index++;
-                //     yield return new WaitForSeconds(textDisplayDelay);
-                // }
-
-                // DisplayChoices();
+                TextHandler = HandleLongText(text, waitTime);
+                StartCoroutine(TextHandler);
             }
             else
             {
+                if (currentStory.currentChoices.Count > 0) yield break;
+                if (isHandlingText) yield break;
+
                 yield return new WaitForSeconds(0.2f);
                 CloseDialoguePanel();
             }
@@ -236,6 +264,7 @@ namespace Dialogues
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
             StartCoroutine(ContinueStory());
+            dialogueText.text = "";
         }
 
         private void SetCubeColor(string color)
