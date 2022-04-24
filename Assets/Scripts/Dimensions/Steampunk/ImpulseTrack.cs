@@ -6,7 +6,7 @@ using NaughtyAttributes;
 [RequireComponent(typeof(BasicTrack))]
 public class ImpulseTrack : MonoBehaviour
 {
-    [SerializeField] public List<IImpulseTrackHandler> handlers;
+    [SerializeField] public List<ImpulseTrackHandler> handlers;
 
     [SerializeField, ReadOnly] public List<BallBehavior> balls;
     [SerializeField, ReadOnly] public BallBehavior lastBall;
