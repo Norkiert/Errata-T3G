@@ -68,7 +68,13 @@ public class BallBehavior : ObjectGroundChecker
             if (!currentTrack)
             {
                 currentTrack = collision.gameObject.transform.parent.gameObject.GetComponent<BasicTrack>();
-                if(currentTrack != lastTrack && currentTrack)
+
+                if (collision.gameObject.transform.parent.gameObject.TryGetComponent(out ImpulseTrack impulseTrack))
+                {
+                    impulseTrack.RegisterImpulse(this);
+                }
+
+                if (currentTrack != lastTrack && currentTrack)
                 {
                     currentTrack.OnBallEnter(this);
 

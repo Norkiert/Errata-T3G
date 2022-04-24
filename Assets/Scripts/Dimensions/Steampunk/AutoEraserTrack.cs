@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
 
-public class StraightTrack : BasicTrack
+public class AutoEraserTrack : BasicTrack
 {
     public new const float length = 0.5f * 2;
     public new const float height = 0.12f * 2;
     public new const float width = 0.24f * 2;
-    public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/StraightTrack.prefab";
+    public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/AutoEraserTrack.prefab";
+
+    [SerializeField] protected Transform erasePoint;
 
     protected new void Awake()
     {
@@ -24,17 +25,16 @@ public class StraightTrack : BasicTrack
     }
     public override void OnBallEnter(BallBehavior ball)
     {
-        InitBallPath(ball);
-        var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
-        {
-            0 => Vector3.forward,
-            1 => Vector3.back,
-            _ => Vector3.zero
-        });
-        ball.ballRigidbody.velocity = moveVector;
+        ball.pathID = 0;
+        ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * ball.ballRigidbody.velocity.normalized;
     }
     public override void OnBallStay(BallBehavior ball)
     {
+        if(Vector3.Distance(erasePoint.position, ball.transform.position) <= ball.realRadius)
+        {
+            Destroy(ball.gameObject);
+            return;
+        }
         ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * ball.ballRigidbody.velocity.normalized;
     }
     public override void OnBallExit(BallBehavior ball)
