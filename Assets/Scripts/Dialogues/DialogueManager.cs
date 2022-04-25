@@ -11,26 +11,25 @@ namespace Dialogues
 {
     public class DialogueManager : MonoBehaviour
     {
+        [Header("Main text")]
         [SerializeField] private GameObject dialoguePanel;
         [SerializeField, Min(0)] private float openTime = 0.2f;
         [SerializeField, Min(0)] private float closeTime = 0.2f;
         [SerializeField] private TextMeshProUGUI dialogueText;
-        [SerializeField] private GameObject prevText;
-        [SerializeField] private GameObject nextText;
-        [SerializeField] private GameObject pressSpaceText;
+        [SerializeField] private TextMeshProUGUI choicesText;
+
+        [Header("Tooltips")]
+        [SerializeField] private GameObject toolTipNext;
+        [SerializeField] private GameObject toolTipPrev;
+        [SerializeField] private GameObject toolTipSelectOption;
         [SerializeField, Min(0)] private float textDisplayDelay = 0.04f;
-        [SerializeField, Min(0)] private int maxNumberOfLetterInLine = 100;
-        [SerializeField, Min(0)] private float lineHeight = 45f;
-        [SerializeField, Min(0)] private float defalutPanelHeight = 155f;
+        [SerializeField, Min(0)] private int maxNumberOfLetterInLine = 50;
 
-        [SerializeField] GameObject __cube;
+        [Header("Ink")]
+        [SerializeField] private TextAsset inkJSONTest;
 
-        [SerializeField] private GameObject[] choices;
-        private TextMeshProUGUI[] choicesText;
-
-        public TextAsset inkJSONTest;
-
-        [SerializeField] List<AudioClipSO> talkingSounds = new List<AudioClipSO>();
+        [Header("Sounds")]
+        [SerializeField] private List<AudioClipSO> talkingSounds = new List<AudioClipSO>();
 
         private Story currentStory;
         public bool IsDialoguePlaying { get; private set; }
@@ -38,7 +37,6 @@ namespace Dialogues
         private bool isHandlingText = false;
 
         public static DialogueManager instance;
-
         private void Awake()
         {
             if (instance != null)
@@ -51,20 +49,7 @@ namespace Dialogues
         {
             ExitDialogueMode();
 
-            choicesText = new TextMeshProUGUI[choices.Length];
-            int index = 0;
-            foreach (GameObject choice in choices)
-            {
-                choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
-                index++;
-            }
-
-            EnterDialogueMode(inkJSONTest);
-        }
-
-        private void playTalkingSound() {
-            int n = Random.Range(0, talkingSounds.Count - 1);
-            AudioManager.PlaySFX(talkingSounds[n]);
+            //EnterDialogueMode(inkJSONTest);
         }
 
         private void Update()
@@ -79,39 +64,49 @@ namespace Dialogues
 
             if (Input.GetKeyDown(KeyCode.Space))
                 StartCoroutine(ContinueStory());
-
-            Debug.Log(isHandlingText);
+        }
+        private void PlayTalkingSound() {
+            int n = Random.Range(0, talkingSounds.Count - 1);
+            AudioManager.PlaySFX(talkingSounds[n]);
         }
 
-        private void SetPanelHeight(string text) {
-            float height = defalutPanelHeight + Mathf.CeilToInt(text.Length / (float)maxNumberOfLetterInLine) * lineHeight;
-            RectTransform dialoguePanelRT = dialoguePanel.GetComponent<RectTransform>();
-            dialoguePanelRT.sizeDelta = new Vector2(dialoguePanelRT.sizeDelta.x, height);
-        }
-
-        IEnumerator TextHandler;
-        private IEnumerator HandleLongText(string s, float waitTime = 0) {
+        private IEnumerator textHandler;
+        private IEnumerator HandleLongText(string s, float waitTime = 0) 
+        {
             isHandlingText = true;
-            DisplayChoices();
+            choicesText.text = "";
+            toolTipSelectOption.SetActive(false);
+
             yield return new WaitForSeconds(waitTime);
 
             string[] texts = s.Split(new string[] {"<n>"}, System.StringSplitOptions.None);
             
             int current_text = 0;
 
-            if (texts.Length > 1) nextText.SetActive(true);
-            else {
+            if (texts.Length > 1)
+                toolTipNext.SetActive(true);
+            else
+            {
                 isHandlingText = false;
-                nextText.SetActive(false);
+                toolTipNext.SetActive(false);
             }
 
-            prevText.SetActive(false);
+            toolTipPrev.SetActive(false);
 
-            playTalkingSound();
-            SetPanelHeight(texts[0]);
+            PlayTalkingSound();
 
-            while (current_text < texts.Length) {
-                if (current_text == texts.Length - 1) DisplayChoices();
+            while (current_text < texts.Length) 
+            {
+                if (current_text == texts.Length - 1)
+                {
+                    DisplayChoices(MainTextLines(texts[texts.Length - 1]));
+                    toolTipSelectOption.SetActive(true);
+                }
+                else
+                {
+                    choicesText.text = "";
+                    toolTipSelectOption.SetActive(false);
+                }
 
                 if (texts[current_text] != dialogueText.text)
                 {
@@ -123,32 +118,37 @@ namespace Dialogues
                     }
                 }
                 
-
-                if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                    if (current_text > 0) {
+                // provious
+                if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    if (current_text > 0)
+                    {
                         current_text--;
                         dialogueText.text = "";
-                        playTalkingSound();
+                        PlayTalkingSound();
 
-                        SetPanelHeight(texts[current_text]);
-                        nextText.SetActive(true);
+                        toolTipNext.SetActive(true);
                     }
 
-                    if (current_text == 0) prevText.SetActive(false);
+                    if (current_text == 0)
+                        toolTipPrev.SetActive(false);
                 }
 
-                if (Input.GetKeyDown(KeyCode.Mouse1)) {  
-                    if (current_text < texts.Length - 1) {
-                        SetPanelHeight(texts[current_text]);
+                // next
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {  
+                    if (current_text < texts.Length - 1)
+                    {
+                        current_text++;
                         dialogueText.text = "";
-                        playTalkingSound();
-                        prevText.SetActive(true);
+                        PlayTalkingSound();
+                        toolTipPrev.SetActive(true);
                     }
-                    current_text++;
 
-                    if (current_text == texts.Length - 1) {
+                    if (current_text == texts.Length - 1)
+                    {
                         isHandlingText = false;
-                        nextText.SetActive(false);
+                        toolTipNext.SetActive(false);
                     }
                 }
 
@@ -164,15 +164,19 @@ namespace Dialogues
         {
             if (currentStory.canContinue)
             {
-                if (isHandlingText) yield break;
+                if (isHandlingText)
+                    yield break;
+
                 string text = currentStory.Continue();
                 Debug.Log("CanContinue text: " + text);
 
                 
-                if (TextHandler != null) StopCoroutine(TextHandler);
+                if (textHandler != null)
+                    
+                    StopCoroutine(textHandler);
                 dialogueText.text = "";
-                TextHandler = HandleLongText(text, waitTime);
-                StartCoroutine(TextHandler);
+                textHandler = HandleLongText(text, waitTime);
+                StartCoroutine(textHandler);
             }
             else
             {
@@ -200,9 +204,9 @@ namespace Dialogues
 
             IsDialoguePlaying = true;
             dialogueText.text = "";
+            choicesText.text = "";
             dialoguePanel.SetActive(true);
-            for (int index = 0; index < choices.Length; index++)
-                choices[index].gameObject.SetActive(false);
+
 
             // anim open
             CanvasGroup cg = dialoguePanel.GetComponent<CanvasGroup>();
@@ -233,32 +237,27 @@ namespace Dialogues
         }
         private void ExitDialogueMode()
         {
+            if (textHandler != null)
+                StopCoroutine(textHandler);
+
             IsDialoguePlaying = false;
             dialoguePanel.SetActive(false);
             dialogueText.text = "";
         }
 
-        private void DisplayChoices()
+        private void DisplayChoices(int mainTextLines)
         {
             List<Choice> currentChoices = currentStory.currentChoices;
 
-            pressSpaceText.SetActive(currentChoices.Count == 0);
+            choicesText.text = "";
+            for (int i = 0; i < mainTextLines; i++)
+                choicesText.text += "\n";
 
-            if (currentChoices.Count > choices.Length)
-            {
-                Debug.LogWarning("More choices were given than the UI can support. Number of choices given: "
-                    + currentChoices.Count);
-            }
-
-            int index = 0;
-            for (; index < Mathf.Min(currentChoices.Count, choices.Length); index++)
-            {
-                choices[index].gameObject.SetActive(true);
-                choicesText[index].text = (index + 1).ToString() + ". " + currentChoices[index].text;
-            }
-            for (; index < choices.Length; index++)
-                choices[index].gameObject.SetActive(false);
+            for (int i = 0; i < currentChoices.Count; i++)
+                choicesText.text += $"\n{i + 1}. {currentChoices[i].text}";
         }
+        private int MainTextLines(string text) => Mathf.FloorToInt(text.Length / (float)maxNumberOfLetterInLine);
+
 
         public void MakeChoice(int choiceIndex)
         {
@@ -279,7 +278,7 @@ namespace Dialogues
                     c = new Color(255, 0, 0);
                     break;
             }
-            __cube.GetComponent<MeshRenderer>().material.color = c;
+            Debug.Log($"Selected color {c}");
         }
     }
 
