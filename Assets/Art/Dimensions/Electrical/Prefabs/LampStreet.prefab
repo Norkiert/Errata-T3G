@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5039988716801713697}
-  m_LocalRotation: {x: 0.5624847, y: 0.42849854, z: -0.5624847, w: 0.42849854}
+  m_LocalRotation: {x: 0.6272114, y: 0.32650557, z: -0.6272114, w: 0.32650557}
   m_LocalPosition: {x: -1.82, y: 1.05, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2129542921142795523}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 105.4, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 125, y: 90, z: 0}
 --- !u!108 &371385089769914926
 Light:
   m_ObjectHideFlags: 0
@@ -44,9 +44,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.972549, g: 0.8235294, b: 0.42745098, a: 1}
-  m_Intensity: 120
+  m_Intensity: 150
   m_Range: 25
-  m_SpotAngle: 75
+  m_SpotAngle: 110
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UsePipelineSettings: 0
+  m_UsePipelineSettings: 1
 --- !u!1001 &1875486996144888552
 PrefabInstance:
   m_ObjectHideFlags: 0
