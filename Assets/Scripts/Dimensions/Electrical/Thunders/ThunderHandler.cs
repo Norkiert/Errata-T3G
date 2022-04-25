@@ -50,6 +50,6 @@ public class ThunderHandler : MonoBehaviour
     private void PlayStormSound()
     {
         int numb = Mathf.CeilToInt((Random.value * 1000) % (clips.Count - 1));
-        AudioManager.PlaySFX(clips[numb]);
+        AudioManager.PlaySFX(clips[numb],new Vector3(transform.position.x,0,transform.position.z));
     }
 }
