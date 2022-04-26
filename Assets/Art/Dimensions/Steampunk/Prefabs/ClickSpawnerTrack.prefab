@@ -82,6 +82,8 @@ MonoBehaviour:
   visible: 1.78
   spawningSpeed: 2
   spawnPoint: {fileID: 2259393043054979004}
+  timeToWait: 0.5
+  timeElapsed: 0
   isSpawning: 0
   currentBall: {fileID: 0}
   cutoffHeight: 0
@@ -299,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4982460856544985622
 Transform:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class ClickSpawnerTrack : BasicTrack
     [SerializeField] protected float spawningSpeed = 1f;
 
     [SerializeField] protected Transform spawnPoint;
+    [SerializeField] protected float timeToWait = 1f;
+    [SerializeField] protected float timeElapsed;
 
     [SerializeField, ReadOnly] protected bool isSpawning = false;
     [SerializeField, ReadOnly] protected BallBehavior currentBall;
@@ -43,17 +45,24 @@ public class ClickSpawnerTrack : BasicTrack
             ballRenderer.material = defaultMaterial;
 
             currentBall = null;
-            cutoffHeight = 0f;
+            cutoffHeight = notVisible;
             isSpawning = false;
             ballRenderer = null;
+        }
+        else if (!isSpawning && timeElapsed < timeToWait)
+        {
+            timeElapsed += Time.deltaTime;
+
+            if(timeElapsed > timeToWait)
+            {
+                timeElapsed = timeToWait;
+            }
         }
     }
     protected void InitBallSpawn()
     {
-        if (!isSpawning)
+        if (!isSpawning && timeElapsed >= timeToWait)
         {
-            isSpawning = true;
-
             currentBall = Instantiate(ballPrefab, spawnPoint.transform.position, new Quaternion()).GetComponent<BallBehavior>();
             currentBall.ballRigidbody.Sleep();
 
@@ -63,12 +72,16 @@ public class ClickSpawnerTrack : BasicTrack
             cutoffHeight = notVisible;
 
             StartCoroutine(DissolveEffect());
+
+            isSpawning = true;
+            timeElapsed = 0f;
         }
     }
     protected IEnumerator DissolveEffect()
     {
         for(; ; )
         {
+            currentBall.ballRigidbody.Sleep();
             ballRenderer.material.SetFloat("_CutoffHeight", cutoffHeight += Time.deltaTime / spawningSpeed * Mathf.Abs(notVisible - visible));
             yield return null;
         }
