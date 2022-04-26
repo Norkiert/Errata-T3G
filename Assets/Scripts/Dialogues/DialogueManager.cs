@@ -54,7 +54,7 @@ namespace Dialogues
 
         private void Update()
         {
-            if (!IsDialoguePlaying) return;
+            if (!IsDialoguePlaying || GameManagment.GameManager.IsGamePaused) return;
 
             if (Input.GetKeyDown(KeyCode.Alpha1) && currentStory.currentChoices.Count >= 1) MakeChoice(0);
             if (Input.GetKeyDown(KeyCode.Alpha2) && currentStory.currentChoices.Count >= 2) MakeChoice(1);
@@ -119,7 +119,7 @@ namespace Dialogues
                 }
                 
                 // provious
-                if (Input.GetKeyDown(KeyCode.Mouse1))
+                if (Input.GetKeyDown(KeyCode.Mouse1) && !GameManagment.GameManager.IsGamePaused)
                 {
                     if (current_text > 0)
                     {
@@ -135,7 +135,7 @@ namespace Dialogues
                 }
 
                 // next
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Mouse0) && !GameManagment.GameManager.IsGamePaused)
                 {  
                     if (current_text < texts.Length - 1)
                     {
