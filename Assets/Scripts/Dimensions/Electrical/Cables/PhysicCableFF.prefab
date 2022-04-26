@@ -337,6 +337,7 @@ MonoBehaviour:
   numberOfPoints: 1
   space: 0.3
   size: 0.3
+  springForce: 200
   brakeLengthMultiplier: 1.7
   minBrakeTime: 1
   start: {fileID: 5128321506739837778}
@@ -489,8 +490,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.4}
-  m_Center: {x: 0, y: 0, z: -0.25}
+  m_Size: {x: 0.5, y: 0.5, z: 0.48404196}
+  m_Center: {x: 0, y: 0, z: -0.20797901}
 --- !u!54 &5128321506739837780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -610,8 +611,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.4}
-  m_Center: {x: 0, y: 0, z: 0.25}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5425016}
+  m_Center: {x: 0, y: 0, z: 0.17874917}
 --- !u!54 &5128321506898141142
 Rigidbody:
   m_ObjectHideFlags: 0

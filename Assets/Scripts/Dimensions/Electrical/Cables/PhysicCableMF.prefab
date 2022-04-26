@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.4}
-  m_Center: {x: 0, y: 0, z: 0.25}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5009933}
+  m_Center: {x: 0, y: 0, z: 0.19950333}
 --- !u!54 &3163945117640814479
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -377,6 +377,7 @@ MonoBehaviour:
   numberOfPoints: 1
   space: 0.3
   size: 0.3
+  springForce: 200
   brakeLengthMultiplier: 1.7
   minBrakeTime: 1
   start: {fileID: 4808589163005558536}
@@ -448,8 +449,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
-  m_Center: {x: 0, y: 0, z: -0.2}
+  m_Size: {x: 0.4, y: 0.4, z: 0.44215414}
+  m_Center: {x: 0, y: 0, z: -0.17892294}
 --- !u!54 &4808589163005558542
 Rigidbody:
   m_ObjectHideFlags: 0
