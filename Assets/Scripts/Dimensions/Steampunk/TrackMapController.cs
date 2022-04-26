@@ -20,6 +20,7 @@ public class TrackMapController : MonoBehaviour
         Q3Collector,
         AutoEraser,
         AutoSpawner,
+        ClickSpawner,
     }
     public Transform zeroPoint;
     protected Dictionary<TrackMapPosition, BasicTrack> trackMap = new Dictionary<TrackMapPosition, BasicTrack>();

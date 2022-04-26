@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BallOnCreation
+  m_Shader: {fileID: -6465566751694194690, guid: 1fbf9248940078d4db14041be3ae49f0, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_3cf26d37cbe94b00ac03a18ba640d265:
+        m_Texture: {fileID: 2800000, guid: 153ec0d2dd0e7b14cbe9e8ee3218f6a9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_47886f05dc31415e9961fd1d33422a0f:
+        m_Texture: {fileID: 2800000, guid: 6196cae090a6b074392ec3476ded5483, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_5c65cb597ccb43ac8decc1a5b609df4a:
+        m_Texture: {fileID: 2800000, guid: 52470b6b981e57944b0ab85b99cf21bc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _CutoffHeight: 1.78
+    - _EdgeWidth: 0.1
+    - _NoiseScale: 40.22
+    - _NoiseStrength: 1.13
+    m_Colors:
+    - Color_4b5884a4462348a88e295ee318658a73: {r: 0, g: 0.49803922, b: 1, a: 0}
+    - Color_b74ae7e3b4fa4c9fa8b54bf76ac938e5: {r: 1, g: 1, b: 1, a: 1}
+    - _Albedo: {r: 0, g: 0, b: 0, a: 1}
+    - _EdgeColor: {r: 0, g: 0.4980392, b: 1, a: 1}
+  m_BuildTextureStacks: []

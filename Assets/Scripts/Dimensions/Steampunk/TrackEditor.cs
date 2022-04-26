@@ -241,6 +241,7 @@ public class TrackEditor : EditorWindow
                     TrackMapController.TrackType.Q3Collector => Q3CollectorTrack.prefabPath,
                     TrackMapController.TrackType.AutoSpawner => AutoSpawnerTrack.prefabPath,
                     TrackMapController.TrackType.AutoEraser => AutoEraserTrack.prefabPath,
+                    TrackMapController.TrackType.ClickSpawner => ClickSpawnerTrack.prefabPath,
                     _ => ""
                 };
                 BasicTrack newTrack = ((GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath), parentTransform)).GetComponent<BasicTrack>();
