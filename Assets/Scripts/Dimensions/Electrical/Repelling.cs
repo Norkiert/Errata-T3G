@@ -10,12 +10,13 @@ public class Repelling : MonoBehaviour
     [SerializeField] private AudioClipSO touchSound;
     [SerializeField] private Vector3 pushDirection;
     [SerializeField] private float pushForce;
-    [SerializeField] private CharacterController characterController;
+    private CharacterController characterController;
 
     private Vector3 impact = Vector3.zero;
 
     private void Start()
     {
+        characterController = GameObject.Find("Player").GetComponent<CharacterController>();
         sparks.Play();
     }
     private void AddImpact(Vector3 dir, float force)
