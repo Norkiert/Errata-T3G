@@ -24,7 +24,7 @@ public class ElevatorTrack : BasicTrack
 
     [SerializeField] public GameObject pistonRodThick;
         const float rodThickHeight = 0.7951697f;
-        const float rodThickScaleAddon = 1.0f / rodThickHeight;
+        const float rodThickScaleAddon = 1.0f / rodThickHeight / 2.0f;
     [SerializeField] public GameObject pistonRodThin;
         const float rodThinHeight = 0.6469156f;
         const float rodThinScaleAddon = 1.0f / rodThinHeight;
