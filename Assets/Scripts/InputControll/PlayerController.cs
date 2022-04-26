@@ -218,7 +218,7 @@ public class PlayerController : PortalTraveller
     private void MoveCamera()
     {
         // Verrrrrry gross hack to stop camera swinging down at start
-        if (inputMouse.x * inputMouse.x + inputMouse.y * inputMouse.y > 25)
+        if (Time.unscaledTime < 6f && inputMouse.x * inputMouse.x + inputMouse.y * inputMouse.y > 50)
         {
             inputMouse.x = 0;
             inputMouse.y = 0;
@@ -227,8 +227,9 @@ public class PlayerController : PortalTraveller
         if (FreezCamera)
             return;
 
-        yaw += inputMouse.x * mouseSensitivity;
-        pitch -= inputMouse.y * mouseSensitivity;
+        float settingsMultiplier = SettingsMenu.MouseSensitivity;
+        yaw += inputMouse.x * mouseSensitivity * settingsMultiplier;
+        pitch -= inputMouse.y * mouseSensitivity * settingsMultiplier;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         transform.eulerAngles = Vector3.up * yaw;

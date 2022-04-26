@@ -32,7 +32,11 @@ namespace Audio
 
         private const string keyGeneralVolume = "GeneralVolume";
         public static float GeneralVolume => PlayerPrefs.GetFloat(keyGeneralVolume, 1f);
-        public static void SetGeneralVolume(float volume) => PlayerPrefs.SetFloat(keyGeneralVolume, volume);
+        public static void SetGeneralVolume(float volume)
+        {
+            PlayerPrefs.SetFloat(keyGeneralVolume, volume);
+            UpdateTrackVolume();
+        }
 
 
         #region -Music-
@@ -43,8 +47,12 @@ namespace Audio
         {
             PlayerPrefs.SetFloat(keyMusicVolume, volume);
 
+            UpdateTrackVolume();
+        }
+        private static void UpdateTrackVolume()
+        {
             foreach (Track track in tracks.Values)
-                track.UpdateVolume(volume);
+                track.UpdateVolume(MusicVolume * GeneralVolume);
         }
 
 
@@ -277,7 +285,7 @@ namespace Audio
                 musicSource.name = $"Music-{clip.name}";
                 musicSource.Play();
 
-                float targetVolume = MusicVolume * defaultClipVolume;
+                float targetVolume = MusicVolume * GeneralVolume * defaultClipVolume;
                 while (musicSource.volume >= targetVolume)
                 {
                     musicSource.volume += Time.deltaTime / fadeTime;

@@ -6,8 +6,7 @@ using Audio;
 
 public class SettingsMenu : MonoBehaviour
 {
-
-    [SerializeField] private PlayerController playerController;
+    public static float MouseSensitivity { get; private set; } = 1;
 
     [SerializeField] private Toggle fullScreenToggle;
     [SerializeField] private TMPro.TMP_Dropdown qualityDropdown;
@@ -20,6 +19,12 @@ public class SettingsMenu : MonoBehaviour
     private const string fullScreenKey = "fullScreen";
     private const string qualityKey = "quality";
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void UpdateValues()
+    {
+        MouseSensitivity = PlayerPrefs.GetFloat(mouseSensitivityKey, 1.0f);
+    }
+
     private void Start()
     {
         LoadMouseSensitivity();
@@ -31,21 +36,12 @@ public class SettingsMenu : MonoBehaviour
         sfxVolumeSlider.value = AudioManager.SFXVolume;
     }
 
-    private void LoadMouseSensitivity()
-    {
-        if (playerController != null)
-        {
-            playerController.mouseSensitivity = mouseSensitivitySlider.value;
-        }
-        mouseSensitivitySlider.value = PlayerPrefs.GetFloat(mouseSensitivityKey, 8.0f);
-    }
+    private void LoadMouseSensitivity() => mouseSensitivitySlider.value = PlayerPrefs.GetFloat(mouseSensitivityKey, 1.0f);
 
     public void SaveMouseSensitivity()
     {
-        if (playerController != null)
-            playerController.mouseSensitivity = mouseSensitivitySlider.value;
-
         PlayerPrefs.SetFloat(mouseSensitivityKey, mouseSensitivitySlider.value);
+        UpdateValues();
     }
 
     public void SetFullScreen()
