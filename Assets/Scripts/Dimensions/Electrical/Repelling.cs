@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Audio;
 
 public class Repelling : MonoBehaviour
 {
-    [SerializeField] private PointThunder pointThunder;
+    [SerializeField] private ParticleSystem touchSpark;
+    [SerializeField] private ParticleSystem sparks;
+    [SerializeField] private AudioClipSO touchSound;
     [SerializeField] private Vector3 pushDirection;
     [SerializeField] private float pushForce;
     [SerializeField] private CharacterController characterController;
 
     private Vector3 impact = Vector3.zero;
 
-    private void Strike(Vector3 pos)
+    private void Start()
     {
-        pointThunder.SpawnThunder(pos);
+        sparks.Play();
     }
-
     private void AddImpact(Vector3 dir, float force)
     {
         dir.Normalize();
@@ -33,8 +35,9 @@ public class Repelling : MonoBehaviour
         GameObject player = other.gameObject;
         if (player.GetComponent<PlayerController>() != null)
         {
-            Strike(transform.position);
+            touchSpark.Play();
             AddImpact(pushDirection, pushForce);
+            AudioManager.PlaySFX(touchSound, transform.position);
         }
     }
 }
