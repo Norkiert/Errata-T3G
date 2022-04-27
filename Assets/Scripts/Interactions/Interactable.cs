@@ -6,7 +6,7 @@ using NaughtyAttributes;
 [DisallowMultipleComponent]
 public class Interactable : MonoBehaviour
 {
-    [field: SerializeField] [field: ReadOnly] public bool IsSelected { get; private set; }
+    [field: SerializeField, ReadOnly] public bool IsSelected { get; private set; }
 
     protected virtual void Awake()
     {

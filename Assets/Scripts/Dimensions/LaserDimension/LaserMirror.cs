@@ -35,12 +35,12 @@ public class LaserMirror : Interactable
 
         actualRotate = 0f;
     }
+    
     public override void Select()
     {
         base.Select();
         ShowUI();
         player.OnInteractionStart += StartRotateMirror;
-        player.OnInteractionEnd += EndRotateMirror;
     }
     public override void Deselect()
     {
@@ -49,9 +49,9 @@ public class LaserMirror : Interactable
         {
             HideUI();
             player.OnInteractionStart -= StartRotateMirror;
-            player.OnInteractionEnd -= EndRotateMirror;
         }
     }
+
     private void StartRotateMirror()
     {
         playerController.FreezCamera = true;
@@ -71,7 +71,7 @@ public class LaserMirror : Interactable
         float stepCheckVertical = 0f;
         float reverseRotating = 1f;
 
-        while(playerController.FreezCamera && playerController.FreezMovement)
+        while (player.Interacting)
         {
             float mx = Input.GetAxis("Mouse X");
             float my = Input.GetAxis("Mouse Y");
@@ -134,6 +134,8 @@ public class LaserMirror : Interactable
 
             yield return null;
         }
+
+        EndRotateMirror();
     }
 
     private void ShowUI() => mirrorUI.StartMirrorUI(rotateHorizontal, rotateVertical);

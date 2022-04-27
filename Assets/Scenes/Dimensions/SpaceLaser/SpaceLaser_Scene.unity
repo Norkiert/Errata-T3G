@@ -6499,7 +6499,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1038128821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a30235fd7f6f7e41b52927ddd5f0e65, type: 3}
+  m_Script: {fileID: 11500000, guid: 60876bcd40b70c245969ce4705e21b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToSetColor:
@@ -6516,9 +6516,11 @@ MonoBehaviour:
   - {fileID: 1139363527}
   - {fileID: 1917036623}
   - {fileID: 1532804169}
-  - {fileID: 0}
   - {fileID: 32372490}
   materialToSet: {fileID: 2100000, guid: 04a415757cd959f4ba29f814b7fac524, type: 2}
+  setDefaltMaterialOnDisable: 0
+  defaultMaterial: {fileID: 0}
+  disableInteractions: 1
 --- !u!4 &1043017221 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6cad47b2d6c898f46835aa5739d6b609, type: 3}
@@ -9102,7 +9104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166593, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_RootOrder
@@ -10341,7 +10343,9 @@ MonoBehaviour:
   - {fileID: 1203330237}
   - {fileID: 1688690558}
   materialToSet: {fileID: 2100000, guid: f33aad7829a79d44790eb87ce8534ac2, type: 2}
+  setDefaltMaterialOnDisable: 1
   defaultMaterial: {fileID: 2100000, guid: 04a415757cd959f4ba29f814b7fac524, type: 2}
+  disableInteractions: 2
 --- !u!4 &1621841951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dcefa269eb43cff44a0f7d7e4218ece1, type: 3}
@@ -11194,10 +11198,11 @@ MonoBehaviour:
   - {fileID: 1139363527}
   - {fileID: 1917036623}
   - {fileID: 1532804169}
-  - {fileID: 0}
   - {fileID: 32372490}
   materialToSet: {fileID: 2100000, guid: c05ad5f0e45427047b888c9cac657fbb, type: 2}
+  setDefaltMaterialOnDisable: 1
   defaultMaterial: {fileID: 2100000, guid: 04a415757cd959f4ba29f814b7fac524, type: 2}
+  disableInteractions: 2
 --- !u!1 &1712687767
 GameObject:
   m_ObjectHideFlags: 0

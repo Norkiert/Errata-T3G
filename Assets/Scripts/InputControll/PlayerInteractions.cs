@@ -57,12 +57,12 @@ public class PlayerInteractions : MonoBehaviour
         bool interacting = Input.GetMouseButton(0);
         if (interacting != Interacting)
         {
+            Interacting = interacting;
             if (interacting)
                 OnInteractionStart?.Invoke();
             else
                 OnInteractionEnd?.Invoke();
         }
-        Interacting = interacting;
     }
 
     #endregion
@@ -81,7 +81,7 @@ public class PlayerInteractions : MonoBehaviour
         if (SelectedObject)
             SelectedObject.Deselect();
 
-        if (foundInteractable)
+        if (foundInteractable && foundInteractable.enabled)
             foundInteractable.Select();
 
         SelectedObject = foundInteractable;
