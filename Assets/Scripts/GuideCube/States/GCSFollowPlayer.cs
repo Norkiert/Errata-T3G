@@ -25,6 +25,7 @@ namespace GuideCube
         public override void Start()
         {
             controller.SetRotating(true);
+            controller.SetHightlithing(true);
         }
 
         public override void Update()
@@ -42,6 +43,12 @@ namespace GuideCube
             }
 
             controller.SetVerticalOscylation(!controller.IsOnTheWay);
+        }
+
+
+        public override void OnClicked()
+        {
+            controller.SetState(new GCSDialogue(controller, Dialogues.DialogueInkKeeper.CurrentText), this);
         }
     }
 }

@@ -41,7 +41,11 @@ namespace GuideCube
             clickable = GetComponent<Clickable>();
 
             defaultState = new GCSIdle(this);
-            SetState(defaultState);
+        }
+
+        private void Start()
+        {
+            SetState(new GCSGoTo(this, NearestPointPosition)); 
         }
 
         private void OnEnable() => clickable.OnClick += OnClicked;
@@ -62,7 +66,7 @@ namespace GuideCube
                 return;
             }
 
-            Debug.Log($"Select state {state.GetType()}");
+            Debug.Log($"GuideCube: Select state {state.GetType()}");
 
             KillCurrentState();
 
@@ -70,8 +74,11 @@ namespace GuideCube
             if (nextStates != null)
                 this.nextStates.AddRange(nextStates);
 
+            StartState(state);
+        }
+        private void StartState(GCubeState state)
+        {
             currentState = state;
-
             currentState.Start();
         }
         private void KillCurrentState()
@@ -89,18 +96,18 @@ namespace GuideCube
         {
             KillCurrentState();
 
-            GCubeState stateToSet = defaultState;
-
             if (nextStates.Count > 0)
             {
-                stateToSet = nextStates[0];
-                nextStates.RemoveAt(0); 
+                GCubeState stateToSet = nextStates[0];
+                nextStates.RemoveAt(0);
+                StartState(stateToSet);
             }
-
-            SetState(stateToSet);
+            else
+                SetState(defaultState);
         }
 
 
+        public Vector3 NearestPointPosition => Pathfinder.FindClosestPoint(Position)?.Position ?? Position;
         public Vector3 Position => transform.position;
 
 
@@ -110,7 +117,7 @@ namespace GuideCube
         private IEnumerator targetFollowing = null;
         public void GoToTarget(Vector3 target, float avaDistanceToTarget)
         {
-            if (Vector3.Distance(this.target, target) < 1)
+            if (Vector3.Distance(this.target, target) < 0.1f)
                 return;
 
             this.target = target;
@@ -148,7 +155,7 @@ namespace GuideCube
             while (true)
             {
                 // update path aftar target changed
-                if (path == null || Vector3.Distance(target, oldTarget) > 2)
+                if (path == null || Vector3.Distance(target, oldTarget) > 1)
                 {
                     //Debug.Log($"Reques new path target: {fixedTarget} old target: {oldTarget}");
                     oldTarget = target;
@@ -162,7 +169,7 @@ namespace GuideCube
                         yield break;
                     }
 
-                    validDistance = Mathf.Max(avaDistanceToTarget - Vector3.Distance(fixedTarget, target), 1);
+                    validDistance = Mathf.Max(avaDistanceToTarget - Vector3.Distance(fixedTarget, target), 0.1f);
 
                     currentPathIndex = 0;
 

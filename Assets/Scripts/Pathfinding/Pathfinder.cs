@@ -36,7 +36,7 @@ namespace Pathfinding
         public static LayerMask PathBlockers => Instance == null ? (LayerMask)defultPathBlockers : Instance.pathBlockers;
         public static bool ShowConnections => Instance == null ? false : Instance.showConnections;
 
-        private void Start()
+        private void Awake()
         {
             UpdatePoints();
         }
@@ -197,7 +197,7 @@ namespace Pathfinding
         }
 
 
-        private static Point FindClosestPoint(Vector3 position)
+        public static Point FindClosestPoint(Vector3 position)
         {
             if (allPoints.Length == 0)
                 return null;

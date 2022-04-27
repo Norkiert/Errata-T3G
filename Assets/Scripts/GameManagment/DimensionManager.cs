@@ -5,6 +5,7 @@ using Pathfinding;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Dialogues;
 
 namespace GameManagment
 {
@@ -69,7 +70,10 @@ namespace GameManagment
 
             // desactive current dimension
             if (LoadedDimension != null)
+            {
                 DesactiveDimension(LoadedDimension);
+                yield return new WaitForSeconds(0.2f);
+            }
 
             // close portal
             {
@@ -120,11 +124,16 @@ namespace GameManagment
 
             // fix if changed dimensionToLoad 
             if (LoadedDimension != dimensionToLoad)
+            {
                 LoadDimension(dimensionToLoad);
-            else
-                ActiveDimension(LoadedDimension);
+                yield break;
+            }
 
-            yield return null;
+
+            // active new dimension
+            ActiveDimension(LoadedDimension);
+            yield return new WaitForSeconds(0.2f);
+
             UpdateCamera();
 
 
@@ -154,8 +163,13 @@ namespace GameManagment
         {
             Debug.Log($"Active {dimension}");
 
+            if (dimension.BasicDialogues != null)
+                DialogueInkKeeper.AddNewText(dimension.BasicDialogues);
+
+            // active
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(dimension.SceneName));
 
+            // set
             DimensionCore dimensionCore = GetDimensionCore(dimension);
             if (dimensionCore == null)
             {
@@ -178,11 +192,11 @@ namespace GameManagment
                 {
                     case DimensionSO.CameraBackgroundType.SkyBox:
                         dimensionCore.MainPortal.SetCameraBackgroundOnSkyBox();
-                        playerController?.SetCameraBackgroundOnSkyBox(dimensionSO.cameraViewRange);
+                        playerController?.SetCameraBackgroundOnSkyBox(dimensionSO.CameraViewRange);
                         break;
                     case DimensionSO.CameraBackgroundType.SolidColor:
                         dimensionCore.MainPortal.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor);
-                        playerController?.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor, dimensionSO.cameraViewRange);
+                        playerController?.SetCameraBackgroundOnSolidColor(dimensionSO.CameraBackgroundColor, dimensionSO.CameraViewRange);
                         break;
                 }
             }
@@ -202,6 +216,9 @@ namespace GameManagment
             mainHubPortal.SetLinkedPortal(null);
 
             mainPortalPathindingPoint.SetConnectedPortalPoint(null);
+
+            if (dimension.BasicDialogues != null)
+                DialogueInkKeeper.RemoveText(dimension.BasicDialogues);
         }
 
         private DimensionCore GetDimensionCore(DimensionSO dimension)

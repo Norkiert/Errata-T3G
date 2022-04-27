@@ -1,11 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
+using NaughtyAttributes;
 
 namespace Audio
 {
     [CreateAssetMenu(fileName = "newAudioClipSO", menuName = "Audio/AudioClipSO")]
     public class AudioClipSO : ScriptableObject
     {
-        [field: SerializeField] public AudioClip Clip { get; private set; }
+        private enum Type { Single, Multiple }
+
+        [SerializeField] private Type type = Type.Single;
+        [SerializeField, ShowIf(nameof(IsSingle))] private AudioClip clip;
+        [SerializeField, HideIf(nameof(IsSingle))] private List<AudioClip> clips = new List<AudioClip>();
+
         [field: SerializeField, Range(0f, 1f)] public float Volume { get; private set; } = 0.5f;
 
         [field: SerializeField, Range(-3f, 3f)] public float Pitch { get; private set; } = 1f;
@@ -24,5 +31,9 @@ namespace Audio
             source.spatialBlend = SpiralBlend;
             source.reverbZoneMix = ReverbZoneMix;
         }
+
+        public AudioClip Clip => type == Type.Single ? clip : clips[Random.Range(0, clips.Count)];
+
+        private bool IsSingle() => type == Type.Single;
     }
 }

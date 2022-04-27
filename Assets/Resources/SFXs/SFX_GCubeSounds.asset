@@ -10,11 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1957137d81aae194e83ca6c462b7c1ee, type: 3}
-  m_Name: SFX_StormBolt03
+  m_Name: SFX_GCubeSounds
   m_EditorClassIdentifier: 
-  <Clip>k__BackingField: {fileID: 8300000, guid: 759211555814c414caf5eda3df863e1b, type: 3}
+  type: 1
+  clip: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 64f05a4cbacd77d4cbaba71e66945086, type: 3}
+  - {fileID: 8300000, guid: 168b423e90e344644b2e7a14d5ddfdb0, type: 3}
+  - {fileID: 8300000, guid: c11e30b03ca09934aa08ddea38083c7a, type: 3}
+  - {fileID: 8300000, guid: 040ab19837f37b84e9894cbff2893dd0, type: 3}
+  - {fileID: 8300000, guid: decf693df0b7bcd4a839d55e8583ff5b, type: 3}
   <Volume>k__BackingField: 0.5
   <Pitch>k__BackingField: 1
   <StereoPan>k__BackingField: 0
-  <SpiralBlend>k__BackingField: 1
+  <SpiralBlend>k__BackingField: 0
   <ReverbZoneMix>k__BackingField: 1

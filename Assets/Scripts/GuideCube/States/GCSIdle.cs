@@ -12,8 +12,20 @@ namespace GuideCube
 
         public override void Start()
         {
+            if (Vector3.Distance(controller.Position, controller.NearestPointPosition) > 0.5f)
+            {
+                controller.SetState(new GCSGoTo(controller, controller.NearestPointPosition), this);
+                return;
+            }
+
             controller.SetVerticalOscylation(true);
             controller.SetRotating(true);
+            controller.SetHightlithing(true);
+        }
+
+        public override void OnClicked()
+        {
+            controller.SetState(new GCSDialogue(controller, Dialogues.DialogueInkKeeper.CurrentText));
         }
     }
 }
