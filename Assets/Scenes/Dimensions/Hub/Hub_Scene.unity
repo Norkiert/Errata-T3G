@@ -31212,8 +31212,8 @@ MonoBehaviour:
   m_text: "bul5z_bul5z_bul5z_bul5z_bul5z_bul5z_bul5z_bul5z_bul5z_bul5z_bul\nbulbulbulbulbulbulb\ni
     b\xF3l"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4058a754eaa911146a484904328d3505, type: 2}
+  m_sharedMaterial: {fileID: 1120967222411054947, guid: 4058a754eaa911146a484904328d3505, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40184,16 +40184,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-
-
-    1. Test choice
-
-    2. Test choice'
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4058a754eaa911146a484904328d3505, type: 2}
+  m_sharedMaterial: {fileID: 1120967222411054947, guid: 4058a754eaa911146a484904328d3505, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -43791,15 +43785,14 @@ MonoBehaviour:
   openTime: 0.5
   closeTime: 0.2
   dialogueText: {fileID: 1130224864}
-  choicesText: {fileID: 1476025764}
+  choicesColor: {r: 1, g: 1, b: 0, a: 1}
   toolTipNext: {fileID: 1274067113}
   toolTipPrev: {fileID: 325820285}
   toolTipSelectOption: {fileID: 1577207411}
   textDisplayDelay: 0.04
-  maxNumberOfLetterInLine: 45
-  inkJSONTest: {fileID: 4900000, guid: ac42149649b6a1a48a4b87213d8319f5, type: 3}
   talkingSounds:
   - {fileID: 11400000, guid: 776e02c2722a286468e4b9c1aaafdccd, type: 2}
+  letterPerSound: 2
 --- !u!4 &1626460527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 861020360650854112, guid: ebca9bd19d62f64438b692022c7396ec, type: 3}

@@ -161,6 +161,7 @@ namespace Dialogues
             }
             else if (Input.GetKeyDown(KeyCode.Mouse1))
             {
+                Debug.Log(historyIndex);
                 if (historyIndex > 0)
                 {
                     historyIndex--;
@@ -196,6 +197,7 @@ namespace Dialogues
             IsDialoguePlaying = true;
             dialogueText.text = "";
             textHistory.Clear();
+            historyIndex = 0;
             dialoguePanel.SetActive(true);
 
 
