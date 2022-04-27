@@ -10,6 +10,7 @@ public class Laser : Interactable, ILogicBoolOutput
     [SerializeField, Range(0f, 1f)] private float laserSize = 0.1f;
     [SerializeField, Min(1)] private float maxLaserLength = 100f;
     [SerializeField, ReadOnly] private bool targetHit = false;
+    [SerializeField] private LayerMask layerMask = 1;
 
     private LineRenderer laser;
     private readonly List<Vector3> laserIndices = new List<Vector3>();
@@ -41,7 +42,7 @@ public class Laser : Interactable, ILogicBoolOutput
         laserIndices.Add(position);
         Ray ray = new Ray(position, direction);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, maxLaserLength, 1))
+        if (Physics.Raycast(ray, out RaycastHit hit, maxLaserLength, layerMask))
         {
             CheckHit(hit, direction);
         }
