@@ -138,7 +138,10 @@ namespace Dialogues
                 {
                     historyIndex++;
 
-                    CoroutineResetStart(textHistory[historyIndex]);
+                    string text = textHistory[historyIndex];
+                    if (text.Length < 3)
+                        text = "";
+                    CoroutineResetStart(text + ChoicesString());
                 }
                 else if (currentStory.canContinue)
                 {
@@ -161,7 +164,6 @@ namespace Dialogues
             }
             else if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                Debug.Log(historyIndex);
                 if (historyIndex > 0)
                 {
                     historyIndex--;
@@ -188,6 +190,7 @@ namespace Dialogues
                 return;
             }
 
+            Debug.Log($"Play story: {inkJSON.name}");
             currentStory = new Story(inkJSON.text);
 
             currentStory.BindExternalFunction("test", (string color) => {
@@ -231,7 +234,10 @@ namespace Dialogues
         private void ExitDialogueMode()
         {
             if (textHandler != null)
+            {
                 StopCoroutine(textHandler);
+                textHandler = null;
+            }
 
             IsDialoguePlaying = false;
             dialoguePanel.SetActive(false);
