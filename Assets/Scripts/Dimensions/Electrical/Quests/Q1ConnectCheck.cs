@@ -31,10 +31,31 @@ public class Q1ConnectCheck : MonoBehaviour
         }
         TurnOffSill();
     }
+    private IEnumerator checkDisconection;
+    private IEnumerator CheckDisconection()
+    {
+        while (con1.IsConnected && con2.IsConnected && con3.IsConnected && con4.IsConnected)
+        {
+            yield return new WaitForSeconds(checkDelay);
+        }
+        TurnOnSill();
+    }
     private void TurnOffSill()
     {
-        StopCoroutine(checkConnections);
+        if(checkConnections!=null)
+            StopCoroutine(checkConnections);
         sill.enabled = false;
         sparks.Stop();
+        checkDisconection = CheckDisconection();
+        StartCoroutine(checkDisconection);
+    }
+    private void TurnOnSill()
+    {
+        if (checkDisconection != null)
+            StopCoroutine(checkDisconection);
+        checkConnections = CheckConnections();
+        StartCoroutine(checkConnections);
+        sill.enabled = true;
+        sparks.Play();
     }
 }
