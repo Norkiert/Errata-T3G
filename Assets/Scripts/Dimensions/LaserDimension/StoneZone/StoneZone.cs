@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class StoneZone : MonoBehaviour
 {
-    [SerializeField] private Transform objectsParent;
-    [SerializeField] private List<Transform> points = new List<Transform>();
+    [SerializeField, Required] private Transform objectsParent;
+    [SerializeField, Required] private Transform pointsParent;
     [SerializeField] private List<GameObject> models = new List<GameObject>();
 
     [Header("Shape")]
@@ -21,6 +21,7 @@ public class StoneZone : MonoBehaviour
     [SerializeField, Min(0.1f)] private float disapireDistance = 1f;
 
 
+    private readonly List<Transform> points = new List<Transform>();
     private readonly Dictionary<int, List<Part>> movingParts = new Dictionary<int, List<Part>>();
 
 
@@ -42,7 +43,6 @@ public class StoneZone : MonoBehaviour
 
         Generate();
     }
-
     private void Update()
     {
         MoveObjects();
@@ -50,6 +50,8 @@ public class StoneZone : MonoBehaviour
 
     private bool IsValid()
     {
+        GetPoints();
+
         if (points.Count < 2)
         {
             Debug.LogWarning($"{name}: Number of points is less then 2!");
@@ -146,12 +148,20 @@ public class StoneZone : MonoBehaviour
         Quaternion RotationTo(Vector3 start, Vector3 end) => Quaternion.LookRotation(end - start, Vector3.right);
     }
 
-
+    private void GetPoints()
+    {
+        points.Clear();
+        for (int i = 0; i < pointsParent.childCount; i++)
+            points.Add(pointsParent.GetChild(i));
+    }
     private void Generate()
     {
         int l = objectsParent.childCount;
         for (int i = 0; i < l; i++)
             DestroyImmediate(objectsParent.GetChild(0).gameObject);
+
+        GetPoints();
+        UpdateColliders();
 
         movingParts.Clear();
         List<Transform> lastObjects = new List<Transform>();
@@ -219,7 +229,26 @@ public class StoneZone : MonoBehaviour
         }
         int RandomNegative() => Random.Range(0, 2) == 0 ? 1 : -1;
     }
+    private void UpdateColliders()
+    {
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            Transform startPoint = points[i];
+            Transform endPoint = points[i + 1];
 
+            if (!startPoint.TryGetComponent(out BoxCollider coll))
+                coll = startPoint.gameObject.AddComponent<BoxCollider>();
+
+            startPoint.rotation = Quaternion.LookRotation(endPoint.position - startPoint.position, Vector3.right);
+
+            float dist = Vector3.Distance(endPoint.position, startPoint.position);
+            coll.center = Vector3.forward * (dist / 2f);
+            coll.size = new Vector3(range * 2, range * 2, dist);
+        }
+
+        if (points[points.Count - 1].TryGetComponent(out BoxCollider endColl))
+            DestroyImmediate(endColl);
+    }
 
     private class Part
     {
