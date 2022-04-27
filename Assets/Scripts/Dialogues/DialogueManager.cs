@@ -16,26 +16,21 @@ namespace Dialogues
         [SerializeField, Min(0)] private float openTime = 0.2f;
         [SerializeField, Min(0)] private float closeTime = 0.2f;
         [SerializeField] private TextMeshProUGUI dialogueText;
-        [SerializeField] private TextMeshProUGUI choicesText;
-        private List<string> textHistory = new List<string>();
+        [SerializeField] private Color choicesColor;
+        private readonly List<string> textHistory = new List<string>();
 
         [Header("Tooltips")]
         [SerializeField] private GameObject toolTipNext;
         [SerializeField] private GameObject toolTipPrev;
         [SerializeField] private GameObject toolTipSelectOption;
         [SerializeField, Min(0)] private float textDisplayDelay = 0.04f;
-        [SerializeField, Min(0)] private int maxNumberOfLetterInLine = 50;
-
-        [Header("Ink")]
-        [SerializeField] private TextAsset inkJSONTest;
 
         [Header("Sounds")]
         [SerializeField] private List<AudioClipSO> talkingSounds = new List<AudioClipSO>();
+        [SerializeField, Min(1)] private int letterPerSound = 2;
 
         private Story currentStory;
         public bool IsDialoguePlaying { get; private set; }
-
-        private bool isHandlingText = false;
 
         public static DialogueManager instance;
         private void Awake()
@@ -49,8 +44,6 @@ namespace Dialogues
         private void Start()
         {
             ExitDialogueMode();
-
-            EnterDialogueMode(inkJSONTest);
         }
 
         private void Update()
@@ -66,32 +59,49 @@ namespace Dialogues
             if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 StartCoroutine(ContinueStory());
         }
-        private void PlayTalkingSound() {
-            int n = Random.Range(0, talkingSounds.Count - 1);
+
+
+        private void PlayTalkingSound()
+        {
+            int n = Random.Range(0, talkingSounds.Count);
             AudioManager.PlaySFX(talkingSounds[n]);
         }
 
         private IEnumerator textHandler;
         private IEnumerator DisplayText(string text)
         {
-            dialogueText.text = "";
-            foreach (char c in text)
+            text = text.Replace("<n>", "\n");
+            dialogueText.text = text;
+            dialogueText.maxVisibleCharacters = 0;
+
+            for (int i = 0; i < text.Length; i++)
             {
-                dialogueText.text += c;
+                dialogueText.maxVisibleCharacters++;
+                if (i % letterPerSound == 0)
+                    PlayTalkingSound();
                 yield return new WaitForSeconds(textDisplayDelay);
             }
+
+            textHandler = null;
         }
 
         private void CoroutineResetStart(string text)
         {
-            if (textHandler != null) StopCoroutine(textHandler);
+            if (textHandler != null)
+                StopCoroutine(textHandler);
+
             textHandler = DisplayText(text);
             StartCoroutine(textHandler);
+
+            UpdateToolTips();
         }
 
         private int historyIndex = 0;
         private IEnumerator ContinueStory(float waitTime = 0, bool start = false)
         {
+            if (waitTime > 0)
+                yield return new WaitForSeconds(waitTime);
+
             if (start)
             {
                 if (currentStory.canContinue)
@@ -99,44 +109,51 @@ namespace Dialogues
                     string text = currentStory.Continue();
                     textHistory.Add(text);
 
-                    StartCoroutine(DisplayText(text));
-                    DisplayChoices(MainTextLines(text));
+                    if (text.Length < 3)
+                        text = "";
+                    text += ChoicesString();
 
-                    if (currentStory.currentChoices.Count == 0) toolTipNext.SetActive(true);
+                    if (text == "")
+                    {
+                        ExitDialogueMode();
+                        yield break;
+                    }
+
+                    CoroutineResetStart(text);
+
+                    UpdateToolTips();
                 }
                 yield break;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (historyIndex < textHistory.Count - 1) {
+                if (textHandler != null)
+                {
+                    StopCoroutine(textHandler);
+                    textHandler = null;
+                    dialogueText.maxVisibleCharacters = dialogueText.text.Length;
+                }
+                else if (historyIndex < textHistory.Count - 1)
+                {
                     historyIndex++;
 
                     CoroutineResetStart(textHistory[historyIndex]);
-
-                    if (currentStory.currentChoices.Count == 0) toolTipNext.SetActive(true);
-                    else toolTipNext.SetActive(false);
-
-                    if (historyIndex > 0) toolTipPrev.SetActive(true);
                 }
-
                 else if (currentStory.canContinue)
                 {
                     string text = currentStory.Continue();
                     textHistory.Add(text);
                     historyIndex++;
 
-                    CoroutineResetStart(text);
-                    DisplayChoices(MainTextLines(text));
-
-                    if (currentStory.currentChoices.Count == 0) toolTipNext.SetActive(true);
-                    else toolTipNext.SetActive(false);
-
-                    if (historyIndex > 0) toolTipPrev.SetActive(true);
+                    if (text.Length < 3)
+                        text = "";
+                    CoroutineResetStart(text + ChoicesString());
                 }
                 else
                 {
-                    if (currentStory.currentChoices.Count > 0) yield break;
+                    if (currentStory.currentChoices.Count > 0)
+                        yield break;
 
                     yield return new WaitForSeconds(0.2f);
                     CloseDialoguePanel();
@@ -147,14 +164,19 @@ namespace Dialogues
                 if (historyIndex > 0)
                 {
                     historyIndex--;
-                    Debug.Log(historyIndex);
                     CoroutineResetStart(textHistory[historyIndex]);
-                
-                    if (historyIndex == 0) toolTipPrev.SetActive(false);
-
-                    if (historyIndex < textHistory.Count - 1) toolTipNext.SetActive(true);
                 }
             }
+        }
+
+        private void UpdateToolTips()
+        {
+            bool chcivedChoices = currentStory.currentChoices.Count > 0;
+            toolTipNext.SetActive(historyIndex < textHistory.Count - 1 || chcivedChoices == false);
+            toolTipPrev.SetActive(historyIndex > 0);
+
+            bool showChoices = chcivedChoices && historyIndex == textHistory.Count - 1;
+            toolTipSelectOption.SetActive(showChoices);
         }
 
         public void EnterDialogueMode(TextAsset inkJSON)
@@ -173,7 +195,7 @@ namespace Dialogues
 
             IsDialoguePlaying = true;
             dialogueText.text = "";
-            choicesText.text = "";
+            textHistory.Clear();
             dialoguePanel.SetActive(true);
 
 
@@ -214,19 +236,19 @@ namespace Dialogues
             dialogueText.text = "";
         }
 
-        private void DisplayChoices(int mainTextLines)
+        private string ChoicesString()
         {
             List<Choice> currentChoices = currentStory.currentChoices;
 
-            choicesText.text = "";
-            for (int i = 0; i < mainTextLines; i++)
-                choicesText.text += "\n";
+            if (currentChoices.Count == 0)
+                return "";
 
+            string s = $"<color=#{ColorToHex(choicesColor)}>";
             for (int i = 0; i < currentChoices.Count; i++)
-                choicesText.text += $"\n{i + 1}. {currentChoices[i].text}";
-        }
-        private int MainTextLines(string text) => Mathf.FloorToInt(text.Length / (float)maxNumberOfLetterInLine);
+                s += $"{i + 1}. {currentChoices[i].text}\n";
 
+            return s;
+        }
 
         public void MakeChoice(int choiceIndex)
         {
@@ -250,6 +272,7 @@ namespace Dialogues
             }
             Debug.Log($"Selected color {c}");
         }
-    }
 
+        private string ColorToHex(Color color) => Mathf.RoundToInt(color.r * 255).ToString("X2") + Mathf.RoundToInt(color.g * 255).ToString("X2") + Mathf.RoundToInt(color.b * 255).ToString("X2");
+    }
 }

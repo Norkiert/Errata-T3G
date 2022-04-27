@@ -23,6 +23,13 @@ namespace GuideCube
 
         public override void Start()
         {
+            if (dialogueText == null)
+            {
+                Debug.LogWarning("GuideCube: Can't enter in dialogue state! text is null!");
+                controller.EndCurrentState();
+                return;
+            }
+
             controller.SetVerticalOscylation(true);
             controller.SetRotating(true);
             DialogueManager.instance.EnterDialogueMode(dialogueText);

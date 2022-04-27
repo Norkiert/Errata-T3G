@@ -10,13 +10,18 @@ namespace GameManagment
     {
         public enum CameraBackgroundType { SkyBox, SolidColor }
 
+        [field: Header("Names")]
         [field: SerializeField] public string DimensionName { get; private set; } = "";
         [field: SerializeField] public string SceneName { get; private set; } = "";
 
 
+        [field: Header("Environment")]
         [field: SerializeField] public CameraBackgroundType CameraBackground { get; private set; } = CameraBackgroundType.SkyBox;
         [field: SerializeField, ShowIf(nameof(IsShownCameraBackgroundColor))] public Color CameraBackgroundColor { get; private set; } = Color.white;
-        [field: SerializeField] public float cameraViewRange { get; private set; } = 1000f;
+        [field: SerializeField] public float CameraViewRange { get; private set; } = 1000f;
+
+        [field: Header("Dialoguues")]
+        [field: SerializeField] public TextAsset BasicDialogues { get; private set; } = null;
 
 
         #region -inspektor methods-
