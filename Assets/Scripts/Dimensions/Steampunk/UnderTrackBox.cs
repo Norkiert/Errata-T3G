@@ -50,7 +50,7 @@ public class UnderTrackBox : Clickable
 
         var point1 = point0 + transform.parent.rotation * playerFacing * (3 * height);
 
-        Debug.DrawLine(point0, point1);
+        //Debug.DrawLine(point0, point1);
     }
 
     [Button("Update Box Position")]
@@ -59,6 +59,7 @@ public class UnderTrackBox : Clickable
         if (!connectedTrack)
         {
             Debug.LogError("Box has no track assigned.");
+            return;
         }
 
         float trackHeight = connectedTrack.TrackType switch
@@ -72,7 +73,8 @@ public class UnderTrackBox : Clickable
             TrackMapController.TrackType.Elevator => ElevatorTrack.height,
             _ => BasicTrack.height
         };
-        transform.localPosition = connectedTrack.transform.localPosition - Vector3.up * (trackHeight + height * transform.localScale.y / defaultScale);
+        transform.position = connectedTrack.transform.position;
+        transform.position -= Vector3.up * (trackHeight * 2 + height * transform.localScale.y / defaultScale);
     }
     
     protected void Push()
