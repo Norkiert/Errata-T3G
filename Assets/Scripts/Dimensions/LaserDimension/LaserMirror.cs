@@ -54,6 +54,7 @@ public class LaserMirror : Interactable
 
     private void StartRotateMirror()
     {
+        HideUI();
         playerController.FreezCamera = true;
         playerController.FreezMovement = true;
         StartCoroutine(RotateMirror());
