@@ -49,8 +49,9 @@ public class HubGCubeBehaviours : MonoBehaviour
     private void StartFirstDialogue()
     {
         startFirstDialogue = false;
-        cubeController.SetState(new GCSGoTo(cubeController, cubeDialoguePoint.Position),
+        cubeController.SetState(
             new List<GCubeState> {
+            new GCSGoTo(cubeController, cubeDialoguePoint.Position),
             new GCSDialogue(cubeController, dialogueText, 50f),
             new GCSFollowPlayer(cubeController)
             });

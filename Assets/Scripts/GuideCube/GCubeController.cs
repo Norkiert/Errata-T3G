@@ -21,10 +21,7 @@ namespace GuideCube
         [Header("Distances")]
         [SerializeField, Min(1)] private float maxDistFollowPlayer = 20f;
         [SerializeField, Min(1)] private float maxDistDialogue = 20f;
-        public float MaxDistFollowPlayer => maxDistFollowPlayer;
-        public float MaxDistDialogue => maxDistDialogue;
-
-
+        
         private GCubeState currentState;
         private GCubeState defaultState;
         private readonly List<GCubeState> nextStates = new List<GCubeState>();
@@ -33,9 +30,20 @@ namespace GuideCube
         private HighlightableOnSelect highlightable;
         private Clickable clickable;
 
+        public static GCubeController Instance { get; private set; } = null;
+
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Debug.LogWarning($"{nameof(GCubeController)} already exist!");
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+
             Player = FindObjectOfType<PlayerController>();
             highlightable = GetComponent<HighlightableOnSelect>();
             clickable = GetComponent<Clickable>();
@@ -56,42 +64,24 @@ namespace GuideCube
             currentState?.Update();
         }
 
-        public void SetState(GCubeState state) => SetState(state, (List<GCubeState>)null);
-        public void SetState(GCubeState state, GCubeState nextState) => SetState(state, new List<GCubeState> { nextState });
-        public void SetState(GCubeState state, List<GCubeState> nextStates)
+        public void SetState(GCubeState state) => SetState(new List<GCubeState> { state });
+        public void SetState(GCubeState state, GCubeState nextState) => SetState(new List<GCubeState> { state, nextState });
+        public void SetState(List<GCubeState> followinStates)
         {
-            if (state == null)
-            {
-                Debug.LogWarning($"{name}: Attepted set null state!");
+            if (!CheckStateList(followinStates))
                 return;
-            }
 
-            Debug.Log($"GuideCube: Select state {state.GetType()}");
+            GCubeState stateToStart = followinStates[0];
 
             KillCurrentState();
 
-            this.nextStates.Clear();
-            if (nextStates != null)
-                this.nextStates.AddRange(nextStates);
+            nextStates.Clear();
+            for (int i = 1; i < followinStates.Count; i++)
+                nextStates.Add(followinStates[i]);
 
-            StartState(state);
+            StartState(stateToStart);
         }
-        private void StartState(GCubeState state)
-        {
-            currentState = state;
-            currentState.Start();
-        }
-        private void KillCurrentState()
-        {
-            SetRotating(false);
-            SetVerticalOscylation(false);
-            CancelTarget();
-            SetHightlithing(false);
 
-            currentState?.End();
-
-            currentState = null;
-        }
         public void EndCurrentState()
         {
             KillCurrentState();
@@ -106,9 +96,55 @@ namespace GuideCube
                 SetState(defaultState);
         }
 
+        private void StartState(GCubeState state)
+        {
+            Debug.Log($"GuideCube: Select state {state.GetType()}");
+            currentState = state;
+            currentState.Start();
+        }
+        private void KillCurrentState()
+        {
+            SetRotating(false);
+            SetVerticalOscylation(false);
+            CancelTarget();
+            SetHightlithing(false);
+
+            currentState?.End();
+
+            currentState = null;
+        }
+
+        private bool CheckStateList(List<GCubeState> states)
+        {
+            if (states == null)
+            {
+                Debug.LogWarning($"{name}: Attepted set null state!");
+                return false;
+            }
+
+            for (int i = 0; i < states.Count; i++)
+                if (states[i] == null)
+                {
+                    Debug.LogWarning($"{name}: found null state on followinStates list!");
+                    return false;
+                }
+
+            if (states.Count == 0)
+            {
+                Debug.LogWarning($"{name}: Attepted set empty state list!");
+                return false;
+            }
+
+            return true;
+        }
 
         public Vector3 NearestPointPosition => Pathfinder.FindClosestPoint(Position)?.Position ?? Position;
         public Vector3 Position => transform.position;
+
+
+        public float MaxDistFollowPlayer => maxDistFollowPlayer;
+        public float MaxDistDialogue => maxDistDialogue;
+        public GCubeState CurrentState => currentState;
 
 
         #region -target following-
