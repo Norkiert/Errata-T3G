@@ -56,8 +56,16 @@ namespace Dialogues
             if (Input.GetKeyDown(KeyCode.Alpha4) && currentStory.currentChoices.Count >= 4) MakeChoice(3);
             if (Input.GetKeyDown(KeyCode.Alpha5) && currentStory.currentChoices.Count >= 5) MakeChoice(4);
 
+            Debug.Log(continueCoroutine);
+
             if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
-                StartCoroutine(ContinueStory());
+            {
+                if (continueCoroutine == null)
+                {
+                    continueCoroutine = ContinueStory();
+                    StartCoroutine(continueCoroutine);
+                }
+            }
         }
 
 
@@ -70,6 +78,8 @@ namespace Dialogues
         private IEnumerator textHandler;
         private IEnumerator DisplayText(string text)
         {
+            continueCoroutine = null;
+            Debug.Log("Index: " + historyIndex);
             text = text.Replace("<n>", "\n");
             dialogueText.text = text;
             dialogueText.maxVisibleCharacters = 0;
@@ -97,13 +107,16 @@ namespace Dialogues
         }
 
         private int historyIndex = 0;
+        private IEnumerator continueCoroutine = null;
         private IEnumerator ContinueStory(float waitTime = 0, bool start = false)
         {
+            Debug.Log("start: " + start);
             if (waitTime > 0)
                 yield return new WaitForSeconds(waitTime);
 
             if (start)
             {
+                Debug.Log("start");
                 if (currentStory.canContinue)
                 {
                     string text = currentStory.Continue();
@@ -128,10 +141,13 @@ namespace Dialogues
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                Debug.Log("dupa");
+
                 if (textHandler != null)
                 {
                     StopCoroutine(textHandler);
                     textHandler = null;
+                    continueCoroutine = null;
                     dialogueText.maxVisibleCharacters = dialogueText.text.Length;
                 }
                 else if (historyIndex < textHistory.Count - 1)
@@ -212,7 +228,8 @@ namespace Dialogues
                 .Join(dialoguePanel.transform.DOScale(Vector3.one, openTime).SetEase(Ease.InQuad))
                 ;
 
-            StartCoroutine(ContinueStory(openTime, true));
+            continueCoroutine = ContinueStory(openTime, true);
+            StartCoroutine(continueCoroutine);
         }
 
         public void CloseDialoguePanel(bool anim = true)
