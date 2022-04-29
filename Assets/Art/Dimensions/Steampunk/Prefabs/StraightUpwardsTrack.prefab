@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2763616436780964505}
   - component: {fileID: 8875276870772241506}
   - component: {fileID: 1874591586703793905}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube.046
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081584036657692832}
-  m_Mesh: {fileID: 3048851310703494, guid: a176136296931584fadedbe73cfbcd42, type: 3}
+  m_Mesh: {fileID: 3048851310703494, guid: dda45c1583073764aa83ff2361ad20ad, type: 3}
 --- !u!23 &2763616436780964505
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 3048851310703494, guid: a176136296931584fadedbe73cfbcd42, type: 3}
+  m_Mesh: {fileID: 3048851310703494, guid: dda45c1583073764aa83ff2361ad20ad, type: 3}
 --- !u!114 &1874591586703793905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,16 +113,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: -0.0000027120113, y: 0.09058574, z: 0.013157487}
+  center: {x: -0.0000027120113, y: 0.08869648, z: 0.013157487}
   displayAsRelative: 1
-  XpYpZp: {x: 0.26397675, y: 0.35443732, z: 0.49517894}
-  XpYpZm: {x: 0.26397675, y: 0.35443732, z: -0.49517894}
-  XpYmZp: {x: 0.26397675, y: -0.35443732, z: 0.49517894}
-  XpYmZm: {x: 0.26397675, y: -0.35443732, z: -0.49517894}
-  XmYpZp: {x: -0.26397675, y: 0.35443732, z: 0.49517894}
-  XmYpZm: {x: -0.26397675, y: 0.35443732, z: -0.49517894}
-  XmYmZp: {x: -0.26397675, y: -0.35443732, z: 0.49517894}
-  XmYmZm: {x: -0.26397675, y: -0.35443732, z: -0.49517894}
+  XpYpZp: {x: 0.26397675, y: 0.35254806, z: 0.49517894}
+  XpYpZm: {x: 0.26397675, y: 0.35254806, z: -0.49517894}
+  XpYmZp: {x: 0.26397675, y: -0.35254806, z: 0.49517894}
+  XpYmZm: {x: 0.26397675, y: -0.35254806, z: -0.49517894}
+  XmYpZp: {x: -0.26397675, y: 0.35254806, z: 0.49517894}
+  XmYpZm: {x: -0.26397675, y: 0.35254806, z: -0.49517894}
+  XmYmZp: {x: -0.26397675, y: -0.35254806, z: 0.49517894}
+  XmYmZm: {x: -0.26397675, y: -0.35254806, z: -0.49517894}
 --- !u!1 &2961558601399339758
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2961558601399339758}
-  m_Mesh: {fileID: -362046790695249943, guid: a176136296931584fadedbe73cfbcd42, type: 3}
+  m_Mesh: {fileID: -362046790695249943, guid: dda45c1583073764aa83ff2361ad20ad, type: 3}
 --- !u!23 &4285706656378027448
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -362046790695249943, guid: a176136296931584fadedbe73cfbcd42, type: 3}
+  m_Mesh: {fileID: -362046790695249943, guid: dda45c1583073764aa83ff2361ad20ad, type: 3}
 --- !u!114 &6091171579299764502
 MonoBehaviour:
   m_ObjectHideFlags: 0
