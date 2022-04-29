@@ -42,8 +42,8 @@ public class SplitterTrackMovingElement : MonoBehaviour
             }
         }
     }
-    public void RotateLeftInstant() => transform.Rotate(Vector3.forward, 100f);
-    public void RotateRightInstant() => transform.Rotate(Vector3.forward, -100f);
+    public void RotateLeftInstant() => transform.Rotate(Vector3.up, 100f);
+    public void RotateRightInstant() => transform.Rotate(Vector3.up, -100f);
     public IEnumerator RotateLeft()
     {
         for (; ; )

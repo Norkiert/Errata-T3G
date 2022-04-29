@@ -1002,9 +1002,14 @@ public class TrackEditor : EditorWindow
                 };
                 SplitterTrack splitterTrack = (SplitterTrack)SelectedTrack;
                 var hammerFacingCopy = splitterTrack.hammerFacingRight;
-                splitterTrack.hammerFacingRight = GUILayout.SelectionGrid(splitterTrack.hammerFacingRight ? 1 : 0, buttonStrings, 2, labelStyle) == 1;
-                if(hammerFacingCopy != splitterTrack.hammerFacingRight)
+                bool hammerFacingRightValue = GUILayout.SelectionGrid(splitterTrack.hammerFacingRight ? 1 : 0, buttonStrings, 2, labelStyle) == 1;
+                if(hammerFacingCopy != hammerFacingRightValue)
                 {
+                    SerializedObject serializedObject = new SerializedObject(splitterTrack);
+                    SerializedProperty serializedProperty = serializedObject.FindProperty("hammerFacingRight");
+                    serializedProperty.boolValue = hammerFacingRightValue;
+                    serializedObject.ApplyModifiedProperties();
+
                     if (splitterTrack.hammerFacingRight)
                     {
                         splitterTrack.hammer.RotateRightInstant();
