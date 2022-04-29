@@ -6,8 +6,7 @@ using NaughtyAttributes;
 public class UnderTrackBox : Clickable
 {
     public const string PrefabPath = "Assets/Art/Dimensions/Electrical/Prefabs/wooden_box.prefab";
-    public const float height = 0.8384452f;
-    public const float defaultScale = 83.97792f;
+    public const float height = 0.02055f;
 
     [SerializeField] protected BasicTrack connectedTrack;
     protected Transform player;
@@ -25,32 +24,6 @@ public class UnderTrackBox : Clickable
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-
-        Vector3 playerFacing;
-
-        var playerRelativeAngle = (player.rotation * Quaternion.Inverse(transform.parent.rotation)).eulerAngles.y;
-
-        if (playerRelativeAngle > 45f && playerRelativeAngle <= 135f)           // Xplus
-        {
-            playerFacing = Vector3.right;
-        }
-        else if (playerRelativeAngle > 135f && playerRelativeAngle <= 225f)     // Zminus
-        {
-            playerFacing = Vector3.back;
-        }
-        else if (playerRelativeAngle > 225f && playerRelativeAngle <= 315f)     // Xminus
-        {
-            playerFacing = Vector3.left;
-        }
-        else // if (playerRelativeAngle > 315f || playerRelativeAngle <= 45f)   // Zplus
-        {
-            playerFacing = Vector3.forward;
-        }
-        var point0 = transform.position;
-
-        var point1 = point0 + transform.parent.rotation * playerFacing * (3 * height);
-
-        //Debug.DrawLine(point0, point1);
     }
 
     [Button("Update Box Position")]
@@ -73,8 +46,10 @@ public class UnderTrackBox : Clickable
             TrackMapController.TrackType.Elevator => ElevatorTrack.height,
             _ => BasicTrack.height
         };
+
         transform.position = connectedTrack.transform.position;
-        transform.position -= Vector3.up * (trackHeight * 2 + height * transform.localScale.y / defaultScale);
+
+        transform.position -= Vector3.up * (trackHeight * connectedTrack.transform.lossyScale.y + height * transform.localScale.y);
     }
     
     protected void Push()
