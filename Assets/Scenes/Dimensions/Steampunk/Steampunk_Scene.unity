@@ -17907,7 +17907,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3912743327701166593, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_RootOrder
@@ -25147,6 +25147,91 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
   m_PrefabInstance: {fileID: 1614647404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1617129587
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1685021344}
+    m_Modifications:
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_RootOrder
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362359355755898385, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: m_Name
+      value: Q3CollectorTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519338467413267858, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: _posX
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519338467413267858, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: _posZ
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519338467413267858, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 1685021343}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+--- !u!114 &1617129588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8519338467413267858, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+  m_PrefabInstance: {fileID: 1617129587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6187d50e17872c848abf790f71ba890e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1617129589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2729833008331422891, guid: 145a2f9013640094ebb017fd116979a2, type: 3}
+  m_PrefabInstance: {fileID: 1617129587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1622012440
 GameObject:
   m_ObjectHideFlags: 0
@@ -26265,9 +26350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zeroPoint: {fileID: 2056533615}
-  trackMapX: 000000000000000000000000000000000000000000000000010000000200000003000000040000000500000005000000030000000200000001000000000000000400000005000000fffffffffefffffffdfffffffcffffff0600000006000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f00000010000000110000001200000012000000fbfffffffafffffff9fffffff8fffffff8fffffff7fffffff6fffffff7fffffff6fffffff8fffffff5fffffff4fffffff3ffffff
-  trackMapY: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  trackMapZ: 00000000fffffffffefffffffdfffffffcfffffffbffffff0000000000000000000000000000000000000000ffffffff01000000010000000100000001000000010000000100000001000000010000000100000001000000fffffffffeffffff010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000200000001000000010000000100000001000000000000000000000000000000fdfffffffdfffffffdfffffffdfffffffdfffffffdffffff
+  trackMapX: 000000000000000000000000000000000000000000000000010000000200000003000000040000000500000005000000030000000200000001000000000000000400000005000000fffffffffefffffffdfffffffcffffff0600000006000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f00000010000000110000001200000012000000fbfffffffafffffff9fffffff8fffffff8fffffff7fffffff6fffffff7fffffff6fffffff8fffffff5fffffff4fffffff3ffffff06000000
+  trackMapY: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  trackMapZ: 00000000fffffffffefffffffdfffffffcfffffffbffffff0000000000000000000000000000000000000000ffffffff01000000010000000100000001000000010000000100000001000000010000000100000001000000fffffffffeffffff010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000200000001000000010000000100000001000000000000000000000000000000fdfffffffdfffffffdfffffffdfffffffdfffffffdfffffffbffffff
   trackMapTracks:
   - {fileID: 307352979}
   - {fileID: 1835256213}
@@ -26320,6 +26405,7 @@ MonoBehaviour:
   - {fileID: 524628232}
   - {fileID: 239027885}
   - {fileID: 1874223234}
+  - {fileID: 1617129588}
 --- !u!4 &1685021344
 Transform:
   m_ObjectHideFlags: 0
@@ -26383,6 +26469,7 @@ Transform:
   - {fileID: 524628233}
   - {fileID: 239027886}
   - {fileID: 1874223235}
+  - {fileID: 1617129589}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
