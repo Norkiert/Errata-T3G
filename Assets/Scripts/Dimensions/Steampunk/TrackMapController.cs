@@ -47,7 +47,6 @@ public class TrackMapController : MonoBehaviour
         {
             trackMap[position] = track;
             track.trackMapController = this;
-            track.position = position;
             track.InitPos(position);
             return true;
         }
