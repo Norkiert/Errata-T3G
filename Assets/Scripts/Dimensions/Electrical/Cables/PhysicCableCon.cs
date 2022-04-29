@@ -59,17 +59,19 @@ public class PhysicCableCon : Liftable
         foreach (var s in previousPoint.GetComponents<SpringJoint>())
             if (s.connectedBody == thisRB)
                 spring = s;
-        spring.connectedBody = null;
+        if (spring != null)
+            Destroy(spring);
 
         while (IsLift)
         {
-            if (Vector3.Distance(transform.position, previousPoint.position) > 0.1)
-                previousPoint.position += (transform.position - previousPoint.position) * Mathf.Clamp01(Time.deltaTime * 20);
+            if (Vector3.Distance(transform.position, previousPoint.position) > 0)
+                previousPoint.position += (transform.position - previousPoint.position) * Mathf.Clamp01(Time.deltaTime * 100);
             yield return null;
         }
 
         previousRB.isKinematic = false;
-        spring.connectedBody = thisRB;
+        spring = previousPoint.gameObject.AddComponent<SpringJoint>();
+        cable.SetSpirng(spring, thisRB);
     }
 
     private bool CanConnect(Connector secondConnector) => secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType && secondConnector.ConnectionColor == _connector.ConnectionColor;

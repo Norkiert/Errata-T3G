@@ -212,8 +212,15 @@ public class PhysicCable : MonoBehaviour
             Transform nextPoint = points[i + 1];
             Transform connector = connectors[i].transform;
             connector.position = CountConPos(lastPoint.position, nextPoint.position);
-            connector.rotation = Quaternion.LookRotation(nextPoint.position - connector.position);
-            connector.localScale = CountSizeOfCon(lastPoint.position, nextPoint.position);
+            if (lastPoint.position == nextPoint.position || nextPoint.position == connector.position)
+            {
+                connector.localScale = Vector3.zero;
+            }
+            else
+            {
+                connector.rotation = Quaternion.LookRotation(nextPoint.position - connector.position);
+                connector.localScale = CountSizeOfCon(lastPoint.position, nextPoint.position);
+            }
 
             if (isConnected)
                 cableLength += (lastPoint.position - nextPoint.position).magnitude;
@@ -247,7 +254,7 @@ public class PhysicCable : MonoBehaviour
     private string PointName(int index) => $"{cloneText}_{index}_Point";
 
 
-    private void SetSpirng(SpringJoint spring, Rigidbody connectedBody)
+    public void SetSpirng(SpringJoint spring, Rigidbody connectedBody)
     {
         spring.connectedBody = connectedBody;
         spring.spring = springForce;

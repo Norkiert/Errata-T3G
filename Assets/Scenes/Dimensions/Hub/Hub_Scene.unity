@@ -26940,7 +26940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeDockingPoint: {fileID: 1229350836}
-  startFirstDialogue: 1
+  startFirstDialogue: 0
   firstDialoguedealy: 1.5
   cubeDialoguePoint: {fileID: 441542762}
   dialogueText: {fileID: 4900000, guid: fc3a6441d6d30664daf9e06f2d7971a2, type: 3}
@@ -50251,9 +50251,9 @@ SpringJoint:
   m_GameObject: {fileID: 1782244921}
   m_ConnectedBody: {fileID: 3266258784225638123}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.5, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.0041205734, z: -0.27949154}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
   m_Spring: 200
   m_Damper: 0.2
@@ -55684,7 +55684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1966852229
 Transform:
   m_ObjectHideFlags: 0
