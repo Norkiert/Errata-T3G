@@ -56,8 +56,6 @@ namespace Dialogues
             if (Input.GetKeyDown(KeyCode.Alpha4) && currentStory.currentChoices.Count >= 4) MakeChoice(3);
             if (Input.GetKeyDown(KeyCode.Alpha5) && currentStory.currentChoices.Count >= 5) MakeChoice(4);
 
-            Debug.Log(continueCoroutine);
-
             if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
             {
                 if (continueCoroutine == null)
@@ -92,6 +90,12 @@ namespace Dialogues
                 yield return new WaitForSeconds(textDisplayDelay);
             }
 
+            
+            
+            string choices = ChoicesString();
+            dialogueText.maxVisibleCharacters += choices.Length;
+            dialogueText.text += choices;
+
             textHandler = null;
         }
 
@@ -124,7 +128,6 @@ namespace Dialogues
 
                     if (text.Length < 3)
                         text = "";
-                    text += ChoicesString();
 
                     if (text == "")
                     {
@@ -157,7 +160,7 @@ namespace Dialogues
                     string text = textHistory[historyIndex];
                     if (text.Length < 3)
                         text = "";
-                    CoroutineResetStart(text + ChoicesString());
+                    CoroutineResetStart(text);
                 }
                 else if (currentStory.canContinue)
                 {
@@ -167,7 +170,7 @@ namespace Dialogues
 
                     if (text.Length < 3)
                         text = "";
-                    CoroutineResetStart(text + ChoicesString());
+                    CoroutineResetStart(text);
                 }
                 else
                 {

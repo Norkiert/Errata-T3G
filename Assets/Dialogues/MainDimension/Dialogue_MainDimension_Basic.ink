@@ -2,4 +2,7 @@
 
 === M_B01 ===
 MainDimenison. Bul pytania ból półśkię źńąki
-	-> END
+    + [bul 1]
+        -> END
+    + [bul 2]
+	    -> END
