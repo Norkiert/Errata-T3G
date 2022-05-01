@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-[System.Serializable]
+
 public static class HroberPrefs
 {
     public static HroberPrefsData data;
@@ -55,7 +55,7 @@ public static class HroberPrefs
         Save();
     }
 
-    static void Load()
+    public static void Load()
     {
         string path = Application.persistentDataPath + "/hrober.json";
 
