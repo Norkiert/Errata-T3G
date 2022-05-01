@@ -20,7 +20,7 @@ public static class SaveManager
         }
 
         save = SaveLaser(save);
-        
+
         string saveJson = JsonUtility.ToJson(save);
 
         File.WriteAllText(path, saveJson);
@@ -46,7 +46,6 @@ public static class SaveManager
     {
         if (!SceneManager.GetSceneByName("SpaceLaser_Scene").isLoaded)
         {
-            Debug.LogWarning("Laser scene is not loaded!");
             return save;
         }
 
@@ -71,10 +70,14 @@ public static class SaveManager
 
         LaserMirror[] mirrors = GameObject.FindObjectsOfType<LaserMirror>();
 
+        if (mirrors.Length != save.mirrorsRotations.Count) return;
+
         for (int i = 0; i < save.mirrorsRotations.Count; i++)
         {
             mirrors[i].gameObject.transform.eulerAngles = save.mirrorsRotations[i];
         }
         Debug.Log("loaded laser");
     }
+
+    
 }
