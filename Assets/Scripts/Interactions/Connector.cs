@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using Logic;
+using Audio;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Connector : MonoBehaviour, ILogicBoolOutput
@@ -24,6 +25,7 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     [Header("Object to set")]
     [SerializeField, Required] private Transform connectionPoint;
     [SerializeField] private MeshRenderer collorRenderer;
+    [SerializeField] private AudioClipSO connectSound;
 
 
     private FixedJoint fixedJoint;
@@ -48,7 +50,7 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         UpdateConnectorColor();
     }
 
-    private void OnDisable() => Disconnect();
+    private void OnDisable() => Disconnect(false);
 
     public void SetAsConnectedTo(Connector secondConnector)
     {
@@ -56,7 +58,7 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
     }
 
-    public void Connect(Connector secondConnector)
+    public void Connect(Connector secondConnector, bool playSound)
     {
         if (secondConnector == null)
         {
@@ -65,7 +67,7 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         }
 
         if (IsConnected)
-            Disconnect();
+            Disconnect(true);
 
         secondConnector.transform.rotation = ConnectionRotation * secondConnector.RotationOffset;
         secondConnector.transform.position = ConnectionPosition - (secondConnector.ConnectionPosition - secondConnector.transform.position);
@@ -78,9 +80,12 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         if (makeConnectionKinematic)
             secondConnector.Rigidbody.isKinematic = true;
         ConnectedTo = secondConnector;
+
+        if (playSound && connectSound)
+            AudioManager.PlaySFX(connectSound, transform.position);
     }
 
-    public void Disconnect(Connector onlyThis = null)
+    public void Disconnect(bool playSound, Connector onlyThis = null)
     {
         if (ConnectedTo == null || onlyThis != null && onlyThis != ConnectedTo)
             return;
@@ -93,6 +98,9 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         if (makeConnectionKinematic)
             toDisconect.Rigidbody.isKinematic = wasConnectionKinematic;
         toDisconect.Disconnect(this);
+
+        if (playSound && connectSound)
+            AudioManager.PlaySFX(connectSound, transform.position);
     }
 
 

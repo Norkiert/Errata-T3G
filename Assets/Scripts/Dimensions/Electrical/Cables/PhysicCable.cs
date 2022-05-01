@@ -235,8 +235,8 @@ public class PhysicCable : MonoBehaviour
                 timeToBrake -= Time.deltaTime;
                 if (timeToBrake < 0f)
                 {
-                    startConnector.Disconnect();
-                    endConnector.Disconnect();
+                    startConnector.Disconnect(true);
+                    endConnector.Disconnect(true);
                     timeToBrake = minBrakeTime;
                 }
             }

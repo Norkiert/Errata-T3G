@@ -21,7 +21,7 @@ public class PhysicCableCon : Liftable
         Interactable selecredObject = FindObjectOfType<PlayerInteractions>().SelectedObject;
         if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector) && CanConnect(secondConnector))
         {
-            secondConnector.Connect(_connector);
+            secondConnector.Connect(_connector, true);
         }
     }
     public override void PickUp(int layer)
@@ -29,7 +29,7 @@ public class PhysicCableCon : Liftable
         base.PickUp(layer);
 
         if (_connector.ConnectedTo)
-            _connector.Disconnect();
+            _connector.Disconnect(true);
 
 
 

@@ -140,6 +140,11 @@ namespace Audio
             }
 
             AudioSource source = GetFreeAudioSource();
+            if (source == null)
+            {
+                Debug.LogWarning("Invalid free aadio source");
+                return;
+            }
 
             if (parent == null)
             {
@@ -165,6 +170,12 @@ namespace Audio
 
         private static AudioSource GetFreeAudioSource()
         {
+            if (Application.isPlaying == false)
+            {
+                Debug.LogWarning("Tried play sound on unload scene");
+                return null;
+            }
+
             if (unusedAudioSources.Count > 0)
             {
                 AudioSource source = unusedAudioSources[0];
