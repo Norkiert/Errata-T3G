@@ -34,4 +34,15 @@ public class HroberPrefsReset : MonoBehaviour
         ResetSaveGame();
         ResetHroberPrefs();
     }
+
+    public static void ResetSave()
+    {
+        string path = Application.persistentDataPath + "/errata.json";
+        if (File.Exists(path))
+        {
+            SaveData save = new SaveData();
+            string json = JsonUtility.ToJson(save);
+            File.WriteAllText(path, json);
+        }
+    }
 }

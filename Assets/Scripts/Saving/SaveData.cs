@@ -7,4 +7,8 @@ using UnityEngine.SceneManagement;
 public class SaveData
 {
     public List<SVector3> mirrorsRotations = new List<SVector3>();
+
+    public List<string> cableStartTarget = new List<string>();
+    public List<string> cableEndTarget = new List<string>();
+    public List<ListWrapper> cablePartsLocation = new List<ListWrapper>();
 }

@@ -20,6 +20,7 @@ public static class SaveManager
         }
 
         save = SaveLaser(save);
+        save = SaveElectrical(save);
 
         string saveJson = JsonUtility.ToJson(save);
 
@@ -30,6 +31,7 @@ public static class SaveManager
 
     public static void LoadGame()
     {
+
         string path = Application.persistentDataPath + "/errata.json";
         if (File.Exists(path))
         {
@@ -37,6 +39,7 @@ public static class SaveManager
             SaveData save = JsonUtility.FromJson<SaveData>(json);
 
             LoadLaser(save);
+            LoadElectrical(save);
         }
 
         Debug.Log("loaded game");
@@ -79,5 +82,91 @@ public static class SaveManager
         Debug.Log("loaded laser");
     }
 
-    
+    static SaveData SaveElectrical(SaveData save)
+    {
+        if (!SceneManager.GetSceneByName("Electrical_Scene").isLoaded)
+        {
+            return save;
+        }
+
+        PhysicCable[] cables = GameObject.FindObjectsOfType<PhysicCable>();
+
+        save.cableEndTarget.Clear();
+        save.cableStartTarget.Clear();
+        save.cablePartsLocation.Clear();
+
+        for (int i = 1; i < cables.Length; i++)
+        {
+            Connector[] startEnd = cables[i].gameObject.GetComponentsInChildren<Connector>();
+            SpringJoint[] points = cables[i].gameObject.GetComponentsInChildren<SpringJoint>();
+
+            Connector start = startEnd[0];
+            Connector end = startEnd[1];
+
+            if (start.ConnectedTo != null) {
+                Connector female = start.ConnectedTo;
+                save.cableStartTarget.Add(female.gameObject.name);
+
+            } else {
+                save.cableStartTarget.Add("");
+            }
+
+            if (end.ConnectedTo != null) {
+                Connector female = end.ConnectedTo;
+                save.cableEndTarget.Add(female.gameObject.name);
+            } else {
+                save.cableEndTarget.Add("");
+            }
+
+            Debug.Log(points.Length);
+            save.cablePartsLocation.Add(new ListWrapper());
+            for (int j = 0; j < points.Length; j++)
+            {
+                save.cablePartsLocation[i-1].list.Add(points[j].gameObject.transform.position);
+            }
+        }
+
+        return save;
+    }
+
+    static void LoadElectrical(SaveData save)
+    {
+        if (!SceneManager.GetSceneByName("Electrical_Scene").isLoaded)
+        {
+            return;
+        }
+        
+        if (save.cablePartsLocation.Count == 0) return;
+        
+
+        PhysicCable[] cables = GameObject.FindObjectsOfType<PhysicCable>();
+        for (int i = 1; i < cables.Length; i++)
+        {
+            if (i == 1) continue;
+
+            Connector[] startEnd = cables[i].gameObject.GetComponentsInChildren<Connector>();
+            SpringJoint[] points = cables[i].gameObject.GetComponentsInChildren<SpringJoint>();
+            
+            Connector start = startEnd[0];
+            Connector end = startEnd[1];
+
+            Debug.Log(points.Length + " p: " + save.cablePartsLocation[i-1].list.Count);
+            for (int j = 0; j < save.cablePartsLocation[i-1].list.Count; j++)
+            {
+                points[j].gameObject.transform.position = save.cablePartsLocation[i-1].list[j];
+            }
+
+            Debug.Break();
+
+            if (save.cableStartTarget[i-1] != "") {
+                Connector target = GameObject.Find(save.cableStartTarget[i-1]).GetComponent<Connector>();
+                target.Connect(start, false);
+            }
+
+            if (save.cableEndTarget[i-1] != "") {
+                Connector target = GameObject.Find(save.cableEndTarget[i-1]).GetComponent<Connector>();
+                target.Connect(end, false);
+            }
+        }
+    }
 }
