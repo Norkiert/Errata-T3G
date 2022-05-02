@@ -156,8 +156,6 @@ public static class SaveManager
                 points[j].gameObject.transform.position = save.cablePartsLocation[i-1].list[j];
             }
 
-            Debug.Break();
-
             if (save.cableStartTarget[i-1] != "") {
                 Connector target = GameObject.Find(save.cableStartTarget[i-1]).GetComponent<Connector>();
                 target.Connect(start, false);
