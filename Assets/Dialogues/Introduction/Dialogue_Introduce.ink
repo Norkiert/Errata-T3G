@@ -1,20 +1,22 @@
--> H_W_01
+-> H_W_00
 
-=== H_W_01 ===
+=== H_W_00 ===
 Nareszcie jesteś...
-.
+	-> H_W_01
+	
+=== H_W_01 ===
 + [Czym ty jesteś?]
     -> H_W_02
 + [Kim ja jestem?]
     -> H_W_03
 + [Jestem, jestem... Wszystko wiem, już biorę się za robotę]
-    -> END
+    -> H_W_08
 	
 === H_W_02 ===
 Czym jestem...
 W takim razie zacznę od początku.
 Musisz zmienić swoje postrzeganie sił, które nazywasz fizyką.
-Wszystkie te zjawiska które obserwujesz nie dzieją się same z siebie. Grawitacja, światło, promieniowanie, to tylko ułamek zjawisk za które odpowiada zlokalizowana tu maszyneria.
+Wszystkie te zjawiska które obserwujesz nie dzieją się same z siebie.<n>Grawitacja, światło, promieniowanie, to tylko ułamek zjawisk za które odpowiada zlokalizowana tu maszyneria.
 Wasze prymitywne sensory nie są w stanie jej dostrzec, ale ona jest wszechobecna. Całe uniwersum może funkcjonować tylko dzięki niej.
 Kostka którą widzisz, to jej reprezentacja, intefejs zmaterializowany, aby ułatwić Ci pracę.
 + [Pracę? Ja mam tu coś zrobić? Stało się coś?]
@@ -42,17 +44,30 @@ Wykryte zostały liczne usterki. <n>Doprowadziły one do spadku mocy obliczeniow
 	-> H_W_07
 	
 === H_W_05 ===
-Nie ma informacji na ten temat. <n>Mogły one ulec zniszczeniu.
+Nie ma informacji na ten temat.<n>Mogły one ulec zniszczeniu.
 + [Trudno, A gdzie ja teraz jestem?]
 	-> H_W_06
 
 === H_W_06 ===
-Znajdujesz się w Hubie. <n>Centralnym miejscu, gdzie schodzą się wszystkie wymiary.
-W tym miejscu wymiry nieustanie przenikają się. Generuje to olbrzymie ilości energii, która promieniuje zieloną poświatą.
+Znajdujesz się w pomieszczeniu kontrolnym. <n>Centralnym miejscu, gdzie schodzą się wszystkie wymiary.
+W tym miejscu wymiary nieustanie przenikają się. Generuje to olbrzymie ilości energii, która promieniuje zieloną poświatą.
 	-> H_W_07
 
 === H_W_07 ===
-Podłącz przewód do wybranego źródła, aby przekierować energię do katalizatora. <n>Scali to chwilowo to miejsce z wybranym wymiarem, umożliwiając ingeręcję w jego strukturę.
-Scalenie i ingerencja w inne wymiary jest niezbędna do naprawy wyżądzonych zniszczeń. Aktualne możliwości maszyny, nie pozwalają na przeprowadzenie takich manipulacji.
+Podłącz przewód do wybranego źródła, aby przekierować energię do katalizatora.<n>Scali to chwilowo to miejsce z wybranym wymiarem, umożliwiając ingerencję w jego strukturę.
+Scalenie i ingerencja w inne wymiary jest niezbędna do naprawy wyrządzonych zniszczeń.<n>Aktualne możliwości maszyny, nie pozwalają na przeprowadzenie takich manipulacji.
 + [Rozumiem]
+	-> H_W_08
+	
+=== H_W_08 ===
+Pozostaję do dyspozycji, w razie potrzeby pytaj.
++ [W sumie mam jeszcze kilka pytań]
+	-> H_W_09
++ [Wiem wiem]
 	-> END
+	
+=== H_W_09 ===
++ [Czym ty jesteś?]
+    -> H_W_02
++ [Kim ja jestem?]
+    -> H_W_03
