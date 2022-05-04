@@ -16,7 +16,7 @@ public class Q3Additional : MonoBehaviour
     {
         checkConnect = CheckConnect();
         StartCoroutine(checkConnect);
-        if(!(con1.IsConnected && con2.IsConnected && con3.IsConnected))
+        if(!(con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight))
         {
             newPart1.Stop();
             newPart2.Stop();
@@ -34,7 +34,7 @@ public class Q3Additional : MonoBehaviour
     private IEnumerator checkConnect;
     private IEnumerator CheckConnect()
     {
-        while(!(con1.IsConnected&&con2.IsConnected&&con3.IsConnected))
+        while(!(con1.IsConnectedRight&&con2.IsConnectedRight&&con3.IsConnectedRight))
         {
             yield return new WaitForSeconds(2f);
         }
@@ -44,7 +44,7 @@ public class Q3Additional : MonoBehaviour
     private IEnumerator checkDisconnect;
     private IEnumerator CheckDisconnect()
     {
-        while (con1.IsConnected && con2.IsConnected && con3.IsConnected)
+        while (con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight)
         {
             yield return new WaitForSeconds(2f);
         }

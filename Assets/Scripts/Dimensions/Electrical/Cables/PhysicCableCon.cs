@@ -19,9 +19,15 @@ public class PhysicCableCon : Liftable
         base.Drop();
         
         Interactable selecredObject = FindObjectOfType<PlayerInteractions>().SelectedObject;
-        if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector) && CanConnect(secondConnector))
+        if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector))
         {
-            secondConnector.Connect(_connector, true);
+            if (CanConnect(secondConnector))
+                secondConnector.Connect(_connector, true);
+            else
+            {
+                transform.rotation = secondConnector.ConnectionRotation * _connector.RotationOffset;
+                transform.position = secondConnector.ConnectionPosition - (_connector.ConnectionPosition - _connector.transform.position);
+            }
         }
     }
     public override void PickUp(int layer)
@@ -74,5 +80,5 @@ public class PhysicCableCon : Liftable
         cable.SetSpirng(spring, thisRB);
     }
 
-    private bool CanConnect(Connector secondConnector) => secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType && secondConnector.ConnectionColor == _connector.ConnectionColor;
+    private bool CanConnect(Connector secondConnector) => secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType;
 }

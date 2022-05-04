@@ -19,13 +19,17 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     [SerializeField] private bool makeConnectionKinematic = false;
     private bool wasConnectionKinematic;
 
-    [field: SerializeField] [field: ReadOnly] public Connector ConnectedTo { get; private set; }
+    [SerializeField] private bool hideInteractableWhenIsConnected = false;
+
+    [field: SerializeField] public Connector ConnectedTo { get; private set; }
 
 
     [Header("Object to set")]
     [SerializeField, Required] private Transform connectionPoint;
     [SerializeField] private MeshRenderer collorRenderer;
     [SerializeField] private AudioClipSO connectSound;
+    [SerializeField] private ParticleSystem sparksParticle;
+    [SerializeField] private AudioClipSO sparksSound;
 
 
     private FixedJoint fixedJoint;
@@ -36,7 +40,8 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     public Quaternion RotationOffset => connectionPoint ? connectionPoint.localRotation : Quaternion.Euler(Vector3.zero);
 
     public bool IsConnected => ConnectedTo != null;
-    public bool LogicValue => IsConnected;
+    public bool IsConnectedRight => IsConnected && ConnectionColor == ConnectedTo.ConnectionColor;
+    public bool LogicValue => IsConnectedRight;
 
 
 
@@ -48,6 +53,9 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     private void Start()
     {
         UpdateConnectorColor();
+
+        if (ConnectedTo != null)
+            Connect(ConnectedTo, false);
     }
 
     private void OnDisable() => Disconnect(false);
@@ -66,7 +74,7 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
             return;
         }
 
-        if (IsConnected)
+        if (IsConnectedRight)
             Disconnect(true);
 
         secondConnector.transform.rotation = ConnectionRotation * secondConnector.RotationOffset;
@@ -81,8 +89,25 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
             secondConnector.Rigidbody.isKinematic = true;
         ConnectedTo = secondConnector;
 
+        // connectSound
         if (playSound && connectSound)
             AudioManager.PlaySFX(connectSound, transform.position);
+
+        // sparks on inncretc connection
+        if (incorrectSparksC == null && sparksParticle && IsConnected && !IsConnectedRight)
+        {
+            incorrectSparksC = IncorrectSparks();
+            StartCoroutine(incorrectSparksC);
+        }
+
+        // disable outline on select
+        if (hideInteractableWhenIsConnected)
+        {
+            if (TryGetComponent(out HighlightableOnSelect highlightableOnSelect))
+                highlightableOnSelect.enabled = false;
+            if (TryGetComponent(out Collider collider))
+                collider.enabled = false;
+        }
     }
 
     public void Disconnect(bool playSound, Connector onlyThis = null)
@@ -99,10 +124,41 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
             toDisconect.Rigidbody.isKinematic = wasConnectionKinematic;
         toDisconect.Disconnect(this);
 
+        // connectSound
         if (playSound && connectSound)
             AudioManager.PlaySFX(connectSound, transform.position);
+
+        // sparks on inncretc connection
+        if (sparksParticle)
+        {
+            sparksParticle.Stop();
+            sparksParticle.Clear();
+        }
+
+        // enable outline on select
+        if (hideInteractableWhenIsConnected)
+        {
+            if (TryGetComponent(out HighlightableOnSelect highlightableOnSelect))
+                highlightableOnSelect.enabled = true;
+            if (TryGetComponent(out Collider collider))
+                collider.enabled = true;
+        }
     }
 
+
+    private IEnumerator incorrectSparksC;
+    private IEnumerator IncorrectSparks()
+    {
+        while (incorrectSparksC != null && sparksParticle && IsConnected && !IsConnectedRight)
+        {
+            sparksParticle.Play();
+            if (sparksSound)
+                AudioManager.PlaySFX(sparksSound, transform.position);
+
+            yield return new WaitForSeconds(Random.Range(0.6f, 0.8f));
+        }
+        incorrectSparksC = null;
+    }
 
     private void UpdateConnectorColor()
     {

@@ -48,7 +48,7 @@ namespace GameManagment
                     if (!connectCube.Connector)
                         continue;
 
-                    if (connectCube.Connector.IsConnected)
+                    if (connectCube.Connector.IsConnectedRight)
                     {
                         selectedDimension = connectCube.Dimension;
                         UpdateCubesMovement(connectCube.X, connectCube.Y, false);

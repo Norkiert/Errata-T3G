@@ -42,7 +42,7 @@ public class Q2Switch : Interactable
     }
     private void TrySwitchSwitchDown()
     {
-        if(con1.IsConnected&& con2.IsConnected && con3.IsConnected && con4.IsConnected && con5.IsConnected && con6.IsConnected && !done)
+        if(con1.IsConnectedRight&& con2.IsConnectedRight && con3.IsConnectedRight && con4.IsConnectedRight && con5.IsConnectedRight && con6.IsConnectedRight && !done)
         {
             done = true;
             transform.DOLocalRotate(new Vector3(0, 0, 180), 1f);

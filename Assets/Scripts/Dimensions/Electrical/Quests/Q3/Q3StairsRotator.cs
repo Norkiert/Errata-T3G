@@ -21,7 +21,7 @@ public class Q3StairsRotator : MonoBehaviour
     private IEnumerator CheckConnect()
     {
         yield return new WaitForSeconds(checkDelay);
-        while(!connectorToCheck.IsConnected)
+        while(!connectorToCheck.IsConnectedRight)
         {
             yield return new WaitForSeconds(checkDelay);
         }
@@ -32,7 +32,7 @@ public class Q3StairsRotator : MonoBehaviour
     private IEnumerator CheckDisconnect()
     {
         yield return new WaitForSeconds(checkDelay);
-        while (connectorToCheck.IsConnected)
+        while (connectorToCheck.IsConnectedRight)
         {
             yield return new WaitForSeconds(checkDelay);
         }

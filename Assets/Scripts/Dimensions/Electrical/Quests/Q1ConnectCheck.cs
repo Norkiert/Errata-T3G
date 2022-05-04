@@ -25,7 +25,7 @@ public class Q1ConnectCheck : MonoBehaviour
 
     private IEnumerator CheckConnections()
     {
-        while(!(con1.IsConnected && con2.IsConnected && con3.IsConnected && con4.IsConnected))
+        while(!(con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight && con4.IsConnectedRight))
         {
             yield return new WaitForSeconds(checkDelay);
         }
@@ -34,7 +34,7 @@ public class Q1ConnectCheck : MonoBehaviour
     private IEnumerator checkDisconection;
     private IEnumerator CheckDisconection()
     {
-        while (con1.IsConnected && con2.IsConnected && con3.IsConnected && con4.IsConnected)
+        while (con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight && con4.IsConnectedRight)
         {
             yield return new WaitForSeconds(checkDelay);
         }

@@ -23,7 +23,7 @@ public class Q2SillDisable : MonoBehaviour
 
     private IEnumerator CheckConnections()
     {
-        while (!(con1.IsConnected && con2.IsConnected))
+        while (!(con1.IsConnectedRight && con2.IsConnectedRight))
         {
             yield return new WaitForSeconds(checkDelay);
         }
@@ -32,7 +32,7 @@ public class Q2SillDisable : MonoBehaviour
     private IEnumerator checkDisconection;
     private IEnumerator CheckDisconection()
     {
-        while (con1.IsConnected && con2.IsConnected)
+        while (con1.IsConnectedRight && con2.IsConnectedRight)
         {
             yield return new WaitForSeconds(checkDelay);
         }
