@@ -7,24 +7,27 @@ namespace Audio
 {
     public class AudioManager : MonoBehaviour
     {
-        private static AudioManager instance;
-        private static AudioManager Instance
+        [RuntimeInitializeOnLoadMethod]
+        private static void Init()
         {
-            get
-            {
-                if (instance == null)
-                {
-                    GameObject newAudioManager = new GameObject();
-                    instance = newAudioManager.AddComponent<AudioManager>();
-                }
-                return instance;
-            }
+            if (instance != null)
+                return;
+
+            GameObject newAudioManager = new GameObject();
+            newAudioManager.AddComponent<AudioManager>();
+            newAudioManager.name = nameof(AudioManager);
+            DontDestroyOnLoad(newAudioManager);
         }
+
         private void Awake()
         {
-            gameObject.name = nameof(AudioManager);
-            DontDestroyOnLoad(gameObject);
+            if (instance != null)
+                Destroy(gameObject);
+            else
+                instance = this;
         }
+
+        private static AudioManager instance;
 
 
         private static readonly List<AudioSource> unusedAudioSources = new List<AudioSource>();
@@ -148,7 +151,7 @@ namespace Audio
 
             if (parent == null)
             {
-                source.transform.parent = Instance.transform;
+                source.transform.parent = instance.transform;
                 source.transform.position = offset;
             }
             else
@@ -161,7 +164,7 @@ namespace Audio
             source.gameObject.name = $"SFX-{source.clip.name}";
             source.gameObject.SetActive(true);
             source.Play();
-            Instance.StartCoroutine(DesactiveSource(source, source.clip.length));
+            instance.StartCoroutine(DesactiveSource(source, source.clip.length));
         }
 
 
@@ -170,7 +173,7 @@ namespace Audio
 
         private static AudioSource GetFreeAudioSource()
         {
-            if (Application.isPlaying == false)
+            if (instance == null)
             {
                 Debug.LogWarning("Tried play sound on unload scene");
                 return null;
@@ -184,7 +187,7 @@ namespace Audio
             }
 
             AudioSource newSource = new GameObject().AddComponent<AudioSource>();
-            newSource.transform.parent = Instance.transform;
+            newSource.transform.parent = instance.transform;
             newSource.playOnAwake = false;
             return newSource;
         }
@@ -193,7 +196,8 @@ namespace Audio
         {
             yield return new WaitForSeconds(time);
 
-            DesactiveSource(source);
+            if (source.gameObject != null)
+                DesactiveSource(source);
         }
         private static void DesactiveSource(AudioSource source)
         {
@@ -234,9 +238,9 @@ namespace Audio
                 defaultClipVolume = clip.Volume;
 
                 if (clipChanger != null)
-                    Instance.StopCoroutine(clipChanger);
+                    instance.StopCoroutine(clipChanger);
                 clipChanger = ChangeClipOnTrack(clip, fadeTime);
-                Instance.StartCoroutine(clipChanger);
+                instance.StartCoroutine(clipChanger);
             }
             public void PlayMusic(List<AudioClipSO> clips, float fadeTime)
             {
@@ -247,9 +251,9 @@ namespace Audio
                 }
 
                 if (multipleMusicSelector != null)
-                    Instance.StopCoroutine(multipleMusicSelector);
+                    instance.StopCoroutine(multipleMusicSelector);
                 multipleMusicSelector = SelectMusicFromMultiple(clips, fadeTime);
-                Instance.StartCoroutine(multipleMusicSelector);
+                instance.StartCoroutine(multipleMusicSelector);
             }
 
             public void UpdateVolume(float volume)
@@ -261,10 +265,10 @@ namespace Audio
             public void Desactive()
             {
                 if (clipChanger != null)
-                    Instance.StopCoroutine(clipChanger);
+                    instance.StopCoroutine(clipChanger);
 
                 if (multipleMusicSelector != null)
-                    Instance.StopCoroutine(multipleMusicSelector);
+                    instance.StopCoroutine(multipleMusicSelector);
 
                 DesactiveSource(musicSource);
             }
