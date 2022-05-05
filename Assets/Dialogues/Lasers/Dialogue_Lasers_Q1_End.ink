@@ -1,3 +1,5 @@
+-> L_Q1_E00
+
 === L_Q1_E00 ===
 Pierwsza wiązka skalibrowana.
 Efektem końcowym tego modułu, powinna być falaZero.<n>Dlatego trzeba skalibrować pozostałe dwie wiązki.
