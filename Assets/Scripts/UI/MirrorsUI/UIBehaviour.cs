@@ -21,10 +21,13 @@ public class UIBehaviour : MonoBehaviour
     /// <param name="hor">bool declaring if horizontal ToolTip should be didsplayed</param>
     /// <param name="ver">bool declaring if vertical ToolTip should be didsplayed</param>
     /// 
-    public void StartMirrorUI(bool hor, bool ver)
+    public void StartMirrorUI(bool hor, bool ver, bool freezCam)
     {
-        turnOnCanvas = TurnOnCanvas(hor, ver);
-        StartCoroutine(turnOnCanvas);
+        if(!freezCam)
+        {
+            turnOnCanvas = TurnOnCanvas(hor, ver);
+            StartCoroutine(turnOnCanvas);
+        }
     }
     public void StopMirrorUI()
     {

@@ -139,6 +139,6 @@ public class LaserMirror : Interactable
         EndRotateMirror();
     }
 
-    private void ShowUI() => mirrorUI.StartMirrorUI(rotateHorizontal, rotateVertical);
+    private void ShowUI() => mirrorUI.StartMirrorUI(rotateHorizontal, rotateVertical, playerController.FreezCamera);
     private void HideUI() => mirrorUI.StopMirrorUI();
 }
