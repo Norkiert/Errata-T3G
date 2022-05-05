@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dialogues;
 
 namespace GuideCube
 {
@@ -48,7 +49,8 @@ namespace GuideCube
 
         public override void OnClicked()
         {
-            controller.SetState(new GCSDialogue(controller, Dialogues.DialogueInkKeeper.CurrentText), this);
+            if (DialogueManager.instance != null && !DialogueManager.instance.IsDialoguePlaying)
+                controller.SetState(new GCSDialogue(controller, DialogueInkKeeper.CurrentText), this);
         }
     }
 }
