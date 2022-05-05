@@ -92,6 +92,7 @@ namespace Dialogues
             
             
             string choices = ChoicesString();
+            Debug.Log(choices);
             dialogueText.maxVisibleCharacters += choices.Length;
             dialogueText.text += choices;
 

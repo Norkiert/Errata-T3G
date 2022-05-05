@@ -8,7 +8,7 @@ public class UnderTrackBox : Clickable
     public const string PrefabPath = "Assets/Art/Dimensions/Electrical/Prefabs/wooden_box.prefab";
     public const float height = 0.02055f;
 
-    [SerializeField] protected BasicTrack connectedTrack;
+    [SerializeField] public BasicTrack connectedTrack;
     protected Transform player;
 
     [SerializeField] LayerMask layerMask;

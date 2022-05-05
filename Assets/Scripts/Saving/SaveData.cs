@@ -11,4 +11,8 @@ public class SaveData
     public List<string> cableStartTarget = new List<string>();
     public List<string> cableEndTarget = new List<string>();
     public List<ListWrapper> cablePartsLocation = new List<ListWrapper>();
+
+    public List<SVector3> rotatableRotations = new List<SVector3>();
+    public List<SVector3> boxPositions = new List<SVector3>();
+    public List<SVector3> connectedTracksPositions = new List<SVector3>();
 }

@@ -21,6 +21,7 @@ public static class SaveManager
 
         save = SaveLaser(save);
         save = SaveElectrical(save);
+        save = SaveSteampunk(save);
 
         string saveJson = JsonUtility.ToJson(save);
 
@@ -40,6 +41,7 @@ public static class SaveManager
 
             LoadLaser(save);
             LoadElectrical(save);
+            LoadSteampunk(save);
         }
 
         Debug.Log("loaded game");
@@ -165,6 +167,70 @@ public static class SaveManager
                 Connector target = GameObject.Find(save.cableEndTarget[i-1]).GetComponent<Connector>();
                 target.Connect(end, false);
             }
+        }
+    }
+
+    static SaveData SaveSteampunk(SaveData save)
+    {
+        if (!SceneManager.GetSceneByName("Steampunk_Scene").isLoaded)
+        {
+            return save;
+        }
+
+        BasicTrack[] tracks = GameObject.FindObjectsOfType<BasicTrack>();
+        List<BasicTrack> rotatable = new List<BasicTrack>();
+
+        for (int i = 0; i < tracks.Length; i++)
+            if (tracks[i].rotateable) rotatable.Add(tracks[i]);
+
+        save.rotatableRotations.Clear();
+        for (int i = 0; i < rotatable.Count; i++)
+            save.rotatableRotations.Add(rotatable[i].transform.eulerAngles);
+
+        save.boxPositions.Clear();
+        save.connectedTracksPositions.Clear();
+
+        UnderTrackBox[] boxes = GameObject.FindObjectsOfType<UnderTrackBox>();
+        for (int i = 0; i < boxes.Length; i++)
+        {
+            save.boxPositions.Add(boxes[i].gameObject.transform.position);
+            if (boxes[i].connectedTrack != null) {
+                save.connectedTracksPositions.Add(boxes[i].connectedTrack.gameObject.transform.position);
+            } else {
+                save.connectedTracksPositions.Add(Vector3.zero);
+            }
+        }
+
+        return save;
+    }
+
+    static void LoadSteampunk(SaveData save)
+    {
+        if (!SceneManager.GetSceneByName("Steampunk_Scene").isLoaded)
+        {
+            return;
+        }
+
+        BasicTrack[] tracks = GameObject.FindObjectsOfType<BasicTrack>();
+        List<BasicTrack> rotatable = new List<BasicTrack>();
+
+        for (int i = 0; i < tracks.Length; i++)
+            if (tracks[i].rotateable) rotatable.Add(tracks[i]);
+
+        if (rotatable.Count != save.rotatableRotations.Count) return;
+
+        for (int i = 0; i < save.rotatableRotations.Count; i++)
+            rotatable[i].gameObject.transform.eulerAngles = save.rotatableRotations[i];
+
+        UnderTrackBox[] boxes = GameObject.FindObjectsOfType<UnderTrackBox>();
+        
+        if (boxes.Length != save.boxPositions.Count) return;
+
+        for (int i = 0; i < save.boxPositions.Count; i++)
+        {
+            boxes[i].gameObject.transform.position = save.boxPositions[i];
+            if (boxes[i].connectedTrack != null)
+                boxes[i].connectedTrack.gameObject.transform.position = save.connectedTracksPositions[i];
         }
     }
 }
