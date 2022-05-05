@@ -147,7 +147,11 @@ namespace Dialogues
                     StopCoroutine(textHandler);
                     textHandler = null;
                     continueCoroutine = null;
-                    dialogueText.maxVisibleCharacters = dialogueText.text.Length;
+
+                    string choices = ChoicesString();
+                    dialogueText.text += choices;
+                    dialogueText.maxVisibleCharacters = dialogueText.text.Length + choices.Length;
+
                 }
                 else if (historyIndex < textHistory.Count - 1)
                 {
