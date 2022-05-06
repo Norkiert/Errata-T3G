@@ -21,9 +21,9 @@ public class PhysicCableCon : Liftable
         Interactable selecredObject = FindObjectOfType<PlayerInteractions>().SelectedObject;
         if (selecredObject && selecredObject.TryGetComponent(out Connector secondConnector))
         {
-            if (CanConnect(secondConnector))
+            if (_connector.CanConnect(secondConnector))
                 secondConnector.Connect(_connector, true);
-            else
+            else if (!secondConnector.IsConnected)
             {
                 transform.rotation = secondConnector.ConnectionRotation * _connector.RotationOffset;
                 transform.position = secondConnector.ConnectionPosition - (_connector.ConnectionPosition - _connector.transform.position);
@@ -79,6 +79,4 @@ public class PhysicCableCon : Liftable
         spring = previousPoint.gameObject.AddComponent<SpringJoint>();
         cable.SetSpirng(spring, thisRB);
     }
-
-    private bool CanConnect(Connector secondConnector) => secondConnector != _connector && secondConnector.ConnectionType != _connector.ConnectionType;
 }
