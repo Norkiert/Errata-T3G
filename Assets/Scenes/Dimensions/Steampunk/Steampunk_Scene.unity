@@ -7137,12 +7137,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8622534411575567806, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
+      propertyPath: hammerFacingRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622534411575567806, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 1554739535}
     - target: {fileID: 8892371264107505713, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
       propertyPath: m_Name
       value: SplitterTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061772830427099066, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9063078
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061772830427099066, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061772830427099066, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.42261827
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061772830427099066, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a1d8da8379f0044696b19b87e98d9c0, type: 3}
@@ -18021,7 +18041,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3912743327701166593, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_RootOrder
@@ -26681,6 +26701,7 @@ Transform:
   - {fileID: 2066694319}
   - {fileID: 1878599040}
   - {fileID: 1377535883}
+  - {fileID: 397338450}
   - {fileID: 863118747}
   - {fileID: 577845154}
   - {fileID: 726562632}
@@ -26704,7 +26725,6 @@ Transform:
   - {fileID: 365684688}
   - {fileID: 1438130007}
   - {fileID: 1906143169}
-  - {fileID: 397338450}
   - {fileID: 437915213}
   - {fileID: 1841251364}
   - {fileID: 1797534409}
