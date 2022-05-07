@@ -47,6 +47,37 @@ public abstract class BasicTrack : Clickable
     [SerializeField] public List<Transform> pathBeginPoints;
 
     [SerializeField] public bool rotateable = true;
+
+    [SerializeField] public List<BallBehavior> balls;
+    public BallBehavior LastBall
+    {
+        get
+        {
+            if(balls.Count != 0)
+            {
+                return balls[balls.Count - 1];
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+    public BallBehavior FirstBall
+    {
+        get
+        {
+            if (balls.Count != 0)
+            {
+                return balls[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
     public bool Rotateable 
     { 
         get 

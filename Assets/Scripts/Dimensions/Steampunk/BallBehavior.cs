@@ -76,6 +76,7 @@ public class BallBehavior : ObjectGroundChecker
 
                 if (currentTrack != lastTrack && currentTrack)
                 {
+                    currentTrack.balls.Add(this);
                     currentTrack.OnBallEnter(this);
 
                     lastTrack = currentTrack;
@@ -95,7 +96,11 @@ public class BallBehavior : ObjectGroundChecker
     {
         if ((1 << collision.gameObject.layer & trackLayer.value) != 0)
         {
-            if(currentTrack) currentTrack.OnBallExit(this);
+            if (currentTrack)
+            {
+                currentTrack.balls.Remove(this);
+                currentTrack.OnBallExit(this);
+            }
             onTrack = false;
             currentTrack = null;
             ballRigidbody.WakeUp();

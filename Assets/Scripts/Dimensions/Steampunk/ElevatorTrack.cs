@@ -17,8 +17,8 @@ public class ElevatorTrack : BasicTrack
     [SerializeField][ReadOnly] public bool isRetracting = false;
     protected float heightAtStart;
 
-    protected BallBehavior currentBall;
-    protected BallBehavior lastBall;
+    [SerializeField] public bool normalMode = true;
+
     protected float ballHeight;
     protected float ballDistance = float.MaxValue;
 
@@ -33,21 +33,7 @@ public class ElevatorTrack : BasicTrack
     protected new void Awake()
     {
         base.Awake();
-    }
-    protected void Update()
-    {
-        if (isRetracting && !isExtending)
-        {
-            if (pistonTrack.transform.localPosition.y - heightAtStart <= 0f)
-            {
-                isRetracting = false;
-                StopAllCoroutines();
-
-                pistonRodThick.transform.localScale = new Vector3(pistonRodThick.transform.localScale.x, 1, pistonRodThick.transform.localScale.z);
-                pistonRodThin.transform.localScale = new Vector3(pistonRodThin.transform.localScale.x, 1, pistonRodThin.transform.localScale.z);
-                pistonTrack.transform.localPosition = new Vector3(pistonTrack.transform.localPosition.x, heightAtStart, pistonTrack.transform.localPosition.z);
-            }
-        }
+        heightAtStart = pistonTrack.transform.localPosition.y;
     }
     public override void RotateRight()
     {
@@ -73,28 +59,80 @@ public class ElevatorTrack : BasicTrack
         if (!isRetracting)
         {
             // initialize upwards extension
-            if (!isExtending && ballDistance <= Vector3.Distance(pistonTrack.transform.position, ball.transform.position) && currentBall != ball)
+            if (!isExtending && ballDistance <= Vector3.Distance(pistonTrack.transform.position, ball.transform.position) && pistonTrack.transform.localPosition.y == heightAtStart && normalMode)
             {
-                ball.transform.position = new Vector3(pistonTrack.transform.position.x, ball.transform.position.y, pistonTrack.transform.position.z);
-                currentBall = ball;
-                ballHeight = ball.transform.position.y - pistonTrack.transform.position.y;
-                isExtending = true;
-                heightAtStart = pistonTrack.transform.localPosition.y;
-                StartCoroutine(Extend());
+                BeginExtension();
             }
-            else if (isExtending)
+            else if (!isExtending)
+            {
+                ball.ballRigidbody.velocity = ball.rollingSpeed * rollingSpeed * ball.ballRigidbody.velocity.normalized;
+                ballDistance = Vector3.Distance(pistonTrack.transform.position, ball.transform.position);
+            }
+            else
             {
                 ball.ballRigidbody.velocity = Vector3.zero;
-                // arrived
-                if (pistonTrack.transform.localPosition.y - heightAtStart >= elevatorHeight)
-                {
-                    isExtending = false;
-                    StopAllCoroutines();
+            }
+        }
+    }
+    public override void OnBallExit(BallBehavior ball)
+    {
+        if (!isRetracting && !isExtending && balls.Count == 0)
+        {
+            StartCoroutine(Retract());
+        }
+    }
+    public override void InitPos(TrackMapPosition tmp)
+    {
+        position = tmp;
+        transform.localPosition = GetLocalPosition();
+    }
+    public void BeginExtension()
+    {
+        StartCoroutine(Extend());
+    }
+    public IEnumerator Extend()
+    {
+        if (isRetracting)
+        {
+            yield break;
+        }
 
-                    pistonRodThick.transform.localScale = new Vector3(pistonRodThick.transform.localScale.x, 1 + (elevatorHeight * rodThickScaleAddon), pistonRodThick.transform.localScale.z);
-                    pistonRodThin.transform.localScale = new Vector3(pistonRodThin.transform.localScale.x, 1 + (elevatorHeight * rodThinScaleAddon), pistonRodThin.transform.localScale.z);
-                    pistonTrack.transform.localPosition = new Vector3(pistonTrack.transform.localPosition.x, heightAtStart + elevatorHeight, pistonTrack.transform.localPosition.z);
-                    currentBall.transform.position = new Vector3(currentBall.transform.position.x, pistonTrack.transform.position.y + ballHeight, currentBall.transform.position.z);
+        if (FirstBall)
+        {
+            ballHeight = FirstBall.transform.position.y - pistonTrack.transform.position.y;
+        }
+        else
+        {
+            ballHeight = 0;
+        }
+
+        isExtending = true;
+        for(; ; )
+        {
+            pistonRodThick.transform.localScale += Time.deltaTime * extensionSpeed * rodThickScaleAddon * Vector3.up;
+            pistonRodThin.transform.localScale += Time.deltaTime * extensionSpeed * rodThinScaleAddon * Vector3.up;
+            pistonTrack.transform.localPosition += Time.deltaTime * extensionSpeed * Vector3.up;
+            foreach(var ball in balls)
+            {
+                ball.transform.position = new Vector3(ball.transform.position.x, pistonTrack.transform.position.y + ballHeight, ball.transform.position.z);
+            }
+            
+            if(pistonTrack.transform.localPosition.y - heightAtStart >= elevatorHeight)
+            { // track arrived at desired height
+                isExtending = false;
+
+                pistonRodThick.transform.localScale = new Vector3(pistonRodThick.transform.localScale.x, 1 + (elevatorHeight * rodThickScaleAddon), pistonRodThick.transform.localScale.z);
+                pistonRodThin.transform.localScale = new Vector3(pistonRodThin.transform.localScale.x, 1 + (elevatorHeight * rodThinScaleAddon), pistonRodThin.transform.localScale.z);
+                pistonTrack.transform.localPosition = new Vector3(pistonTrack.transform.localPosition.x, heightAtStart + elevatorHeight, pistonTrack.transform.localPosition.z);
+
+                if (balls.Count == 0)
+                {
+                    StartCoroutine(Retract());
+                }
+
+                foreach (var ball in balls)
+                {
+                    ball.transform.position = new Vector3(ball.transform.position.x, pistonTrack.transform.position.y + ballHeight, ball.transform.position.z);
 
                     var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
                     {
@@ -104,47 +142,38 @@ public class ElevatorTrack : BasicTrack
                     });
                     ball.ballRigidbody.velocity = moveVector;
                 }
+
+                yield break;
             }
-            else if (!isExtending)
-            {
-                ball.ballRigidbody.velocity = ball.rollingSpeed * rollingSpeed * ball.ballRigidbody.velocity.normalized;
-                ballDistance = Vector3.Distance(pistonTrack.transform.position, ball.transform.position);
-            }
-        }
-    }
-    public override void OnBallExit(BallBehavior ball)
-    {
-        if (!isRetracting && !isExtending)
-        {
-            currentBall = null;
-            ballDistance = float.MaxValue;
-            StartCoroutine(Retract());
-            isRetracting = true;
-        }
-    }
-    public override void InitPos(TrackMapPosition tmp)
-    {
-        position = tmp;
-        transform.localPosition = GetLocalPosition();
-    }
-    public IEnumerator Extend()
-    {
-        for(; ; )
-        {
-            pistonRodThick.transform.localScale += Time.deltaTime * extensionSpeed * rodThickScaleAddon * Vector3.up;
-            pistonRodThin.transform.localScale += Time.deltaTime * extensionSpeed * rodThinScaleAddon * Vector3.up;
-            pistonTrack.transform.localPosition += Time.deltaTime * extensionSpeed * Vector3.up;
-            currentBall.transform.position = new Vector3(currentBall.transform.position.x, pistonTrack.transform.position.y + ballHeight, currentBall.transform.position.z);
+
             yield return null;
         }
     }
     public IEnumerator Retract()
     {
+        if (isExtending)
+        {
+            yield break;
+        }
+
+        isRetracting = true;
         for(; ; )
         {
             pistonRodThick.transform.localScale += Time.deltaTime * extensionSpeed * rodThickScaleAddon * Vector3.down;
             pistonRodThin.transform.localScale += Time.deltaTime * extensionSpeed * rodThinScaleAddon * Vector3.down;
             pistonTrack.transform.localPosition += Time.deltaTime * extensionSpeed * Vector3.down;
+
+            if(pistonTrack.transform.localPosition.y <= heightAtStart)
+            { // track arrived at 0
+                isRetracting = false;
+
+                pistonRodThick.transform.localScale = new Vector3(pistonRodThick.transform.localScale.x, 1, pistonRodThick.transform.localScale.z);
+                pistonRodThin.transform.localScale = new Vector3(pistonRodThin.transform.localScale.x, 1, pistonRodThin.transform.localScale.z);
+                pistonTrack.transform.localPosition = new Vector3(pistonTrack.transform.localPosition.x, heightAtStart, pistonTrack.transform.localPosition.z);
+
+                yield break;
+            }
+
             yield return null;
         }
     }

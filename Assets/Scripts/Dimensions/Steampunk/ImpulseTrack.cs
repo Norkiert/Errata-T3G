@@ -8,9 +8,6 @@ public class ImpulseTrack : MonoBehaviour
 {
     [SerializeField] public List<ImpulseTrackHandler> handlers;
 
-    [SerializeField, ReadOnly] public List<BallBehavior> balls;
-    [SerializeField, ReadOnly] public BallBehavior lastBall;
-
     [SerializeField, ReadOnly] public BasicTrack track;
 
     protected void Awake()
@@ -20,8 +17,7 @@ public class ImpulseTrack : MonoBehaviour
 
     public void RegisterImpulse(BallBehavior ball)
     {
-        balls.Add(ball);
-        lastBall = ball;
+        track.balls.Add(ball);
 
         foreach(var handler in handlers)
         {
