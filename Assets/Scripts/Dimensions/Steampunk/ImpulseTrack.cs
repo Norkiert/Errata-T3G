@@ -8,7 +8,17 @@ public class ImpulseTrack : MonoBehaviour
 {
     [SerializeField] public List<ImpulseTrackHandler> handlers;
 
-    [SerializeField, ReadOnly] public BasicTrack track;
+    [HideInInspector] public bool impulseMode = true;
+    [ShowIf("impulseMode"), Button("Mode: On Enter")] protected void OnEnter()
+    {
+        impulseMode = false;
+    }
+    [HideIf("impulseMode"), Button("Mode: On Exit")] protected void OnExit()
+    {
+        impulseMode = true;
+    }
+
+    [SerializeField, HideInInspector] public BasicTrack track;
 
     protected void Awake()
     {
@@ -19,12 +29,26 @@ public class ImpulseTrack : MonoBehaviour
     {
         track.balls.Add(ball);
 
+        Impulse impulse = new Impulse(this, ball);
+
         foreach(var handler in handlers)
         {
-            if (handler.QualifyImpulse(this))
+            if (handler.QualifyImpulse(impulse))
             {
-                handler.HandleImpulse(this);
+                handler.HandleImpulse(impulse);
             }
         }
+    }
+}
+
+public struct Impulse
+{
+    public ImpulseTrack track;
+    public BallBehavior ball;
+
+    public Impulse(ImpulseTrack track, BallBehavior ball)
+    {
+        this.track = track;
+        this.ball = ball;
     }
 }

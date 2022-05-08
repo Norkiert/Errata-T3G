@@ -14,12 +14,12 @@ public class ImpulseElevatorTrack : ImpulseTrackHandler
         track = GetComponent<ElevatorTrack>();
     }
 
-    public override bool QualifyImpulse(ImpulseTrack impulseTrack)
+    public override bool QualifyImpulse(Impulse impulse)
     {
         return true;
     }
 
-    public override void HandleImpulse(ImpulseTrack impulseTrack)
+    public override void HandleImpulse(Impulse impulse)
     {
         StartCoroutine(WaitAndExtend());
     }

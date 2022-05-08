@@ -19,6 +19,7 @@ public class BallBehavior : ObjectGroundChecker
 
     [SerializeField] protected LayerMask trackLayer;
     [SerializeField] [ReadOnly] protected BasicTrack currentTrack;
+    [SerializeField, HideInInspector] protected ImpulseTrack impulseTrack;
     [SerializeField] [ReadOnly] protected bool onTrack;
     [SerializeField] public float rollingSpeed = 1f;
     [SerializeField] [ReadOnly] public float velocity;
@@ -69,7 +70,7 @@ public class BallBehavior : ObjectGroundChecker
             {
                 currentTrack = collision.gameObject.transform.parent.gameObject.GetComponent<BasicTrack>();
 
-                if (collision.gameObject.transform.parent.gameObject.TryGetComponent(out ImpulseTrack impulseTrack))
+                if (collision.gameObject.transform.parent.gameObject.TryGetComponent(out impulseTrack) && impulseTrack.impulseMode)
                 {
                     impulseTrack.RegisterImpulse(this);
                 }
@@ -98,11 +99,16 @@ public class BallBehavior : ObjectGroundChecker
         {
             if (currentTrack)
             {
+                if(impulseTrack && !impulseTrack.impulseMode)
+                {
+                    impulseTrack.RegisterImpulse(this);
+                }
                 currentTrack.balls.Remove(this);
                 currentTrack.OnBallExit(this);
             }
             onTrack = false;
             currentTrack = null;
+            impulseTrack = null;
             ballRigidbody.WakeUp();
             pathID = -1;
         }
