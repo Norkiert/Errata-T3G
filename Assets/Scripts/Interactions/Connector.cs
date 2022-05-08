@@ -20,6 +20,7 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     private bool wasConnectionKinematic;
 
     [SerializeField] private bool hideInteractableWhenIsConnected = false;
+    [SerializeField] private bool allowConnectDifrentCollor = false;
 
     [field: SerializeField] public Connector ConnectedTo { get; private set; }
 
@@ -55,7 +56,11 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         UpdateConnectorColor();
 
         if (ConnectedTo != null)
-            Connect(ConnectedTo, false);
+        {
+            Connector t = ConnectedTo;
+            ConnectedTo = null;
+            Connect(t, false);
+        }
     }
 
     private void OnDisable() => Disconnect(false);
@@ -64,8 +69,8 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
     {
         ConnectedTo = secondConnector;
         wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
+        UpdateInteractableWhenIsConnected();
     }
-
     public void Connect(Connector secondConnector, bool playSound)
     {
         if (secondConnector == null)
@@ -74,8 +79,8 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
             return;
         }
 
-        if (IsConnectedRight)
-            Disconnect(true);
+        if (IsConnected)
+            Disconnect(secondConnector);
 
         secondConnector.transform.rotation = ConnectionRotation * secondConnector.RotationOffset;
         secondConnector.transform.position = ConnectionPosition - (secondConnector.ConnectionPosition - secondConnector.transform.position);
@@ -101,15 +106,8 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         }
 
         // disable outline on select
-        if (hideInteractableWhenIsConnected)
-        {
-            if (TryGetComponent(out HighlightableOnSelect highlightableOnSelect))
-                highlightableOnSelect.enabled = false;
-            if (TryGetComponent(out Collider collider))
-                collider.enabled = false;
-        }
+        UpdateInteractableWhenIsConnected();
     }
-
     public void Disconnect(bool playSound, Connector onlyThis = null)
     {
         if (ConnectedTo == null || onlyThis != null && onlyThis != ConnectedTo)
@@ -136,12 +134,17 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         }
 
         // enable outline on select
+        UpdateInteractableWhenIsConnected();
+    }
+
+    private void UpdateInteractableWhenIsConnected()
+    {
         if (hideInteractableWhenIsConnected)
         {
             if (TryGetComponent(out HighlightableOnSelect highlightableOnSelect))
-                highlightableOnSelect.enabled = true;
+                highlightableOnSelect.enabled = !IsConnected;
             if (TryGetComponent(out Collider collider))
-                collider.enabled = true;
+                collider.enabled = !IsConnected;
         }
     }
 
@@ -181,4 +184,11 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         CableColor.Blue => Color.blue,
         _ => Color.clear
     };
+
+
+    public bool CanConnect(Connector secondConnector) =>
+        this != secondConnector
+        && !this.IsConnected && !secondConnector.IsConnected
+        && this.ConnectionType != secondConnector.ConnectionType
+        && (this.allowConnectDifrentCollor || secondConnector.allowConnectDifrentCollor || this.ConnectionColor == secondConnector.ConnectionColor);
 }

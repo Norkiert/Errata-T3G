@@ -52,6 +52,6 @@ public class SplitterTrack : BasicTrack
     {
         position = tmp;
         transform.localPosition = GetLocalPosition();
-        transform.localPosition += transform.localRotation * Vector3.forward * (ModelTrack.length - CurvedTrack.length - 0.03f);
+        transform.localPosition += transform.localRotation * Vector3.forward * (ModelTrack.length - CurvedTrack.length - 0.04f);
     }
 }

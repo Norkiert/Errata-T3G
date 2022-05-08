@@ -48,7 +48,7 @@ public class SplitterTrackMovingElement : MonoBehaviour
     {
         for (; ; )
         {
-            transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
             totalRotation += rotationSpeed * Time.deltaTime;
             yield return null;
         }
@@ -57,7 +57,7 @@ public class SplitterTrackMovingElement : MonoBehaviour
     {
         for(; ; )
         {
-            transform.Rotate(Vector3.forward, -rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
             totalRotation += rotationSpeed * Time.deltaTime;
             yield return null;
         }
