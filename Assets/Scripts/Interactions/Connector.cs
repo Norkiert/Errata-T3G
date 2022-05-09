@@ -9,7 +9,7 @@ using Audio;
 public class Connector : MonoBehaviour, ILogicBoolOutput
 {
     public enum ConType { Male, Female }
-    public enum CableColor { White, Red, Green, Yellow, Blue }
+    public enum CableColor { White, Red, Green, Yellow, Blue, Cyan, Magenta}
 
     [field: Header("Settings")]
 
@@ -182,6 +182,8 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
         CableColor.Green => Color.green,
         CableColor.Yellow => Color.yellow,
         CableColor.Blue => Color.blue,
+        CableColor.Cyan => Color.cyan,
+        CableColor.Magenta => Color.magenta,
         _ => Color.clear
     };
 
