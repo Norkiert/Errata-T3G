@@ -75,6 +75,8 @@ public class Q3CollectorMovingElement : MonoBehaviour
                     StopAllCoroutines();
                     isMoving = 0;
                     isWaiting = true;
+                    balls.Clear();
+                    ballsRigidbodies.Clear();
                 }
                 break;
             case -1:

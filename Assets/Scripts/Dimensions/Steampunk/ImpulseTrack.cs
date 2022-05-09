@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using System;
 
 [RequireComponent(typeof(BasicTrack))]
 public class ImpulseTrack : MonoBehaviour
