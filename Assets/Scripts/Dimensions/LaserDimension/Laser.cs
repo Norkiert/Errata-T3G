@@ -5,7 +5,7 @@ using Logic;
 using NaughtyAttributes;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Laser : Interactable, ILogicBoolOutput
+public class Laser : LogicBoolOutput
 {
     [SerializeField, Range(0f, 1f)] private float laserSize = 0.1f;
     [SerializeField, Min(1)] private float maxLaserLength = 100f;
@@ -15,7 +15,7 @@ public class Laser : Interactable, ILogicBoolOutput
     private LineRenderer laser;
     private readonly List<Vector3> laserIndices = new List<Vector3>();
 
-    public bool LogicValue => targetHit;
+    public override bool LogicValue => targetHit;
 
     private void Start()
     {

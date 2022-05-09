@@ -6,8 +6,11 @@ using Logic;
 
 namespace Dialogues
 {
-    public class DialoguePlayByBoolValue : LogicBoolInput
+    public class DialoguePlayByBoolValue : MonoBehaviour
     {
+        [Header("Activator")]
+        [SerializeField] private LogicBoolOutput activator;
+
         [Header("Dialogue")]
         [SerializeField] private TextAsset dialogueToPlay;
 
@@ -20,15 +23,24 @@ namespace Dialogues
         [SerializeField, ShowIf(nameof(playOnlyOneTime))] private string uniqueSaveKey = "undefined";
 
 
-        protected override void ValueChaged(bool value)
+        private bool lastValue = false;
+
+
+        private void Start() => InvokeRepeating(nameof(CheckValue), 0.3f, 0.3f);
+
+        public void CheckValue()
         {
-            if (value)
+            if (activator.LogicValue == lastValue)
+                return;
+
+            lastValue = activator.LogicValue;
+            if (activator.LogicValue)
             {
                 if (waitForIteractButtonRelase && Input.GetMouseButton(0))
                     StartCoroutine(WaitForRealase());
                 else
                     TryPlayDialogue();
-            } 
+            }
         }
 
         private IEnumerator WaitForRealase()

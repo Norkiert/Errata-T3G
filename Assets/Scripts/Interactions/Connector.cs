@@ -6,7 +6,7 @@ using Logic;
 using Audio;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Connector : MonoBehaviour, ILogicBoolOutput
+public class Connector : LogicBoolOutput
 {
     public enum ConType { Male, Female }
     public enum CableColor { White, Red, Green, Yellow, Blue, Cyan, Magenta}
@@ -42,7 +42,7 @@ public class Connector : MonoBehaviour, ILogicBoolOutput
 
     public bool IsConnected => ConnectedTo != null;
     public bool IsConnectedRight => IsConnected && ConnectionColor == ConnectedTo.ConnectionColor;
-    public bool LogicValue => IsConnectedRight;
+    public override bool LogicValue => IsConnectedRight;
 
 
 
