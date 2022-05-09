@@ -7,7 +7,6 @@ public class Q3StairsRotator : MonoBehaviour
 {
     [SerializeField] private Connector connectorToCheck;
     [SerializeField] private GameObject[] objects;
-    [SerializeField] private float flyDistance = 5f;
     [SerializeField] private float duration = 1f;
     [SerializeField] private float checkDelay = 2f;
     void Start()
@@ -45,7 +44,7 @@ public class Q3StairsRotator : MonoBehaviour
             StopCoroutine(checkConnect);
         foreach(GameObject obj in objects)
         {
-            obj.transform.DOMoveY(obj.transform.position.y + flyDistance, duration);
+            obj.transform.DORotate(new Vector3(0,obj.transform.eulerAngles.y,0),duration);
         }
         checkDisconnect = CheckDisconnect();
         StartCoroutine(checkDisconnect);
@@ -56,7 +55,7 @@ public class Q3StairsRotator : MonoBehaviour
             StopCoroutine(checkDisconnect);
         foreach (GameObject obj in objects)
         {
-            obj.transform.DOMoveY(obj.transform.position.y - flyDistance, duration);
+           obj.transform.DORotate(new Vector3(-80, obj.transform.eulerAngles.y, 0), duration);
         }
         checkConnect = CheckConnect();
         StartCoroutine(checkConnect);
