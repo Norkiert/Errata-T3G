@@ -6,7 +6,7 @@ using NaughtyAttributes;
 public class UnderTrackBox : Clickable
 {
     public const string PrefabPath = "Assets/Art/Dimensions/Electrical/Prefabs/wooden_box.prefab";
-    public const float height = 0.02055f;
+    public const float height = 0.02152f;
 
     [SerializeField] public BasicTrack connectedTrack;
     protected Transform player;
@@ -82,7 +82,11 @@ public class UnderTrackBox : Clickable
 
         var newPosition = connectedTrack.position + ((int)playerFacing.x, (int)playerFacing.y, (int)playerFacing.z);
 
-        if (!connectedTrack.trackMapController.Contains(newPosition) && !Physics.Raycast(transform.position, transform.parent.rotation * playerFacing, out RaycastHit hit, 4 * height, layerMask))
+        if (!connectedTrack.trackMapController.Contains(newPosition) && !Physics.Raycast(transform.position, transform.parent.rotation * playerFacing, out RaycastHit hit, height * 1.5f * playerFacing.z switch
+        {
+            0 => transform.lossyScale.x,
+            _ => transform.lossyScale.z
+        }, layerMask))
         {
             var tmc = connectedTrack.trackMapController;
             tmc.Remove(connectedTrack);
