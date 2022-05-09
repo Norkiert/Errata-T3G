@@ -7,6 +7,6 @@ public class Q2Capsule : MonoBehaviour
 {
     public void SLideCapsuleDown()
     {
-        transform.DOMoveY(2f, 5f);
+        transform.DOMoveY(2f, 10f);
     }
 }
