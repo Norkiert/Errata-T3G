@@ -65,7 +65,7 @@ public class Q3FakeConnector : MonoBehaviour
         {
             obj.transform.DORotate(new Vector3(-90, obj.transform.eulerAngles.y, 0), duration);
         }
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration*3);
         foreach (GameObject obj in objects)
         {
             obj.transform.DORotate(new Vector3(0, obj.transform.eulerAngles.y, 0), duration);
