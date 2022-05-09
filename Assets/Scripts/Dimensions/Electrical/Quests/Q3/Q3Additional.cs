@@ -12,11 +12,12 @@ public class Q3Additional : MonoBehaviour
     [SerializeField] private Connector con1;
     [SerializeField] private Connector con2;
     [SerializeField] private Connector con3;
+    [SerializeField] private Connector con4;
     void Start()
     {
         checkConnect = CheckConnect();
         StartCoroutine(checkConnect);
-        if(!(con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight))
+        if(!(con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight && con4.IsConnectedRight))
         {
             newPart1.Stop();
             newPart2.Stop();
@@ -34,7 +35,7 @@ public class Q3Additional : MonoBehaviour
     private IEnumerator checkConnect;
     private IEnumerator CheckConnect()
     {
-        while(!(con1.IsConnectedRight&&con2.IsConnectedRight&&con3.IsConnectedRight))
+        while(!(con1.IsConnectedRight&&con2.IsConnectedRight&&con3.IsConnectedRight && con4.IsConnectedRight))
         {
             yield return new WaitForSeconds(2f);
         }
@@ -44,7 +45,7 @@ public class Q3Additional : MonoBehaviour
     private IEnumerator checkDisconnect;
     private IEnumerator CheckDisconnect()
     {
-        while (con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight)
+        while (con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight && con4.IsConnectedRight)
         {
             yield return new WaitForSeconds(2f);
         }
