@@ -10,6 +10,8 @@ public class SplitterTrackMovingElement : MonoBehaviour
     [SerializeField] private SplitterTrack splitterTrack;
     public bool Rotating { get; private set; }
     private float totalRotation = 0f;
+
+    private BallBehavior ball;
     
     private void Update()
     {
@@ -33,13 +35,40 @@ public class SplitterTrackMovingElement : MonoBehaviour
     {
         if (!Rotating)
         {
-            if ((1 << collision.gameObject.layer & ballLayer.value) != 0)
+            if ((1 << collision.gameObject.layer & ballLayer.value) != 0 && ball.gameObject != collision.gameObject)
             {
+                ball = collision.gameObject.GetComponent<BallBehavior>();
                 Rotating = true;
                 splitterTrack.hammerFacingRight = !splitterTrack.hammerFacingRight;
                 totalRotation = 0f;
+                StopAllCoroutines();
                 StartCoroutine(splitterTrack.hammerFacingRight ? RotateRight() : RotateLeft());
             }
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (!Rotating)
+        {
+            if ((1 << collision.gameObject.layer & ballLayer.value) != 0)
+            {
+                StartCoroutine(BallTimer());
+            }
+        }
+    }
+    private IEnumerator BallTimer()
+    {
+        const float timeToWait = 1;
+        float timeElapsed = 0;
+        for(; ; )
+        {
+            timeElapsed += Time.deltaTime;
+            if(timeElapsed >= timeToWait)
+            {
+                ball = null;
+                yield break;
+            }
+            yield return null;
         }
     }
     public void RotateLeftInstant() => transform.Rotate(Vector3.up, 100f);
