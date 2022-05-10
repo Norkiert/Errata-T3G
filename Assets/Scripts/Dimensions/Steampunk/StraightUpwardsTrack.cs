@@ -23,12 +23,7 @@ public class StraightUpwardsTrack : BasicTrack
     public override void OnBallEnter(BallBehavior ball)
     {
         ball.pathID = 0;
-        var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
-        {
-            0 => Vector3.forward,
-            _ => Vector3.zero
-        });
-        ball.ballRigidbody.velocity = moveVector;
+        ball.ballRigidbody.velocity = ball.rollingSpeed * rollingSpeed * ball.ballRigidbody.velocity.normalized;
     }
     public override void OnBallStay(BallBehavior ball)
     {
