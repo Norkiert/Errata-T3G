@@ -35,7 +35,7 @@ public class SplitterTrackMovingElement : MonoBehaviour
     {
         if (!Rotating)
         {
-            if ((1 << collision.gameObject.layer & ballLayer.value) != 0 && ball.gameObject != collision.gameObject)
+            if ((1 << collision.gameObject.layer & ballLayer.value) != 0 && (ball && ball.gameObject != collision.gameObject || !ball))
             {
                 ball = collision.gameObject.GetComponent<BallBehavior>();
                 Rotating = true;
