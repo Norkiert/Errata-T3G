@@ -5,7 +5,9 @@ using NaughtyAttributes;
 
 public class WeightedGear : Gear
 {
-    [SerializeField] protected float anglePerSecond;
+    [SerializeField, Range(0, 1)] protected float forceMultiplier;
+    [SerializeField] protected float maxForce;
+    [SerializeField, ReadOnly] protected float force;
 
     [SerializeField] protected Transform pointLeft;
     [SerializeField] protected Transform pointRight;
@@ -14,6 +16,11 @@ public class WeightedGear : Gear
 
     [SerializeField, ReadOnly] protected bool stopFlag = false;
 
+    protected void Update()
+    {
+        Rotate(force * Time.deltaTime);
+        force *= forceMultiplier;
+    }
     protected void OnCollisionEnter(Collision collision)
     {
         if ((1 << collision.gameObject.layer & layer.value) != 0)
@@ -41,7 +48,7 @@ public class WeightedGear : Gear
                 stopFlag = false;
                 yield break;
             }
-            Rotate(anglePerSecond * Time.deltaTime);
+            force = maxForce;
             yield return null;
         }
     }
@@ -54,7 +61,7 @@ public class WeightedGear : Gear
                 stopFlag = false;
                 yield break;
             }
-            Rotate(-anglePerSecond * Time.deltaTime);
+            force = -maxForce;
             yield return null;
         }
     }

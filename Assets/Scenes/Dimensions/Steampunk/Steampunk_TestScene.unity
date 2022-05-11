@@ -4271,7 +4271,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6627357793553221977, guid: 459c5d7c78c295649a3180cc134aa447, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6627357793553221983, guid: 459c5d7c78c295649a3180cc134aa447, type: 3}
       propertyPath: m_Name
@@ -5203,7 +5203,9 @@ MonoBehaviour:
   connectedGears: []
   coaxialGears:
   - {fileID: 1158993999}
-  anglePerSecond: 180
+  forceAddon: 0.5
+  forceMultiplier: 0.95
+  angle: 0
   pointLeft: {fileID: 457153030}
   pointRight: {fileID: 1920005087}
   layer:
