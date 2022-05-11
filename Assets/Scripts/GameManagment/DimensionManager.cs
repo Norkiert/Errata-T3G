@@ -39,8 +39,6 @@ namespace GameManagment
             }
 
             instance = this;
-
-            DOTween.SetTweensCapacity(200, 1100);
         }
 
         private void Start()

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using NaughtyAttributes;
+using DG.Tweening;
 
 namespace GameManagment
 {
@@ -20,7 +21,8 @@ namespace GameManagment
         [RuntimeInitializeOnLoadMethod]
         private static void Init()
         {
-            Application.targetFrameRate = 70;
+            Application.targetFrameRate = 60;
+            DOTween.SetTweensCapacity(200, 1100);
         }
 
         public static GameManager instance;
