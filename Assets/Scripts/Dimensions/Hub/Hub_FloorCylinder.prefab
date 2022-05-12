@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 826787467654836271}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hub_FloorCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,14 +94,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d121d5eb7e2d1e54a98f190577b81bc5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 317f193dd8d05324785281b5656803f4, type: 2}
     - target: {fileID: 919132149155446097, guid: d121d5eb7e2d1e54a98f190577b81bc5, type: 3}
       propertyPath: m_Name
       value: hub_buildingfloor_single_active
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d121d5eb7e2d1e54a98f190577b81bc5, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d121d5eb7e2d1e54a98f190577b81bc5, type: 3}
+--- !u!1 &7352081942851282379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d121d5eb7e2d1e54a98f190577b81bc5, type: 3}
+  m_PrefabInstance: {fileID: 7694046208770955418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7875677813003960177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d121d5eb7e2d1e54a98f190577b81bc5, type: 3}
   m_PrefabInstance: {fileID: 7694046208770955418}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &4384749661052124663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352081942851282379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4, y: 0, z: 1.4}
+  m_Center: {x: 0, y: 0, z: 0}

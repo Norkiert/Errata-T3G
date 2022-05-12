@@ -42,7 +42,7 @@ public class HubFloorCylinderBahaviour : MonoBehaviour
 
         UpdateAllCubesMovement();
 
-        //StartCoroutine(CheckConnections());
+        StartCoroutine(CheckConnections());
     }
 
     private void Generate()
@@ -66,6 +66,9 @@ public class HubFloorCylinderBahaviour : MonoBehaviour
 
             for (int x = - center; x < n - center; x++)
             {
+                if (y < centerMargin && Mathf.Abs(x) + (y + (x > 0 ? 1 : 0)) / 2 < centerMargin)
+                    continue;
+
                 Spawn(x , y);
                 if (y != 0)
                     Spawn(x, -y);
@@ -76,9 +79,6 @@ public class HubFloorCylinderBahaviour : MonoBehaviour
         {
             bool isOdd = Mathf.Abs(y) % 2 == 1;
             Vector3 offset = new Vector3(x * height * 2 + (isOdd ? oddXOffset : 0), 0, y * side * 1.5f);
-
-            if (offset.magnitude < centerMargin)
-                return;
 
             ConnectCylinder connectCylinder = connectors.Find(c => c.X == x && c.Y == y);
             bool isConnector = connectCylinder != null;
@@ -213,20 +213,34 @@ public class HubFloorCylinderBahaviour : MonoBehaviour
                 if (Mathf.Abs(Transform.localPosition.y - minY) < Mathf.Abs(Transform.localPosition.y - maxY))
                 {
                     sequence = DOTween.Sequence()
+                        .Append(Transform.DOLocalMoveY(maxY, moveTime))
+                        .OnComplete(Loop);
+
+                    void Loop()
+                    {
+                        sequence = DOTween.Sequence()
                         .SetLoops(-1)
+                        .Append(Transform.DOLocalMoveY(minY, moveTime))
                         .Append(Transform.DOLocalMoveY(maxY, moveTime))
                         .AppendInterval(moveTime / 2f)
-                        .Append(Transform.DOLocalMoveY(minY, moveTime))
                         ;
+                    } 
                 }
                 else
                 {
                     sequence = DOTween.Sequence()
-                        .SetLoops(-1)
                         .Append(Transform.DOLocalMoveY(minY, moveTime))
+                        .OnComplete(Loop);
+
+                    void Loop()
+                    {
+                        sequence = DOTween.Sequence()
+                        .SetLoops(-1)
                         .Append(Transform.DOLocalMoveY(maxY, moveTime))
                         .AppendInterval(moveTime / 2f)
+                        .Append(Transform.DOLocalMoveY(minY, moveTime))
                         ;
+                    }
                 }
             }
             else
