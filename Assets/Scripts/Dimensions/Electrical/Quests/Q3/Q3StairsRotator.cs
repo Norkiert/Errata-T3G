@@ -7,6 +7,7 @@ public class Q3StairsRotator : MonoBehaviour
 {
     [SerializeField] private Connector connectorToCheck;
     [SerializeField] private GameObject[] objects;
+    [SerializeField] private Collider[] objectsWithCollider;
     [SerializeField] private float duration = 1f;
     [SerializeField] private float checkDelay = 2f;
     void Start()
@@ -46,6 +47,10 @@ public class Q3StairsRotator : MonoBehaviour
         {
             obj.transform.DORotate(new Vector3(0,obj.transform.eulerAngles.y,0),duration);
         }
+        foreach(Collider col in objectsWithCollider)
+        {
+            col.enabled = true;
+        }
         checkDisconnect = CheckDisconnect();
         StartCoroutine(checkDisconnect);
     }
@@ -56,6 +61,10 @@ public class Q3StairsRotator : MonoBehaviour
         foreach (GameObject obj in objects)
         {
            obj.transform.DORotate(new Vector3(-84, obj.transform.eulerAngles.y, 0), duration);
+        }
+        foreach (Collider col in objectsWithCollider)
+        {
+            col.enabled = false;
         }
         checkConnect = CheckConnect();
         StartCoroutine(checkConnect);

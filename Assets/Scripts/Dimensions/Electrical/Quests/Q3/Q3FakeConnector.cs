@@ -8,7 +8,7 @@ public class Q3FakeConnector : MonoBehaviour
 [SerializeField] private Connector connectorToCheck;
 [SerializeField] private GameObject[] objects;
 [SerializeField] private float duration = 1f;
-[SerializeField] private float checkDelay = 2f;
+[SerializeField] private float checkDelay = 1.5f;
 void Start()
 {
     if (connectorToCheck != null)
