@@ -4,71 +4,61 @@ using UnityEngine;
 using DG.Tweening;
 
 public class Q3FakeConnector : MonoBehaviour
+{ 
+[SerializeField] private Connector connectorToCheck;
+[SerializeField] private GameObject[] objects;
+[SerializeField] private float duration = 1f;
+[SerializeField] private float checkDelay = 2f;
+void Start()
 {
-    [SerializeField] private Connector connectorToCheck;
-    [SerializeField] private GameObject[] objects;
-    [SerializeField] private float duration = 1f;
-    [SerializeField] private float checkDelay = 2f;
-    void Start()
-    {
-        if (connectorToCheck != null)
-            DisconnectedCable();
-    }
+    if (connectorToCheck != null)
+        DisconnectedCable();
+}
 
-    private IEnumerator checkConnect;
+private IEnumerator checkConnect;
 
-    private IEnumerator CheckConnect()
-    {
-        yield return new WaitForSeconds(checkDelay/4);
-        while (!connectorToCheck.IsConnectedRight)
-        {
-            yield return new WaitForSeconds(checkDelay/4);
-        }
-        ConnectedCable();
-    }
-    private IEnumerator checkDisconnect;
-
-    private IEnumerator CheckDisconnect()
+private IEnumerator CheckConnect()
+{
+    yield return new WaitForSeconds(checkDelay);
+    while (!connectorToCheck.IsConnectedRight)
     {
         yield return new WaitForSeconds(checkDelay);
-        while (connectorToCheck.IsConnectedRight)
-        {
-            yield return new WaitForSeconds(checkDelay);
-        }
-        DisconnectedCable();
     }
+    ConnectedCable();
+}
+private IEnumerator checkDisconnect;
 
-    private void ConnectedCable()
+private IEnumerator CheckDisconnect()
+{
+    yield return new WaitForSeconds(checkDelay);
+    while (connectorToCheck.IsConnectedRight)
     {
-        if (checkConnect != null)
-            StopCoroutine(checkConnect);
-        if (rotateFake != null)
-            StopCoroutine(rotateFake);
-        rotateFake = RotateFake();
-        StartCoroutine(rotateFake);
-        checkDisconnect = CheckDisconnect();
-        StartCoroutine(checkDisconnect);
+        yield return new WaitForSeconds(checkDelay);
     }
-    private void DisconnectedCable()
-    {
-        if (checkDisconnect != null)
-            StopCoroutine(checkDisconnect);
-        checkConnect = CheckConnect();
-        StartCoroutine(checkConnect);
-    }
+    DisconnectedCable();
+}
 
-    private IEnumerator rotateFake;
-
-    private IEnumerator RotateFake()
+private void ConnectedCable()
+{
+    if (checkConnect != null)
+        StopCoroutine(checkConnect);
+    foreach (GameObject obj in objects)
     {
-        foreach (GameObject obj in objects)
-        {
-            obj.transform.DORotate(new Vector3(-90, obj.transform.eulerAngles.y, 0), duration);
-        }
-        yield return new WaitForSeconds(duration*3);
-        foreach (GameObject obj in objects)
-        {
-            obj.transform.DORotate(new Vector3(0, obj.transform.eulerAngles.y, 0), duration);
-        }
+        obj.transform.DORotate(new Vector3(-85, obj.transform.eulerAngles.y, 0), duration);
     }
+    checkDisconnect = CheckDisconnect();
+    StartCoroutine(checkDisconnect);
+}
+private void DisconnectedCable()
+{
+    if (checkDisconnect != null)
+        StopCoroutine(checkDisconnect);
+    foreach (GameObject obj in objects)
+    {
+        obj.transform.DORotate(new Vector3(0, obj.transform.eulerAngles.y, 0), duration);
+    }
+    checkConnect = CheckConnect();
+    StartCoroutine(checkConnect);
+}
+
 }

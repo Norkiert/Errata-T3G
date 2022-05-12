@@ -55,7 +55,7 @@ public class Q3StairsRotator : MonoBehaviour
             StopCoroutine(checkDisconnect);
         foreach (GameObject obj in objects)
         {
-           obj.transform.DORotate(new Vector3(-80, obj.transform.eulerAngles.y, 0), duration);
+           obj.transform.DORotate(new Vector3(-84, obj.transform.eulerAngles.y, 0), duration);
         }
         checkConnect = CheckConnect();
         StartCoroutine(checkConnect);
