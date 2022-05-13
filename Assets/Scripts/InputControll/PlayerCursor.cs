@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(PlayerInteractions))]
+public class PlayerCursor : MonoBehaviour
+{
+    [SerializeField] private GameObject cursorCanvas;
+    [SerializeField, Min(0)] private float minShowDistance;
+
+    private PlayerInteractions playerInteractions;
+    private IEnumerator cursorUpdater;
+
+    private void OnEnable()
+    {
+        playerInteractions = GetComponent<PlayerInteractions>();
+        if (playerInteractions == null)
+            return;
+
+        playerInteractions.OnSelect += ActiveCursor;
+        //playerInteractions.OnDeselect += DesactiveCursor;
+    }
+    private void OnDisable()
+    {
+        if (playerInteractions == null)
+            return;
+
+        playerInteractions.OnSelect -= ActiveCursor;
+        //playerInteractions.OnDeselect -= DesactiveCursor;
+
+        DesactiveCursor();
+    }
+
+    private void ActiveCursor()
+    {
+        if (playerInteractions == null)
+            return;
+
+        if (cursorUpdater == null)
+        {
+            cursorUpdater = UpdateCursor();
+            StartCoroutine(cursorUpdater);
+        }
+    }
+    private void DesactiveCursor() => cursorCanvas?.SetActive(false);
+
+    private IEnumerator UpdateCursor()
+    {
+        if (cursorCanvas == null)
+            yield break;
+
+        while (playerInteractions.SelectedObject != null)
+        {
+            float distance = Vector3.Distance(playerInteractions.SelectedObject.transform.position, transform.position);
+            cursorCanvas.SetActive(distance >= minShowDistance);
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        DesactiveCursor();
+        cursorUpdater = null;
+    }
+}

@@ -22,6 +22,9 @@ public class PlayerInteractions : MonoBehaviour
     [field: Header("Input")]
     [field: SerializeField, ReadOnly] public bool Interacting { get; private set; } = false;
 
+    public event Action OnSelect;
+    public event Action OnDeselect;
+
     public event Action OnInteractionStart;
     public event Action OnInteractionEnd;
 
@@ -79,12 +82,19 @@ public class PlayerInteractions : MonoBehaviour
             return;
 
         if (SelectedObject)
+        {
             SelectedObject.Deselect();
-
-        if (foundInteractable && foundInteractable.enabled)
-            foundInteractable.Select();
+            OnDeselect?.Invoke();
+        }
 
         SelectedObject = foundInteractable;
+
+        if (foundInteractable && foundInteractable.enabled)
+        {
+            
+            foundInteractable.Select();
+            OnSelect?.Invoke();
+        }
     }
 
     #endregion
