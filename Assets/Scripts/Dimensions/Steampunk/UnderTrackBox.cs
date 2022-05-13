@@ -96,10 +96,17 @@ public class UnderTrackBox : Clickable
         else
         {
             newPosition = connectedTrack.position - ((int)playerFacing.x, (int)playerFacing.y, (int)playerFacing.z);
-            var tmc = connectedTrack.trackMapController;
-            tmc.Remove(connectedTrack);
-            tmc.Add(connectedTrack, newPosition);
-            UpdateBoxPosition();
+            if (!connectedTrack.trackMapController.Contains(newPosition) && !Physics.Raycast(transform.position, transform.parent.rotation * playerFacing * -1, out RaycastHit hit2, height * 1.5f * playerFacing.z switch
+            {
+                0 => transform.lossyScale.x,
+                _ => transform.lossyScale.z
+            }, layerMask))
+            {
+                var tmc = connectedTrack.trackMapController;
+                tmc.Remove(connectedTrack);
+                tmc.Add(connectedTrack, newPosition);
+                UpdateBoxPosition();
+            }
         }
     }
 }
