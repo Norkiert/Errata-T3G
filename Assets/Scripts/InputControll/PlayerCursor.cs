@@ -36,13 +36,26 @@ public class PlayerCursor : MonoBehaviour
         if (playerInteractions == null)
             return;
 
+        if (playerInteractions.SelectedObject is Interactable == false)
+            return;
+
         if (cursorUpdater == null)
         {
             cursorUpdater = UpdateCursor();
             StartCoroutine(cursorUpdater);
         }
     }
-    private void DesactiveCursor() => cursorCanvas?.SetActive(false);
+    private void DesactiveCursor()
+    {
+        cursorCanvas?.SetActive(false);
+
+        if (cursorUpdater != null)
+        {
+            StopCoroutine(cursorUpdater);
+            cursorUpdater = null;
+        }
+    }
+
 
     private IEnumerator UpdateCursor()
     {
@@ -57,7 +70,7 @@ public class PlayerCursor : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        DesactiveCursor();
         cursorUpdater = null;
+        DesactiveCursor();
     }
 }
