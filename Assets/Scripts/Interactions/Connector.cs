@@ -39,6 +39,7 @@ public class Connector : LogicBoolOutput
     public Vector3 ConnectionPosition => connectionPoint ? connectionPoint.position : transform.position;
     public Quaternion ConnectionRotation => connectionPoint ? connectionPoint.rotation : transform.rotation;
     public Quaternion RotationOffset => connectionPoint ? connectionPoint.localRotation : Quaternion.Euler(Vector3.zero);
+    public Vector3 ConnectedOutOffset => connectionPoint ? connectionPoint.right : transform.right;
 
     public bool IsConnected => ConnectedTo != null;
     public bool IsConnectedRight => IsConnected && ConnectionColor == ConnectedTo.ConnectionColor;

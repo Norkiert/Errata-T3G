@@ -26,7 +26,7 @@ public class PhysicCableCon : Liftable
             else if (!secondConnector.IsConnected)
             {
                 transform.rotation = secondConnector.ConnectionRotation * _connector.RotationOffset;
-                transform.position = secondConnector.ConnectionPosition - (_connector.ConnectionPosition - _connector.transform.position);
+                transform.position = (secondConnector.ConnectionPosition + secondConnector.ConnectedOutOffset * 0.5f) - (_connector.ConnectionPosition - _connector.transform.position);
             }
         }
     }
