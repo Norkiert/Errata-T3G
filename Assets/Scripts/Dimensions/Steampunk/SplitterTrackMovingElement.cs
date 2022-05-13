@@ -47,11 +47,11 @@ public class SplitterTrackMovingElement : MonoBehaviour
                 StopAllCoroutines();
 
                 StartCoroutine(splitterTrack.hammerFacingRight ? RotateRight() : RotateLeft());
-                if (splitterTrack.hammerFacingRight)
+                if (splitterTrack.hammerFacingRight && ballSpitter)
                 {
                     ballSpitter.BeginRotateRight();
                 }
-                else
+                else if(ballSpitter)
                 {
                     ballSpitter.BeginRotateLeft();
                 }
