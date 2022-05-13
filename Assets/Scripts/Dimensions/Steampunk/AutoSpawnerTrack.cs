@@ -36,7 +36,7 @@ public class AutoSpawnerTrack : BasicTrack
     }
     protected void SpawnBall()
     {
-        var ball = Instantiate(prefab, spawnPoint.transform.position, new Quaternion());
+        var ball = Instantiate(prefab, spawnPoint.position, new Quaternion());
     }
     public override void RotateRight()
     {

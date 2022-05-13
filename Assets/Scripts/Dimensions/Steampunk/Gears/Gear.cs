@@ -33,6 +33,6 @@ public abstract class Gear : MonoBehaviour
         foreach (var gear in coaxialGears)
         {
             gear.Rotate(angle);
-        };
+        }
     }
 }
