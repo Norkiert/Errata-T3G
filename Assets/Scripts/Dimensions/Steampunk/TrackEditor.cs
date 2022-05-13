@@ -1012,10 +1012,18 @@ public class TrackEditor : EditorWindow
 
                     if (splitterTrack.hammerFacingRight)
                     {
+                        if (splitterTrack.hammer.ballSpitter)
+                        {
+                            splitterTrack.hammer.ballSpitter.RotateRightInstant();
+                        }
                         splitterTrack.hammer.RotateRightInstant();
                     }
                     else if (!splitterTrack.hammerFacingRight)
                     {
+                        if (splitterTrack.hammer.ballSpitter)
+                        {
+                            splitterTrack.hammer.ballSpitter.RotateLeftInstant();
+                        }
                         splitterTrack.hammer.RotateLeftInstant();
                     }
                 }

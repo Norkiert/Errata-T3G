@@ -6,8 +6,11 @@ public class SplitterTrackMovingElement : MonoBehaviour
 {
     [SerializeField] private MeshCollider meshCollider;
     [SerializeField] private LayerMask ballLayer;
-    [SerializeField] private float rotationSpeed = 100f;
+
     [SerializeField] private SplitterTrack splitterTrack;
+    [SerializeField] public BallSpitter ballSpitter;
+
+    [SerializeField] public float rotationSpeed = 100f;
     public bool Rotating { get; private set; }
     private float totalRotation = 0f;
 
@@ -42,7 +45,16 @@ public class SplitterTrackMovingElement : MonoBehaviour
                 splitterTrack.hammerFacingRight = !splitterTrack.hammerFacingRight;
                 totalRotation = 0f;
                 StopAllCoroutines();
+
                 StartCoroutine(splitterTrack.hammerFacingRight ? RotateRight() : RotateLeft());
+                if (splitterTrack.hammerFacingRight)
+                {
+                    ballSpitter.BeginRotateRight();
+                }
+                else
+                {
+                    ballSpitter.BeginRotateLeft();
+                }
             }
         }
     }
