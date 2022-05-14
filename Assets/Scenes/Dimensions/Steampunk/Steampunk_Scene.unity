@@ -5488,7 +5488,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 20b04771e0092064f90c9e6c4069520d, type: 2}
+  - {fileID: 2100000, guid: 470b1dbea8b24de46914513d10d3e185, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6917,10 +6917,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spitter
       objectReference: {fileID: 0}
+    - target: {fileID: 8832057750453696701, guid: e6b0ba9bbc520d1448d0d23df85add38, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9160327725397636322, guid: e6b0ba9bbc520d1448d0d23df85add38, type: 3}
       propertyPath: hammer
       value: 
       objectReference: {fileID: 790631152}
+    - target: {fileID: 9160327725397636322, guid: e6b0ba9bbc520d1448d0d23df85add38, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160327725397636322, guid: e6b0ba9bbc520d1448d0d23df85add38, type: 3}
+      propertyPath: timeToSpawn
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9160327725397636322, guid: e6b0ba9bbc520d1448d0d23df85add38, type: 3}
       propertyPath: rotationAngle
       value: 15
@@ -13880,7 +13892,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583419648}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -15853,7 +15865,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6d28cbdf123d23a45a9b5fba867a57fe, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 20b04771e0092064f90c9e6c4069520d, type: 2}
+      objectReference: {fileID: 2100000, guid: 470b1dbea8b24de46914513d10d3e185, type: 2}
     - target: {fileID: 919132149155446097, guid: 6d28cbdf123d23a45a9b5fba867a57fe, type: 3}
       propertyPath: m_Name
       value: Gear1
@@ -20257,7 +20269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812801120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: 0, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1726941907}
@@ -27472,7 +27484,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160619280}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -34641,11 +34653,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalScale.x
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalScale.y
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalScale.z
@@ -34669,11 +34681,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.92387956
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalRotation.z
@@ -34685,16 +34697,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 470b1dbea8b24de46914513d10d3e185, type: 2}
+    - target: {fileID: -5754084199372789682, guid: c38fc60908acfee488351395fa0c7807, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2045750654109849388, guid: 4f2e463c31e192c41bf73f4471479871, type: 3}
     - target: {fileID: 919132149155446097, guid: c38fc60908acfee488351395fa0c7807, type: 3}
       propertyPath: m_Name
       value: gear5
@@ -34744,7 +34760,24 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -2045750654109849388, guid: c38fc60908acfee488351395fa0c7807, type: 3}
+  m_Mesh: {fileID: -2045750654109849388, guid: 4f2e463c31e192c41bf73f4471479871, type: 3}
+--- !u!114 &1543784658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543784655}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce969e64d5fd2946a5b8df82ac3d4bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+  connectedGears: []
+  coaxialGears:
+  - {fileID: 1665238156}
+  anglePerSecond: 360
 --- !u!4 &1543784660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c38fc60908acfee488351395fa0c7807, type: 3}
@@ -34903,8 +34936,8 @@ Transform:
   - {fileID: 1015911723}
   - {fileID: 1389250761}
   - {fileID: 292574082}
-  - {fileID: 196397808}
   - {fileID: 1208334497}
+  - {fileID: 196397808}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 30.3, z: 0}
@@ -40997,7 +41030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17bfcbbc72ffc14cb2f4ed185140349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 12
+  radius: 13.65
   connectedGears: []
   coaxialGears:
   - {fileID: 637398332}
