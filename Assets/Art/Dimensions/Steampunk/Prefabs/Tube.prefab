@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f9f4eb3c7fa882489fd412759fa7ff9, type: 2}
+  - {fileID: 2100000, guid: 43e067683fd037644a82a6dd5196c858, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,16 +145,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 0, y: -0.11999999, z: -0.00050002337}
+  center: {x: 8.74, y: 0.26135385, z: 4}
   displayAsRelative: 1
-  XpYpZp: {x: 0.24, y: 0.120000005, z: 0.5005}
-  XpYpZm: {x: 0.24, y: 0.120000005, z: -0.5005}
-  XpYmZp: {x: 0.24, y: -0.120000005, z: 0.5005}
-  XpYmZm: {x: 0.24, y: -0.120000005, z: -0.5005}
-  XmYpZp: {x: -0.24, y: 0.120000005, z: 0.5005}
-  XmYpZm: {x: -0.24, y: 0.120000005, z: -0.5005}
-  XmYmZp: {x: -0.24, y: -0.120000005, z: 0.5005}
-  XmYmZm: {x: -0.24, y: -0.120000005, z: -0.5005}
+  XpYpZp: {x: 0.23999977, y: 1.001, z: 0.48000002}
+  XpYpZm: {x: 0.23999977, y: 1.001, z: -0.48000002}
+  XpYmZp: {x: 0.23999977, y: -1.001, z: 0.48000002}
+  XpYmZm: {x: 0.23999977, y: -1.001, z: -0.48000002}
+  XmYpZp: {x: -0.23999977, y: 1.001, z: 0.48000002}
+  XmYpZm: {x: -0.23999977, y: 1.001, z: -0.48000002}
+  XmYmZp: {x: -0.23999977, y: -1.001, z: 0.48000002}
+  XmYmZm: {x: -0.23999977, y: -1.001, z: -0.48000002}
 --- !u!1 &5152051472074321181
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +164,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1612962235364813883}
+  - component: {fileID: 5155848510012429989}
+  - component: {fileID: 2074212399191179162}
   m_Layer: 0
   m_Name: Tube
   m_TagString: Untagged
@@ -187,6 +189,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5155848510012429989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5152051472074321181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa45e153bb70d449b7a16d98e6491d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tubeRenderers:
+  - {fileID: 5104543578339401166}
+  - {fileID: 1458953662043740153}
+  - {fileID: 184466432274219730}
+  - {fileID: 659933758773666245}
+  materialNotCompleted: {fileID: 2100000, guid: 43e067683fd037644a82a6dd5196c858, type: 2}
+  materialCompleted: {fileID: 2100000, guid: 3efb86548efcb6d498c013357d7f8d5c, type: 2}
+  ballLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+--- !u!65 &2074212399191179162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5152051472074321181}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3465726, y: 0.33189958, z: 0.09292531}
+  m_Center: {x: 0.02, y: 0.0025696158, z: 0.36}
 --- !u!1 &6016342921129270478
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +317,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f9f4eb3c7fa882489fd412759fa7ff9, type: 2}
+  - {fileID: 2100000, guid: 43e067683fd037644a82a6dd5196c858, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -332,16 +369,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: -0.00000017881393, y: -0.13192578, z: -0.0005250573}
+  center: {x: 8.763851, y: 0.26130378, z: 4.0000005}
   displayAsRelative: 1
-  XpYpZp: {x: 0.26397362, y: 0.13192578, z: 0.50059634}
-  XpYpZm: {x: 0.26397362, y: 0.13192578, z: -0.50059634}
-  XpYmZp: {x: 0.26397362, y: -0.13192578, z: 0.50059634}
-  XpYmZm: {x: 0.26397362, y: -0.13192578, z: -0.50059634}
-  XmYpZp: {x: -0.26397362, y: 0.13192578, z: 0.50059634}
-  XmYpZm: {x: -0.26397362, y: 0.13192578, z: -0.50059634}
-  XmYmZp: {x: -0.26397362, y: -0.13192578, z: 0.50059634}
-  XmYmZm: {x: -0.26397362, y: -0.13192578, z: -0.50059634}
+  XpYpZp: {x: 0.26385117, y: 1.0011927, z: 0.5279474}
+  XpYpZm: {x: 0.26385117, y: 1.0011927, z: -0.5279474}
+  XpYmZp: {x: 0.26385117, y: -1.0011927, z: 0.5279474}
+  XpYmZm: {x: 0.26385117, y: -1.0011927, z: -0.5279474}
+  XmYpZp: {x: -0.26385117, y: 1.0011927, z: 0.5279474}
+  XmYpZm: {x: -0.26385117, y: 1.0011927, z: -0.5279474}
+  XmYmZp: {x: -0.26385117, y: -1.0011927, z: 0.5279474}
+  XmYmZm: {x: -0.26385117, y: -1.0011927, z: -0.5279474}
 --- !u!1 &7677104671060799050
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +440,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f9f4eb3c7fa882489fd412759fa7ff9, type: 2}
+  - {fileID: 2100000, guid: 43e067683fd037644a82a6dd5196c858, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -455,16 +492,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 0.00000017881393, y: 0.13192578, z: -0.0005250573}
+  center: {x: 8.236149, y: 0.26130378, z: 3.9999995}
   displayAsRelative: 1
-  XpYpZp: {x: 0.26397362, y: 0.13192578, z: 0.50059634}
-  XpYpZm: {x: 0.26397362, y: 0.13192578, z: -0.50059634}
-  XpYmZp: {x: 0.26397362, y: -0.13192578, z: 0.50059634}
-  XpYmZm: {x: 0.26397362, y: -0.13192578, z: -0.50059634}
-  XmYpZp: {x: -0.26397362, y: 0.13192578, z: 0.50059634}
-  XmYpZm: {x: -0.26397362, y: 0.13192578, z: -0.50059634}
-  XmYmZp: {x: -0.26397362, y: -0.13192578, z: 0.50059634}
-  XmYmZm: {x: -0.26397362, y: -0.13192578, z: -0.50059634}
+  XpYpZp: {x: 0.26385117, y: 1.0011927, z: 0.5279474}
+  XpYpZm: {x: 0.26385117, y: 1.0011927, z: -0.5279474}
+  XpYmZp: {x: 0.26385117, y: -1.0011927, z: 0.5279474}
+  XpYmZm: {x: 0.26385117, y: -1.0011927, z: -0.5279474}
+  XmYpZp: {x: -0.26385117, y: 1.0011927, z: 0.5279474}
+  XmYpZm: {x: -0.26385117, y: 1.0011927, z: -0.5279474}
+  XmYmZp: {x: -0.26385117, y: -1.0011927, z: 0.5279474}
+  XmYmZm: {x: -0.26385117, y: -1.0011927, z: -0.5279474}
 --- !u!1 &9162486532090414062
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +563,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f9f4eb3c7fa882489fd412759fa7ff9, type: 2}
+  - {fileID: 2100000, guid: 43e067683fd037644a82a6dd5196c858, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -578,13 +615,13 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 0, y: 0.11999999, z: -0.00050002337}
+  center: {x: 8.26, y: 0.26135385, z: 4}
   displayAsRelative: 1
-  XpYpZp: {x: 0.24, y: 0.120000005, z: 0.5005}
-  XpYpZm: {x: 0.24, y: 0.120000005, z: -0.5005}
-  XpYmZp: {x: 0.24, y: -0.120000005, z: 0.5005}
-  XpYmZm: {x: 0.24, y: -0.120000005, z: -0.5005}
-  XmYpZp: {x: -0.24, y: 0.120000005, z: 0.5005}
-  XmYpZm: {x: -0.24, y: 0.120000005, z: -0.5005}
-  XmYmZp: {x: -0.24, y: -0.120000005, z: 0.5005}
-  XmYmZm: {x: -0.24, y: -0.120000005, z: -0.5005}
+  XpYpZp: {x: 0.23999977, y: 1.001, z: 0.48000002}
+  XpYpZm: {x: 0.23999977, y: 1.001, z: -0.48000002}
+  XpYmZp: {x: 0.23999977, y: -1.001, z: 0.48000002}
+  XpYmZm: {x: 0.23999977, y: -1.001, z: -0.48000002}
+  XmYpZp: {x: -0.23999977, y: 1.001, z: 0.48000002}
+  XmYpZm: {x: -0.23999977, y: 1.001, z: -0.48000002}
+  XmYmZp: {x: -0.23999977, y: -1.001, z: 0.48000002}
+  XmYmZm: {x: -0.23999977, y: -1.001, z: -0.48000002}
