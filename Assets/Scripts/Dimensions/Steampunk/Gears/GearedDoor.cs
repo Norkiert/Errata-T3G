@@ -10,7 +10,7 @@ public class GearedDoor : Gear
     [SerializeField] protected Transform maxHeightPoint;
     [SerializeField] protected Transform minHeightPoint;
 
-    protected Vector3 max;
+    public Vector3 max;
     protected Vector3 min;
 
     protected void Awake()
