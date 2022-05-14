@@ -15,4 +15,8 @@ public class SaveData
     public List<SVector3> rotatableRotations = new List<SVector3>();
     public List<SVector3> boxPositions = new List<SVector3>();
     public List<SVector3> connectedTracksPositions = new List<SVector3>();
+
+    public bool isLaserFinished = false;
+    public bool isElectricalFinished = false;
+    public bool isSteampunkFinished = false;
 }

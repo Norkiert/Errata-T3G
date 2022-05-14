@@ -62,6 +62,9 @@ public static class SaveManager
             save.mirrorsRotations.Add(mirrors[i].gameObject.transform.eulerAngles);
         }
 
+        GameObject sun = GameObject.Find("SunModelFinal");
+        save.isLaserFinished = sun != null;
+
         Debug.Log("saved laser");
         return save;
     }
@@ -231,6 +234,28 @@ public static class SaveManager
             boxes[i].gameObject.transform.position = save.boxPositions[i];
             if (boxes[i].connectedTrack != null)
                 boxes[i].connectedTrack.gameObject.transform.position = save.connectedTracksPositions[i];
+        }
+    }
+
+    public static bool isLevelFinished(Dimension dim) {
+        string path = Application.persistentDataPath + "/errata.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData save = JsonUtility.FromJson<SaveData>(json);
+
+            switch (dim) {
+                case Dimension.Laser:
+                    return save.isLaserFinished;
+                case Dimension.Electrical:
+                    return save.isElectricalFinished;
+                case Dimension.Steampunk:
+                    return save.isSteampunkFinished;
+            }
+
+            return false;
+        } else {
+            return false;
         }
     }
 }
