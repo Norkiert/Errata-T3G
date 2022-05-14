@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8f9f4eb3c7fa882489fd412759fa7ff9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,16 +113,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: -0.0000027120113, y: 0.08869648, z: 0.013157487}
+  center: {x: 11.973684, y: 1.1773927, z: -10.000005}
   displayAsRelative: 1
-  XpYpZp: {x: 0.26397675, y: 0.35254806, z: 0.49517894}
-  XpYpZm: {x: 0.26397675, y: 0.35254806, z: -0.49517894}
-  XpYmZp: {x: 0.26397675, y: -0.35254806, z: 0.49517894}
-  XpYmZm: {x: 0.26397675, y: -0.35254806, z: -0.49517894}
-  XmYpZp: {x: -0.26397675, y: 0.35254806, z: 0.49517894}
-  XmYpZm: {x: -0.26397675, y: 0.35254806, z: -0.49517894}
-  XmYmZp: {x: -0.26397675, y: -0.35254806, z: 0.49517894}
-  XmYmZm: {x: -0.26397675, y: -0.35254806, z: -0.49517894}
+  XpYpZp: {x: 0.99035835, y: 0.70509624, z: 0.5279541}
+  XpYpZm: {x: 0.99035835, y: 0.70509624, z: -0.5279541}
+  XpYmZp: {x: 0.99035835, y: -0.70509624, z: 0.5279541}
+  XpYmZm: {x: 0.99035835, y: -0.70509624, z: -0.5279541}
+  XmYpZp: {x: -0.99035835, y: 0.70509624, z: 0.5279541}
+  XmYpZm: {x: -0.99035835, y: 0.70509624, z: -0.5279541}
+  XmYmZp: {x: -0.99035835, y: -0.70509624, z: 0.5279541}
+  XmYmZm: {x: -0.99035835, y: -0.70509624, z: -0.5279541}
 --- !u!1 &2961558601399339758
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8f9f4eb3c7fa882489fd412759fa7ff9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,16 +236,16 @@ MonoBehaviour:
   drawOnlyOnSelection: 1
   ignoreScale: 0
   color: {r: 0, g: 1, b: 0, a: 1}
-  center: {x: 0.00000010430813, y: 0.1003834, z: -0.0069649667}
+  center: {x: 12.013929, y: 1.2007668, z: -9.999999}
   displayAsRelative: 1
-  XpYpZp: {x: 0.24000013, y: 0.3403834, z: 0.49503523}
-  XpYpZm: {x: 0.24000013, y: 0.3403834, z: -0.49503523}
-  XpYmZp: {x: 0.24000013, y: -0.3403834, z: 0.49503523}
-  XpYmZm: {x: 0.24000013, y: -0.3403834, z: -0.49503523}
-  XmYpZp: {x: -0.24000013, y: 0.3403834, z: 0.49503523}
-  XmYpZm: {x: -0.24000013, y: 0.3403834, z: -0.49503523}
-  XmYmZp: {x: -0.24000013, y: -0.3403834, z: 0.49503523}
-  XmYmZm: {x: -0.24000013, y: -0.3403834, z: -0.49503523}
+  XpYpZp: {x: 0.9900713, y: 0.68076706, z: 0.4800005}
+  XpYpZm: {x: 0.9900713, y: 0.68076706, z: -0.4800005}
+  XpYmZp: {x: 0.9900713, y: -0.68076706, z: 0.4800005}
+  XpYmZm: {x: 0.9900713, y: -0.68076706, z: -0.4800005}
+  XmYpZp: {x: -0.9900713, y: 0.68076706, z: 0.4800005}
+  XmYpZm: {x: -0.9900713, y: 0.68076706, z: -0.4800005}
+  XmYmZp: {x: -0.9900713, y: -0.68076706, z: 0.4800005}
+  XmYmZm: {x: -0.9900713, y: -0.68076706, z: -0.4800005}
 --- !u!1 &9061875479598588613
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +297,7 @@ MonoBehaviour:
   rollingSpeed: 2
   pathBeginPoints: []
   rotateable: 0
+  balls: []
   <TrackType>k__BackingField: 5
   _posX: 0
   _posY: 0
