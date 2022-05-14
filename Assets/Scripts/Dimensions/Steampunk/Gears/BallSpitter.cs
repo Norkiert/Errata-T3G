@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class BallSpitter : MonoBehaviour
 {
@@ -18,6 +19,18 @@ public class BallSpitter : MonoBehaviour
 
     [SerializeField] protected float rotationAngle;
 
+    [SerializeField] protected float timeToSpawn;
+    [SerializeField, ReadOnly] protected float timeElapsed;
+
+    protected void Update()
+    {
+        timeElapsed += Time.deltaTime;
+        if(timeElapsed >= timeToSpawn)
+        {
+            timeElapsed = 0;
+            SpawnBall();
+        }
+    }
     public void BeginRotateRight()
     {
         StartCoroutine(RotateRight());
@@ -33,7 +46,7 @@ public class BallSpitter : MonoBehaviour
             {
                 RotateRightInstant();
 
-                SpawnBall();
+                //SpawnBall();
 
                 yield break;
             }
@@ -55,7 +68,7 @@ public class BallSpitter : MonoBehaviour
             {
                 RotateLeftInstant();
 
-                SpawnBall();
+                //SpawnBall();
 
                 yield break;
             }
