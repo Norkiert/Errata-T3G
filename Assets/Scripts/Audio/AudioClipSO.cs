@@ -10,8 +10,8 @@ namespace Audio
         private enum Type { Single, Multiple }
 
         [SerializeField] private Type type = Type.Single;
-        [SerializeField, ShowIf(nameof(IsSingle))] private AudioClip clip;
-        [SerializeField, HideIf(nameof(IsSingle))] private List<AudioClip> clips = new List<AudioClip>();
+        [SerializeField, HideIf(nameof(HasMultipleClips))] private AudioClip clip;
+        [SerializeField, ShowIf(nameof(HasMultipleClips))] private List<AudioClip> clips = new List<AudioClip>();
 
         [field: SerializeField, Range(0f, 1f)] public float Volume { get; private set; } = 0.5f;
 
@@ -34,6 +34,6 @@ namespace Audio
 
         public AudioClip Clip => type == Type.Single ? clip : clips[Random.Range(0, clips.Count)];
 
-        private bool IsSingle() => type == Type.Single;
+        public bool HasMultipleClips() => type == Type.Single;
     }
 }
