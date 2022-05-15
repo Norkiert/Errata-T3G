@@ -21,5 +21,5 @@
 
 === M_B01 ===
 Znajdujesz się w wymiarze głównym.
-Nie ma on narzędzi kreujących właściwości wszechświata.<n>A przynajmniej nie tak, jak pozostałe wymiary.<n>Za to posiada unikalną zdolność do odzwierciedlania stanu wszechrzeczy.dlania stanu wszechrzeczy.
+Nie ma on narzędzi kreujących właściwości wszechświata.<n>A przynajmniej nie tak, jak pozostałe wymiary.<n>Za to posiada unikalną zdolność do odzwierciedlania stanu wszechrzeczy.
 	-> END
