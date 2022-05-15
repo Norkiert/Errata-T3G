@@ -7,7 +7,7 @@ public class SteampunkQ3 : ImpulseTrackHandler
     protected SteampunkQGeneral qGeneral;
 
     [SerializeField] protected List<ImpulseTrack> erasers;
-    [SerializeField] protected Dictionary<ImpulseTrack, float> erasersElapsedTime;
+    [SerializeField] protected Dictionary<ImpulseTrack, float> erasersElapsedTime = new Dictionary<ImpulseTrack, float>();
     [SerializeField] protected float timeToWait;
 
     [SerializeField] protected Portals.Portal purplePortal;
