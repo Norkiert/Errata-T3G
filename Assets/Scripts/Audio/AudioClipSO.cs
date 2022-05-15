@@ -34,6 +34,6 @@ namespace Audio
 
         public AudioClip Clip => type == Type.Single ? clip : clips[Random.Range(0, clips.Count)];
 
-        public bool HasMultipleClips() => type == Type.Single;
+        public bool HasMultipleClips() => type == Type.Multiple;
     }
 }
