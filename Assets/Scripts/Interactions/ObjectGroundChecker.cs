@@ -21,7 +21,7 @@ public class ObjectGroundChecker : MonoBehaviour
 
     protected void OnCollisionExit(Collision collision)
     {
-        if ((1 << collision.gameObject.layer & groundLayer.value) != 0)
+        if ((1 << collision.gameObject.layer & groundLayer.value) != 0 && groundTransform == collision.transform)
         {
             isGrounded = false;
             groundTransform = null;
