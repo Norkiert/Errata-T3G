@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class SteampunkQ1 : MonoBehaviour
 {
+    protected SteampunkQGeneral qGeneral;
+
     [SerializeField] protected GearedDoor door;
     protected Transform doorTransform;
 
-    [SerializeField] public bool completed = false;
-
-    protected AutoSpawnerTrack spawner;
-
     protected void Awake()
     {
+        qGeneral = GetComponent<SteampunkQGeneral>();
         doorTransform = door.transform;
-        spawner = GetComponent<AutoSpawnerTrack>();
     }
     protected void Update()
     {
-        if(!completed && doorTransform.position.y == door.max.y)
+        if(!qGeneral.completed && doorTransform.position.y == door.max.y)
         {
-            completed = true;
             OnCompletion();
         }
     }
     protected void OnCompletion()
     {
-        spawner.SpawnBall();
+        qGeneral.OnCompletion();
     }
 }
