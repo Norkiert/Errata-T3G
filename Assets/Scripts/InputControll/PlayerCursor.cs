@@ -36,10 +36,7 @@ public class PlayerCursor : MonoBehaviour
         if (playerInteractions == null)
             return;
 
-        if (playerInteractions.SelectedObject is Interactable == false)
-            return;
-
-        if (cursorUpdater == null)
+        if (playerInteractions.SelectedObject is Interactable interactable && interactable.ShowPointerOnInterract)
         {
             cursorUpdater = UpdateCursor();
             StartCoroutine(cursorUpdater);
