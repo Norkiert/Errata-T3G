@@ -9,9 +9,12 @@ public class SteampunkQ1 : MonoBehaviour
 
     [SerializeField] public bool completed = false;
 
+    protected AutoSpawnerTrack spawner;
+
     protected void Awake()
     {
         doorTransform = door.transform;
+        spawner = GetComponent<AutoSpawnerTrack>();
     }
     protected void Update()
     {
@@ -23,6 +26,6 @@ public class SteampunkQ1 : MonoBehaviour
     }
     protected void OnCompletion()
     {
-
+        spawner.SpawnBall();
     }
 }

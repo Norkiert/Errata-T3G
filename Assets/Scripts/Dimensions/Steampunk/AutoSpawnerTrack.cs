@@ -11,7 +11,7 @@ public class AutoSpawnerTrack : BasicTrack
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/AutoSpawnerTrack.prefab";
 
     [SerializeField] protected float timeToSpawn;
-    [SerializeField, ReadOnly] public float timeElapsed = 0f;
+    [SerializeField] public float timeElapsed = 0f;
 
     [SerializeField] protected Transform spawnPoint;
     [SerializeField] protected BallBehavior prefab;
@@ -34,7 +34,7 @@ public class AutoSpawnerTrack : BasicTrack
             }
         }
     }
-    protected void SpawnBall()
+    public void SpawnBall()
     {
         var ball = Instantiate(prefab, spawnPoint.position, new Quaternion());
     }
