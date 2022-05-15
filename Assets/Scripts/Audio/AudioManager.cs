@@ -161,6 +161,7 @@ namespace Audio
             }
 
             sfx.ApplySettingsForAudioSource(source, GeneralVolume * SFXVolume);
+            source.loop = false;
             source.gameObject.name = $"SFX-{source.clip.name}";
             source.gameObject.SetActive(true);
             source.Play();
