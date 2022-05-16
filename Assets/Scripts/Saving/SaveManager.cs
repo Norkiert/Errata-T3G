@@ -99,6 +99,8 @@ public static class SaveManager
         save.cableEndTarget.Clear();
         save.cableStartTarget.Clear();
         save.cablePartsLocation.Clear();
+        save.cableStartPosition.Clear();
+        save.cableEndPosition.Clear();
 
         for (int i = 1; i < cables.Length; i++)
         {
@@ -108,7 +110,10 @@ public static class SaveManager
             Connector start = startEnd[0];
             Connector end = startEnd[1];
 
-            if (start.ConnectedTo != null) {
+            save.cableStartPosition.Add(start.gameObject.transform.position);
+            save.cableEndPosition.Add(end.gameObject.transform.position);
+
+            if (start.ConnectedTo != null && start.ConnectionType != Connector.ConType.Female) {
                 Connector female = start.ConnectedTo;
                 save.cableStartTarget.Add(female.gameObject.name);
 
@@ -116,7 +121,7 @@ public static class SaveManager
                 save.cableStartTarget.Add("");
             }
 
-            if (end.ConnectedTo != null) {
+            if (end.ConnectedTo != null && end.ConnectionType != Connector.ConType.Female) {
                 Connector female = end.ConnectedTo;
                 save.cableEndTarget.Add(female.gameObject.name);
             } else {
@@ -131,6 +136,11 @@ public static class SaveManager
             }
         }
 
+        ElectricalQuestCompleted q = GameObject.FindObjectOfType<ElectricalQuestCompleted>();
+        
+        if (q.Q1State && q.Q2State && q.Q3State && q.Q4State) 
+            save.isElectricalFinished = true;
+
         return save;
     }
 
@@ -142,6 +152,7 @@ public static class SaveManager
         }
         
         if (save.cablePartsLocation.Count == 0) return;
+        if (save.cableStartPosition.Count == 0) return;
         
 
         PhysicCable[] cables = GameObject.FindObjectsOfType<PhysicCable>();
@@ -154,6 +165,12 @@ public static class SaveManager
             
             Connector start = startEnd[0];
             Connector end = startEnd[1];
+
+            if (start.IsConnected && start.ConnectionType != Connector.ConType.Female) start.Disconnect(false);
+            if (end.IsConnected && start.ConnectionType != Connector.ConType.Female) end.Disconnect(false);
+
+            start.gameObject.transform.position = save.cableStartPosition[i - 1];
+            end.gameObject.transform.position = save.cableEndPosition[i - 1];
 
             Debug.Log(points.Length + " p: " + save.cablePartsLocation[i-1].list.Count);
             for (int j = 0; j < save.cablePartsLocation[i-1].list.Count; j++)
@@ -170,6 +187,8 @@ public static class SaveManager
                 Connector target = GameObject.Find(save.cableEndTarget[i-1]).GetComponent<Connector>();
                 target.Connect(end, false);
             }
+
+            Debug.Break();
         }
     }
 

@@ -7,29 +7,27 @@ using System.IO;
 public class HroberPrefsReset : MonoBehaviour
 {
     [Button]
-    public void ResetHroberPrefs()
+    public static void ResetHroberPrefs()
     {
-        HroberPrefs.Load();
-        HroberPrefs.data.bools.Clear();
-        HroberPrefs.data.ints.Clear();
-        HroberPrefs.data.floats.Clear();
-        HroberPrefs.Save();
-    }
-
-    [Button]
-    public void ResetSaveGame()
-    {
-        string path = Application.persistentDataPath + "/errata.json";
+        string path = Application.persistentDataPath + "/hrober.json";
         if (File.Exists(path))
         {
-            SaveData save = new SaveData();
-            string json = JsonUtility.ToJson(save);
-            File.WriteAllText(path, json);
+            File.Delete(path);
         }
     }
 
     [Button]
-    public void ResetAll()
+    public static void ResetSaveGame()
+    {
+        string path = Application.persistentDataPath + "/errata.json";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Button]
+    public static void ResetAll()
     {
         ResetSaveGame();
         ResetHroberPrefs();
@@ -40,9 +38,7 @@ public class HroberPrefsReset : MonoBehaviour
         string path = Application.persistentDataPath + "/errata.json";
         if (File.Exists(path))
         {
-            SaveData save = new SaveData();
-            string json = JsonUtility.ToJson(save);
-            File.WriteAllText(path, json);
+            File.Delete(path);
         }
     }
 }

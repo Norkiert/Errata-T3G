@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameManagment;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
@@ -27,16 +28,20 @@ public class MainMenu : MonoBehaviour
         settingsButton.onClick.AddListener(OpenSettings);
         creditsButton.onClick.AddListener(OpenCredits);
         quitButton.onClick.AddListener(QuitGame);
+
+        string path = Application.persistentDataPath + "/errata.json";
+        if (!File.Exists(path)) loadButton.interactable = false;
     }
 
     private void PlayGame()
     {
+        HroberPrefsReset.ResetAll();
         GameManager.instance.LoadFirstGame();
     }
 
     private void LoadGame()
     {
-        Debug.Log("TODO: Load");
+        GameManager.instance.LoadFirstGame();
     }
 
     private void OpenSettings()
