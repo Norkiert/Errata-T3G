@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6052626262706430951}
   - component: {fileID: 6052626262706430952}
   - component: {fileID: 6052626262706430953}
+  - component: {fileID: 1773190775521317365}
   m_Layer: 0
   m_Name: LightPillar
   m_TagString: Untagged
@@ -82,6 +83,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1773190775521317365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052626262706430948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ab227edf4183542859fdbb090dba19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conToCheck: {fileID: 0}
+  obToFind: 
+  partSys: {fileID: 6052626263244383101}
+  pillar: {fileID: 6052626262706430953}
+  matConnected: {fileID: 2100000, guid: 8c581455e1f682d4d906bfe593fed752, type: 2}
+  matDisconnected: {fileID: 2100000, guid: 08618d59171a091408d0ba915088e662, type: 2}
+  checkStep: 0.3
 --- !u!1 &6052626263244383096
 GameObject:
   m_ObjectHideFlags: 0
