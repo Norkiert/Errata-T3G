@@ -47,12 +47,15 @@ public class PillarBehaviour : MonoBehaviour
         checkConnect = CheckConnect();
         StartCoroutine(checkConnect);
     }
+
+
     private IEnumerator getConnectors;
     private IEnumerator GetConnectors()
     {
         yield return new WaitForSeconds(0.1f);
-        if(GameObject.Find(obToFind).TryGetComponent<Connector>(out _)&& conToCheck==null)
-            conToCheck = GameObject.Find(obToFind).GetComponent<Connector>();
+        GameObject ob = GameObject.Find(obToFind);
+        if(ob.TryGetComponent<Connector>(out _)&& conToCheck==null)
+            conToCheck = ob.GetComponent<Connector>();
         if (checkConnect != null)
             StopCoroutine(checkConnect);
         checkConnect = CheckConnect();
