@@ -21,7 +21,7 @@ public class ElectricalQuestCompleted : MonoBehaviour
     [SerializeField] ParticleSystem particleQ3;
 
     [Header("Q4 Objects")]
-    [SerializeField] private bool bul;
+    [SerializeField] private Q4ConnectCheck q4Con;
 
 
     [Header("Panel objects and materials")]
@@ -35,7 +35,6 @@ public class ElectricalQuestCompleted : MonoBehaviour
     [SerializeField] private float checkDelay = 2f;
     void Start()
     {
-        bul = false;
         Q1State = false;
         Q2State = false;
         Q3State = false;
@@ -45,6 +44,8 @@ public class ElectricalQuestCompleted : MonoBehaviour
         q2Lamp.material = unDoneMaterial;
         q3Lamp.material = unDoneMaterial;
         q4Lamp.material = unDoneMaterial;
+
+        q4Con = FindObjectOfType<Q4ConnectCheck>();
         CheckQuests();
         if (counterToCheck != null)
             StopCoroutine(counterToCheck);
@@ -80,7 +81,7 @@ public class ElectricalQuestCompleted : MonoBehaviour
         else
             Q3State = false;
         //CheckQ4
-        if (bul)
+        if (q4Con.q4Done)
             Q4State = true;
         else
             Q4State = false;
