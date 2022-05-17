@@ -8,7 +8,7 @@ namespace Logic
     {
         public override bool LogicValue => value;
 
-        private bool value = false;
+        [SerializeField] private bool value = false;
 
         public void SetValue(bool value) => this.value = value;
     }

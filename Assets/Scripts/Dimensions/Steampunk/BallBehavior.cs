@@ -67,7 +67,7 @@ public class BallBehavior : ObjectGroundChecker
         #endregion
     }
 
-    protected void OnCollisionStay(Collision collision)
+    protected new void OnCollisionStay(Collision collision)
     {
         var collisionGO = collision.gameObject;
         var collisionT = collision.transform;
@@ -98,6 +98,10 @@ public class BallBehavior : ObjectGroundChecker
             }
             if(currentTrack) currentTrack.OnBallStay(this);
             velocity = ballRigidbody.velocity.magnitude;
+        }
+        else
+        {
+            base.OnCollisionStay(collision);
         }
     }
 
@@ -150,8 +154,8 @@ public class BallBehavior : ObjectGroundChecker
 
 public class BallPool
 {
-    protected const string ballPrefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/Sphere.prefab";
-    protected static BallBehavior ballPrefab = AssetDatabase.LoadAssetAtPath<BallBehavior>(ballPrefabPath);
+    protected const string ballPrefabPath = "Prefabs/Sphere";
+    protected static BallBehavior ballPrefab = Resources.Load<BallBehavior>(ballPrefabPath);
 
     protected static Queue<BallBehavior> balls = new Queue<BallBehavior>();
 

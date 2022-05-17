@@ -37,13 +37,10 @@ namespace GuideCube
 
         public override void Update()
         {
-            if (
-                !DialogueManager.instance.IsDialoguePlaying
-                || Vector3.Distance(controller.Position, controller.Player.transform.position) > distanceToCloseDialogue
-                )
-            {
+            if (!DialogueManager.instance.IsDialoguePlaying)
                 controller.EndCurrentState();
-            }    
+            else if (Vector3.Distance(controller.Position, controller.Player.transform.position) > distanceToCloseDialogue)
+                controller.EndCurrentState();
         }
 
         public override void End()

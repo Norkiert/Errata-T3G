@@ -122,13 +122,15 @@ namespace Dialogues
                 if (currentStory.canContinue)
                 {
                     string text = currentStory.Continue();
+                    Debug.Log(text);
                     textHistory.Add(text);
 
                     if (text.Length < 3)
                         text = "";
 
-                    if (text == "")
+                    if (text == "" && ChoicesString().Length == 0)
                     {
+                        Debug.LogWarning("Text is empty!");
                         ExitDialogueMode();
                         yield break;
                     }
