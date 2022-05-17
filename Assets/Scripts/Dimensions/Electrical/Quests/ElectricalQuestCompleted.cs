@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Logic;
 
 public class ElectricalQuestCompleted : MonoBehaviour
 {
@@ -32,6 +33,13 @@ public class ElectricalQuestCompleted : MonoBehaviour
     [SerializeField] private Renderer q3Lamp;
     [SerializeField] private Renderer q4Lamp;
 
+    [Header("Logic object")]
+    [SerializeField] private LogicBoolOutputValue q1Value;
+    [SerializeField] private LogicBoolOutputValue q2Value;
+    [SerializeField] private LogicBoolOutputValue q3Value;
+    [SerializeField] private LogicBoolOutputValue q4Value;
+
+    [Header("Settings")]
     [SerializeField] private float checkDelay = 2f;
     void Start()
     {
@@ -66,60 +74,36 @@ public class ElectricalQuestCompleted : MonoBehaviour
     private void CheckQuests()
     {
         //Check Q1
-        if (!sillQ1Collider.enabled)
-            Q1State = true;
-        else
-            Q1State = false;
-        //Check Q2
-        if (conQ2_1.IsConnectedRight && conQ2_2.IsConnectedRight)
-            Q2State = true;
-        else
-            Q2State = false;
-        //CheckQ3
-        if (particleQ3.isPlaying)
-            Q3State = true;
-        else
-            Q3State = false;
-        //CheckQ4
-        if (q4Con.q4Done)
-            Q4State = true;
-        else
-            Q4State = false;
+        Q1State = !sillQ1Collider.enabled;
+        q1Value.SetValue(Q1State);
 
-        ChangeLampsMaterials(Q1State, Q2State, Q3State, Q4State);
+        //Check Q2
+        Q2State = conQ2_1.IsConnectedRight && conQ2_2.IsConnectedRight;
+        q2Value.SetValue(Q2State);
+
+        //CheckQ3
+        Q3State = particleQ3.isPlaying;
+        q3Value.SetValue(Q3State);
+
+        //CheckQ4
+        Q4State = q4Con.q4Done;
+        q4Value.SetValue(Q4State);
+
+        ChangeLampsMaterials(q1Lamp, Q1State);
+        ChangeLampsMaterials(q2Lamp, Q2State);
+        ChangeLampsMaterials(q3Lamp, Q3State);
+        ChangeLampsMaterials(q4Lamp, Q4State);
+
         if (counterToCheck != null)
             StopCoroutine(counterToCheck);
         counterToCheck = CounterToCheck();
         StartCoroutine(counterToCheck);
     }
 
-    /// <summary>
-    /// Change material for declared objects to given material depending on quest completition
-    /// </summary>
-    /// <param name="q1">bool defining q1 state</param>
-    /// <param name="q2">bool defining q2 state</param>
-    /// <param name="q3">bool defining q3 state</param>
-    /// <param name="q4">bool defining q4 state</param>
-    private void ChangeLampsMaterials(bool q1,bool q2, bool q3, bool q4)
+    private void ChangeLampsMaterials(Renderer lamp, bool state)
     {
-        if (q1)
-            q1Lamp.material = doneMaterial;
-        else
-            q1Lamp.material = unDoneMaterial;
-        if (q2)
-            q2Lamp.material = doneMaterial;
-        else
-            q2Lamp.material = unDoneMaterial;
-        if (q3)
-            q3Lamp.material = doneMaterial;
-        else
-            q3Lamp.material = unDoneMaterial;
-        if (q4)
-            q4Lamp.material = doneMaterial;
-        else
-            q4Lamp.material = unDoneMaterial;
+        Material mat = state ? doneMaterial : unDoneMaterial;
+        if (mat != lamp.material)
+            lamp.material = mat;
     }
-
-
-
 }
