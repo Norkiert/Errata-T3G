@@ -26,7 +26,7 @@ Zlokalizowana tu maszyneria i kostka, którą widzisz, to zmaterializowany na tw
 === H_W_03 ===
 Skoro nie pamiętasz, kim jesteś, stan świata pogarsza się szybciej, niż założono w wariantach ratunkowych.
 Wygląda na to, że uszkodzeniu uległ również system przesyłu elektronów.<n>Dla was, form życia opartych na węglu, może to powodować utratę danych - utratę pamięci.
-Wracając do Ciebie...<n>Na podstawie ocalałych danych, jesteś najlepszym kwanto-mechanikiem.<n>Właśnie dlatego zostałeś tutaj ściągnięty.
+Wracając do Ciebie...<n>Na podstawie ocalałych danych, jesteś najlepszym kwanto-mechanikiem.Właśnie dlatego zostałeś tutaj ściągnięty.
 + [Ściągnięty? Mam tu coś zrobić? Co tu się dzieje?]
 	-> H_W_04
 * [A ty kim jesteś?]
