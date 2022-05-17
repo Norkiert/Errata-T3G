@@ -13,6 +13,8 @@ public class SteampunkQ2 : ImpulseTrackHandler
     [SerializeField] protected Transform bluePortalStartingPosition;
     [SerializeField] protected Transform bluePortalCompletePosition;
 
+    [SerializeField] protected List<GameObject> blockers;
+
     protected void Awake()
     {
         qGeneral = GetComponent<SteampunkQGeneral>();
@@ -26,6 +28,11 @@ public class SteampunkQ2 : ImpulseTrackHandler
         qGeneral.OnCompletion();
 
         bluePortalT.position = bluePortalCompletePosition.position;
+
+        foreach(var blocker in blockers)
+        {
+            blocker.SetActive(false);
+        }
     }
 
     public override bool QualifyImpulse(Impulse impulse)
