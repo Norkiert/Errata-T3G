@@ -9,9 +9,9 @@ public class ObjectGroundChecker : OptimizedMonoBehaviour
     [SerializeField] [ReadOnly] public bool isGrounded;
     [SerializeField] public Transform groundTransform;
 
-    protected void OnCollisionEnter(Collision collision)
+    protected void OnCollisionStay(Collision collision)
     {
-        if((1 << collision.gameObject.layer & groundLayer.value) != 0)
+        if((1 << collision.gameObject.layer & groundLayer.value) != 0 && !groundTransform)
         {
             isGrounded = true;
             groundTransform = collision.transform;
