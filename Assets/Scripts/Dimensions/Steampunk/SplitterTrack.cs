@@ -15,18 +15,18 @@ public class SplitterTrack : BasicTrack
 
     public override void RotateRight()
     {
-        transform.Rotate(Vector3.up * 90);
+        MyTransform.Rotate(Vector3.up * 90);
         InitPos(position);
     }
     public override void RotateLeft()
     {
-        transform.Rotate(Vector3.down * 90);
+        MyTransform.Rotate(Vector3.down * 90);
         InitPos(position);
     }
     public override void OnBallEnter(BallBehavior ball)
     {
         ball.pathID = 0;
-        var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
+        var moveVector = MyTransform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
         {
             0 => Vector3.forward,
             _ => Vector3.zero
@@ -37,7 +37,7 @@ public class SplitterTrack : BasicTrack
     {
         if (hammer.Rotating)
         {
-            ball.ballRigidbody.velocity = transform.rotation * Vector3.forward * rollingSpeed * ball.rollingSpeed;
+            ball.ballRigidbody.velocity = MyTransform.rotation * Vector3.forward * rollingSpeed * ball.rollingSpeed;
         }
         else
         {
@@ -51,7 +51,7 @@ public class SplitterTrack : BasicTrack
     public override void InitPos(TrackMapPosition tmp)
     {
         position = tmp;
-        transform.localPosition = GetLocalPosition();
-        transform.localPosition += transform.localRotation * Vector3.forward * (ModelTrack.length - CurvedTrack.length - 0.04f);
+        MyTransform.localPosition = GetLocalPosition();
+        MyTransform.localPosition += MyTransform.localRotation * Vector3.forward * (ModelTrack.length - CurvedTrack.length - 0.04f);
     }
 }

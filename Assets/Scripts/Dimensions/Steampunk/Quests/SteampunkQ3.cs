@@ -7,10 +7,12 @@ public class SteampunkQ3 : ImpulseTrackHandler
     protected SteampunkQGeneral qGeneral;
 
     [SerializeField] protected List<ImpulseTrack> erasers;
+
     [SerializeField] protected Dictionary<ImpulseTrack, float> erasersElapsedTime = new Dictionary<ImpulseTrack, float>();
     [SerializeField] protected float timeToWait;
 
     [SerializeField] protected Portals.Portal purplePortal;
+    protected Transform purplePortalT;
     [SerializeField] protected Transform purplePortalStartingPosition;
     [SerializeField] protected Transform purplePortalCompletePosition;
 
@@ -18,7 +20,9 @@ public class SteampunkQ3 : ImpulseTrackHandler
     {
         qGeneral = GetComponent<SteampunkQGeneral>();
 
-        purplePortal.transform.position = purplePortalStartingPosition.position;
+        purplePortalT = purplePortal.transform;
+
+        purplePortalT.position = purplePortalStartingPosition.position;
 
         foreach(var eraser in erasers)
         {
@@ -52,7 +56,7 @@ public class SteampunkQ3 : ImpulseTrackHandler
     {
         qGeneral.OnCompletion();
 
-        purplePortal.transform.position = purplePortalCompletePosition.position;
+        purplePortalT.position = purplePortalCompletePosition.position;
     }
 
     public override bool QualifyImpulse(Impulse impulse)

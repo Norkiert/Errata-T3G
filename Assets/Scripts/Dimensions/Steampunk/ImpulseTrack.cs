@@ -5,7 +5,7 @@ using NaughtyAttributes;
 using System;
 
 [RequireComponent(typeof(BasicTrack))]
-public class ImpulseTrack : MonoBehaviour
+public class ImpulseTrack : OptimizedMonoBehaviour
 {
     [SerializeField] public List<ImpulseTrackHandler> handlers;
 

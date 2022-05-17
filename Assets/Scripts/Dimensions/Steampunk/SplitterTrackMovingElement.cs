@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SplitterTrackMovingElement : MonoBehaviour
+public class SplitterTrackMovingElement : OptimizedMonoBehaviour
 {
     [SerializeField] private MeshCollider meshCollider;
     [SerializeField] private LayerMask ballLayer;
@@ -23,13 +23,13 @@ public class SplitterTrackMovingElement : MonoBehaviour
             if (splitterTrack.hammerFacingRight && totalRotation >= 100f)
             {
                 StopAllCoroutines();
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 310f, transform.localEulerAngles.z);
+                MyTransform.localEulerAngles = new Vector3(MyTransform.localEulerAngles.x, 310f, MyTransform.localEulerAngles.z);
                 Rotating = false;
             }
             else if (!splitterTrack.hammerFacingRight && totalRotation >= 100f)
             {
                 StopAllCoroutines();
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 50f, transform.localEulerAngles.z);
+                MyTransform.localEulerAngles = new Vector3(MyTransform.localEulerAngles.x, 50f, MyTransform.localEulerAngles.z);
                 Rotating = false;
             }
         }
@@ -89,7 +89,7 @@ public class SplitterTrackMovingElement : MonoBehaviour
     {
         for (; ; )
         {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+            MyTransform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
             totalRotation += rotationSpeed * Time.deltaTime;
             yield return null;
         }
@@ -98,7 +98,7 @@ public class SplitterTrackMovingElement : MonoBehaviour
     {
         for(; ; )
         {
-            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+            MyTransform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
             totalRotation += rotationSpeed * Time.deltaTime;
             yield return null;
         }

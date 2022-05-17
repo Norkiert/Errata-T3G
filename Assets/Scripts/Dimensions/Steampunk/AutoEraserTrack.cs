@@ -17,11 +17,11 @@ public class AutoEraserTrack : BasicTrack
     }
     public override void RotateRight()
     {
-        transform.Rotate(Vector3.up * 90);
+        MyTransform.Rotate(Vector3.up * 90);
     }
     public override void RotateLeft()
     {
-        transform.Rotate(Vector3.down * 90);
+        MyTransform.Rotate(Vector3.down * 90);
     }
     public override void OnBallEnter(BallBehavior ball)
     {
@@ -30,9 +30,9 @@ public class AutoEraserTrack : BasicTrack
     }
     public override void OnBallStay(BallBehavior ball)
     {
-        if(Vector3.Distance(erasePoint.position, ball.transform.position) <= ball.realRadius)
+        if(Vector3.Distance(erasePoint.position, ball.MyTransform.position) <= ball.realRadius)
         {
-            Destroy(ball.gameObject);
+            BallPool.ReturnBall(ball);
             return;
         }
         ball.ballRigidbody.velocity = rollingSpeed * ball.rollingSpeed * ball.ballRigidbody.velocity.normalized;
@@ -44,6 +44,6 @@ public class AutoEraserTrack : BasicTrack
     public override void InitPos(TrackMapPosition tmp)
     {
         position = tmp;
-        transform.localPosition = GetLocalPosition();
+        MyTransform.localPosition = GetLocalPosition();
     }
 }

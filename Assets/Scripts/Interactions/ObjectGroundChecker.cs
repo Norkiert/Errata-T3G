@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public class ObjectGroundChecker : MonoBehaviour
+public class ObjectGroundChecker : OptimizedMonoBehaviour
 {
     [SerializeField] protected LayerMask groundLayer;
-    [SerializeField] [ReadOnly] protected bool isGrounded;
-    [SerializeField] protected Transform groundTransform;
+    [SerializeField] [ReadOnly] public bool isGrounded;
+    [SerializeField] public Transform groundTransform;
 
     protected void OnCollisionEnter(Collision collision)
     {

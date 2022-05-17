@@ -10,7 +10,6 @@ public class ClickSpawnerTrack : BasicTrack
     public new const float width = 0.24f * 2;
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/ClickSpawnerTrack.prefab";
 
-    [SerializeField] protected GameObject ballPrefab;
     [SerializeField] protected Material defaultMaterial;
 
     [SerializeField] protected Material shaderMaterial;
@@ -63,7 +62,7 @@ public class ClickSpawnerTrack : BasicTrack
     {
         if (!isSpawning && timeElapsed >= timeToWait)
         {
-            currentBall = Instantiate(ballPrefab, spawnPoint.transform.position, new Quaternion()).GetComponent<BallBehavior>();
+            currentBall = BallPool.GetBall(spawnPoint.position);
             currentBall.ballRigidbody.Sleep();
 
             ballRenderer = currentBall.GetComponent<Renderer>();
@@ -88,11 +87,11 @@ public class ClickSpawnerTrack : BasicTrack
     }
     public override void RotateRight()
     {
-        transform.Rotate(Vector3.up * 90);
+        MyTransform.Rotate(Vector3.up * 90);
     }
     public override void RotateLeft()
     {
-        transform.Rotate(Vector3.down * 90);
+        MyTransform.Rotate(Vector3.down * 90);
     }
     public override void OnBallEnter(BallBehavior ball)
     {
@@ -110,6 +109,6 @@ public class ClickSpawnerTrack : BasicTrack
     public override void InitPos(TrackMapPosition tmp)
     {
         position = tmp;
-        transform.localPosition = GetLocalPosition();
+        MyTransform.localPosition = GetLocalPosition();
     }
 }

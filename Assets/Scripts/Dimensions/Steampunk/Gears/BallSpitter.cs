@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class BallSpitter : MonoBehaviour
+public class BallSpitter : OptimizedMonoBehaviour
 {
     [SerializeField] protected Transform spawnPoint;
     [SerializeField] protected BallBehavior ballPrefab;
@@ -35,62 +35,50 @@ public class BallSpitter : MonoBehaviour
     {
         StartCoroutine(RotateRight());
     }
-    protected IEnumerator RotateRight()
-    {
-        float totalRotation = 0f;
-        for (; ; )
-        {
-            transform.Rotate(Vector3.forward, RotationSpeed * Time.deltaTime);
-            totalRotation += RotationSpeed * Time.deltaTime;
-            if (totalRotation >= rotationAngle * 2)
-            {
-                RotateRightInstant();
-
-                //SpawnBall();
-
-                yield break;
-            }
-            yield return null;
-        }
-    }
+    protected IEnumerator RotateRight() => RotateX(true);
     public void BeginRotateLeft()
     {
         StartCoroutine(RotateLeft());
     }
-    protected IEnumerator RotateLeft()
+    protected IEnumerator RotateLeft() => RotateX(false);
+    protected IEnumerator RotateX(bool right)
     {
         float totalRotation = 0f;
         for (; ; )
         {
-            transform.Rotate(Vector3.forward, -RotationSpeed * Time.deltaTime);
+            MyTransform.Rotate(Vector3.forward, RotationSpeed * Time.deltaTime * (right ? 1 : -1));
             totalRotation += RotationSpeed * Time.deltaTime;
             if (totalRotation >= rotationAngle * 2)
             {
-                RotateLeftInstant();
-
-                //SpawnBall();
+                if (right)
+                {
+                    RotateRightInstant();
+                }
+                else
+                {
+                    RotateLeftInstant();
+                }
 
                 yield break;
             }
             yield return null;
         }
     }
-    public void RotateRightInstant()
+    public void RotateRightInstant() => RotateXInstant(true);
+    public void RotateLeftInstant() => RotateXInstant(false);
+    protected void RotateXInstant(bool right)
     {
-        if (transform.rotation.z != rotationAngle)
+        if(right && MyTransform.rotation.z != rotationAngle)
         {
-            transform.localEulerAngles = Vector3.forward * rotationAngle;
+            MyTransform.localEulerAngles = Vector3.forward * rotationAngle;
         }
-    }
-    public void RotateLeftInstant()
-    {
-        if(transform.rotation.z != 360 - rotationAngle)
+        else if(!right && MyTransform.rotation.z != 360 - rotationAngle)
         {
-            transform.localEulerAngles = Vector3.forward * -rotationAngle;
+            MyTransform.localEulerAngles = Vector3.forward * -rotationAngle;
         }
     }
     protected void SpawnBall()
     {
-        var ball = Instantiate(ballPrefab, spawnPoint.position, new Quaternion());
+        BallPool.GetBall(spawnPoint.position);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestTube : MonoBehaviour
+public class QuestTube : OptimizedMonoBehaviour
 {
     [SerializeField] List<MeshRenderer> tubeRenderers;
 

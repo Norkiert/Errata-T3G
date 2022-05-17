@@ -47,9 +47,9 @@ public class UnderTrackBox : Clickable
             _ => BasicTrack.height
         };
 
-        transform.position = connectedTrack.transform.position;
+        MyTransform.position = connectedTrack.MyTransform.position;
 
-        transform.position -= Vector3.up * (trackHeight * connectedTrack.transform.lossyScale.y + height * transform.localScale.y);
+        MyTransform.position -= Vector3.up * (trackHeight * connectedTrack.MyTransform.lossyScale.y + height * MyTransform.localScale.y);
     }
     
     protected void Push()
@@ -61,7 +61,7 @@ public class UnderTrackBox : Clickable
 
         Vector3 playerFacing;
 
-        var playerRelativeAngle = (player.rotation * Quaternion.Inverse(transform.parent.rotation)).eulerAngles.y;
+        var playerRelativeAngle = (player.rotation * Quaternion.Inverse(MyTransform.parent.rotation)).eulerAngles.y;
 
         if (playerRelativeAngle > 45f && playerRelativeAngle <= 135f)           // Xplus
         {
@@ -82,10 +82,10 @@ public class UnderTrackBox : Clickable
 
         var newPosition = connectedTrack.position + ((int)playerFacing.x, (int)playerFacing.y, (int)playerFacing.z);
 
-        if (!connectedTrack.trackMapController.Contains(newPosition) && !Physics.Raycast(transform.position, transform.parent.rotation * playerFacing, out RaycastHit hit, height * 1.5f * playerFacing.z switch
+        if (!connectedTrack.trackMapController.Contains(newPosition) && !Physics.Raycast(MyTransform.position, MyTransform.parent.rotation * playerFacing, out RaycastHit hit, height * 1.5f * playerFacing.z switch
         {
-            0 => transform.lossyScale.x,
-            _ => transform.lossyScale.z
+            0 => MyTransform.lossyScale.x,
+            _ => MyTransform.lossyScale.z
         }, layerMask))
         {
             var tmc = connectedTrack.trackMapController;
@@ -96,10 +96,10 @@ public class UnderTrackBox : Clickable
         else
         {
             newPosition = connectedTrack.position - ((int)playerFacing.x, (int)playerFacing.y, (int)playerFacing.z);
-            if (!connectedTrack.trackMapController.Contains(newPosition) && !Physics.Raycast(transform.position, transform.parent.rotation * playerFacing * -1, out RaycastHit hit2, height * 1.5f * playerFacing.z switch
+            if (!connectedTrack.trackMapController.Contains(newPosition) && !Physics.Raycast(MyTransform.position, MyTransform.parent.rotation * playerFacing * -1, out RaycastHit hit2, height * 1.5f * playerFacing.z switch
             {
-                0 => transform.lossyScale.x,
-                _ => transform.lossyScale.z
+                0 => MyTransform.lossyScale.x,
+                _ => MyTransform.lossyScale.z
             }, layerMask))
             {
                 var tmc = connectedTrack.trackMapController;

@@ -130,7 +130,7 @@ public abstract class BasicTrack : Clickable
             float closestDistance = float.MaxValue;
             for(int i = 0; i != pathBeginPoints.Count; ++i)
             {
-                float distanceOfCurrent = Vector3.Distance(ball.transform.position, pathBeginPoints[i].position);
+                float distanceOfCurrent = Vector3.Distance(ball.MyTransform.position, pathBeginPoints[i].position);
                 if(distanceOfCurrent < closestDistance)
                 {
                     closestDistance = distanceOfCurrent;
@@ -148,7 +148,7 @@ public abstract class BasicTrack : Clickable
     public Vector3 GetPosition()
     {
         Vector3 toReturn = trackMapController.zeroPoint.position;
-        toReturn += new Vector3(position.x * transform.parent.lossyScale.x, position.y * transform.parent.lossyScale.y, position.z * transform.parent.lossyScale.z) * ModelTrack.trackMapCellSize;
+        toReturn += new Vector3(position.x * MyTransform.parent.lossyScale.x, position.y * MyTransform.parent.lossyScale.y, position.z * MyTransform.parent.lossyScale.z) * ModelTrack.trackMapCellSize;
         return toReturn;
     }
     public Vector3 GetLocalPosition()

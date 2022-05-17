@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class Q3CollectorMovingElement : MonoBehaviour
+public class Q3CollectorMovingElement : OptimizedMonoBehaviour
 {
     [SerializeField][ReadOnly] protected int isMoving = 0;
     [SerializeField] protected float movingSpeed = 0.1f;
@@ -31,9 +31,9 @@ public class Q3CollectorMovingElement : MonoBehaviour
                     balls.Add(collision.gameObject);
                     ballsRigidbodies.Add(collision.gameObject.GetComponent<Rigidbody>());
 
-                    var ballPos = transform.position;
+                    var ballPos = MyTransform.position;
                     ballPos.y = collision.gameObject.transform.position.y;
-                    ballPos += (balls.Count - 3) * StraightTrack.length * transform.lossyScale.z * Vector3.forward;
+                    ballPos += (balls.Count - 3) * StraightTrack.length * MyTransform.lossyScale.z * Vector3.forward;
 
                     balls[balls.Count - 1].transform.position = ballPos;
                     ballsRigidbodies[ballsRigidbodies.Count - 1].velocity = Vector3.zero;
@@ -108,7 +108,7 @@ public class Q3CollectorMovingElement : MonoBehaviour
     {
         for(; ; )
         {
-            transform.localPosition += transform.forward * Time.deltaTime * movingSpeed;
+            MyTransform.localPosition += MyTransform.forward * Time.deltaTime * movingSpeed;
             movedDistance += Time.deltaTime * movingSpeed;
             yield return null;
         }
@@ -117,7 +117,7 @@ public class Q3CollectorMovingElement : MonoBehaviour
     {
         for(; ; )
         {
-            transform.localPosition -= transform.forward * Time.deltaTime * movingSpeed;
+            MyTransform.localPosition -= MyTransform.forward * Time.deltaTime * movingSpeed;
             movedDistance -= Time.deltaTime * movingSpeed;
             yield return null;
         }

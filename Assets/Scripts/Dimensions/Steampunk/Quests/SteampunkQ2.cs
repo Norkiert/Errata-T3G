@@ -9,6 +9,7 @@ public class SteampunkQ2 : ImpulseTrackHandler
     [SerializeField] protected List<ImpulseTrack> erasers;
 
     [SerializeField] protected Portals.Portal bluePortal;
+    protected Transform bluePortalT;
     [SerializeField] protected Transform bluePortalStartingPosition;
     [SerializeField] protected Transform bluePortalCompletePosition;
 
@@ -16,20 +17,15 @@ public class SteampunkQ2 : ImpulseTrackHandler
     {
         qGeneral = GetComponent<SteampunkQGeneral>();
 
-        bluePortal.transform.position = bluePortalStartingPosition.position;
-    }
-    protected void Update()
-    {
-        if(!qGeneral.completed && erasers.Count == 0)
-        {
-            OnCompletion();
-        }
+        bluePortalT = bluePortal.transform;
+
+        bluePortalT.position = bluePortalStartingPosition.position;
     }
     protected void OnCompletion()
     {
         qGeneral.OnCompletion();
 
-        bluePortal.transform.position = bluePortalCompletePosition.position;
+        bluePortalT.position = bluePortalCompletePosition.position;
     }
 
     public override bool QualifyImpulse(Impulse impulse)
@@ -43,5 +39,9 @@ public class SteampunkQ2 : ImpulseTrackHandler
     public override void HandleImpulse(Impulse impulse)
     {
         erasers.Remove(impulse.track);
+        if (!qGeneral.completed && erasers.Count == 0)
+        {
+            OnCompletion();
+        }
     }
 }

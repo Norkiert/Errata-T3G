@@ -15,15 +15,15 @@ public class MergerTrack : BasicTrack
     public override void InitPos(TrackMapPosition tmp)
     {
         position = tmp;
-        transform.localPosition = GetLocalPosition();
+        MyTransform.localPosition = GetLocalPosition();
     }
     public override void RotateRight()
     {
-        transform.Rotate(Vector3.up * 90);
+        MyTransform.Rotate(Vector3.up * 90);
     }
     public override void RotateLeft()
     {
-        transform.Rotate(Vector3.down * 90);
+        MyTransform.Rotate(Vector3.down * 90);
     }
     public override void OnBallEnter(BallBehavior ball)
     {
@@ -34,16 +34,20 @@ public class MergerTrack : BasicTrack
             1 => rotationPoint_1,
             _ => throw new System.Exception("Invalid BallBehavior's pathID.")
         };
-        var deltaX = (rotationPoint.position.x - ball.transform.position.x);
-        var deltaZ = (rotationPoint.position.z - ball.transform.position.z);
-        var angle = Quaternion.Euler(0, Mathf.Atan2(deltaZ, deltaX) * Mathf.Rad2Deg, 0) * transform.rotation;
-        var moveVector = angle * (Quaternion.Inverse(transform.rotation) * (ball.pathID switch
+
+        var deltaX = rotationPoint.position.x - ball.MyTransform.position.x;
+        var deltaZ = rotationPoint.position.z - ball.MyTransform.position.z;
+
+        var angle = Quaternion.Euler(0, Mathf.Atan2(deltaZ, deltaX) * Mathf.Rad2Deg, 0) * MyTransform.rotation;
+
+        var moveVector = angle * (Quaternion.Inverse(MyTransform.rotation) * (ball.pathID switch
         {
             0 => Vector3.back,
             1 => Vector3.forward,
             _ => Vector3.zero
         })) * rollingSpeed * ball.rollingSpeed;
         moveVector.x *= -1;
+
         ball.ballRigidbody.velocity = moveVector;
     }
     public override void OnBallStay(BallBehavior ball)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class TrackMapController : MonoBehaviour
+public class TrackMapController : OptimizedMonoBehaviour
 #if UNITY_EDITOR
     , ISerializationCallbackReceiver
 #endif

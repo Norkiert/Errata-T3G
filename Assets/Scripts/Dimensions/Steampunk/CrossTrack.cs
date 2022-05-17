@@ -11,18 +11,16 @@ public class CrossTrack : BasicTrack
 
     public override void RotateRight()
     {
-        transform.Rotate(Vector3.up * 90);
-        //InitPos(position);
+        MyTransform.Rotate(Vector3.up * 90);
     }
     public override void RotateLeft()
     {
-        transform.Rotate(Vector3.down * 90);
-        //InitPos(position);
+        MyTransform.Rotate(Vector3.down * 90);
     }
     public override void OnBallEnter(BallBehavior ball)
     {
         InitBallPath(ball);
-        var moveVector = transform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
+        var moveVector = MyTransform.rotation * (ball.rollingSpeed * rollingSpeed * ball.pathID switch
         {
             0 => Vector3.forward,
             1 => Vector3.forward,
@@ -43,7 +41,7 @@ public class CrossTrack : BasicTrack
     public override void InitPos(TrackMapPosition tmp)
     {
         position = tmp;
-        transform.localPosition = GetLocalPosition();
-        transform.localPosition += transform.localRotation * (Vector3.forward + Vector3.right) * 0.5f;
+        MyTransform.localPosition = GetLocalPosition();
+        MyTransform.localPosition += MyTransform.localRotation * (Vector3.forward + Vector3.right) * 0.5f;
     }
 }

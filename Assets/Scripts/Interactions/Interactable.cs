@@ -4,7 +4,7 @@ using UnityEngine;
 using NaughtyAttributes;
 
 [DisallowMultipleComponent]
-public class Interactable : MonoBehaviour
+public class Interactable : OptimizedMonoBehaviour
 {
     [field: SerializeField] public bool ShowPointerOnInterract { get; private set; } = true;
 

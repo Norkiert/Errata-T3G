@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteampunkQGeneral : MonoBehaviour
+public class SteampunkQGeneral : OptimizedMonoBehaviour
 {
     [SerializeField] public bool completed = false;
 

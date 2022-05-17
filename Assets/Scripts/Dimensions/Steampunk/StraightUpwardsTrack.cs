@@ -14,11 +14,11 @@ public class StraightUpwardsTrack : BasicTrack
     }
     public override void RotateRight()
     {
-        transform.Rotate(Vector3.up * 90);
+        MyTransform.Rotate(Vector3.up * 90);
     }
     public override void RotateLeft()
     {
-        transform.Rotate(Vector3.down * 90);
+        MyTransform.Rotate(Vector3.down * 90);
     }
     public override void OnBallEnter(BallBehavior ball)
     {
@@ -36,6 +36,6 @@ public class StraightUpwardsTrack : BasicTrack
     public override void InitPos(TrackMapPosition tmp)
     {
         position = tmp;
-        transform.localPosition = GetLocalPosition();
+        MyTransform.localPosition = GetLocalPosition();
     }
 }

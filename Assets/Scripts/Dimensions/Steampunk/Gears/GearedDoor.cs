@@ -8,10 +8,9 @@ public class GearedDoor : Gear
     [SerializeField] protected bool reversed;
 
     [SerializeField] protected Transform maxHeightPoint;
+        public Vector3 max;
     [SerializeField] protected Transform minHeightPoint;
-
-    public Vector3 max;
-    protected Vector3 min;
+        protected Vector3 min;
 
     protected void Awake()
     {
@@ -20,21 +19,19 @@ public class GearedDoor : Gear
     }
     public override void Rotate(float angle, Gear caller)
     {
-        Rotate(angle * caller.RealRadius / radius);
+        Rotate(angle * CachedRatio(caller));
     }
     public override void Rotate(float angle)
     {
-        Transform t = transform;
+        MyTransform.position += forceMultiplier * (reversed ? -1 : 1) * angle * Vector3.up;
 
-        t.position += forceMultiplier * (reversed ? -1 : 1) * angle * Vector3.up;
-
-        if(t.position.y > max.y)
+        if(MyTransform.position.y > max.y)
         {
-            t.position = max;
+            MyTransform.position = max;
         }
-        else if(t.position.y < min.y)
+        else if(MyTransform.position.y < min.y)
         {
-            t.position = min;
+            MyTransform.position = min;
         }
     }
 }

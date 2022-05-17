@@ -12,13 +12,6 @@ public class SteampunkQ4 : ImpulseTrackHandler
     {
         qGeneral = GetComponent<SteampunkQGeneral>();
     }
-    protected void Update()
-    {
-        if (!qGeneral.completed && erasers.Count == 0)
-        {
-            OnCompletion();
-        }
-    }
     protected void OnCompletion()
     {
         qGeneral.OnCompletion();
@@ -35,5 +28,9 @@ public class SteampunkQ4 : ImpulseTrackHandler
     public override void HandleImpulse(Impulse impulse)
     {
         erasers.Remove(impulse.track);
+        if (!qGeneral.completed && erasers.Count == 0)
+        {
+            OnCompletion();
+        }
     }
 }
