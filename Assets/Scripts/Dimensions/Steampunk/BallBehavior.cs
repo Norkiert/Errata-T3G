@@ -154,8 +154,8 @@ public class BallBehavior : ObjectGroundChecker
 
 public class BallPool
 {
-    protected const string ballPrefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/Sphere.prefab";
-    protected static BallBehavior ballPrefab = AssetDatabase.LoadAssetAtPath<BallBehavior>(ballPrefabPath);
+    protected const string ballPrefabPath = "Prefabs/Sphere";
+    protected static BallBehavior ballPrefab = Resources.Load<BallBehavior>(ballPrefabPath);
 
     protected static Queue<BallBehavior> balls = new Queue<BallBehavior>();
 
