@@ -7,13 +7,20 @@
 - 2 : W czym problem?
 - 3 : W czym mogę pomóc?
 }
+~ temp odp = "def"
+{ RANDOM(0, 3) :
+- 0 : ~ odp = "Nic, nic"
+- 1 : ~ odp = "Już nie ważne"
+- 2 : ~ odp = "Tak tylko sprawdzam czy jeszcze działasz"
+- 3 : ~ odp = "Właśnie sobie przypomniałem"
+}
 + [Co to za miejsce?]
     -> L_B01
 + [Co tu jest nie tak?]
     -> L_B02
 + [Jak mam to naprawić?]
     -> L_B03
-+ [Właśnie sobie przypomniałem]
++ [{odp}]
     -> END
     
 
