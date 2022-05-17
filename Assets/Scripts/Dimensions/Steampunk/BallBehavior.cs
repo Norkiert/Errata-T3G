@@ -154,7 +154,6 @@ public class BallPool
     protected static BallBehavior ballPrefab = AssetDatabase.LoadAssetAtPath<BallBehavior>(ballPrefabPath);
 
     protected static Queue<BallBehavior> balls = new Queue<BallBehavior>();
-    public static float BallsCount { get; protected set; }
 
     public static BallBehavior GetBall(Vector3 position, Transform parent = null)
     {
@@ -162,8 +161,6 @@ public class BallPool
         if(balls.Count == 0)
         {
             ball = MakeNewBall();
-            ++BallsCount;
-            Debug.Log(BallsCount);
         }
         else
         {
