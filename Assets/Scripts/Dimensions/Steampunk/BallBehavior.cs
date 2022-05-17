@@ -67,7 +67,7 @@ public class BallBehavior : ObjectGroundChecker
         #endregion
     }
 
-    protected void OnCollisionStay(Collision collision)
+    protected new void OnCollisionStay(Collision collision)
     {
         var collisionGO = collision.gameObject;
         var collisionT = collision.transform;
@@ -98,6 +98,10 @@ public class BallBehavior : ObjectGroundChecker
             }
             if(currentTrack) currentTrack.OnBallStay(this);
             velocity = ballRigidbody.velocity.magnitude;
+        }
+        else
+        {
+            base.OnCollisionStay(collision);
         }
     }
 
