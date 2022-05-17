@@ -12823,7 +12823,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 3d44d01027c7e9e47851acd5a17a2dca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18838,7 +18838,7 @@ GameObject:
   - component: {fileID: 701719548}
   - component: {fileID: 701719550}
   - component: {fileID: 701719549}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27091,15 +27091,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.96
+      value: 2.79
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.28
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.11
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29717,6 +29717,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 749014840}
     m_Modifications:
+    - target: {fileID: 1359718017241557360, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f0527cb7b75d5654c93bc3ea2083f3d6, type: 2}
     - target: {fileID: 2566550469849545979, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_Name
       value: CurvedTrack
@@ -29781,6 +29785,10 @@ PrefabInstance:
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 749014839}
+    - target: {fileID: 4964997612026291131, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f0527cb7b75d5654c93bc3ea2083f3d6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
 --- !u!1 &1160619280
@@ -33555,6 +33563,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1135686527}
     m_Modifications:
+    - target: {fileID: 184466432274219730, guid: 62e60c3b4e2db2f46b8609adbf130201, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3efb86548efcb6d498c013357d7f8d5c, type: 2}
+    - target: {fileID: 659933758773666245, guid: 62e60c3b4e2db2f46b8609adbf130201, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3efb86548efcb6d498c013357d7f8d5c, type: 2}
     - target: {fileID: 1458953662043740153, guid: 62e60c3b4e2db2f46b8609adbf130201, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -40412,17 +40428,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627337823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8482e28e5ecbb284e927700bf4200309, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a531a1fc98fe5f4c89050c34a7c28f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 1, g: 0.2216981, b: 0.2216981, a: 1}
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 5
   triggerEnable: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
-  isEnabled: 1
+  isEnabled: 0
 --- !u!1001 &1630082874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41152,6 +41168,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1135686527}
     m_Modifications:
+    - target: {fileID: 184466432274219730, guid: 62e60c3b4e2db2f46b8609adbf130201, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3efb86548efcb6d498c013357d7f8d5c, type: 2}
+    - target: {fileID: 659933758773666245, guid: 62e60c3b4e2db2f46b8609adbf130201, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3efb86548efcb6d498c013357d7f8d5c, type: 2}
     - target: {fileID: 1458953662043740153, guid: 62e60c3b4e2db2f46b8609adbf130201, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -41784,7 +41808,7 @@ GameObject:
   - component: {fileID: 1666742923}
   - component: {fileID: 1666742922}
   - component: {fileID: 1666742927}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Impulser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46625,7 +46649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865427455}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: JointStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47010,7 +47034,7 @@ GameObject:
   - component: {fileID: 1882104096}
   - component: {fileID: 1882104095}
   - component: {fileID: 1882104094}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: jointCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
