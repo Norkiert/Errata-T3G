@@ -1,31 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using UnityEditor;
 using UnityEngine;
 
 [DisallowMultipleComponent]
 public class BallBehavior : ObjectGroundChecker
 {
-    [SerializeField] protected float timeLimit = 5f;
-    [SerializeField] [ReadOnly] protected float timeElapsed = 0f;
-    [SerializeField] protected bool groudTimerRunning = true;
+    [SerializeField] public float timeLimit = 5f;
+    [SerializeField] [ReadOnly] public float timeElapsed = 0f;
+    [SerializeField] public bool groudTimerRunning = true;
 
-    [SerializeField] protected bool isDestroying = false;
+    [SerializeField] public bool isDestroying = false;
     [SerializeField] protected float destructionSpeed = 0.005f;
+    [SerializeField] protected float groundY;
 
     public SphereCollider ballCollider;
     public Rigidbody ballRigidbody;
     public float realRadius;
 
     [SerializeField] protected LayerMask trackLayer;
-    [SerializeField] [ReadOnly] protected BasicTrack currentTrack;
-    [SerializeField, HideInInspector] protected ImpulseTrack impulseTrack;
-    [SerializeField] [ReadOnly] protected bool onTrack;
+
+    [SerializeField] [ReadOnly] public BasicTrack currentTrack;
+    [SerializeField] [HideInInspector] public BasicTrack lastTrack;
+    [SerializeField, HideInInspector] public ImpulseTrack impulseTrack;
+    [SerializeField] [ReadOnly] public bool onTrack;
+
     [SerializeField] public float rollingSpeed = 1f;
     [SerializeField] [ReadOnly] public float velocity;
+
     [SerializeField] [ReadOnly] public int pathID = -1;
     [SerializeField] [HideInInspector] private int pathIDCopy;
-    [SerializeField] [HideInInspector] private BasicTrack lastTrack;
 
     protected void Awake()
     {
@@ -64,13 +69,16 @@ public class BallBehavior : ObjectGroundChecker
 
     protected void OnCollisionStay(Collision collision)
     {
-        if ((1 << collision.gameObject.layer & trackLayer.value) != 0)
+        var collisionGO = collision.gameObject;
+        var collisionT = collision.transform;
+
+        if ((1 << collisionGO.layer & trackLayer.value) != 0)
         {
             if (!currentTrack)
             {
-                currentTrack = collision.gameObject.transform.parent.gameObject.GetComponent<BasicTrack>();
+                currentTrack = collisionT.parent.gameObject.GetComponent<BasicTrack>();
 
-                if (collision.gameObject.transform.parent.gameObject.TryGetComponent(out impulseTrack) && impulseTrack.impulseMode)
+                if (currentTrack.TryGetComponent(out impulseTrack) && impulseTrack.impulseMode)
                 {
                     impulseTrack.RegisterImpulse(this);
                 }
@@ -106,6 +114,7 @@ public class BallBehavior : ObjectGroundChecker
                 currentTrack.balls.Remove(this);
                 currentTrack.OnBallExit(this);
             }
+
             onTrack = false;
             currentTrack = null;
             impulseTrack = null;
@@ -125,10 +134,10 @@ public class BallBehavior : ObjectGroundChecker
 
     protected void Destroy()
     {
-        transform.position = transform.position + Vector3.down * destructionSpeed;
-        if (transform.position.y + realRadius < groundTransform.position.y)
+        MyTransform.position = MyTransform.position + Vector3.down * destructionSpeed;
+        if (groundTransform && MyTransform.position.y + realRadius < groundTransform.position.y || !groundTransform && MyTransform.position.y + realRadius < groundY)
         {
-            Destroy(gameObject);
+            BallPool.ReturnBall(this);
         }
     }
 
@@ -136,5 +145,64 @@ public class BallBehavior : ObjectGroundChecker
     {
         ballCollider.enabled = false;
         ballRigidbody.useGravity = false;
+    }
+}
+
+public class BallPool
+{
+    protected const string ballPrefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/Sphere.prefab";
+    protected static BallBehavior ballPrefab = AssetDatabase.LoadAssetAtPath<BallBehavior>(ballPrefabPath);
+
+    protected static Queue<BallBehavior> balls = new Queue<BallBehavior>();
+    public static float BallsCount { get; protected set; }
+
+    public static BallBehavior GetBall(Vector3 position, Transform parent = null)
+    {
+        BallBehavior ball;
+        if(balls.Count == 0)
+        {
+            ball = MakeNewBall();
+            ++BallsCount;
+            Debug.Log(BallsCount);
+        }
+        else
+        {
+            ball = balls.Dequeue();
+        }
+
+        // zero the ball
+        ball.MyGameObject.SetActive(true);
+        ball.MyTransform.position = position;
+        ball.MyTransform.parent = parent;
+        ball.isGrounded = false;
+        ball.groundTransform = null;
+        ball.ballCollider.enabled = true;
+        ball.ballRigidbody.velocity = Vector3.zero;
+        ball.ballRigidbody.useGravity = true;
+        ball.ballRigidbody.WakeUp();
+        ball.currentTrack = null;
+        ball.groudTimerRunning = true;
+        ball.impulseTrack = null;
+        ball.isDestroying = false;
+        ball.lastTrack = null;
+        ball.onTrack = false;
+        ball.pathID = -1;
+        ball.rollingSpeed = 1f;
+        ball.timeElapsed = 0f;
+        ball.timeLimit = 5f;
+        ball.velocity = 0f;
+
+        return ball;
+    }
+    public static void ReturnBall(BallBehavior returned)
+    {
+        returned.MyGameObject.SetActive(false);
+        returned.MyTransform.parent = null;
+
+        balls.Enqueue(returned);
+    }
+    protected static BallBehavior MakeNewBall()
+    {
+        return Object.Instantiate(ballPrefab, Vector3.zero, new Quaternion());
     }
 }
