@@ -171,6 +171,7 @@ public class BallPool
         ball.MyGameObject.SetActive(true);
         ball.MyTransform.position = position;
         ball.MyTransform.parent = parent;
+        ball.MyTransform.eulerAngles = Vector3.zero;
         ball.isGrounded = false;
         ball.groundTransform = null;
         ball.ballCollider.enabled = true;
