@@ -27,6 +27,8 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
+        gameObject.SetActive(false);
+
         LoadMouseSensitivity();
         LoadFullScreen();
         LoadQualityLevel();
@@ -52,7 +54,7 @@ public class SettingsMenu : MonoBehaviour
 
     private void LoadFullScreen()
     {
-        bool isFullScreen = PlayerPrefs.GetInt(fullScreenKey) == 1;
+        bool isFullScreen = PlayerPrefs.GetInt(fullScreenKey, 1) == 1;
         Screen.fullScreen = isFullScreen;
         fullScreenToggle.isOn = isFullScreen;
     }

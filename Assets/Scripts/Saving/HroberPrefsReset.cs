@@ -33,6 +33,12 @@ public class HroberPrefsReset : MonoBehaviour
         ResetHroberPrefs();
     }
 
+    [Button]
+    public static void ResetPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public static void ResetSave()
     {
         string path = Application.persistentDataPath + "/errata.json";
