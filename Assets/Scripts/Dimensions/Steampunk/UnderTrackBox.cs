@@ -52,6 +52,23 @@ public class UnderTrackBox : Clickable
         MyTransform.position -= Vector3.up * (trackHeight * connectedTrack.MyTransform.lossyScale.y + height * MyTransform.localScale.y);
     }
     
+    [Button("Update Track Position")]
+    public void UpdateTrackPosition()
+    {
+        var tmc = connectedTrack.trackMapController;
+
+        TrackMapPosition newPosition = ((int)MyTransform.localPosition.x, 0, (int)MyTransform.localPosition.z);
+
+        if (tmc.Contains(newPosition))
+        {
+            Debug.LogError($"Cannot move track to ({newPosition.x}; {newPosition.z}) as this place is already occupied.");
+            return;
+        }
+
+        tmc.Remove(connectedTrack);
+        tmc.Add(connectedTrack, newPosition);
+    }
+
     protected void Push()
     {
         if (!player)
