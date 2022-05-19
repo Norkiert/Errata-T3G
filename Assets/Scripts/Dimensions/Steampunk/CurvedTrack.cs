@@ -21,7 +21,7 @@ public class CurvedTrack : BasicTrack
 
     public new void Awake()
     {
-        sparks = GetComponentInChildren<ParticleSystem>();
+        sparks = GameObject.Find("TrackParticles").GetComponent<ParticleSystem>();
         base.Awake();
     }
     private void Start()
@@ -34,8 +34,9 @@ public class CurvedTrack : BasicTrack
         MyTransform.Rotate(Vector3.up * 90);
         if (!SaveManager.isLevelFinished(Dimension.Electrical))
         {
-            if ((Random.value * 10000) % 10 > 6)
+            if (((Random.value * 10000000) % 10* (Random.value * 10000000) % 10)%9 > 6)
             {
+                sparks.transform.position = (this.transform.position + new Vector3(0.15f, -0.1f, -0.15f));
                 sparks.Play();
                 AddImpact(playerCam.transform.forward * -1, pushForce);
             }
@@ -46,8 +47,9 @@ public class CurvedTrack : BasicTrack
         MyTransform.Rotate(Vector3.up * -90);
         if (!SaveManager.isLevelFinished(Dimension.Electrical))
         {
-            if ((Random.value * 10000) % 10 > 6)
+            if (((Random.value * 10000000) % 10 * (Random.value * 10000000) % 10) % 9 > 6)
             {
+                sparks.transform.position = (this.transform.position + new Vector3(0.15f, -0.1f, -0.15f));
                 sparks.Play();
                 AddImpact(playerCam.transform.forward * -1, pushForce);
             }
