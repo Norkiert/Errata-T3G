@@ -13,6 +13,7 @@ public class CurvedTrack : BasicTrack
     //sory krisu to do przeszkadzajek
     private CharacterController player;
     private ParticleSystem sparks;
+    private GameObject sparkGO;
     private Vector3 impact = Vector3.zero;
     private Camera playerCam;
     [SerializeField] private float pushForce = 20f;
@@ -21,37 +22,47 @@ public class CurvedTrack : BasicTrack
 
     public new void Awake()
     {
-        sparks = GameObject.Find("TrackParticles").GetComponent<ParticleSystem>();
+        sparkGO = GameObject.Find("TrackParticles");
+        if(sparkGO!=null)
+            sparks = sparkGO.GetComponent<ParticleSystem>();
         base.Awake();
     }
     private void Start()
     {
-        playerCam = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+        GameObject cam = GameObject.Find("PlayerCamera");
+        if(cam!=null)
+            playerCam = cam.GetComponent<Camera>();
         player = FindObjectOfType<CharacterController>();
     }
     public override void RotateRight()
     {
         MyTransform.Rotate(Vector3.up * 90);
-        if (!SaveManager.isLevelFinished(Dimension.Electrical))
+        if(sparkGO!=null)
         {
-            if (((Random.value * 10000000) % 10* (Random.value * 10000000) % 10)%9 > 6)
+            if (!SaveManager.isLevelFinished(Dimension.Electrical))
             {
-                sparks.transform.position = (this.transform.position + new Vector3(0.15f, -0.1f, -0.15f));
-                sparks.Play();
-                AddImpact(playerCam.transform.forward * -1, pushForce);
+                if (((Random.value * 10000000) % 10 * (Random.value * 10000000) % 10) % 9 > 6)
+                {
+                    sparks.transform.position = (this.transform.position + new Vector3(0.15f, -0.1f, -0.15f));
+                    sparks.Play();
+                    AddImpact(playerCam.transform.forward * -1, pushForce);
+                }
             }
         }
     }
     public override void RotateLeft()
     {
         MyTransform.Rotate(Vector3.up * -90);
-        if (!SaveManager.isLevelFinished(Dimension.Electrical))
+        if(sparkGO != null)
         {
-            if (((Random.value * 10000000) % 10 * (Random.value * 10000000) % 10) % 9 > 6)
+            if (!SaveManager.isLevelFinished(Dimension.Electrical))
             {
-                sparks.transform.position = (this.transform.position + new Vector3(0.15f, -0.1f, -0.15f));
-                sparks.Play();
-                AddImpact(playerCam.transform.forward * -1, pushForce);
+                if (((Random.value * 10000000) % 10 * (Random.value * 10000000) % 10) % 9 > 6)
+                {
+                    sparks.transform.position = (this.transform.position + new Vector3(0.15f, -0.1f, -0.15f));
+                    sparks.Play();
+                    AddImpact(playerCam.transform.forward * -1, pushForce);
+                }
             }
         }
     }
