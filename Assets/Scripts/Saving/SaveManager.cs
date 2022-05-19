@@ -187,8 +187,6 @@ public static class SaveManager
                 Connector target = GameObject.Find(save.cableEndTarget[i-1]).GetComponent<Connector>();
                 target.Connect(end, false);
             }
-
-            Debug.Break();
         }
     }
 
