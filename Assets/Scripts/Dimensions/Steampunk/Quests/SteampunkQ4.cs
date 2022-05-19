@@ -12,7 +12,7 @@ public class SteampunkQ4 : ImpulseTrackHandler
     {
         qGeneral = GetComponent<SteampunkQGeneral>();
     }
-    protected void OnCompletion()
+    public void OnCompletion()
     {
         qGeneral.OnCompletion();
     }

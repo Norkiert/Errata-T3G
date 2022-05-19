@@ -23,7 +23,7 @@ public class SteampunkQ2 : ImpulseTrackHandler
 
         bluePortalT.position = bluePortalStartingPosition.position;
     }
-    protected void OnCompletion()
+    public void OnCompletion()
     {
         qGeneral.OnCompletion();
 

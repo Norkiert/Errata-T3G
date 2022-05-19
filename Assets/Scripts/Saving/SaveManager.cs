@@ -260,9 +260,14 @@ public static class SaveManager
         }
 
         if (save.questsState.Count == 4) {
-            for (int i = 0; i < 4; i++) {
-                if (save.questsState[i]) GameObject.Find("Q" + (i+1) + "Complete").GetComponent<SteampunkQGeneral>().OnCompletion();
+            if (save.questsState[0]) {
+                GameObject.Find("Q1Complete").GetComponent<SteampunkQ1>().OnCompletion();
+                GameObject.Find("Door").transform.position = GameObject.Find("max").transform.position;
+                GameObject.Find("AutoSpawnerTrack21").GetComponent<AutoSpawnerTrack>().SpawnBall();
             }
+            if (save.questsState[1]) GameObject.Find("Q2Complete").GetComponent<SteampunkQ2>().OnCompletion();
+            if (save.questsState[2]) GameObject.Find("Q3Complete").GetComponent<SteampunkQ3>().OnCompletion();
+            if (save.questsState[3]) GameObject.Find("Q4Complete").GetComponent<SteampunkQ4>().OnCompletion();
         } 
     }
 

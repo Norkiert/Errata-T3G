@@ -59,11 +59,11 @@ public class UnderTrackBox : Clickable
 
         TrackMapPosition newPosition = ((int)MyTransform.localPosition.x, 0, (int)MyTransform.localPosition.z);
 
-        if (tmc.Contains(newPosition))
-        {
-            Debug.LogError($"Cannot move track to ({newPosition.x}; {newPosition.z}) as this place is already occupied.");
-            return;
-        }
+        // if (tmc.Contains(newPosition))
+        // {
+        //     Debug.LogError($"Cannot move track to ({newPosition.x}; {newPosition.z}) as this place is already occupied.");
+        //     return;
+        // }
 
         tmc.Remove(connectedTrack);
         tmc.Add(connectedTrack, newPosition);
