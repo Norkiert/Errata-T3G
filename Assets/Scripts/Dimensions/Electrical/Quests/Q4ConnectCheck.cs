@@ -8,6 +8,8 @@ public class Q4ConnectCheck : MonoBehaviour
 
     [SerializeField] private List<Connector> connectorsToCheck;
     [SerializeField] private float delay = 1f;
+
+    [SerializeField] private List<Connector> cables;
     void Start()
     {
         if (checkDone != null)
@@ -38,7 +40,7 @@ public class Q4ConnectCheck : MonoBehaviour
         {
             yield return new WaitForSeconds(delay*2);
         }
-        q4Done = true;
+        q4Done = false;
         if (checkDone != null)
             StopCoroutine(checkDone);
         checkDone = CheckDone();
@@ -51,6 +53,13 @@ public class Q4ConnectCheck : MonoBehaviour
         {
             if (!con.IsConnectedRight)
                 done = false;
+        }
+        for(int i=0;i<cables.Count;i+=2)
+        {
+            if(!(cables[i].IsConnectedRight==cables[i+1].IsConnectedRight))
+            {
+                done = false;
+            }
         }
         return done;
     }
