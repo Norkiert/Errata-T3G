@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class FromLasers : MonoBehaviour
 {
-    [SerializeField] private GameObject plane;
+     private SpriteRenderer plane;
+     private GameObject laserOb;
     [SerializeField] private float checkDelay=2f;
-    private void Awake()
-    {
-        plane = GameObject.Find("LaserPlane");
 
-    }
     void Start()
     {
-        plane.SetActive(true);
-        if (counter != null)
-            StopCoroutine(counter);
-        counter = Counter();
-        StartCoroutine(counter);
+        laserOb = GameObject.Find("LaserPlane");
+        if (laserOb!=null)
+        {
+            plane = laserOb.GetComponent<SpriteRenderer>();
+            plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0.7f);
+            if (counter != null)
+                StopCoroutine(counter);
+            counter = Counter();
+            StartCoroutine(counter);
+        }
     }
 
     private IEnumerator counter;
@@ -26,6 +28,12 @@ public class FromLasers : MonoBehaviour
     {
         while (!SaveManager.isLevelFinished(Dimension.Laser))
             yield return new WaitForSeconds(checkDelay);
-        plane.SetActive(false);
+        plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0f);
+    }
+
+    private void OnDisable()
+    {
+        if (plane != null)
+            plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0f);
     }
 }
