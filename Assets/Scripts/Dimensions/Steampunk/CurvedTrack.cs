@@ -9,19 +9,49 @@ public class CurvedTrack : BasicTrack
     public new const float width = length;
     public new const string prefabPath = "Assets/Art/Dimensions/Steampunk/Prefabs/CurvedTrack.prefab";
 
+
+    //sory krisu to do przeszkadzajek
+    private CharacterController player;
+    private ParticleSystem sparks;
+    private Vector3 impact = Vector3.zero;
+    private Camera playerCam;
+    [SerializeField] private float pushForce = 20f;
+
     [SerializeField] public Transform rotationPoint;
 
     public new void Awake()
     {
+        sparks = GetComponentInChildren<ParticleSystem>();
         base.Awake();
+    }
+    private void Start()
+    {
+        playerCam = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+        player = FindObjectOfType<CharacterController>();
     }
     public override void RotateRight()
     {
         MyTransform.Rotate(Vector3.up * 90);
+        if (!SaveManager.isLevelFinished(Dimension.Electrical))
+        {
+            if ((Random.value * 10000) % 10 > 6)
+            {
+                sparks.Play();
+                AddImpact(playerCam.transform.forward * -1, pushForce);
+            }
+        }
     }
     public override void RotateLeft()
     {
         MyTransform.Rotate(Vector3.up * -90);
+        if (!SaveManager.isLevelFinished(Dimension.Electrical))
+        {
+            if ((Random.value * 10000) % 10 > 6)
+            {
+                sparks.Play();
+                AddImpact(playerCam.transform.forward * -1, pushForce);
+            }
+        }
     }
     public override void OnBallEnter(BallBehavior ball)
     {
@@ -53,5 +83,17 @@ public class CurvedTrack : BasicTrack
     {
         position = tmp;
         MyTransform.localPosition = GetLocalPosition();
+    }
+
+    private void AddImpact(Vector3 dir, float force)
+    {
+        dir.Normalize();
+        impact += dir * force;
+    }
+
+    private void Update()
+    {
+        if (impact.magnitude > 0.2) player.Move(impact * Time.deltaTime);
+        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
 }
