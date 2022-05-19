@@ -210,18 +210,27 @@ public static class SaveManager
             save.rotatableRotations.Add(rotatable[i].transform.eulerAngles);
 
         save.boxPositions.Clear();
-        save.connectedTracksPositions.Clear();
 
         UnderTrackBox[] boxes = GameObject.FindObjectsOfType<UnderTrackBox>();
         for (int i = 0; i < boxes.Length; i++)
         {
             save.boxPositions.Add(boxes[i].gameObject.transform.position);
-            if (boxes[i].connectedTrack != null) {
-                save.connectedTracksPositions.Add(boxes[i].connectedTrack.gameObject.transform.position);
-            } else {
-                save.connectedTracksPositions.Add(Vector3.zero);
-            }
         }
+
+        bool q1 = GameObject.Find("Q1Complete").GetComponent<SteampunkQGeneral>().completed;
+        bool q2 = GameObject.Find("Q2Complete").GetComponent<SteampunkQGeneral>().completed;
+        bool q3 = GameObject.Find("Q3Complete").GetComponent<SteampunkQGeneral>().completed;
+        bool q4 = GameObject.Find("Q4Complete").GetComponent<SteampunkQGeneral>().completed;
+
+        save.questsState.Clear();
+
+        save.questsState.Add(q1);
+        save.questsState.Add(q2);
+        save.questsState.Add(q3);
+        save.questsState.Add(q4);
+
+        if (!save.questsState.Contains(false))
+            save.isElectricalFinished = true;
 
         return save;
     }
@@ -246,14 +255,17 @@ public static class SaveManager
 
         UnderTrackBox[] boxes = GameObject.FindObjectsOfType<UnderTrackBox>();
         
-        if (boxes.Length != save.boxPositions.Count) return;
-
         for (int i = 0; i < save.boxPositions.Count; i++)
         {
             boxes[i].gameObject.transform.position = save.boxPositions[i];
-            if (boxes[i].connectedTrack != null)
-                boxes[i].connectedTrack.gameObject.transform.position = save.connectedTracksPositions[i];
+            boxes[i].UpdateTrackPosition();
         }
+
+        if (save.questsState.Count == 4) {
+            for (int i = 0; i < 4; i++) {
+                if (save.questsState[i]) GameObject.Find("Q" + (i+1) + "Complete").GetComponent<SteampunkQGeneral>().OnCompletion();
+            }
+        } 
     }
 
     public static bool isLevelFinished(Dimension dim) {
