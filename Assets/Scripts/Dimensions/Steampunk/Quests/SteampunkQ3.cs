@@ -52,7 +52,7 @@ public class SteampunkQ3 : ImpulseTrackHandler
             }
         }
     }
-    protected void OnCompletion()
+    public void OnCompletion()
     {
         qGeneral.OnCompletion();
 

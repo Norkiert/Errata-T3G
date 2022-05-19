@@ -19,7 +19,7 @@ public class SteampunkQ1 : MonoBehaviour
             OnCompletion();
         }
     }
-    protected void OnCompletion()
+    public void OnCompletion()
     {
         qGeneral.OnCompletion();
     }
