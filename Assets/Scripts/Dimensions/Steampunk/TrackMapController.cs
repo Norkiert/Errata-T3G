@@ -61,6 +61,33 @@ public class TrackMapController : OptimizedMonoBehaviour
         trackMap[position].trackMapController = null;
         trackMap.Remove(position);
     }
+    public bool Move(BasicTrack track, TrackMapPosition newPosition)
+    {
+        if (Contains(track))
+        {
+            return Move(track.position, newPosition);
+        }
+        else
+        {
+            Debug.LogError("Track is not in this TrackGroup.");
+            return false;
+        }
+    }
+    public bool Move(TrackMapPosition positionNow, TrackMapPosition newPosition)
+    {
+        if (Occupied(newPosition))
+        {
+            Debug.LogError("NewPosition is already occupied.");
+            return false;
+        }
+
+        var track = Get(positionNow);
+        track.position = newPosition;
+
+        trackMap.Remove(positionNow);
+        trackMap.Add(newPosition, track);
+        return true;
+    }
     public bool Occupied(TrackMapPosition position)
     {
         return trackMap.ContainsKey(position) && trackMap[position] != null;

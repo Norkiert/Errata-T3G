@@ -106,8 +106,7 @@ public class UnderTrackBox : Clickable
         }, layerMask))
         {
             var tmc = connectedTrack.trackMapController;
-            tmc.Remove(connectedTrack);
-            tmc.Add(connectedTrack, newPosition);
+            tmc.Move(connectedTrack, newPosition);
             UpdateBoxPosition();
         }
         else
@@ -120,8 +119,7 @@ public class UnderTrackBox : Clickable
             }, layerMask))
             {
                 var tmc = connectedTrack.trackMapController;
-                tmc.Remove(connectedTrack);
-                tmc.Add(connectedTrack, newPosition);
+                tmc.Move(connectedTrack, newPosition);
                 UpdateBoxPosition();
             }
         }

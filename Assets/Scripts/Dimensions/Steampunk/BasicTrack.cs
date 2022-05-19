@@ -120,6 +120,19 @@ public abstract class BasicTrack : Clickable
         if(Rotateable)
             OnClick += RotateRight;
         base.Awake();
+
+        if (trackMapController && !trackMapController.Contains(this))
+        {
+            var positionCopy = MyTransform.position;
+            var rotationCopy = MyTransform.rotation;
+
+            var tmc = trackMapController;
+            trackMapController = null;
+            tmc.Add(this, position);
+
+            MyTransform.position = positionCopy;
+            MyTransform.rotation = rotationCopy;
+        }
     }
     public abstract void RotateRight();
     public abstract void RotateLeft();
