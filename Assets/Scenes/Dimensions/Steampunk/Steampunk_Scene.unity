@@ -2648,8 +2648,9 @@ GameObject:
   - component: {fileID: 107339073}
   - component: {fileID: 107339072}
   - component: {fileID: 107339071}
+  - component: {fileID: 107339076}
   m_Layer: 0
-  m_Name: Impulser
+  m_Name: Impulser1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2783,6 +2784,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107339069}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &107339076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107339069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe878350934a9d46ab7ef78ec25638c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 2048
+  locked: 1
+  timeToUnlock: 10
 --- !u!1 &109440447
 GameObject:
   m_ObjectHideFlags: 0
@@ -7028,8 +7046,9 @@ GameObject:
   - component: {fileID: 235118392}
   - component: {fileID: 235118391}
   - component: {fileID: 235118390}
+  - component: {fileID: 235118395}
   m_Layer: 0
-  m_Name: Impulser
+  m_Name: Impulser2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7163,6 +7182,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235118388}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &235118395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235118388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe878350934a9d46ab7ef78ec25638c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 2048
+  locked: 1
+  timeToUnlock: 10
 --- !u!1 &236183663
 GameObject:
   m_ObjectHideFlags: 0
@@ -7861,6 +7897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handlers:
   - {fileID: 766182257}
+  - {fileID: 989529967}
   impulseMode: 1
   track: {fileID: 0}
 --- !u!1 &256571672
@@ -13901,6 +13938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handlers:
   - {fileID: 766182257}
+  - {fileID: 1285875650}
   impulseMode: 1
   track: {fileID: 0}
 --- !u!1001 &473146806
@@ -17966,8 +18004,9 @@ GameObject:
   - component: {fileID: 609380874}
   - component: {fileID: 609380873}
   - component: {fileID: 609380872}
+  - component: {fileID: 609380877}
   m_Layer: 0
-  m_Name: Impulser
+  m_Name: Impulser3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18101,6 +18140,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609380870}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &609380877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609380870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe878350934a9d46ab7ef78ec25638c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 2048
+  locked: 1
+  timeToUnlock: 10
 --- !u!1001 &610420217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28678,8 +28734,9 @@ GameObject:
   - component: {fileID: 989529970}
   - component: {fileID: 989529969}
   - component: {fileID: 989529968}
+  - component: {fileID: 989529967}
   m_Layer: 0
-  m_Name: Impulser
+  m_Name: Impulser4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28699,6 +28756,23 @@ Transform:
   m_Father: {fileID: 106630435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &989529967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989529965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe878350934a9d46ab7ef78ec25638c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 2048
+  locked: 1
+  timeToUnlock: 10
 --- !u!59 &989529968
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -30664,15 +30738,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.23
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.24
+      value: 3.9
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.64
+      value: -20.5
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31242,6 +31316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handlers:
   - {fileID: 766182257}
+  - {fileID: 235118395}
   impulseMode: 1
   track: {fileID: 0}
 --- !u!1001 &1079311596
@@ -37104,8 +37179,9 @@ GameObject:
   - component: {fileID: 1285875647}
   - component: {fileID: 1285875646}
   - component: {fileID: 1285875645}
+  - component: {fileID: 1285875650}
   m_Layer: 0
-  m_Name: Impulser
+  m_Name: Impulser5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37239,6 +37315,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285875643}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1285875650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285875643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe878350934a9d46ab7ef78ec25638c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 2048
+  locked: 1
+  timeToUnlock: 10
 --- !u!1 &1286547431
 GameObject:
   m_ObjectHideFlags: 0
@@ -57895,6 +57988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handlers:
   - {fileID: 766182257}
+  - {fileID: 107339076}
   impulseMode: 1
   track: {fileID: 0}
 --- !u!1001 &2058964603
@@ -58001,6 +58095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handlers:
   - {fileID: 766182257}
+  - {fileID: 609380877}
   impulseMode: 1
   track: {fileID: 0}
 --- !u!1001 &2066694317
