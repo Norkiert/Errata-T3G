@@ -154,6 +154,7 @@ public class BallBehavior : ObjectGroundChecker
             if(cutoffHeight <= notVisible)
             {
                 BallPool.ReturnBall(this);
+                yield break;
             }
             yield return null;
         }

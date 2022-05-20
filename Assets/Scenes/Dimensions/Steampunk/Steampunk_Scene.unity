@@ -1276,12 +1276,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49894487}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.484, y: 1.473, z: 1}
-  m_LocalScale: {x: 0.05, y: 1, z: 0.8}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.0066693616, y: 0, z: 3.3399997}
+  m_LocalScale: {x: 0.3333333, y: 6.6666646, z: 1.5999997}
   m_Children: []
-  m_Father: {fileID: 744926677}
-  m_RootOrder: 89
+  m_Father: {fileID: 1133852460}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &49894489
 BoxCollider:
@@ -6084,7 +6084,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.1, z: 10}
   m_Children: []
   m_Father: {fileID: 744926677}
-  m_RootOrder: 90
+  m_RootOrder: 89
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &204901744
 BoxCollider:
@@ -15976,7 +15976,7 @@ Transform:
   - {fileID: 1297069011}
   - {fileID: 1062369958}
   - {fileID: 428068626}
-  - {fileID: 1133852460}
+  - {fileID: 1148613586}
   m_Father: {fileID: 2070930045}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23307,7 +23307,6 @@ Transform:
   - {fileID: 1535449827}
   - {fileID: 1684673872}
   - {fileID: 373581269}
-  - {fileID: 49894488}
   - {fileID: 204901743}
   m_Father: {fileID: 2070930045}
   m_RootOrder: 0
@@ -30665,7 +30664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.98
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30673,7 +30672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.9
+      value: 0.64
       objectReference: {fileID: 0}
     - target: {fileID: 3912743327701166597, guid: b7e1ae79b36878c4f904ae5eac47651f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33050,7 +33049,7 @@ GameObject:
   - component: {fileID: 1133852462}
   - component: {fileID: 1133852461}
   m_Layer: 0
-  m_Name: Cylinder (6)
+  m_Name: xdddd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33064,11 +33063,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133852459}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.483, y: 1.974, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.5, z: 0.15}
-  m_Children: []
-  m_Father: {fileID: 545382953}
-  m_RootOrder: 6
+  m_Children:
+  - {fileID: 49894488}
+  m_Father: {fileID: 1148613586}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &1133852461
 CapsuleCollider:
@@ -33606,6 +33606,37 @@ Transform:
   - {fileID: 534900304}
   m_Father: {fileID: 647462789}
   m_RootOrder: 184
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1148613585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1148613586}
+  m_Layer: 0
+  m_Name: PreQ3Blocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1148613586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148613585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.483, y: 1.974, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1133852460}
+  m_Father: {fileID: 545382953}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1149440396
 PrefabInstance:
@@ -54875,7 +54906,8 @@ MonoBehaviour:
   bluePortal: {fileID: 745318364}
   bluePortalStartingPosition: {fileID: 586260789}
   bluePortalCompletePosition: {fileID: 742785966}
-  blockers: []
+  blocker: {fileID: 1148613586}
+  blockerSpeed: 45
 --- !u!114 &1939749641
 MonoBehaviour:
   m_ObjectHideFlags: 0
