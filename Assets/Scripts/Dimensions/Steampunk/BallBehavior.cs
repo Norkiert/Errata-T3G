@@ -12,8 +12,15 @@ public class BallBehavior : ObjectGroundChecker
     [SerializeField] public bool groudTimerRunning = true;
 
     [SerializeField] public bool isDestroying = false;
-    [SerializeField] protected float destructionSpeed = 0.005f;
+    [SerializeField] protected float _destructionSpeed = 0.005f;
     [SerializeField] protected float groundY;
+
+    [SerializeField] public Renderer ballRenderer;
+    [SerializeField] public Material defaultMaterial;
+    [SerializeField] public Material destructionMaterial;
+    [SerializeField] protected float notVisible = -1.44f;
+    [SerializeField] protected float visible = 1.78f;
+    [SerializeField] protected float destructionSpeed = 1f;
 
     public SphereCollider ballCollider;
     public Rigidbody ballRigidbody;
@@ -34,8 +41,6 @@ public class BallBehavior : ObjectGroundChecker
 
     protected void Awake()
     {
-        ballRigidbody = GetComponent<Rigidbody>();
-        ballCollider = GetComponent<SphereCollider>();
         realRadius = ballCollider.bounds.size.y / 2f;
     }
 
@@ -43,11 +48,7 @@ public class BallBehavior : ObjectGroundChecker
     {
         #region -Ground Destruction-
 
-        if (isDestroying)
-        {
-            Destroy();
-        }
-        else if (isGrounded)
+        if (isGrounded)
         {
             if (groudTimerRunning)
             {
@@ -136,12 +137,25 @@ public class BallBehavior : ObjectGroundChecker
         timeElapsed += Time.deltaTime;
     }
 
-    protected void Destroy()
+    protected IEnumerator Destroy()
     {
-        MyTransform.position = MyTransform.position + Vector3.down * destructionSpeed;
+        /*MyTransform.position = MyTransform.position + Vector3.down * _destructionSpeed;
         if (groundTransform && MyTransform.position.y + realRadius < groundTransform.position.y || !groundTransform && MyTransform.position.y + realRadius < groundY)
         {
             BallPool.ReturnBall(this);
+        }*/
+
+        float cutoffHeight = visible;
+        ballRenderer.material = new Material(destructionMaterial);
+        for (; ; )
+        {
+            ballRigidbody.Sleep();
+            ballRenderer.material.SetFloat("_CutoffHeight", cutoffHeight -= Time.deltaTime / destructionSpeed * Mathf.Abs(notVisible - visible));
+            if(cutoffHeight <= notVisible)
+            {
+                BallPool.ReturnBall(this);
+            }
+            yield return null;
         }
     }
 
@@ -149,6 +163,9 @@ public class BallBehavior : ObjectGroundChecker
     {
         ballCollider.enabled = false;
         ballRigidbody.useGravity = false;
+        ballRigidbody.velocity = Vector3.zero;
+        MyTransform.localEulerAngles = Vector3.zero;
+        StartCoroutine(Destroy());
     }
 }
 
@@ -171,10 +188,17 @@ public class BallPool
             ball = balls.Dequeue();
         }
 
-        // zero the ball
-        ball.MyGameObject.SetActive(true);
+        ZeroBall(ball);
+
         ball.MyTransform.position = position;
         ball.MyTransform.parent = parent;
+
+        return ball;
+    }
+    public static void ZeroBall(BallBehavior ball)
+    {
+        ball.ballRenderer.material = ball.defaultMaterial;
+        ball.MyGameObject.SetActive(true);
         ball.MyTransform.eulerAngles = Vector3.zero;
         ball.isGrounded = false;
         ball.groundTransform = null;
@@ -193,8 +217,6 @@ public class BallPool
         ball.timeElapsed = 0f;
         ball.timeLimit = 5f;
         ball.velocity = 0f;
-
-        return ball;
     }
     public static void ReturnBall(BallBehavior returned)
     {

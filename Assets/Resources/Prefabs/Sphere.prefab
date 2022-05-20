@@ -134,17 +134,25 @@ MonoBehaviour:
   timeElapsed: 0
   groudTimerRunning: 1
   isDestroying: 0
-  destructionSpeed: 0.005
-  ballCollider: {fileID: 0}
-  ballRigidbody: {fileID: 0}
+  _destructionSpeed: 0.005
+  groundY: 0
+  ballRenderer: {fileID: 6627357793553221979}
+  defaultMaterial: {fileID: 2100000, guid: 61cecc4039d185941a49ffa159f0f3de, type: 2}
+  destructionMaterial: {fileID: 2100000, guid: 03d76ae3a88295c4490ac76249336a09, type: 2}
+  notVisible: -1.44
+  visible: 1.78
+  destructionSpeed: 2
+  ballCollider: {fileID: 6627357793553221978}
+  ballRigidbody: {fileID: 6627357793553221977}
   realRadius: 0
   trackLayer:
     serializedVersion: 2
     m_Bits: 1024
   currentTrack: {fileID: 0}
+  lastTrack: {fileID: 0}
+  impulseTrack: {fileID: 0}
   onTrack: 0
   rollingSpeed: 1
   velocity: 0
   pathID: -1
   pathIDCopy: 0
-  lastTrack: {fileID: 0}
