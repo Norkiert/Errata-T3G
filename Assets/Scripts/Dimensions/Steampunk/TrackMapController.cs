@@ -86,6 +86,7 @@ public class TrackMapController : OptimizedMonoBehaviour
 
         trackMap.Remove(positionNow);
         trackMap.Add(newPosition, track);
+        track.InitPos(newPosition);
         return true;
     }
     public bool Occupied(TrackMapPosition position)
