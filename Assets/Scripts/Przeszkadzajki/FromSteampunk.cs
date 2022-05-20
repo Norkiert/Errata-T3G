@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using DG.Tweening;
+
 
 public class FromSteampunk : MonoBehaviour
 {
     [SerializeField] private GameObject ball;
     [SerializeField] private List<Transform> targets;
     [SerializeField] private float flySpeed = 10f;
-
+    [SerializeField] private GameObject laserFinal;
 
     [Header("Timer settings")]
     [SerializeField] private float minTimeToSpawn = 3f;
     [SerializeField] private float maxTimeToSpawn = 10f;
+
     void Start()
     {
         ball.SetActive(false);
@@ -23,6 +26,7 @@ public class FromSteampunk : MonoBehaviour
             timerToSpawn = TimerToSpawn();
             StartCoroutine(timerToSpawn);
         }
+        StartCoroutine(IsFinished());
     }
        
     private Vector3 PickTarget()
@@ -49,11 +53,14 @@ public class FromSteampunk : MonoBehaviour
     private IEnumerator FlyingBall()
     {
         ball.SetActive(true);
+        ball.transform.DOScale(new Vector3(4, 4, 4), 0.1f);
         while(ball.transform.position.y>-15)
         {
             ball.transform.position -= new Vector3(0, flySpeed * Time.deltaTime, 0);
             yield return null;
         }
+        ball.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 2f);
+        yield return new WaitForSeconds(2f);
         ball.SetActive(false);
         if (timerToSpawn != null)
             StopCoroutine(timerToSpawn);
@@ -66,5 +73,16 @@ public class FromSteampunk : MonoBehaviour
         StopAllCoroutines();        
     }
 
-
+    private void stopEverything()
+    {
+        StopAllCoroutines();
+        ball.transform.DOScale(new Vector3(4, 4, 4), 0.1f);
+        ball.SetActive(false);
+    }
+    private IEnumerator IsFinished()
+    {
+        while (!laserFinal.activeSelf)
+            yield return new WaitForSeconds(2f);
+        stopEverything();
+    }
 }
