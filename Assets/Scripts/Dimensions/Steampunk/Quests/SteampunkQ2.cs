@@ -13,7 +13,8 @@ public class SteampunkQ2 : ImpulseTrackHandler
     [SerializeField] protected Transform bluePortalStartingPosition;
     [SerializeField] protected Transform bluePortalCompletePosition;
 
-    [SerializeField] protected List<GameObject> blockers;
+    [SerializeField] protected Transform blocker;
+    [SerializeField] protected float blockerSpeed;
 
     protected void Awake()
     {
@@ -29,9 +30,20 @@ public class SteampunkQ2 : ImpulseTrackHandler
 
         bluePortalT.position = bluePortalCompletePosition.position;
 
-        foreach(var blocker in blockers)
+        StartCoroutine(OpenBlocker());
+    }
+
+    protected IEnumerator OpenBlocker()
+    {
+        for(; ; )
         {
-            blocker.SetActive(false);
+            blocker.localEulerAngles += blockerSpeed * Time.deltaTime * Vector3.forward;
+            if(blocker.localEulerAngles.z >= 90)
+            {
+                blocker.localEulerAngles = new Vector3(blocker.localEulerAngles.x, blocker.localEulerAngles.y, blocker.localEulerAngles.z);
+                yield break;
+            }
+            yield return null;
         }
     }
 
