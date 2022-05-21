@@ -30,7 +30,8 @@ public class MainMenu : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
 
         string path = Application.persistentDataPath + "/errata.json";
-        if (!File.Exists(path)) loadButton.interactable = false;
+        if (!File.Exists(path))
+            loadButton.interactable = false;
     }
 
     private void PlayGame()
@@ -41,7 +42,7 @@ public class MainMenu : MonoBehaviour
 
     private void LoadGame()
     {
-        GameManager.instance.LoadFirstGame();
+        GameManager.instance.LoadGame();
     }
 
     private void OpenSettings()

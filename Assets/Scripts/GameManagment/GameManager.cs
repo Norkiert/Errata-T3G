@@ -17,6 +17,10 @@ namespace GameManagment
         public static event Action OnResumeGame;
         public static bool IsGamePaused { get; private set; } = false;
 
+        private const string hubSceneName = "Hub_Scene";
+
+        private IEnumerator loader;
+
 
         [RuntimeInitializeOnLoadMethod]
         private static void Init()
@@ -45,15 +49,23 @@ namespace GameManagment
         
         public void LoadFirstGame()
         {
-            if (loadFirstGameC != null)
+            if (loader != null)
                 return;
 
-            loadFirstGameC = LoadFirstGameC("Hub_Scene");
-            StartCoroutine(loadFirstGameC);
+            loader = LoadFirstGameC(hubSceneName);
+            StartCoroutine(loader);
         }
 
-        private IEnumerator loadFirstGameC;
-        private IEnumerator LoadFirstGameC(string sceneName)
+        public void LoadGame()
+        {
+            if (loader != null)
+                return;
+
+            loader = LoadGame(hubSceneName);
+            StartCoroutine(loader);
+        }
+
+        private IEnumerator LoadGame(string sceneName)
         {
             loadingBar.value = 0;
             loadingScreen.SetActive(true);
@@ -65,25 +77,32 @@ namespace GameManagment
             {
                 loadingBar.value = loadingDimension.progress / 0.9f * 0.5f;
                 yield return null;
-            }    
+            }
 
             Debug.Log($"Loaded {sceneName}");
 
 
             // wait for load main dimension
-            while(DimensionManager.LoadedDimension != DimensionManager.DefaultDimension)
+            while (DimensionManager.LoadedDimension != DimensionManager.DefaultDimension)
                 yield return null;
 
 
             const float loadingTime = 0.7f;
             float waitTime = 0;
-            while(waitTime <= loadingTime)
+            while (waitTime <= loadingTime)
             {
                 waitTime += Time.unscaledDeltaTime;
                 loadingBar.value = waitTime / loadingTime * 0.5f + 0.5f;
                 yield return null;
             }
             loadingScreen.SetActive(false);
+
+
+            loader = null;
+        }
+        private IEnumerator LoadFirstGameC(string sceneName)
+        {
+            yield return LoadGame(sceneName);
 
 
             // set player position
@@ -105,8 +124,6 @@ namespace GameManagment
                 Debug.LogWarning($"Dont found {typeof(HubGCubeBehaviours)} object! Can't play first dialogue");
             else
                 hgcb.SetStartDialuge(true);
-
-            loadFirstGameC = null;
         }
 
         // Escape menu handling
