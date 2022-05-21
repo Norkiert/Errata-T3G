@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameManagment;
+using UnityEngine.SceneManagement;
 
 public class EscapeMenu : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class EscapeMenu : MonoBehaviour
         resumeGameButton.onClick.AddListener(ResumeGame);
         loadGameButton.onClick.AddListener(LoadGame);
         settingsButton.onClick.AddListener(OpenSettings);
-        backToMenuButton.onClick.AddListener(BackToMenu);
 
         Close();
     }
@@ -68,10 +68,11 @@ public class EscapeMenu : MonoBehaviour
     {
         settingsPanel.SetActive(true);
     }
-    private void BackToMenu()
+    public void BackToMenu()
     {
-        Debug.Log("ESC MENU: Back to main menu");
+        SceneManager.LoadScene(0);
     }
+
 
     #endregion
 }
