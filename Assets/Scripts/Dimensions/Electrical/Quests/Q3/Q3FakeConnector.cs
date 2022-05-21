@@ -7,6 +7,7 @@ public class Q3FakeConnector : MonoBehaviour
 { 
 [SerializeField] private Connector connectorToCheck;
 [SerializeField] private GameObject[] objects;
+[SerializeField] private Collider[] objectsWithCollider;
 [SerializeField] private float duration = 1f;
 [SerializeField] private float checkDelay = 1.5f;
 void Start()
@@ -46,7 +47,11 @@ private void ConnectedCable()
     {
         obj.transform.DORotate(new Vector3(-85, obj.transform.eulerAngles.y, 0), duration);
     }
-    checkDisconnect = CheckDisconnect();
+    foreach (Collider col in objectsWithCollider)
+    {
+        col.enabled = false;
+    }
+        checkDisconnect = CheckDisconnect();
     StartCoroutine(checkDisconnect);
 }
 private void DisconnectedCable()
@@ -57,7 +62,11 @@ private void DisconnectedCable()
     {
         obj.transform.DORotate(new Vector3(0, obj.transform.eulerAngles.y, 0), duration);
     }
-    checkConnect = CheckConnect();
+        foreach (Collider col in objectsWithCollider)
+        {
+            col.enabled = true;
+        }
+        checkConnect = CheckConnect();
     StartCoroutine(checkConnect);
 }
 
