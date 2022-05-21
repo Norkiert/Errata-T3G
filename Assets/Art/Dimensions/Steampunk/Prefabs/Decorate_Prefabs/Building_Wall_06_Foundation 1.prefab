@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4605768154501762694}
   - component: {fileID: 8068615745243604351}
   - component: {fileID: 2564015880159034613}
-  - component: {fileID: 9064014079341170744}
+  - component: {fileID: 8723359547645032904}
   m_Layer: 0
   m_Name: Building_Wall_06_Foundation 1
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9064014079341170744
-MeshCollider:
+--- !u!65 &8723359547645032904
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8909834572867253291, guid: 9a11dc181bf288f478a5d6acba2e86ef, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 4.2000012, y: 4, z: 0.80000037}
+  m_Center: {x: 2.5000007, y: 2, z: -0.000000029802322}
