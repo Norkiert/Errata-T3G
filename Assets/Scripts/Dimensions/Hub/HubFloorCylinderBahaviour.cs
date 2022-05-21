@@ -45,6 +45,13 @@ public class HubFloorCylinderBahaviour : MonoBehaviour
         StartCoroutine(CheckConnections());
     }
 
+    private void OnDestroy()
+    {
+        foreach (Cylinder cylinder in cylinders)
+            if (cylinder != null)
+                cylinder.CancelMove();
+    }
+
     private void Generate()
     {
         int l = cylindersParent.childCount;

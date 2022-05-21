@@ -25,7 +25,7 @@ public class SettingsMenu : MonoBehaviour
         MouseSensitivity = PlayerPrefs.GetFloat(mouseSensitivityKey, 1.0f);
     }
 
-    private void Start()
+    private void Awake()
     {
         gameObject.SetActive(false);
 

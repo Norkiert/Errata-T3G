@@ -39,7 +39,7 @@ public class CurvedTrack : BasicTrack
         MyTransform.Rotate(Vector3.up * 90);
         if(sparkGO!=null)
         {
-            if (!SaveManager.isLevelFinished(Dimension.Electrical))
+            if (!SaveManager.IsLevelFinished(Dimension.Electrical))
             {
                 if (((Random.value * 10000000) % 10 * (Random.value * 10000000) % 10) % 9 > 6)
                 {
@@ -55,7 +55,7 @@ public class CurvedTrack : BasicTrack
         MyTransform.Rotate(Vector3.up * -90);
         if(sparkGO != null)
         {
-            if (!SaveManager.isLevelFinished(Dimension.Electrical))
+            if (!SaveManager.IsLevelFinished(Dimension.Electrical))
             {
                 if (((Random.value * 10000000) % 10 * (Random.value * 10000000) % 10) % 9 > 6)
                 {

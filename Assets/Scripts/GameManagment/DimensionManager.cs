@@ -238,5 +238,18 @@ namespace GameManagment
 
             return null;
         }
+
+
+        public static void BackToMenu()
+        {
+            if (instance != null && LoadedDimension != null)
+            {
+                SaveManager.SaveGame();
+                instance.DesactiveDimension(LoadedDimension);
+                LoadedDimension = null;
+            }
+
+            SceneManager.LoadScene(0);
+        }
     }
 }

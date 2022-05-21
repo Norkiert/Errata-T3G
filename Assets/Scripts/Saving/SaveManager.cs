@@ -271,7 +271,7 @@ public static class SaveManager
         } 
     }
 
-    public static bool isLevelFinished(Dimension dim) {
+    public static bool IsLevelFinished(Dimension dim) {
         string path = Application.persistentDataPath + "/errata.json";
         if (File.Exists(path))
         {

@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameManagment;
-using UnityEngine.SceneManagement;
 
 public class EscapeMenu : MonoBehaviour
 {
+    [Header("Panels")]
     [SerializeField] private GameObject escMenu;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject confirmExitPanel;
 
+    [Header("Buttons")]
     [SerializeField] private Button resumeGameButton;
-    [SerializeField] private Button loadGameButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button backToMenuButton;
 
+    [Header("Other")]
+    [SerializeField] private HubPlayerHandler playerHandler;
 
-    private void Start()
+    private void Awake()
     {
         resumeGameButton.onClick.AddListener(ResumeGame);
-        loadGameButton.onClick.AddListener(LoadGame);
         settingsButton.onClick.AddListener(OpenSettings);
-
+        backToMenuButton.onClick.AddListener(TryBackToMenu);
         Close();
     }
 
@@ -44,13 +46,19 @@ public class EscapeMenu : MonoBehaviour
 
     private void Open()
     {
+        CloseAllAditionalPanels();
         escMenu.SetActive(true);
-        settingsPanel.SetActive(false);
     }
     private void Close()
     {
+        CloseAllAditionalPanels();
         escMenu.SetActive(false);
+    }
+
+    private void CloseAllAditionalPanels()
+    {
         settingsPanel.SetActive(false);
+        confirmExitPanel.SetActive(false);
     }
 
     #region -Buttons functionality-
@@ -60,18 +68,21 @@ public class EscapeMenu : MonoBehaviour
         Close();
         GameManager.ResumeGame();
     }
-    private void LoadGame()
-    {
-        Debug.Log("ESC MENU: load game");
-    }
     private void OpenSettings()
     {
+        CloseAllAditionalPanels();
         settingsPanel.SetActive(true);
     }
-    public void BackToMenu()
+    private void TryBackToMenu()
     {
-        SceneManager.LoadScene(0);
+        CloseAllAditionalPanels();
+
+        if (playerHandler == null || !playerHandler.IsPlayerInHub)
+            confirmExitPanel.SetActive(true);
+        else
+            BackToMenu();
     }
+    public void BackToMenu() => DimensionManager.BackToMenu();
 
 
     #endregion

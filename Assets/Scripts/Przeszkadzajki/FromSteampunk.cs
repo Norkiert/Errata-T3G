@@ -19,7 +19,7 @@ public class FromSteampunk : MonoBehaviour
     void Start()
     {
         ball.SetActive(false);
-        if(!SaveManager.isLevelFinished(Dimension.Steampunk))
+        if(!SaveManager.IsLevelFinished(Dimension.Steampunk))
         {
             if (timerToSpawn != null)
                 StopCoroutine(timerToSpawn);

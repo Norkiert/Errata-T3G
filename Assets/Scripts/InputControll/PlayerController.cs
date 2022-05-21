@@ -108,9 +108,8 @@ public class PlayerController : PortalTraveller
 
     private void Start()
     {
-
-        GameManager.OnPauseGame += () => SetEnable(true);
-        GameManager.OnResumeGame += () => SetEnable(false);
+        GameManager.OnPauseGame += SetEnable;
+        GameManager.OnResumeGame += SetDisable;
 
         SetMode(Mods.Default);
 
@@ -119,6 +118,11 @@ public class PlayerController : PortalTraveller
 
         yaw = transform.eulerAngles.y;
         pitch = playerCamera.transform.localEulerAngles.x;
+    }
+    private void OnDestroy()
+    {
+        GameManager.OnPauseGame -= SetEnable;
+        GameManager.OnResumeGame -= SetDisable;
     }
 
     private void Update()
@@ -298,6 +302,8 @@ public class PlayerController : PortalTraveller
         playerCamera.backgroundColor = color;
     }
 
+    private void SetEnable() => SetEnable(true);
+    private void SetDisable() => SetEnable(false);
     public void SetEnable(bool enableState)
     {
         if(enableState)

@@ -26,7 +26,7 @@ public class FromLasers : MonoBehaviour
 
     private IEnumerator Counter()
     {
-        while (!SaveManager.isLevelFinished(Dimension.Laser))
+        while (!SaveManager.IsLevelFinished(Dimension.Laser))
             yield return new WaitForSeconds(checkDelay);
         plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0f);
     }

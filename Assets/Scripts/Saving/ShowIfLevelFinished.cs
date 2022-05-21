@@ -10,6 +10,6 @@ public class ShowIfLevelFinished : MonoBehaviour
 
     public void Start()
     {
-        gameObject.SetActive(SaveManager.isLevelFinished(level));
+        gameObject.SetActive(SaveManager.IsLevelFinished(level));
     }
 }
