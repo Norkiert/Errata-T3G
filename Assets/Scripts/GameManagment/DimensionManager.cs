@@ -26,6 +26,7 @@ namespace GameManagment
 
         private DimensionSO dimensionToLoad;
         private IEnumerator dimenionChanger;
+        private HubGCHandler hubGCHandler;
 
         private static DimensionManager instance;
         public static DimensionSO LoadedDimension { get; private set; } = null;
@@ -44,6 +45,7 @@ namespace GameManagment
         private void Start()
         {
             LoadDimension(defaultDimension);
+            hubGCHandler = FindObjectOfType<HubGCHandler>();
         }
 
         public static void LoadDimension(DimensionSO dimension)
@@ -66,24 +68,30 @@ namespace GameManagment
                 yield break;
             }
 
+            // close portal
+            {
+                mainPortalSwitchingPlane.gameObject.SetActive(true);
+                Color shitchingColor = mainPortalSwitchingPlane.material.color;
+                float switchPercent = shitchingColor.a;
+                while (switchPercent < 1)
+                {
+                    // wait for guide cube
+                    if (hubGCHandler == null || hubGCHandler.IsGCubeInHub || switchPercent < 0.9f)
+                    {
+                        // amim portal
+                        switchPercent += Time.deltaTime / mainPortalSwitchingTime;
+                        shitchingColor.a = switchPercent;
+                        mainPortalSwitchingPlane.material.color = shitchingColor;
+                    }
+                    yield return null;
+                }
+            }
+
             // desactive current dimension
             if (LoadedDimension != null)
             {
                 DesactiveDimension(LoadedDimension);
                 yield return new WaitForSeconds(0.2f);
-            }
-
-            // close portal
-            {
-                Color shitchingColor = mainPortalSwitchingPlane.material.color;
-                float switchPercent = shitchingColor.a;
-                while (switchPercent < 1)
-                {
-                    switchPercent += Time.deltaTime / mainPortalSwitchingTime;
-                    shitchingColor.a = switchPercent;
-                    mainPortalSwitchingPlane.material.color = shitchingColor;
-                    yield return null;
-                }
             }
 
             // unload current dimension
@@ -101,6 +109,8 @@ namespace GameManagment
                 LoadedDimension = null;
                 UpdateCamera();
             }
+
+            yield return null;
 
             // load new
             if (dimensionToLoad != null)
@@ -130,7 +140,7 @@ namespace GameManagment
 
             // active new dimension
             ActiveDimension(LoadedDimension);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
 
             UpdateCamera();
 
@@ -146,6 +156,7 @@ namespace GameManagment
                     mainPortalSwitchingPlane.material.color = shitchingColor;
                     yield return null;
                 }
+                mainPortalSwitchingPlane.gameObject.SetActive(false);
             }
         }
 
