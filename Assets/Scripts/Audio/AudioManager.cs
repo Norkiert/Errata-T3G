@@ -30,7 +30,7 @@ namespace Audio
         private static AudioManager instance;
 
 
-        private static readonly List<AudioSource> unusedAudioSources = new List<AudioSource>();
+        private static readonly Queue<AudioSource> unusedAudioSources = new Queue<AudioSource>();
 
 
         private const string keyGeneralVolume = "GeneralVolume";
@@ -130,23 +130,23 @@ namespace Audio
         public static void SetSFXVolume(float volume) => PlayerPrefs.SetFloat(keySFXVolume, volume);
 
 
-        public static void PlaySFX(AudioClipSO sfx) => SetAndPlaySFX(sfx, Vector3.zero, null);
-        public static void PlaySFX(AudioClipSO sfx, Vector3 position) => SetAndPlaySFX(sfx, position, null);
-        public static void PlaySFX(AudioClipSO sfx, Transform parent) => SetAndPlaySFX(sfx, Vector3.zero, parent);
-        public static void PlaySFX(AudioClipSO sxf, Transform parent, Vector3 offset) => SetAndPlaySFX(sxf, offset, parent);
-        private static void SetAndPlaySFX(AudioClipSO sfx, Vector3 offset, Transform parent)
+        public static AudioSourceWrapper PlaySFX(AudioClipSO sfx) => SetAndPlaySFX(sfx, Vector3.zero, null);
+        public static AudioSourceWrapper PlaySFX(AudioClipSO sfx, Vector3 position) => SetAndPlaySFX(sfx, position, null);
+        public static AudioSourceWrapper PlaySFX(AudioClipSO sfx, Transform parent) => SetAndPlaySFX(sfx, Vector3.zero, parent);
+        public static AudioSourceWrapper PlaySFX(AudioClipSO sxf, Transform parent, Vector3 offset) => SetAndPlaySFX(sxf, offset, parent);
+        private static AudioSourceWrapper SetAndPlaySFX(AudioClipSO sfx, Vector3 offset, Transform parent)
         {
             if (sfx.Clip == null)
             {
                 Debug.LogWarning($"{sfx.name} sfx has no audio clip");
-                return;
+                return null;
             }
 
             AudioSource source = GetFreeAudioSource();
             if (source == null)
             {
                 Debug.LogWarning("Invalid free aadio source");
-                return;
+                return null;
             }
 
             if (parent == null)
@@ -165,7 +165,13 @@ namespace Audio
             source.gameObject.name = $"SFX-{source.clip.name}";
             source.gameObject.SetActive(true);
             source.Play();
-            instance.StartCoroutine(DesactiveSource(source, source.clip.length));
+
+            var wrapper = new AudioSourceWrapper(source, unusedAudioSources);
+
+            instance.StartCoroutine(DeactivateSource(new System.WeakReference<AudioSourceWrapper>(wrapper), source));
+
+            return wrapper;
+            //instance.StartCoroutine(DesactiveSource(source, source.clip.length));
         }
 
 
@@ -182,15 +188,59 @@ namespace Audio
 
             if (unusedAudioSources.Count > 0)
             {
-                AudioSource source = unusedAudioSources[0];
-                unusedAudioSources.RemoveAt(0);
+                AudioSource source = unusedAudioSources.Dequeue();
                 return source;
             }
 
             AudioSource newSource = new GameObject().AddComponent<AudioSource>();
             newSource.transform.parent = instance.transform;
             newSource.playOnAwake = false;
+
             return newSource;
+        }
+
+        protected static IEnumerator DeactivateSource(System.WeakReference<AudioSourceWrapper> reference, AudioSource source)
+        {
+            bool deactivatedLoop = false;
+            for(; ; )
+            {
+                if(reference.TryGetTarget(out AudioSourceWrapper wrapper))
+                {
+                    if (!wrapper.Playing && wrapper.Stopped && !wrapper.Active && wrapper.Valid)
+                    {
+                        DesactiveSource(wrapper.Source);
+                        yield break;
+                    }
+                    else if (!wrapper.Valid && !unusedAudioSources.Contains(source))
+                    {
+                        if (!deactivatedLoop)
+                        {
+                            source.loop = false;
+                            deactivatedLoop = true;
+                        }
+                        if (!source.isPlaying && source.time == 0)
+                        {
+                            DesactiveSource(source);
+                            yield break;
+                        }
+                    }
+                }
+                else
+                {
+                    if (!deactivatedLoop)
+                    {
+                        source.loop = false;
+                        deactivatedLoop = true;
+                    }
+                    if(!source.isPlaying && source.time == 0)
+                    {
+                        DesactiveSource(source);
+                        yield break;
+                    }
+                }
+
+                yield return null;
+            }
         }
 
         private static IEnumerator DesactiveSource(AudioSource source, float time)
@@ -205,7 +255,8 @@ namespace Audio
             source.Stop();
             source.clip = null;
             source.gameObject.SetActive(false);
-            unusedAudioSources.Add(source);
+
+            unusedAudioSources.Enqueue(source);
         }
 
         private class Track
