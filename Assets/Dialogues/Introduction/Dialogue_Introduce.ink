@@ -33,7 +33,7 @@ Wracając do Ciebie...<n>Na podstawie ocalałych danych, jesteś najlepszym kwan
 	-> H_W_02
 
 === H_W_04 ===
-Wykryłem krytyczne usterki w między wymiarowym continuum.<n>Doprowadziły one do zaburzeń w protoenergetycznej strukturze utrzymującej wszechświat w termodynamicznej homeostazie.<n>Skala uszkodzeń wygenerowała destrukcyjną falę anihilacyjną, która wyłączyła tryb auto reparacji.
+Wykryto krytyczne usterki w między wymiarowym continuum.<n>Doprowadziły one do zaburzeń w protoenergetycznej strukturze utrzymującej wszechświat w termodynamicznej homeostazie.<n>Skala uszkodzeń wygenerowała destrukcyjną falę anihilacyjną, która wyłączyła tryb auto reparacji.
 Ocalałe zasoby przekierowane zostały do powstrzymania lawinowej destrukcji, aby dać ci czas na dokonanie napraw.
 + [Jak do tego doszło?]
 	-> H_W_05
