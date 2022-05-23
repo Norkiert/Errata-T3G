@@ -86,7 +86,13 @@ public class ElectricalQuestCompleted : MonoBehaviour
         q3Value.SetValue(Q3State);
 
         //CheckQ4
-        Q4State = q4Con.q4Done;
+        if(q4Con!=null)
+            Q4State = q4Con.q4Done;
+        else
+        {
+            q4Con = FindObjectOfType<Q4ConnectCheck>();
+            Q4State = q4Con.q4Done;
+        }
         q4Value.SetValue(Q4State);
 
         ChangeLampsMaterials(q1Lamp, Q1State);
