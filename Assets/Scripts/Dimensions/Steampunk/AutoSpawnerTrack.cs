@@ -18,6 +18,9 @@ public class AutoSpawnerTrack : BasicTrack
 
     [SerializeField] public bool locked = false;
 
+    [SerializeField] protected bool adjustScale = false;
+    [SerializeField, ShowIf(nameof(adjustScale))] protected float scaleMultiplier = 1f;
+
     protected new void Awake()
     {
         base.Awake();
@@ -36,7 +39,11 @@ public class AutoSpawnerTrack : BasicTrack
     }
     public void SpawnBall()
     {
-        BallPool.GetBall(spawnPoint.position);
+        var ball = BallPool.GetBall(spawnPoint.position);
+        if (adjustScale)
+        {
+            ball.AdjustScale(scaleMultiplier);
+        }
     }
     public override void RotateRight()
     {

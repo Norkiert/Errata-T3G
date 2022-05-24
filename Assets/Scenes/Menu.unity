@@ -380,6 +380,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4007543208646099642, guid: e347974729843fa4c9f48cdf2bb18716, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 41192833387441053, guid: e347974729843fa4c9f48cdf2bb18716, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 41192833387441053, guid: e347974729843fa4c9f48cdf2bb18716, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -387,6 +395,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e347974729843fa4c9f48cdf2bb18716, type: 3}
       propertyPath: m_Name
       value: menu_terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e347974729843fa4c9f48cdf2bb18716, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7895107055033521790, guid: e347974729843fa4c9f48cdf2bb18716, type: 3}
       propertyPath: m_LocalPosition.z
@@ -600,12 +612,16 @@ PrefabInstance:
       value: -27
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 39
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -649,75 +665,107 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
---- !u!1001 &34928761
+--- !u!1001 &28475062
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2015155228}
+    m_TransformParent: {fileID: 581383162}
     m_Modifications:
-    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_Name
-      value: StraightTrack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
       propertyPath: _posX
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: _posZ
-      value: -31
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: trackMapController
-      value: 
-      objectReference: {fileID: 2015155227}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_RootOrder
-      value: 43
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -31
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.w
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: adjustScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: timeElapsed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: timeToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: scaleMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 581383161}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_RootOrder
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8669241898959458439, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_Name
+      value: AutoSpawnerTrack
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+--- !u!114 &28475063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+  m_PrefabInstance: {fileID: 28475062}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5ca8ddb7fd97c4a8822dbd87de2322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &28475064 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+  m_PrefabInstance: {fileID: 28475062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &36796445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -744,6 +792,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -1021,6 +1073,10 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
@@ -1034,7 +1090,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
     - target: {fileID: 8541621021272946815, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8541621021272946815, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1127,12 +1183,16 @@ PrefabInstance:
       value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1366,6 +1426,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -1524,12 +1588,16 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1599,6 +1667,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -1815,12 +1887,16 @@ PrefabInstance:
       value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1928,6 +2004,10 @@ PrefabInstance:
       value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -1953,12 +2033,16 @@ PrefabInstance:
       value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 8541621021272946815, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: m_RootOrder
-      value: 30
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 8541621021272946815, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2026,12 +2110,16 @@ PrefabInstance:
       value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 34
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2097,6 +2185,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posX
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -2214,6 +2306,10 @@ PrefabInstance:
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: _posZ
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
@@ -2407,12 +2503,16 @@ PrefabInstance:
       value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2553,22 +2653,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158765939}
   m_Mesh: {fileID: -5495902117074765545, guid: 1b50fed95337aeb46a90adc6aae59517, type: 3}
---- !u!114 &170824368 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-  m_PrefabInstance: {fileID: 449996778}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &170824369 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-  m_PrefabInstance: {fileID: 449996778}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &176046548 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
@@ -2652,7 +2736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2703,6 +2787,10 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
@@ -2735,7 +2823,7 @@ GameObject:
   - component: {fileID: 192780979}
   - component: {fileID: 192780978}
   - component: {fileID: 192780977}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2837,6 +2925,95 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8541621021272946815, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
   m_PrefabInstance: {fileID: 1091073976}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &223567512
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2015155228}
+    m_Modifications:
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: _posX
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: _posZ
+      value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 2015155227}
+    - target: {fileID: 8639852455193266690, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_Name
+      value: AutoEraserTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+--- !u!114 &223567513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+  m_PrefabInstance: {fileID: 223567512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7002f956a1b0fec459db3e881bb4c730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &223567514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+  m_PrefabInstance: {fileID: 223567512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &225116108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,7 +3025,7 @@ GameObject:
   - component: {fileID: 225116111}
   - component: {fileID: 225116110}
   - component: {fileID: 225116109}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(632.0, -216.0, 239.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3038,6 +3215,10 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -3068,83 +3249,6 @@ PrefabInstance:
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
---- !u!1001 &252274212
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 581383162}
-    m_Modifications:
-    - target: {fileID: 1079513927463000128, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 7907468564987708431, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_Name
-      value: StraightTrack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: _posX
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: _posZ
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: trackMapController
-      value: 
-      objectReference: {fileID: 581383161}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_RootOrder
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3439,6 +3543,10 @@ PrefabInstance:
       value: StraightTrack
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -3499,6 +3607,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
       propertyPath: trackMapController
       value: 
@@ -3568,7 +3680,7 @@ GameObject:
   - component: {fileID: 282113826}
   - component: {fileID: 282113825}
   - component: {fileID: 282113824}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(632.0, -216.0, 1439.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3659,6 +3771,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -3912,6 +4028,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -4163,12 +4283,16 @@ PrefabInstance:
       value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4416,6 +4540,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -4562,22 +4690,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
   m_PrefabInstance: {fileID: 36796445}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &411919374 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-  m_PrefabInstance: {fileID: 814841493}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7002f956a1b0fec459db3e881bb4c730, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &411919375 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-  m_PrefabInstance: {fileID: 814841493}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &418884394
 GameObject:
   m_ObjectHideFlags: 0
@@ -4608,9 +4720,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zeroPoint: {fileID: 1507251615}
-  trackMapX: 00000000000000000000000000000000fffffffffefffffffdfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffdffffff
-  trackMapY: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  trackMapZ: 00000000fffffffffefffffffdfffffffdfffffffdfffffffdfffffffdfffffffeffffffffffffff000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000b000000
+  trackMapX: 00000000000000000000000000000000fffffffffefffffffdfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffdfffffffdfffffffdfffffffdffffff
+  trackMapY: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  trackMapZ: 00000000fffffffffefffffffdfffffffdfffffffdfffffffdfffffffdfffffffeffffffffffffff000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000b0000000c0000000d0000000e000000
   trackMapTracks:
   - {fileID: 1724801825}
   - {fileID: 1052445020}
@@ -4634,7 +4746,10 @@ MonoBehaviour:
   - {fileID: 2031847326}
   - {fileID: 1961540513}
   - {fileID: 1878975225}
-  - {fileID: 411919374}
+  - {fileID: 529039505}
+  - {fileID: 1514421205}
+  - {fileID: 1044469503}
+  - {fileID: 1616463030}
 --- !u!4 &418884396
 Transform:
   m_ObjectHideFlags: 0
@@ -4669,7 +4784,10 @@ Transform:
   - {fileID: 2031847327}
   - {fileID: 1961540514}
   - {fileID: 1878975226}
-  - {fileID: 411919375}
+  - {fileID: 1514421206}
+  - {fileID: 529039506}
+  - {fileID: 1044469504}
+  - {fileID: 1616463031}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 8.007, z: 0}
@@ -4742,6 +4860,10 @@ PrefabInstance:
       value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -4771,12 +4893,16 @@ PrefabInstance:
       value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 29
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4789,75 +4915,6 @@ PrefabInstance:
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -19
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
---- !u!1001 &449996778
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2015155228}
-    m_Modifications:
-    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_Name
-      value: StraightTrack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: _posX
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: _posZ
-      value: -32
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: trackMapController
-      value: 
-      objectReference: {fileID: 2015155227}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_RootOrder
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -32
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4915,6 +4972,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -4994,6 +5055,10 @@ PrefabInstance:
       value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -5043,22 +5108,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
---- !u!114 &469416825 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-  m_PrefabInstance: {fileID: 34928761}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &469416826 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-  m_PrefabInstance: {fileID: 34928761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &475552420
 GameObject:
   m_ObjectHideFlags: 0
@@ -5160,12 +5209,16 @@ PrefabInstance:
       value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 41
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5220,7 +5273,7 @@ GameObject:
   - component: {fileID: 500404435}
   - component: {fileID: 500404434}
   - component: {fileID: 500404433}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(-1768.0, -216.0, 1439.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5374,12 +5427,16 @@ PrefabInstance:
       value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 33
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5585,6 +5642,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -5634,6 +5695,95 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!1001 &529039504
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 418884396}
+    m_Modifications:
+    - target: {fileID: 2566550469849545979, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_Name
+      value: CurvedTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: _posX
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: _posZ
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 418884395}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+--- !u!114 &529039505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+  m_PrefabInstance: {fileID: 529039504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d876227efb4bb52488041610445ac669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &529039506 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+  m_PrefabInstance: {fileID: 529039504}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &534161348 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
@@ -5783,12 +5933,16 @@ PrefabInstance:
       value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 38
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5858,6 +6012,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -5939,16 +6097,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zeroPoint: {fileID: 1530358517}
-  trackMapX: 00000000fffffffffefffffffdffffff0100000002000000fcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffbfffffffafffffff9fffffff8fffffff7fffffff6fffffff5fffffff4fffffff3fffffff2fffffff1fffffff0ffffffefffffffeeffffffedffffffecffffffebffffffeaffffffe9ffffffe8ffffffe7ffffff
-  trackMapY: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  trackMapZ: 00000000000000000000000000000000000000000000000000000000fffffffffefffffffdfffffffcfffffffbfffffffafffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9ffffff
+  trackMapX: 00000000fffffffffefffffffdffffff0100000002000000fcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffcfffffffbfffffffafffffff9fffffff8fffffff7fffffff6fffffff5fffffff4fffffff3fffffff2fffffff1fffffff0ffffffefffffffeeffffffedffffffecffffffebffffffeaffffffe9ffffffe8ffffffe7ffffff0300000004000000
+  trackMapY: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  trackMapZ: 00000000000000000000000000000000000000000000000000000000fffffffffefffffffdfffffffcfffffffbfffffffafffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9fffffff9ffffff0000000000000000
   trackMapTracks:
   - {fileID: 534161348}
   - {fileID: 1812293689}
   - {fileID: 1411004567}
   - {fileID: 534518135}
   - {fileID: 886907182}
-  - {fileID: 1617053507}
+  - {fileID: 867536645}
   - {fileID: 586715084}
   - {fileID: 669014956}
   - {fileID: 294530075}
@@ -5977,7 +6135,9 @@ MonoBehaviour:
   - {fileID: 1293354507}
   - {fileID: 1120130694}
   - {fileID: 709097931}
-  - {fileID: 1300482733}
+  - {fileID: 1419635837}
+  - {fileID: 662652922}
+  - {fileID: 28475063}
 --- !u!4 &581383162
 Transform:
   m_ObjectHideFlags: 0
@@ -6023,8 +6183,10 @@ Transform:
   - {fileID: 1293354508}
   - {fileID: 1120130695}
   - {fileID: 709097932}
-  - {fileID: 1300482734}
-  - {fileID: 1617053508}
+  - {fileID: 1419635838}
+  - {fileID: 867536646}
+  - {fileID: 28475064}
+  - {fileID: 662652923}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 7.576, z: 0}
@@ -6149,12 +6311,16 @@ PrefabInstance:
       value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6224,6 +6390,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -6498,6 +6668,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -6840,6 +7014,10 @@ PrefabInstance:
       value: StraightTrack
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
@@ -6901,6 +7079,91 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!1001 &662652921
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 581383162}
+    m_Modifications:
+    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_Name
+      value: StraightTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posX
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 581383161}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_RootOrder
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!114 &662652922 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 662652921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &662652923 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 662652921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &669014956 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
@@ -6957,12 +7220,16 @@ PrefabInstance:
       value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7066,6 +7333,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -7167,12 +7438,16 @@ PrefabInstance:
       value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 42
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7216,6 +7491,111 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!1001 &714874322
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2015155228}
+    m_Modifications:
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: _posX
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: _posZ
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: adjustScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: timeElapsed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: timeToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: scaleMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 2015155227}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_RootOrder
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669241898959458439, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_Name
+      value: AutoSpawnerTrack
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+--- !u!114 &714874323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+  m_PrefabInstance: {fileID: 714874322}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5ca8ddb7fd97c4a8822dbd87de2322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &714874324 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+  m_PrefabInstance: {fileID: 714874322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &729589552
 GameObject:
   m_ObjectHideFlags: 0
@@ -7446,6 +7826,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posX
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -7806,6 +8190,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -7898,7 +8286,7 @@ GameObject:
   - component: {fileID: 814342416}
   - component: {fileID: 814342415}
   - component: {fileID: 814342414}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(-1768.0, -216.0, 239.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7963,83 +8351,6 @@ Transform:
   m_Father: {fileID: 192780979}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &814841493
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 418884396}
-    m_Modifications:
-    - target: {fileID: 1529541419844131755, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: _posX
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: _posZ
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: trackMapController
-      value: 
-      objectReference: {fileID: 418884395}
-    - target: {fileID: 8639852455193266690, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Name
-      value: AutoEraserTrack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832705090977067451, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_RootOrder
-      value: 23
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
 --- !u!1001 &825112100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8127,6 +8438,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -8288,7 +8603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_RootOrder
-      value: 45
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8339,27 +8654,15 @@ PrefabInstance:
       value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
---- !u!114 &855817983 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-  m_PrefabInstance: {fileID: 1998246260}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7002f956a1b0fec459db3e881bb4c730, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &855817984 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-  m_PrefabInstance: {fileID: 1998246260}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865251822
 GameObject:
   m_ObjectHideFlags: 0
@@ -8457,6 +8760,91 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
   m_PrefabInstance: {fileID: 1573440393}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &867536644
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 581383162}
+    m_Modifications:
+    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_Name
+      value: StraightTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 581383161}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_RootOrder
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!114 &867536645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 867536644}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &867536646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 867536644}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &870913949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8477,12 +8865,16 @@ PrefabInstance:
       value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 40
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9193,6 +9585,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -9734,6 +10130,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -10012,16 +10412,117 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f798aad18795213498bdf4320c021061, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3828236853107434563, guid: f798aad18795213498bdf4320c021061, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 04dc23059a1572547a739344fffd0a75, type: 2}
+    - target: {fileID: 6507901977716847365, guid: f798aad18795213498bdf4320c021061, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022140126847958057, guid: f798aad18795213498bdf4320c021061, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7339356831882890532, guid: f798aad18795213498bdf4320c021061, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 04dc23059a1572547a739344fffd0a75, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f798aad18795213498bdf4320c021061, type: 3}
+--- !u!1001 &1044469502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 418884396}
+    m_Modifications:
+    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_Name
+      value: StraightTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posX
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posZ
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 418884395}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!114 &1044469503 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 1044469502}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1044469504 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 1044469502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1045910070
 GameObject:
   m_ObjectHideFlags: 0
@@ -10224,12 +10725,16 @@ PrefabInstance:
       value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10273,6 +10778,95 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!1001 &1055426940
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2015155228}
+    m_Modifications:
+    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_Name
+      value: StraightTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posX
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posZ
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 2015155227}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_RootOrder
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!114 &1055426941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 1055426940}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1055426942 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 1055426940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1066192234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10341,6 +10935,10 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -10392,6 +10990,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -10467,6 +11069,10 @@ PrefabInstance:
       value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -10530,6 +11136,10 @@ PrefabInstance:
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: _posZ
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: trackMapController
@@ -10931,6 +11541,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -11006,6 +11620,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -11249,6 +11867,10 @@ PrefabInstance:
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: _posZ
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: trackMapController
@@ -11518,6 +12140,10 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -11593,6 +12219,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -11866,12 +12496,16 @@ PrefabInstance:
       value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11935,12 +12569,16 @@ PrefabInstance:
       value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12177,6 +12815,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
@@ -12202,22 +12844,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
   m_PrefabInstance: {fileID: 576308897}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1300482733 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-  m_PrefabInstance: {fileID: 252274212}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1300482734 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
-  m_PrefabInstance: {fileID: 252274212}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1303437990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12242,12 +12868,16 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12317,6 +12947,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -12412,12 +13046,16 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12712,7 +13350,7 @@ GameObject:
   - component: {fileID: 1359263765}
   - component: {fileID: 1359263764}
   - component: {fileID: 1359263763}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: woda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12840,6 +13478,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -12911,6 +13553,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -13297,6 +13943,95 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
   m_PrefabInstance: {fileID: 483898793}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1419635836
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 581383162}
+    m_Modifications:
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: _posX
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: _posZ
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 581383161}
+    - target: {fileID: 8639852455193266690, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_Name
+      value: AutoEraserTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+--- !u!114 &1419635837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+  m_PrefabInstance: {fileID: 1419635836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7002f956a1b0fec459db3e881bb4c730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1419635838 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
+  m_PrefabInstance: {fileID: 1419635836}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1421853669 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
@@ -13337,12 +14072,16 @@ PrefabInstance:
       value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13386,79 +14125,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
---- !u!1001 &1425378383
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 581383162}
-    m_Modifications:
-    - target: {fileID: 1529541419844131755, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: _posX
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: trackMapController
-      value: 
-      objectReference: {fileID: 581383161}
-    - target: {fileID: 8639852455193266690, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Name
-      value: AutoEraserTrack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832705090977067451, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_RootOrder
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
 --- !u!1001 &1428248009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13483,12 +14149,16 @@ PrefabInstance:
       value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13554,6 +14224,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posX
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -13633,6 +14307,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -13698,12 +14376,16 @@ PrefabInstance:
       value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 8541621021272946815, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: m_RootOrder
-      value: 46
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 8541621021272946815, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14029,6 +14711,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -14127,6 +14813,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -14206,6 +14896,95 @@ Transform:
   m_Father: {fileID: 418884396}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1514421204
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 418884396}
+    m_Modifications:
+    - target: {fileID: 8420878995099218547, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_Name
+      value: StraightTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posX
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: _posZ
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 418884395}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_RootOrder
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+--- !u!114 &1514421205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 1514421204}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a962030b09be3b14ea214e6434f3c404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1514421206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+  m_PrefabInstance: {fileID: 1514421204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1530358516
 GameObject:
   m_ObjectHideFlags: 0
@@ -14288,12 +15067,16 @@ PrefabInstance:
       value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 37
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14365,6 +15148,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -14430,21 +15217,110 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
   m_PrefabInstance: {fileID: 301315419}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1617053507 stripped
+--- !u!1001 &1616463029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 418884396}
+    m_Modifications:
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: _posX
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: _posZ
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: adjustScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: timeElapsed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: timeToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: scaleMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: trackMapController
+      value: 
+      objectReference: {fileID: 418884395}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669241898959458439, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+      propertyPath: m_Name
+      value: AutoSpawnerTrack
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+--- !u!114 &1616463030 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-  m_PrefabInstance: {fileID: 1425378383}
+  m_CorrespondingSourceObject: {fileID: 1997103467598843785, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+  m_PrefabInstance: {fileID: 1616463029}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7002f956a1b0fec459db3e881bb4c730, type: 3}
+  m_Script: {fileID: 11500000, guid: cc5ca8ddb7fd97c4a8822dbd87de2322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1617053508 stripped
+--- !u!4 &1616463031 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-  m_PrefabInstance: {fileID: 1425378383}
+  m_CorrespondingSourceObject: {fileID: 8287895723284433469, guid: b7ab45a2202889f4f9db64e132e67d5c, type: 3}
+  m_PrefabInstance: {fileID: 1616463029}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1620923581
 PrefabInstance:
@@ -14466,12 +15342,16 @@ PrefabInstance:
       value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 32
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14557,6 +15437,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -14819,12 +15703,16 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14928,6 +15816,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -15177,12 +16069,16 @@ PrefabInstance:
       value: -23
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 36
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15615,6 +16511,10 @@ PrefabInstance:
       value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -15686,6 +16586,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -15846,6 +16750,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 581383161}
@@ -15940,12 +16848,16 @@ PrefabInstance:
       value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16063,7 +16975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_RootOrder
-      value: 35
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16114,6 +17026,10 @@ PrefabInstance:
       value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
@@ -16159,12 +17075,16 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16363,6 +17283,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -16596,7 +17520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 2942513710948558401, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16643,6 +17567,10 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291415818971976346, guid: c6ad872811a76d54ea5be7d59a3af50d, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
@@ -16663,7 +17591,7 @@ GameObject:
   - component: {fileID: 1903451792}
   - component: {fileID: 1903451791}
   - component: {fileID: 1903451790}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(-568.0, -216.0, 1439.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16784,12 +17712,16 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16877,12 +17809,16 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17204,6 +18140,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -17599,83 +18539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1998246260
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2015155228}
-    m_Modifications:
-    - target: {fileID: 1529541419844131755, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: _posX
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: _posZ
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248103316236074366, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: trackMapController
-      value: 
-      objectReference: {fileID: 2015155227}
-    - target: {fileID: 8639852455193266690, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Name
-      value: AutoEraserTrack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832705090977067451, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c4a909864310d1b479275e8d9462d3cd, type: 2}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8983903509651165368, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: af3c32dee42901f4cbb15b3b6c4810f7, type: 3}
 --- !u!1001 &2011680158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17702,6 +18565,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -17789,7 +18656,7 @@ MonoBehaviour:
   trackMapTracks:
   - {fileID: 52900980}
   - {fileID: 1070080545}
-  - {fileID: 855817983}
+  - {fileID: 714874323}
   - {fileID: 765608180}
   - {fileID: 994581820}
   - {fileID: 1392119876}
@@ -17831,8 +18698,8 @@ MonoBehaviour:
   - {fileID: 1122597237}
   - {fileID: 1415951781}
   - {fileID: 2088491851}
-  - {fileID: 469416825}
-  - {fileID: 170824368}
+  - {fileID: 1055426941}
+  - {fileID: 223567513}
 --- !u!4 &2015155228
 Transform:
   m_ObjectHideFlags: 0
@@ -17847,7 +18714,6 @@ Transform:
   - {fileID: 750778920}
   - {fileID: 52900981}
   - {fileID: 1070080546}
-  - {fileID: 855817984}
   - {fileID: 765608181}
   - {fileID: 994581821}
   - {fileID: 1392119877}
@@ -17887,10 +18753,11 @@ Transform:
   - {fileID: 1122597238}
   - {fileID: 1415951782}
   - {fileID: 2088491852}
-  - {fileID: 469416826}
-  - {fileID: 170824369}
+  - {fileID: 714874324}
   - {fileID: 2049636536}
   - {fileID: 1457286119}
+  - {fileID: 223567514}
+  - {fileID: 1055426942}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: -4.835, z: 0}
@@ -17914,12 +18781,16 @@ PrefabInstance:
       value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18151,12 +19022,16 @@ PrefabInstance:
       value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18485,6 +19360,10 @@ PrefabInstance:
       value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -18570,12 +19449,16 @@ PrefabInstance:
       value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18649,6 +19532,10 @@ PrefabInstance:
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: _posZ
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 250396238135985367, guid: b4e6928de30b07d41a3abb869a630564, type: 3}
       propertyPath: trackMapController
@@ -18754,6 +19641,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -18910,12 +19801,16 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 2015155227}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 9193861660528322761, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19003,6 +19898,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
       value: 
       objectReference: {fileID: 418884395}
@@ -19078,6 +19977,10 @@ PrefabInstance:
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: _posZ
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
+      propertyPath: rollingSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8655233511338463014, guid: 5597564e707680a49956cc7ad4c0304b, type: 3}
       propertyPath: trackMapController
@@ -19249,6 +20152,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 176258968}
     m_Modifications:
+    - target: {fileID: 104436849290335501, guid: 06857e4c410516b4ba958d897f753efc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.1000977
+      objectReference: {fileID: 0}
     - target: {fileID: 598810675832772653, guid: 06857e4c410516b4ba958d897f753efc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -19376,6 +20283,10 @@ PrefabInstance:
     - target: {fileID: 598810676772608549, guid: 06857e4c410516b4ba958d897f753efc, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 598810676812212653, guid: 06857e4c410516b4ba958d897f753efc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20.186035
       objectReference: {fileID: 0}
     - target: {fileID: 598810676913456088, guid: 06857e4c410516b4ba958d897f753efc, type: 3}
       propertyPath: m_AnchorMax.x

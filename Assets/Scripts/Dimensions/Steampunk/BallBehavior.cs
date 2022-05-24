@@ -47,6 +47,9 @@ public class BallBehavior : ObjectGroundChecker
     [SerializeField] protected float maxAudioVelocity;
     public AudioSourceWrapper wrapper;
 
+    protected bool adjustScale = false;
+    protected float scaleMultiplier = 1f;
+
     public void Awake()
     {
         realRadius = ballCollider.bounds.size.y / 2f;
@@ -76,6 +79,14 @@ public class BallBehavior : ObjectGroundChecker
         }
 
         #endregion
+    }
+
+    protected void FixedUpdate()
+    {
+        if (adjustScale)
+        {
+            ballRigidbody.AddForce(scaleMultiplier * Physics.gravity, ForceMode.Acceleration);
+        }
     }
 
     protected new void OnCollisionStay(Collision collision)
@@ -149,6 +160,27 @@ public class BallBehavior : ObjectGroundChecker
     protected void UpdateTime()
     {
         timeElapsed += Time.deltaTime;
+    }
+
+    public void AdjustScale(float multiplier)
+    {
+        if (adjustScale)
+        {
+            return;
+        }
+        if(multiplier == 1)
+        {
+            adjustScale = false;
+            scaleMultiplier = 1;
+            ballRigidbody.useGravity = true;
+        }
+        else
+        {
+            adjustScale = true;
+            scaleMultiplier = multiplier;
+            ballRigidbody.useGravity = false;
+            MyTransform.localScale *= multiplier;
+        }
     }
 
     protected IEnumerator Destroy()

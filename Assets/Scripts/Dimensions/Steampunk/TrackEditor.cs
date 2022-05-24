@@ -85,6 +85,7 @@ public class TrackEditor : EditorWindow
             }
         }
     }
+    protected float appliedSpeed = 2f;
     public void OnGUI()
     {
         if (debugPositionGrid && selectedTrackMapController)
@@ -1077,6 +1078,16 @@ public class TrackEditor : EditorWindow
                 }
                 if (!newSelection)
                     GUI.enabled = true;
+
+                appliedSpeed = EditorGUILayout.FloatField("Speed: ", appliedSpeed);
+                if (GUILayout.Button("Apply Speed", buttonStyle))
+                {
+                    foreach(var pair in selectedTrackMapController.TrackMap)
+                    {
+                        pair.Value.rollingSpeed = appliedSpeed;
+                        EditorUtility.SetDirty(pair.Value);
+                    }
+                }
             }
             else if (!selectedTrackMapController)
             {
