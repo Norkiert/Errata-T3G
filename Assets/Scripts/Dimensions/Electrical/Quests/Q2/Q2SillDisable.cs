@@ -15,6 +15,11 @@ public class Q2SillDisable : MonoBehaviour
 
     void Start()
     {
+        if (con1 == null || con2 == null)
+        {
+            con1 = GameObject.Find("Q2FinalConnector").GetComponent<Connector>();
+            con2 = GameObject.Find("Q2FinalConnectorCapsule").GetComponent<Connector>();
+        }
         checkConnections = CheckConnections();
         StartCoroutine(checkConnections);
     }
@@ -23,8 +28,18 @@ public class Q2SillDisable : MonoBehaviour
 
     private IEnumerator CheckConnections()
     {
+        if(con1==null||con2==null)
+        {
+            con1 = GameObject.Find("Q2FinalConnector").GetComponent<Connector>();
+            con2 = GameObject.Find("Q2FinalConnectorCapsule").GetComponent<Connector>();
+        }
         while (!(con1.IsConnectedRight && con2.IsConnectedRight))
         {
+            if (con1 == null || con2 == null)
+            {
+                con1 = GameObject.Find("Q2FinalConnector").GetComponent<Connector>();
+                con2 = GameObject.Find("Q2FinalConnectorCapsule").GetComponent<Connector>();
+            }
             yield return new WaitForSeconds(checkDelay);
         }
         TurnOffSill();
@@ -32,8 +47,18 @@ public class Q2SillDisable : MonoBehaviour
     private IEnumerator checkDisconection;
     private IEnumerator CheckDisconection()
     {
+        if (con1 == null || con2 == null)
+        {
+            con1 = GameObject.Find("Q2FinalConnector").GetComponent<Connector>();
+            con2 = GameObject.Find("Q2FinalConnectorCapsule").GetComponent<Connector>();
+        }
         while (con1.IsConnectedRight && con2.IsConnectedRight)
         {
+            if (con1 == null || con2 == null)
+            {
+                con1 = GameObject.Find("Q2FinalConnector").GetComponent<Connector>();
+                con2 = GameObject.Find("Q2FinalConnectorCapsule").GetComponent<Connector>();
+            }
             yield return new WaitForSeconds(checkDelay);
         }
         TurnOnSill();

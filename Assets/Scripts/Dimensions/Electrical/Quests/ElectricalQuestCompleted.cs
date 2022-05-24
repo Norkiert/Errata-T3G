@@ -74,12 +74,30 @@ public class ElectricalQuestCompleted : MonoBehaviour
     private void CheckQuests()
     {
         //Check Q1
-        Q1State = !sillQ1Collider.enabled;
-        q1Value.SetValue(Q1State);
-
+        if (sillQ1Collider != null)
+        {
+            Q1State = !sillQ1Collider.enabled;
+            q1Value.SetValue(Q1State);
+        }
+        else
+        {
+            sillQ1Collider = GameObject.Find("SillLeftCollider").GetComponent<Collider>();
+            Q1State = !sillQ1Collider.enabled;
+            q1Value.SetValue(Q1State);
+        }
         //Check Q2
-        Q2State = conQ2_1.IsConnectedRight && conQ2_2.IsConnectedRight;
-        q2Value.SetValue(Q2State);
+        if (conQ2_1 != null&&conQ2_2!=null)
+        {
+            Q2State = conQ2_1.IsConnectedRight && conQ2_2.IsConnectedRight;
+            q2Value.SetValue(Q2State);
+        }
+        else
+        {
+            conQ2_1 = GameObject.Find("Q2FinalConnector").GetComponent<Connector>();
+            conQ2_2 = GameObject.Find("Q2FinalConnectorCapsule").GetComponent<Connector>();
+            Q2State = conQ2_1.IsConnectedRight && conQ2_2.IsConnectedRight;
+            q2Value.SetValue(Q2State);
+        }
 
         //CheckQ3
         Q3State = particleQ3.isPlaying;

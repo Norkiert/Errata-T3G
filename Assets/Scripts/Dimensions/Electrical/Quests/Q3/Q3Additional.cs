@@ -15,6 +15,10 @@ public class Q3Additional : MonoBehaviour
     [SerializeField] private Connector con4;
     void Start()
     {
+        oldPart1 = GameObject.Find("Q3Smoke").GetComponent<ParticleSystem>();
+        oldPart2 = GameObject.Find("Q3SmokeTop").GetComponent<ParticleSystem>();
+        newPart1 = GameObject.Find("Q3SmokeFinal").GetComponent<ParticleSystem>();
+        newPart2 = GameObject.Find("Q3SmokeTopFinal").GetComponent<ParticleSystem>();
         checkConnect = CheckConnect();
         StartCoroutine(checkConnect);
         if(!(con1.IsConnectedRight && con2.IsConnectedRight && con3.IsConnectedRight && con4.IsConnectedRight))
