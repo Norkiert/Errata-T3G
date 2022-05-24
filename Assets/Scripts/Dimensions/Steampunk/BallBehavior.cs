@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
+using Audio;
 
 [DisallowMultipleComponent]
 public class BallBehavior : ObjectGroundChecker
@@ -39,9 +40,18 @@ public class BallBehavior : ObjectGroundChecker
     [SerializeField] [ReadOnly] public int pathID = -1;
     [SerializeField] [HideInInspector] private int pathIDCopy;
 
-    protected void Awake()
+    [SerializeField, ReadOnly] protected AudioClipSO activeRollingClip = null;
+    [SerializeField] protected AudioClipSO trackRollingClip;
+    [SerializeField] protected AudioClipSO groundRollingClip;
+    [SerializeField] protected float minAudioVelocity;
+    [SerializeField] protected float maxAudioVelocity;
+    public AudioSourceWrapper wrapper;
+
+    public void Awake()
     {
         realRadius = ballCollider.bounds.size.y / 2f;
+
+        StartCoroutine(AudioLoop());
     }
 
     protected void Update()
@@ -97,7 +107,11 @@ public class BallBehavior : ObjectGroundChecker
                     pathID = pathIDCopy;
                 }
             }
-            if(currentTrack) currentTrack.OnBallStay(this);
+            if (currentTrack)
+            {
+                currentTrack.OnBallStay(this);
+                onTrack = true;
+            }
             velocity = ballRigidbody.velocity.magnitude;
         }
         else
@@ -168,6 +182,75 @@ public class BallBehavior : ObjectGroundChecker
         MyTransform.localEulerAngles = Vector3.zero;
         StartCoroutine(Destroy());
     }
+
+    public IEnumerator AudioLoop()
+    {
+        wrapper = new AudioSourceWrapper(null, null);
+
+        bool wasGrounded = isGrounded;
+        bool wasOnTrack = onTrack;
+
+        for(; ; )
+        {
+            if(!wasGrounded && isGrounded) // ball hit ground
+            {
+
+            }
+            if (onTrack)
+            {
+                if (isGrounded) // ball touches track, but is on ground
+                {
+                    if (!wrapper.Valid && activeRollingClip == trackRollingClip) // audio stopped or trackRollingClip is playing
+                    {
+                        wrapper.Deactivate();
+                        activeRollingClip = groundRollingClip;
+                        wrapper = AudioManager.PlaySFX(activeRollingClip);
+                    }
+                }
+                else if (!wrapper.Valid && activeRollingClip == trackRollingClip) // audio stopped or groundRollingClip is playing
+                {
+                    wrapper.Deactivate();
+                    activeRollingClip = trackRollingClip;
+                    wrapper = AudioManager.PlaySFX(activeRollingClip);
+                }
+
+                if (!wasOnTrack) // ball hit track
+                {
+
+                }
+            }
+            else if (isGrounded)
+            {
+                if (!wrapper.Valid && activeRollingClip == trackRollingClip) // audio stopped or trackRollingClip is playing
+                {
+                    wrapper.Deactivate();
+                    activeRollingClip = groundRollingClip;
+                    wrapper = AudioManager.PlaySFX(activeRollingClip);
+                }
+            }
+
+            wrapper.Position = MyTransform.position;
+
+            if (ballRigidbody.velocity.magnitude <= minAudioVelocity || !currentTrack && !isGrounded)
+            {
+                wrapper.Volume = 0;
+            }
+            else if (ballRigidbody.velocity.magnitude >= maxAudioVelocity)
+            {
+                wrapper.Volume = 1;
+            }
+            else
+            {
+                wrapper.Volume = (ballRigidbody.velocity.magnitude - minAudioVelocity) / (maxAudioVelocity - minAudioVelocity);
+            }
+
+            wrapper.Volume *= activeRollingClip.Volume;
+
+            wasGrounded = isGrounded;
+            wasOnTrack = onTrack;
+            yield return null;
+        }
+    }
 }
 
 public class BallPool
@@ -187,12 +270,15 @@ public class BallPool
         else
         {
             ball = balls.Dequeue();
+            ball.Awake();
         }
 
         ZeroBall(ball);
 
         ball.MyTransform.position = position;
         ball.MyTransform.parent = parent;
+
+        ball.StartCoroutine(ball.AudioLoop());
 
         return ball;
     }
@@ -223,6 +309,13 @@ public class BallPool
     {
         returned.MyGameObject.SetActive(false);
         returned.MyTransform.parent = null;
+
+        returned.StopAllCoroutines();
+
+        returned.wrapper.Loop = false;
+        returned.wrapper.Deactivate();
+
+        returned.wrapper = null;
 
         balls.Enqueue(returned);
     }
