@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Audio;
 
 public class UnderTrackBox : Clickable
 {
@@ -12,6 +13,8 @@ public class UnderTrackBox : Clickable
     protected Transform player;
 
     [SerializeField] LayerMask layerMask;
+
+    [SerializeField] protected AudioClipSO pushAudio;
 
     protected override void Awake()
     {
@@ -107,6 +110,7 @@ public class UnderTrackBox : Clickable
         {
             var tmc = connectedTrack.trackMapController;
             tmc.Move(connectedTrack, newPosition);
+            PlayPushSound();
             UpdateBoxPosition();
         }
         else
@@ -120,8 +124,11 @@ public class UnderTrackBox : Clickable
             {
                 var tmc = connectedTrack.trackMapController;
                 tmc.Move(connectedTrack, newPosition);
+                PlayPushSound();
                 UpdateBoxPosition();
             }
         }
     }
+
+    protected void PlayPushSound() => AudioManager.PlaySFX(pushAudio, MyTransform.position);
 }
