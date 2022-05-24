@@ -3,33 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class ResetSwitch : Interactable
+public class ResetSwitch : Clickable
 {
     [SerializeField] private CableReset reseter;
 
-    public override void Select()
+    protected override void Awake()
     {
-        base.Select();
-        StartCoroutine(checkPress());
-    }
-    public override void Deselect()
-    {
-        base.Deselect();
-        transform.DOLocalRotate(new Vector3(0, 0, 0), 0.5f);
-        StopAllCoroutines();
+        base.Awake();
+        OnClick += Rotate;
     }
 
-    IEnumerator checkPress()
-    {
-        while (IsSelected)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                StartCoroutine(RotateSwitch());
-            }
-            yield return null;
-        }
-    }
+    private void Rotate() => StartCoroutine(RotateSwitch());
 
     private IEnumerator RotateSwitch()
     {
