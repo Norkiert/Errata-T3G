@@ -30,6 +30,7 @@ public class ClickSpawnerTrack : BasicTrack
     {
         base.Awake();
         OnClick -= RotateRight;
+        OnClick -= PlayRotationSound;
         OnClick += InitBallSpawn;
     }
     protected void Update()

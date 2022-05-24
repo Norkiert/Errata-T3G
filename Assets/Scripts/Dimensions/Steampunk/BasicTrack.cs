@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using NaughtyAttributes;
+using Audio;
 
 public static class NeighborLevelExtensions
 {
@@ -47,6 +48,7 @@ public abstract class BasicTrack : Clickable
     [SerializeField] public List<Transform> pathBeginPoints;
 
     [SerializeField] public bool rotateable = true;
+    [SerializeField, ShowIf("rotateable")] protected AudioClipSO rotationAudio; 
 
     [SerializeField] public List<BallBehavior> balls;
     public BallBehavior LastBall
@@ -91,11 +93,13 @@ public abstract class BasicTrack : Clickable
                 rotateable = value;
                 if (value)
                 {
-                    OnClick += RotateRight;  
+                    OnClick += RotateRight;
+                    OnClick += PlayRotationSound;
                 }
                 else
                 {
                     OnClick -= RotateRight;
+                    OnClick -= PlayRotationSound;
                 }
             }
         } 
@@ -117,8 +121,11 @@ public abstract class BasicTrack : Clickable
     public BasicTrack[,] NeighborTracks => trackMapController.GetNeighbors(position);
     protected new void Awake()
     {
-        if(Rotateable)
+        if (Rotateable)
+        {
             OnClick += RotateRight;
+            OnClick += PlayRotationSound;
+        }
         base.Awake();
 
         if (trackMapController && !trackMapController.Contains(this))
@@ -136,6 +143,7 @@ public abstract class BasicTrack : Clickable
     }
     public abstract void RotateRight();
     public abstract void RotateLeft();
+    public void PlayRotationSound() => AudioManager.PlaySFX(rotationAudio, MyTransform.position);
     public void InitBallPath(BallBehavior ball)
     {
         if (ball.pathID == -1)
