@@ -242,7 +242,7 @@ namespace Audio
         }
         public void Deactivate()
         {
-            Stop();
+            if (Valid) Stop();
             Active = false;
         }
     }
