@@ -14,7 +14,7 @@ public class FromLasers : MonoBehaviour
         if (laserOb!=null)
         {
             plane = laserOb.GetComponent<SpriteRenderer>();
-            plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0.7f);
+            plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0.6f);
             if (counter != null)
                 StopCoroutine(counter);
             counter = Counter();
