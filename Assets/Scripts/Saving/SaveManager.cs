@@ -128,7 +128,7 @@ public static class SaveManager
                 save.cableEndTarget.Add("");
             }
 
-            Debug.Log(points.Length);
+            //Debug.Log(points.Length);
             save.cablePartsLocation.Add(new ListWrapper());
             for (int j = 0; j < points.Length; j++)
             {
@@ -158,7 +158,7 @@ public static class SaveManager
         PhysicCable[] cables = GameObject.FindObjectsOfType<PhysicCable>();
         for (int i = 1; i < cables.Length; i++)
         {
-            if (i == 1) continue;
+            if (i == 1 || cables[i].allowSaved == false) continue;
 
             Connector[] startEnd = cables[i].gameObject.GetComponentsInChildren<Connector>();
             SpringJoint[] points = cables[i].gameObject.GetComponentsInChildren<SpringJoint>();
@@ -172,7 +172,7 @@ public static class SaveManager
             start.gameObject.transform.position = save.cableStartPosition[i - 1];
             end.gameObject.transform.position = save.cableEndPosition[i - 1];
 
-            Debug.Log(points.Length + " p: " + save.cablePartsLocation[i-1].list.Count);
+            //Debug.Log(points.Length + " p: " + save.cablePartsLocation[i-1].list.Count);
             for (int j = 0; j < save.cablePartsLocation[i-1].list.Count; j++)
             {
                 points[j].gameObject.transform.position = save.cablePartsLocation[i-1].list[j];

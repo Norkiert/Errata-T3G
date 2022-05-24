@@ -14,6 +14,7 @@ public class PhysicCable : MonoBehaviour
     [SerializeField, Min(1f)] private float springForce = 200;
     [SerializeField, Min(1f)] private float brakeLengthMultiplier = 2f;
     [SerializeField, Min(0.1f)] private float minBrakeTime = 1f;
+    [SerializeField] public bool allowSaved = true;
     private float brakeLength;
     private float timeToBrake = 1f;
 
@@ -284,4 +285,5 @@ public class PhysicCable : MonoBehaviour
     public Connector StartConnector => startConnector;
     public Connector EndConnector => endConnector;
     public IReadOnlyList<Transform> Points => points;
+    public bool AllowSaved => allowSaved;
 }
