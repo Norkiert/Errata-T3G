@@ -2962,7 +2962,7 @@ GameObject:
   - component: {fileID: 192780979}
   - component: {fileID: 192780978}
   - component: {fileID: 192780977}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3164,7 +3164,7 @@ GameObject:
   - component: {fileID: 225116111}
   - component: {fileID: 225116110}
   - component: {fileID: 225116109}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(632.0, -216.0, 239.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3819,7 +3819,7 @@ GameObject:
   - component: {fileID: 282113826}
   - component: {fileID: 282113825}
   - component: {fileID: 282113824}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(632.0, -216.0, 1439.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5546,7 +5546,7 @@ GameObject:
   - component: {fileID: 500404435}
   - component: {fileID: 500404434}
   - component: {fileID: 500404433}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(-1768.0, -216.0, 1439.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8620,7 +8620,7 @@ GameObject:
   - component: {fileID: 814342416}
   - component: {fileID: 814342415}
   - component: {fileID: 814342414}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(-1768.0, -216.0, 239.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18233,7 +18233,7 @@ GameObject:
   - component: {fileID: 1903451792}
   - component: {fileID: 1903451791}
   - component: {fileID: 1903451790}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain_(-568.0, -216.0, 1439.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19154,6 +19154,10 @@ PrefabInstance:
     - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: maxLaserLength
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079193009320726029, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 32777
       objectReference: {fileID: 0}
     - target: {fileID: 3872986329296569922, guid: 503ab4568b4f189488d69d297a7f8346, type: 3}
       propertyPath: m_Materials.Array.data[0]
