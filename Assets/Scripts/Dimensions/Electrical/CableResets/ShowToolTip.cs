@@ -12,13 +12,16 @@ public class ShowToolTip : Interactable
 
     public override void Select()
     {
-        canv.SetActive(true);
         base.Select();
+        canv.SetActive(true);
+        SetToolTip(true);
     }
 
     public override void Deselect()
     {
-        canv.SetActive(false);
         base.Deselect();
+        SetToolTip(false);
     }
+
+    public void SetToolTip(bool value) => canv.SetActive(value);
 }
