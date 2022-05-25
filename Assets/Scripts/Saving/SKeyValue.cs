@@ -9,4 +9,10 @@ public class SKeyValue<T>
         this.key = key;
         this.value = value;
     }
+
+    public SKeyValue()
+    {
+        this.key = null;
+        this.value = default;
+    }
 }

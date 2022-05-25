@@ -10,9 +10,10 @@ public class SaveData
 
     public List<string> cableStartTarget = new List<string>();
     public List<string> cableEndTarget = new List<string>();
-    public List<ListWrapper> cablePartsLocation = new List<ListWrapper>();
+    public List<SKeyValue<ListWrapper>> cablePartsLocation = new List<SKeyValue<ListWrapper>>();
     public List<SVector3> cableStartPosition = new List<SVector3>();
     public List<SVector3> cableEndPosition = new List<SVector3>();
+    public List<string> cableNames = new List<string>();
 
     public List<SVector3> rotatableRotations = new List<SVector3>();
     public List<SVector3> boxPositions = new List<SVector3>();
