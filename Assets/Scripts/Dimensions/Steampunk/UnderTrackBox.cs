@@ -34,7 +34,7 @@ public class UnderTrackBox : Clickable
     {
         if (!connectedTrack)
         {
-            Debug.LogError("Box has no track assigned.");
+            Debug.LogWarning("Box has no track assigned.");
             return;
         }
 
@@ -64,7 +64,7 @@ public class UnderTrackBox : Clickable
 
         // if (tmc.Contains(newPosition))
         // {
-        //     Debug.LogError($"Cannot move track to ({newPosition.x}; {newPosition.z}) as this place is already occupied.");
+        //     Debug.LogWarning($"Cannot move track to ({newPosition.x}; {newPosition.z}) as this place is already occupied.");
         //     return;
         // }
 
@@ -76,7 +76,7 @@ public class UnderTrackBox : Clickable
     {
         if (!player)
         {
-            Debug.LogError("Box has no player assigned.");
+            Debug.LogWarning("Box has no player assigned.");
         }
 
         Vector3 playerFacing;

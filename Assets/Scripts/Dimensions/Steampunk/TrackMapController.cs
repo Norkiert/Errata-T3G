@@ -30,17 +30,18 @@ public class TrackMapController : OptimizedMonoBehaviour
     {
         if (Contains(position))
         {
-            Debug.LogError($"Tried to add track at occupied position: {position}.");
+            Debug.LogWarning($"Tried to add track at occupied position: {position}.");
             return false;
         }
         else if (Contains(track))
         {
-            Debug.LogError("Tried to add track that is already in this TrackGroup.");
+            Debug.LogWarning("Tried to add track that is already in this TrackGroup.");
             return false;
         }
         else if (track.trackMapController)
         {
-            Debug.LogError("Tried to add track that is already in some TrackGroup.");
+            Debug.LogWarning("Tried to add track that is already in some TrackGroup.");
+            Debug.LogWarning("Tried to add track that is already in some TrackGroup.");
             return false;
         }
         else
@@ -69,7 +70,7 @@ public class TrackMapController : OptimizedMonoBehaviour
         }
         else
         {
-            Debug.LogError("Track is not in this TrackGroup.");
+            Debug.LogWarning("Track is not in this TrackGroup.");
             return false;
         }
     }
@@ -77,7 +78,7 @@ public class TrackMapController : OptimizedMonoBehaviour
     {
         if (Occupied(newPosition))
         {
-            Debug.LogError("NewPosition is already occupied.");
+            Debug.LogWarning("NewPosition is already occupied.");
             return false;
         }
 

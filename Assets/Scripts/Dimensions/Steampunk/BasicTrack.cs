@@ -149,6 +149,8 @@ public abstract class BasicTrack : Clickable
                 tmc.Add(this, position);
             }
 
+            trackMapController = tmc;
+
             MyTransform.position = positionCopy;
             MyTransform.rotation = rotationCopy;
         }
