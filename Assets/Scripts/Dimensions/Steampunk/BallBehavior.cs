@@ -54,7 +54,7 @@ public class BallBehavior : ObjectGroundChecker
     {
         realRadius = ballCollider.bounds.size.y / 2f;
 
-        StartCoroutine(AudioLoop());
+        //StartCoroutine(AudioLoop());
     }
 
     protected void Update()
@@ -307,6 +307,7 @@ public class BallPool
         else
         {
             ball = balls.Dequeue();
+            ZeroBall(ball);
             ball.Awake();
         }
 
@@ -315,7 +316,7 @@ public class BallPool
         ball.MyTransform.position = position;
         ball.MyTransform.parent = parent;
 
-        ball.StartCoroutine(ball.AudioLoop());
+        //ball.StartCoroutine(ball.AudioLoop());
 
         return ball;
     }
@@ -349,10 +350,10 @@ public class BallPool
 
         returned.StopAllCoroutines();
 
-        returned.wrapper.Loop = false;
-        returned.wrapper.Deactivate();
+        //returned.wrapper.Loop = false;
+        //returned.wrapper.Deactivate();
 
-        returned.wrapper = null;
+        //returned.wrapper = null;
 
         balls.Enqueue(returned);
     }

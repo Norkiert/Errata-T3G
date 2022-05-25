@@ -128,7 +128,7 @@ public abstract class BasicTrack : Clickable
         }
         base.Awake();
 
-        if (trackMapController && !trackMapController.Contains(this))
+        if (trackMapController)
         {
             var positionCopy = MyTransform.position;
             var rotationCopy = MyTransform.rotation;
@@ -136,10 +136,18 @@ public abstract class BasicTrack : Clickable
             var tmc = trackMapController;
             trackMapController = null;
 
-            position.x = (int)MyTransform.position.x;
-            position.z = (int)MyTransform.position.z;
+            position.x = (int)MyTransform.localPosition.x;
+            position.y = 0;
+            position.z = (int)MyTransform.localPosition.z;
 
-            tmc.Add(this, position);
+            if (!tmc.Contains(position))
+            {
+                tmc.Add(this, position);
+            }
+            if (!tmc.Contains(this))
+            {
+                tmc.Add(this, position);
+            }
 
             MyTransform.position = positionCopy;
             MyTransform.rotation = rotationCopy;
