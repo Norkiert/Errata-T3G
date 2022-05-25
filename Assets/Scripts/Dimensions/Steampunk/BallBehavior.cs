@@ -217,6 +217,11 @@ public class BallBehavior : ObjectGroundChecker
 
     public IEnumerator AudioLoop()
     {
+        for(; ; )
+        {
+            yield return null;
+        }
+
         wrapper = new AudioSourceWrapper(null, null);
 
         bool wasGrounded = isGrounded;
