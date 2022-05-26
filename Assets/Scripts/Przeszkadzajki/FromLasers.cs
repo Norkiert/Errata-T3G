@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class FromLasers : MonoBehaviour
 {
-     private SpriteRenderer plane;
-     private GameObject laserOb;
-    [SerializeField] private float checkDelay=2f;
+     private SpriteRenderer planeSR;
+     [SerializeField] private float checkDelay = 2f;
 
-    void Start()
+    private void Start()
     {
-        laserOb = GameObject.Find("LaserPlane");
-        if (laserOb!=null)
+        GameObject plane = GameObject.Find("PlayerLaserPlane");
+        if (plane == null)
         {
-            plane = laserOb.GetComponent<SpriteRenderer>();
-            plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0.6f);
-            if (counter != null)
-                StopCoroutine(counter);
-            counter = Counter();
-            StartCoroutine(counter);
+            Debug.LogWarning("Cant found LaserPlane");
+            return;
         }
+
+        planeSR = plane.GetComponent<SpriteRenderer>();
+        planeSR.enabled = true;
+
+        if (counter != null)
+            StopCoroutine(counter);
+        counter = Counter();
+        StartCoroutine(counter);
     }
 
     private IEnumerator counter;
@@ -28,12 +31,13 @@ public class FromLasers : MonoBehaviour
     {
         while (!SaveManager.IsLevelFinished(Dimension.Laser))
             yield return new WaitForSeconds(checkDelay);
-        plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0f);
+
+        planeSR.enabled  = false;
     }
 
     private void OnDisable()
     {
-        if (plane != null)
-            plane.color = new Color(plane.color.r, plane.color.g, plane.color.b, 0f);
+        if (planeSR != null)
+            planeSR.enabled = false;
     }
 }
