@@ -179,7 +179,7 @@ public static class SaveManager
             {
                 if (save.cablePartsLocation[j].key == save.cableNames[i])
                 {
-                    Debug.Log(save.cablePartsLocation[j].key + " : " + save.cablePartsLocation[j].value.list.Count);
+                    //Debug.Log(save.cablePartsLocation[j].key + " : " + save.cablePartsLocation[j].value.list.Count);
                     for (int k = 0; k < save.cablePartsLocation[j].value.list.Count; k++)
                     {
                         points[k].transform.position = save.cablePartsLocation[j].value.list[k];
