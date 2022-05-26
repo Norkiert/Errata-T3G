@@ -1038,7 +1038,21 @@ public class TrackEditor : EditorWindow
         }
         else if (selectedTracks.Count != 0) // multi-track mode
         {
-                
+            GUIStyle buttonStyle = new GUIStyle(GUI.skin.button)
+            {
+                fixedHeight = 40,
+                fontSize = 20
+            };
+
+            appliedSpeed = EditorGUILayout.FloatField("Speed: ", appliedSpeed);
+            if (GUILayout.Button("Apply Speed", buttonStyle))
+            {
+                foreach (var track in selectedTracks)
+                {
+                    track.rollingSpeed = appliedSpeed;
+                    EditorUtility.SetDirty(track);
+                }
+            }
         }
         else // no tracks selected
         {
