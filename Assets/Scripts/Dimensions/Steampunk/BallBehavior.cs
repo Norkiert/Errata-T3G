@@ -199,6 +199,7 @@ public class BallBehavior : ObjectGroundChecker
             ballRenderer.material.SetFloat("_CutoffHeight", cutoffHeight -= Time.deltaTime / destructionSpeed * Mathf.Abs(notVisible - visible));
             if(cutoffHeight <= notVisible)
             {
+                ballRenderer.material = defaultMaterial;
                 BallPool.ReturnBall(this);
                 yield break;
             }
@@ -322,7 +323,6 @@ public class BallPool
     }
     public static void ZeroBall(BallBehavior ball)
     {
-        ball.ballRenderer.material = ball.defaultMaterial;
         ball.MyGameObject.SetActive(true);
         ball.MyTransform.eulerAngles = Vector3.zero;
         ball.isGrounded = false;
