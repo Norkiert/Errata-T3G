@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class FromLasers : MonoBehaviour
 {
-     private SpriteRenderer planeSR;
-     [SerializeField] private float checkDelay = 2f;
+    private SpriteRenderer planeSR;
+    private HubPlayerHandler playerHandler;
+
+    [SerializeField] private SpriteRenderer portalBlackScreen;
+
 
     private void Start()
     {
@@ -17,26 +20,47 @@ public class FromLasers : MonoBehaviour
         }
 
         planeSR = plane.GetComponent<SpriteRenderer>();
-        planeSR.enabled = true;
+        playerHandler = FindObjectOfType<HubPlayerHandler>();
 
-        if (counter != null)
-            StopCoroutine(counter);
-        counter = Counter();
-        StartCoroutine(counter);
-    }
 
-    private IEnumerator counter;
+        if (SaveManager.IsLevelFinished(Dimension.Laser))
+        {
+            DsiableBlack();
+            return;
+        }
 
-    private IEnumerator Counter()
-    {
-        while (!SaveManager.IsLevelFinished(Dimension.Laser))
-            yield return new WaitForSeconds(checkDelay);
 
-        planeSR.enabled  = false;
+        if (playerHandler)
+        {
+            playerHandler.OnChange += SwitchPlanes;
+            SwitchPlanes();
+        }
     }
 
     private void OnDisable()
     {
+        DsiableBlack();
+    }
+
+    private void SwitchPlanes()
+    {
+        if (playerHandler.IsPlayerInHub)
+        {
+            planeSR.enabled = false;
+            portalBlackScreen.enabled = true;
+        }
+        else
+        {
+            planeSR.enabled = true;
+            portalBlackScreen.enabled = false;
+        }
+    }
+
+    private void DsiableBlack()
+    {
+        if (portalBlackScreen != null)
+            portalBlackScreen.enabled = false;
+
         if (planeSR != null)
             planeSR.enabled = false;
     }
