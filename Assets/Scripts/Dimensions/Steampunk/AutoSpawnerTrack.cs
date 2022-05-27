@@ -39,6 +39,12 @@ public class AutoSpawnerTrack : BasicTrack
     }
     public void SpawnBall()
     {
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning("Spawn point not set");
+            return;
+        }
+
         var ball = BallPool.GetBall(spawnPoint.position);
         if (adjustScale)
         {

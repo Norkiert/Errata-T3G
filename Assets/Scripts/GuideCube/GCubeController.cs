@@ -368,7 +368,7 @@ namespace GuideCube
                 rotating = Rotate();
                 StartCoroutine(rotating);
             }
-            else
+            else if (rotating != null)
             {
                 StopCoroutine(rotating);
                 rotating = null;
