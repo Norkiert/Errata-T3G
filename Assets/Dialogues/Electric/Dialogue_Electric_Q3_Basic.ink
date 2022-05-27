@@ -10,7 +10,7 @@
 }
 + [Gdzie jest problem?]
     -> E_Q3_B01
-+ [Skąd mam wsiąść drugi przewód?]
++ [Skąd mam wziąć drugi przewód?]
     -> E_Q3_B02
 + [{odp}]
     -> END
@@ -21,5 +21,5 @@ Problem znajduje się przy dyfuzorze cząstek, na pierwszym piętrze budynku.
 	-> END
 	
 === E_Q3_B02 ===
-Strumień cząstek wypchnoł przewód na pułkę kontrolną u szczytu komina.<n>Wejdź po stopniach by go dosięgnąć.
+Strumień cząstek wypchnął przewód na platformę kontrolną u szczytu dekonstruktora.<n>Wejdź po stopniach, by go dosięgnąć.
     -> END
