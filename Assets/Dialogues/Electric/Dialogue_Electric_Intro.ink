@@ -1,5 +1,5 @@
 -> E_I00
 
 === E_I00 ===
-Intro bul bul
+Dotarłeś do wymiaru elektronów.<n>Jest on odpowiedzialny za energię i logikę mocy.
 	-> END

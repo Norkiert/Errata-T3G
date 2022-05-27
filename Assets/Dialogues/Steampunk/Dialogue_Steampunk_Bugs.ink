@@ -1,5 +1,5 @@
 -> S_U00
 
 === S_U00 ===
-Na ten wymiar silnie oddziałuje światło.<n>Światło nie funkcjonuje poprawnie dlatego jego natężenie jest miejscami wybitnie niskie.<n>Po naprawie wymiaru fotonów zaciemnienie zniknie.
+Mechanizmy w wymiarze działają na zasadach definiowanych również przez wymiar elektronów.<n>Powoduje to wyładowania elektryczne podczas ruchy niektórych elementów.<m>Naprawienie wymiaru elektronów rozwiąże ten problem.
 	-> END
