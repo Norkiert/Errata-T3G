@@ -239,7 +239,7 @@ public static class SaveManager
         save.questsState.Add(q4);
 
         if (!save.questsState.Contains(false))
-            save.isElectricalFinished = true;
+            save.isSteampunkFinished = true;
 
         return save;
     }
