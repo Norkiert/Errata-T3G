@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3125004174490089263}
   - component: {fileID: 3125004174490089260}
   - component: {fileID: 3125004174490089261}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: DialogueZone
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 4900000, guid: 02eaeffee8ec18640b77d7ee8248249f, type: 3}
   playOnEnter: 0
+  dialogueOnEnterText: {fileID: 0}
+  dialogueCloseDistOnEnter: 100
+  playOnlyOneTimeOnEnter: 0
+  uniqueSaveKeyOnEnter: undefined
   idleInPoint: 0
   idlePoint: {fileID: 0}
 --- !u!65 &3125004174490089261

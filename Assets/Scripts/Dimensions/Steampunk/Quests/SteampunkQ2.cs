@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dialogues;
 
 public class SteampunkQ2 : ImpulseTrackHandler
 {
@@ -15,6 +16,10 @@ public class SteampunkQ2 : ImpulseTrackHandler
 
     [SerializeField] protected Transform blocker;
     [SerializeField] protected float blockerSpeed;
+
+    [Header("Dialogues")]
+    [SerializeField] private GameObject dialogueZone;
+    [SerializeField] private DialoguePlayByMethod dialogueOnEnd;
 
     protected void Awake()
     {
@@ -31,6 +36,9 @@ public class SteampunkQ2 : ImpulseTrackHandler
         bluePortalT.position = bluePortalCompletePosition.position;
 
         StartCoroutine(OpenBlocker());
+
+        dialogueZone.SetActive(false);
+        dialogueOnEnd.PlayDialoge();
     }
 
     protected IEnumerator OpenBlocker()

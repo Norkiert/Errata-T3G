@@ -8,6 +8,9 @@ public class SteampunkQ1 : MonoBehaviour
 
     [SerializeField] protected GearedDoor door;
 
+    [Header("Dialogues")]
+    [SerializeField] private GameObject dialogueZone;
+
     protected void Awake()
     {
         qGeneral = GetComponent<SteampunkQGeneral>();
@@ -22,5 +25,7 @@ public class SteampunkQ1 : MonoBehaviour
     public void OnCompletion()
     {
         qGeneral.OnCompletion();
+
+        dialogueZone.SetActive(false);
     }
 }

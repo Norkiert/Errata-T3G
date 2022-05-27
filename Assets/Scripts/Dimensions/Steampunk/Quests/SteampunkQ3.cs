@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dialogues;
 
 public class SteampunkQ3 : ImpulseTrackHandler
 {
@@ -15,6 +16,10 @@ public class SteampunkQ3 : ImpulseTrackHandler
     protected Transform purplePortalT;
     [SerializeField] protected Transform purplePortalStartingPosition;
     [SerializeField] protected Transform purplePortalCompletePosition;
+
+    [Header("Dialogues")]
+    [SerializeField] private GameObject dialogueZone;
+    [SerializeField] private DialoguePlayByMethod dialogueOnEnd;
 
     protected void Awake()
     {
@@ -57,6 +62,9 @@ public class SteampunkQ3 : ImpulseTrackHandler
         qGeneral.OnCompletion();
 
         purplePortalT.position = purplePortalCompletePosition.position;
+
+        dialogueZone.SetActive(false);
+        dialogueOnEnd.PlayDialoge();
     }
 
     public override bool QualifyImpulse(Impulse impulse)

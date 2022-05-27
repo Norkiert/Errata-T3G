@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dialogues;
 
 public class SteampunkQ4 : ImpulseTrackHandler
 {
     protected SteampunkQGeneral qGeneral;
 
     [SerializeField] protected List<ImpulseTrack> erasers;
+
+    [Header("Dialogues")]
+    [SerializeField] private GameObject dialogueZone;
+    [SerializeField] private DialoguePlayByMethod dialogueOnEnd;
 
     protected void Awake()
     {
@@ -15,6 +20,9 @@ public class SteampunkQ4 : ImpulseTrackHandler
     public void OnCompletion()
     {
         qGeneral.OnCompletion();
+
+        dialogueZone.SetActive(false);
+        dialogueOnEnd.PlayDialoge();
     }
 
     public override bool QualifyImpulse(Impulse impulse)

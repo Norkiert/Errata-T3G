@@ -112,4 +112,7 @@ public class ClickSpawnerTrack : BasicTrack
         position = tmp;
         MyTransform.localPosition = GetLocalPosition();
     }
+
+
+    public void SpawnBall() => InitBallSpawn();
 }
