@@ -12,6 +12,11 @@ public class YellowThing : ImpulseTrackHandler
 
     [SerializeField] public Rigidbody myRigidbody;
 
+    [SerializeField] protected Rigidbody gearRigidbody;
+    [SerializeField] protected Transform gearForcePoint;
+    [SerializeField] protected float gearForceMagnitude;
+    [SerializeField] protected float gearWaitTime;
+
     public override bool QualifyImpulse(Impulse impulse)
     {
         return true;
@@ -19,5 +24,13 @@ public class YellowThing : ImpulseTrackHandler
     public override void HandleImpulse(Impulse impulse)
     {
         myRigidbody.AddForceAtPosition(blockForcePoint.up * -blockForceMagnitude, blockForcePoint.position);
+
+        StartCoroutine(DoGear());
+    }
+    protected IEnumerator DoGear()
+    {
+        yield return new WaitForSeconds(gearWaitTime);
+        gearRigidbody.AddForceAtPosition(gearForcePoint.up * gearForceMagnitude, gearForcePoint.position);
+        yield break;
     }
 }
