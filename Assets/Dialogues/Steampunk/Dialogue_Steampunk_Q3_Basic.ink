@@ -4,8 +4,8 @@
 ~ temp odp = "def"
 { RANDOM(0, 3) :
 - 0 : ~ odp = "Nic, nic"
-- 1 : ~ odp = "Już nie ważne"
-- 2 : ~ odp = "Tak tylko sprawdzam czy jeszcze działasz"
+- 1 : ~ odp = "Już nieważne"
+- 2 : ~ odp = "Tak tylko sprawdzam, czy jeszcze działasz"
 - 3 : ~ odp = "Właśnie sobie przypomniałem"
 }
 + [Co to za mechanizm?]
@@ -18,7 +18,7 @@
     -> END
 
 === S_Q3_B01 ===
-Jest to Slpiter.<n>Spliter rozdziela cząstki z jednej ścieżki na 5 symetrycznych torów.
+Jest to Spliter.<n>Rozdziela on strumień cząstek z jednej ścieżki na 5 symetrycznych torów.
 	-> END
 
 === S_Q3_B02 ===
@@ -26,5 +26,5 @@ Na każdym z pięciu wyjść powinna znaleźć się jedna kula, ustaw tory w odp
 	-> END
 
 === S_Q3_B03 ===
-Niektóre elemety torów zostały wygięte przez dziwne anomalie, uderz w nie by zmienić ich rotację i przywrucić im odpowiedni stan.
+Niektóre elemety torów zostały wygięte przez dziwne anomalie, uderz w nie, by zmienić ich położenie i przywrócić im odpowiedni stan.
 	-> END

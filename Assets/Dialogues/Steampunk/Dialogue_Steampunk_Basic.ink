@@ -10,13 +10,13 @@
 ~ temp odp = "def"
 { RANDOM(0, 3) :
 - 0 : ~ odp = "Nic, nic"
-- 1 : ~ odp = "Już nie ważne"
-- 2 : ~ odp = "Tak tylko sprawdzam czy jeszcze działasz"
+- 1 : ~ odp = "Już nieważne"
+- 2 : ~ odp = "Tak tylko sprawdzam, czy jeszcze działasz"
 - 3 : ~ odp = "Właśnie sobie przypomniałem"
 }
 + [Co to za miejsce?]
     -> S_B01
-+ [Gdzie następny mechanizm do naprawy?]
++ [Gdzie jest następny mechanizm do naprawy?]
     -> Guide
 + [Do czego są te czerwone rury koło drzewa?]
     -> S_B02
@@ -24,14 +24,14 @@
     -> END
     
 === Guide ===
-Funkcja chwilowo nie dostępna
+Funkcja chwilowo niedostępna
     -> END
 
 === S_B01 ===
-Znajdzujesz się w części mechanizmu odpowiedzialnej za przetwarzanie danych.<n>Analiza świata prowadzona jest przy użyciu fizyki kwantowej. Małe cząstki przechowujące inforamcjie w pastaci spinu, poruszają się  po wyznaczonych trasach z ogromną prędkością.
-Abyś pojoł i był w stanie naprawić mechanizm, twoja percepcja została dostosowana do odbierania wymiaru na twoich ziemskich warunkach.<n>Cząsteczki zostały odpowiednio spowolnione i przesdstawione są jako kule, naomiast trasy widisz jako półrury.
+Znajdujesz się w części mechanizmu odpowiedzialnej za przetwarzanie danych.<n>Analiza świata prowadzona jest przy użyciu fizyki kwantowej. Subatomowe cząstki przechowujące informacje w postaci spinu, poruszają się po wyznaczonych trajektoriach z ogromną prędkością.
+Abyś to pojął i był w stanie naprawić mechanizm, twoja percepcja została dostosowana do odbierania wymiaru na twoich ziemskich zasadach.<n>Cząsteczki zostały odpowiednio spowolnione i przedstawione jako kule, natomiast trasy widzisz jako pochylnie.
     -> END
 
 === S_B02 ===
-Tuby to wyjścia poszczególnych podukładów logicznych, poprzez splontanie kwantowe.<n>Mechnizm jest w pełni zprawny gdy we wszytkich tubach znajdują się kule.
+Tuby to wyjścia poszczególnych podukładów logicznych, wykorzystujące splątanie kwantowe.<n>Mechnizm jest w pełni sprawny, gdy we wszytkich tubach znajdują się kule.
     -> END
