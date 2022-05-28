@@ -104,7 +104,11 @@ namespace GameManagment
         {
             yield return LoadGame(sceneName);
 
+            SetFirstGameStats();
+        }
 
+        public static void SetFirstGameStats()
+        {
             // set player position
             GameObject spawnPoint = GameObject.Find("PlayerSpawnPoint");
             PlayerController player = FindObjectOfType<PlayerController>();

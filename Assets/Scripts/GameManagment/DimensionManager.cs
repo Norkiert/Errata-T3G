@@ -48,7 +48,7 @@ namespace GameManagment
             hubGCHandler = FindObjectOfType<HubGCHandler>();
         }
 
-        public static void LoadDimension(DimensionSO dimension)
+        public static IEnumerator LoadDimension(DimensionSO dimension)
         {
             instance.dimensionToLoad = dimension;
 
@@ -56,7 +56,8 @@ namespace GameManagment
             {
                 instance.dimenionChanger = instance.ChangeDimension();
                 instance.StartCoroutine(instance.dimenionChanger);
-            }  
+            }
+            return instance.dimenionChanger;
         }
 
         private IEnumerator ChangeDimension()

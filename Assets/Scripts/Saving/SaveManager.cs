@@ -303,4 +303,6 @@ public static class SaveManager
             return false;
         }
     }
+
+    public static bool AreAllLevelFinished() => IsLevelFinished(Dimension.Electrical) && IsLevelFinished(Dimension.Laser) && IsLevelFinished(Dimension.Steampunk);
 }
