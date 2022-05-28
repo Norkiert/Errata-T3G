@@ -39,6 +39,7 @@ public class FromLasers : MonoBehaviour
 
     private void OnDisable()
     {
+        playerHandler.OnChange -= SwitchPlanes;
         DsiableBlack();
     }
 
