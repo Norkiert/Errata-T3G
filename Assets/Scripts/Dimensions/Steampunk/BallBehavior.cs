@@ -52,7 +52,7 @@ public class BallBehavior : ObjectGroundChecker
 
     public void Awake()
     {
-        realRadius = ballCollider.bounds.size.y / 2f;
+        if (ballCollider) realRadius = ballCollider.bounds.size.y / 2f;
 
         //StartCoroutine(AudioLoop());
     }
@@ -308,11 +308,11 @@ public class BallPool
         else
         {
             ball = balls.Dequeue();
-            ZeroBall(ball);
-            ball.Awake();
+            if (ball) ZeroBall(ball);
+            if (ball) ball.Awake();
         }
 
-        ZeroBall(ball);
+        if (ball) ZeroBall(ball);
 
         ball.MyTransform.position = position;
         ball.MyTransform.parent = parent;
@@ -323,25 +323,28 @@ public class BallPool
     }
     public static void ZeroBall(BallBehavior ball)
     {
-        ball.MyGameObject.SetActive(true);
-        ball.MyTransform.eulerAngles = Vector3.zero;
-        ball.isGrounded = false;
-        ball.groundTransform = null;
-        ball.ballCollider.enabled = true;
-        ball.ballRigidbody.velocity = Vector3.zero;
-        ball.ballRigidbody.useGravity = true;
-        ball.ballRigidbody.WakeUp();
-        ball.currentTrack = null;
-        ball.groudTimerRunning = true;
-        ball.impulseTrack = null;
-        ball.isDestroying = false;
-        ball.lastTrack = null;
-        ball.onTrack = false;
-        ball.pathID = -1;
-        ball.rollingSpeed = 1f;
-        ball.timeElapsed = 0f;
-        ball.timeLimit = 5f;
-        ball.velocity = 0f;
+        if (ball)
+        {
+            ball.MyGameObject.SetActive(true);
+            ball.MyTransform.eulerAngles = Vector3.zero;
+            ball.isGrounded = false;
+            ball.groundTransform = null;
+            ball.ballCollider.enabled = true;
+            ball.ballRigidbody.velocity = Vector3.zero;
+            ball.ballRigidbody.useGravity = true;
+            ball.ballRigidbody.WakeUp();
+            ball.currentTrack = null;
+            ball.groudTimerRunning = true;
+            ball.impulseTrack = null;
+            ball.isDestroying = false;
+            ball.lastTrack = null;
+            ball.onTrack = false;
+            ball.pathID = -1;
+            ball.rollingSpeed = 1f;
+            ball.timeElapsed = 0f;
+            ball.timeLimit = 5f;
+            ball.velocity = 0f;
+        }
     }
     public static void ReturnBall(BallBehavior returned)
     {
