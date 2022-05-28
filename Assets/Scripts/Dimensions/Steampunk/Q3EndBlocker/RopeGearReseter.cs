@@ -28,9 +28,9 @@ public class RopeGearReseter : ImpulseTrackHandler
             angle += Mathf.Abs(lastAngle - autoGear.MyTransform.localEulerAngles.z);
             if (angle >= 360 * 2)
             {
-                autoGear.Rotate(angle - 360);
+                autoGear.Rotate(360f - autoGear.MyTransform.localEulerAngles.z);
                 autoGear.enabled = false;
-                autoGear.MyTransform.localEulerAngles = new Vector3(autoGear.MyTransform.localEulerAngles.x, autoGear.MyTransform.localEulerAngles.y, startingAngle);
+                //autoGear.MyTransform.localEulerAngles = new Vector3(autoGear.MyTransform.localEulerAngles.x, autoGear.MyTransform.localEulerAngles.y, startingAngle);
                 yield break;
             }
             lastAngle = autoGear.MyTransform.localEulerAngles.z;
