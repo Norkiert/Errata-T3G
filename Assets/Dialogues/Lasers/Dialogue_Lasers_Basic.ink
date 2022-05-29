@@ -25,7 +25,7 @@
     
 
 === L_B01 ===
-To wymiar kreujący fotony.<n>W tym miejscu definiowana jest część ich właściwości.<n>Mechanizm, który widzisz odpowiada za sposób propagacji światła i określa równowagę kwantową.
+To wymiar kreujący fotony. W tym miejscu definiowana jest część ich właściwości. Mechanizm, który widzisz odpowiada za sposób propagacji światła i określa równowagę kwantową.
 + [Czym są te fotony?]
     -> L_B02
 + [Coś jest nie tak z mechanizmem?]
