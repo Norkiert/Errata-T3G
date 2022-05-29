@@ -26,5 +26,7 @@ namespace Dialogues
             else
                 texts.Remove(newText);
         }
+
+        public static void ClearAllDialogues() => texts.Clear();
     }
 }

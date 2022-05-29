@@ -250,6 +250,8 @@ namespace GameManagment
                 LoadedDimension = null;
             }
 
+            DialogueInkKeeper.ClearAllDialogues();
+
             SceneManager.LoadScene(0);
         }
     }
