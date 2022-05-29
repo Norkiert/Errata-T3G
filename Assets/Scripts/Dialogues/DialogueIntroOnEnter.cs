@@ -44,7 +44,7 @@ public class DialogueIntroOnEnter : MonoBehaviour
         while (DialogueManager.instance.IsDialoguePlaying)
             yield return null;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         DialogueManager.instance.EnterDialogueMode(worldBugsDialogueText);
         gameObject.SetActive(false);

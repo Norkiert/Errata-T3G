@@ -28,13 +28,13 @@ namespace Dialogues
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out PlayerController _))
+            if (other.gameObject.GetComponent<PlayerController>() != null)
                 EnterDialogueZone();
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out PlayerController _))
+            if (other.gameObject.GetComponent<PlayerController>() != null)
                 ExitDialogueZone();
         }
 
