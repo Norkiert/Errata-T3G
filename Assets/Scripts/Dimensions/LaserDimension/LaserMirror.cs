@@ -78,10 +78,12 @@ public class LaserMirror : Interactable
             float my = Input.GetAxis("Mouse Y");
             // Debug.Log(mx);
 
+            float tarationMultiplier = rotationSpeed * Mathf.Pow(SettingsMenu.MouseSensitivity, 2);
+
             if (LimitRotation)
             {
-                if (   ((mx * reverseRotating > 0) && (actualRotate + mx * reverseRotating * rotationSpeed) > leftLimit)
-                    || ((mx * reverseRotating < 0) && (actualRotate + mx * reverseRotating * rotationSpeed) < rightLimit))
+                if (   ((mx * reverseRotating > 0) && (actualRotate + mx * reverseRotating * tarationMultiplier) > leftLimit)
+                    || ((mx * reverseRotating < 0) && (actualRotate + mx * reverseRotating * tarationMultiplier) < rightLimit))
                 {
                     yield return null;
                     continue;
@@ -129,8 +131,8 @@ public class LaserMirror : Interactable
             else
             {
                 reverseRotating = transform.position.x>player.transform.position.x ? -1f : 1f;
-                transform.Rotate(new Vector3(0, (rotateHorizontal ? mx *reverseRotating : 0), (rotateVertical ? my : 0)) * rotationSpeed);
-                actualRotate += mx * reverseRotating * rotationSpeed;
+                transform.Rotate(new Vector3(0, (rotateHorizontal ? mx *reverseRotating : 0), (rotateVertical ? my : 0)) * tarationMultiplier);
+                actualRotate += mx * reverseRotating * tarationMultiplier;
             }
 
             yield return null;

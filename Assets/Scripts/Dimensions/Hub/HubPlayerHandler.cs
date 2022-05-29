@@ -12,6 +12,9 @@ public class HubPlayerHandler : MonoBehaviour
 
     public bool IsPlayerInHub => isPlayerInHub;
 
+    private void OnEnable() => OnChange += DebugEnter;
+    private void OnDisable() => OnChange -= DebugEnter;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerController>() != null)
@@ -20,7 +23,6 @@ public class HubPlayerHandler : MonoBehaviour
             OnChange?.Invoke();
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerController>() != null)
@@ -28,5 +30,13 @@ public class HubPlayerHandler : MonoBehaviour
             isPlayerInHub = false;
             OnChange?.Invoke();
         }
+    }
+
+    private void DebugEnter()
+    {
+        if (isPlayerInHub)
+            Debug.Log("Player enter hub");
+        else
+            Debug.Log("Player exit hub");
     }
 }
