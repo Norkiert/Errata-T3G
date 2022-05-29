@@ -18,7 +18,7 @@ namespace Audio
                 {
                     Source = null;
                     queue = null;
-                    Debug.LogWarning("Tried to use invalid AudioSourceWrapper");
+                    //Debug.LogWarning("Tried to use invalid AudioSourceWrapper");
                 }
                 return value;
             }
