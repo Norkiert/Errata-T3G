@@ -209,7 +209,7 @@ namespace Audio
                     if (wrapper.Valid && !wrapper.Playing && wrapper.Stopped && !wrapper.Active || !source.isPlaying && source.time == 0)
                     {
                         wrapper.Source = null; 
-                        DesactiveSource(wrapper.Source);
+                        DesactiveSource(source);
                         yield break;
                     }
                     else if (!wrapper.Valid && !unusedAudioSources.Contains(source))
