@@ -54,7 +54,7 @@ public class BallBehavior : ObjectGroundChecker
     {
         if (ballCollider) realRadius = ballCollider.bounds.size.y / 2f;
 
-        //StartCoroutine(AudioLoop());
+        StartCoroutine(AudioLoop());
     }
 
     protected void Update()
@@ -218,11 +218,6 @@ public class BallBehavior : ObjectGroundChecker
 
     public IEnumerator AudioLoop()
     {
-        for(; ; )
-        {
-            yield return null;
-        }
-
         wrapper = new AudioSourceWrapper(null, null);
 
         bool wasGrounded = isGrounded;
@@ -238,14 +233,14 @@ public class BallBehavior : ObjectGroundChecker
             {
                 if (isGrounded) // ball touches track, but is on ground
                 {
-                    if (!wrapper.Valid && activeRollingClip == trackRollingClip) // audio stopped or trackRollingClip is playing
+                    if (!wrapper.Valid || activeRollingClip == trackRollingClip) // audio stopped or trackRollingClip is playing
                     {
                         wrapper.Deactivate();
                         activeRollingClip = groundRollingClip;
                         wrapper = AudioManager.PlaySFX(activeRollingClip);
                     }
                 }
-                else if (!wrapper.Valid && activeRollingClip == trackRollingClip) // audio stopped or groundRollingClip is playing
+                else if (!wrapper.Valid || activeRollingClip == groundRollingClip) // audio stopped or groundRollingClip is playing
                 {
                     wrapper.Deactivate();
                     activeRollingClip = trackRollingClip;
@@ -259,7 +254,7 @@ public class BallBehavior : ObjectGroundChecker
             }
             else if (isGrounded)
             {
-                if (!wrapper.Valid && activeRollingClip == trackRollingClip) // audio stopped or trackRollingClip is playing
+                if (!wrapper.Valid || activeRollingClip == trackRollingClip) // audio stopped or trackRollingClip is playing
                 {
                     wrapper.Deactivate();
                     activeRollingClip = groundRollingClip;
@@ -267,25 +262,29 @@ public class BallBehavior : ObjectGroundChecker
                 }
             }
 
-            wrapper.Position = MyTransform.position;
+            if (wrapper.Valid)
+            {
+                wrapper.Position = MyTransform.position;
 
-            if (ballRigidbody.velocity.magnitude <= minAudioVelocity || !currentTrack && !isGrounded)
-            {
-                wrapper.Volume = 0;
-            }
-            else if (ballRigidbody.velocity.magnitude >= maxAudioVelocity)
-            {
-                wrapper.Volume = 1;
-            }
-            else
-            {
-                wrapper.Volume = (ballRigidbody.velocity.magnitude - minAudioVelocity) / (maxAudioVelocity - minAudioVelocity);
-            }
+                if (ballRigidbody.velocity.magnitude <= minAudioVelocity || !currentTrack && !isGrounded)
+                {
+                    wrapper.Volume = 0;
+                }
+                else if (ballRigidbody.velocity.magnitude >= maxAudioVelocity)
+                {
+                    wrapper.Volume = 1;
+                }
+                else
+                {
+                    wrapper.Volume = (ballRigidbody.velocity.magnitude - minAudioVelocity) / (maxAudioVelocity - minAudioVelocity);
+                }
 
-            wrapper.Volume *= activeRollingClip.Volume;
+                wrapper.Volume *= activeRollingClip.Volume;
+            } 
 
             wasGrounded = isGrounded;
             wasOnTrack = onTrack;
+
             yield return null;
         }
     }
@@ -317,7 +316,7 @@ public class BallPool
         ball.MyTransform.position = position;
         ball.MyTransform.parent = parent;
 
-        //ball.StartCoroutine(ball.AudioLoop());
+        if (ball) ball.StartCoroutine(ball.AudioLoop());
 
         return ball;
     }
@@ -353,10 +352,10 @@ public class BallPool
 
         returned.StopAllCoroutines();
 
-        //returned.wrapper.Loop = false;
-        //returned.wrapper.Deactivate();
+        returned.wrapper.Loop = false;
+        returned.wrapper.Deactivate();
 
-        //returned.wrapper = null;
+        returned.wrapper = null;
 
         balls.Enqueue(returned);
     }

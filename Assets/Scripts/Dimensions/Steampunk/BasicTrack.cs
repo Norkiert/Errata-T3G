@@ -94,12 +94,12 @@ public abstract class BasicTrack : Clickable
                 if (value)
                 {
                     OnClick += RotateRight;
-                    //OnClick += PlayRotationSound;
+                    OnClick += PlayRotationSound;
                 }
                 else
                 {
                     OnClick -= RotateRight;
-                    //OnClick -= PlayRotationSound;
+                    OnClick -= PlayRotationSound;
                 }
             }
         } 
@@ -124,7 +124,7 @@ public abstract class BasicTrack : Clickable
         if (Rotateable)
         {
             OnClick += RotateRight;
-            //OnClick += PlayRotationSound;
+            OnClick += PlayRotationSound;
         }
         base.Awake();
 

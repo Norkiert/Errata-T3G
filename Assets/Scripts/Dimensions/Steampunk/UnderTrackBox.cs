@@ -110,7 +110,7 @@ public class UnderTrackBox : Clickable
         {
             var tmc = connectedTrack.trackMapController;
             tmc.Move(connectedTrack, newPosition);
-            //PlayPushSound();
+            PlayPushSound();
             UpdateBoxPosition();
         }
         else
@@ -124,7 +124,7 @@ public class UnderTrackBox : Clickable
             {
                 var tmc = connectedTrack.trackMapController;
                 tmc.Move(connectedTrack, newPosition);
-                //PlayPushSound();
+                PlayPushSound();
                 UpdateBoxPosition();
             }
         }

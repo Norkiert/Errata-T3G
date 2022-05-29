@@ -206,8 +206,9 @@ namespace Audio
             {
                 if(reference.TryGetTarget(out AudioSourceWrapper wrapper))
                 {
-                    if (!wrapper.Playing && wrapper.Stopped && !wrapper.Active && wrapper.Valid)
+                    if (wrapper.Valid && !wrapper.Playing && wrapper.Stopped && !wrapper.Active || !source.isPlaying && source.time == 0)
                     {
+                        wrapper.Source = null; 
                         DesactiveSource(wrapper.Source);
                         yield break;
                     }

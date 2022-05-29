@@ -6,7 +6,7 @@ namespace Audio
 {
     public class AudioSourceWrapper
     {
-        public AudioSource Source { get; private set; }
+        public AudioSource Source { get; set; }
         private Queue<AudioSource> queue;
 
         public bool Valid
