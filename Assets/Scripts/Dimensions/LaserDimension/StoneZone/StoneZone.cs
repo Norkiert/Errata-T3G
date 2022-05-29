@@ -19,6 +19,7 @@ public class StoneZone : MonoBehaviour
     [Header("Movement")]
     [SerializeField, Min(0.1f)] private float moveSpeed = 1f;
     [SerializeField, Min(0.1f)] private float disapireDistance = 1f;
+    [SerializeField, Range(0f, 1f)] private float disapireDistanceColliderMultiplier = 0.5f;
 
 
     private readonly List<Transform> points = new List<Transform>();
@@ -242,8 +243,19 @@ public class StoneZone : MonoBehaviour
             startPoint.rotation = Quaternion.LookRotation(endPoint.position - startPoint.position, Vector3.right);
 
             float dist = Vector3.Distance(endPoint.position, startPoint.position);
-            coll.center = Vector3.forward * (dist / 2f);
-            coll.size = new Vector3(range * 2, range * 2, dist);
+
+            float centerOffset = dist / 2f;
+            if (i == 0)
+                centerOffset += disapireDistance * disapireDistanceColliderMultiplier * 0.5f;
+            else if (i == points.Count - 2)
+                centerOffset -= disapireDistance * disapireDistanceColliderMultiplier * 0.5f;
+            coll.center = centerOffset * Vector3.forward;
+
+            float size = dist;
+            if (i == 0 || i == points.Count - 2)
+                size -= disapireDistance * disapireDistanceColliderMultiplier;
+
+            coll.size = new Vector3(range * 2, range * 2, size);
         }
 
         if (points[points.Count - 1].TryGetComponent(out BoxCollider endColl))
