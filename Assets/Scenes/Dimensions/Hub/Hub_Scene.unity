@@ -59118,7 +59118,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1291403509}
-  - component: {fileID: 1291403511}
   - component: {fileID: 1291403510}
   m_Layer: 0
   m_Name: GameEndEffects
@@ -59179,19 +59178,6 @@ MonoBehaviour:
   endPanel: {fileID: 1973004730}
   blackButonShowDleay: 3
   backToMenuButton: {fileID: 1861069670}
---- !u!114 &1291403511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291403508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c735cdfa0291b9942a0865758282d04c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayerInHub: 0
 --- !u!1 &1295885916
 GameObject:
   m_ObjectHideFlags: 0

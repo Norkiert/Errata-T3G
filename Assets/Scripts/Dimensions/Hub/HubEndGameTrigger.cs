@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using Dialogues;
 using GuideCube;
 
-[RequireComponent(typeof(HubPlayerHandler))]
 public class HubEndGameTrigger : MonoBehaviour
 {
     [SerializeField] private HubPlayerHandler activator;

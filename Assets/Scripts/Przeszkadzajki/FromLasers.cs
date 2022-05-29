@@ -22,19 +22,19 @@ public class FromLasers : MonoBehaviour
         planeSR = plane.GetComponent<SpriteRenderer>();
         playerHandler = FindObjectOfType<HubPlayerHandler>();
 
-
         if (SaveManager.IsLevelFinished(Dimension.Laser))
         {
             DsiableBlack();
             return;
         }
 
-
-        if (playerHandler)
+        if (playerHandler != null)
         {
             playerHandler.OnChange += SwitchPlanes;
             SwitchPlanes();
         }
+        else
+            Debug.LogError("doun found playerHandler");
     }
 
     private void OnDisable()
