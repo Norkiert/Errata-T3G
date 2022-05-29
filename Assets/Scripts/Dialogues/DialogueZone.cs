@@ -76,7 +76,7 @@ namespace Dialogues
         {
             DialogueInkKeeper.RemoveText(dialogueText);
 
-            if (states.Contains(GCubeController.Instance.CurrentState) && GCubeController.Instance.CurrentState is GCSDialogue == false)
+            if (GCubeController.Instance != null && states.Contains(GCubeController.Instance.CurrentState) && GCubeController.Instance.CurrentState is GCSDialogue == false)
             {
                 GCubeController.Instance.SetState(new GCSFollowPlayer(GCubeController.Instance));
             }
