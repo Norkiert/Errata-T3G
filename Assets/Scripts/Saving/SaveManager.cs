@@ -105,12 +105,13 @@ public static class SaveManager
 
         for (int i = 0; i < cables.Length; i++)
         {
-            save.cableNames.Add(cables[i].gameObject.name);
-            Connector[] startEnd = cables[i].gameObject.GetComponentsInChildren<Connector>();
-            SpringJoint[] points = cables[i].gameObject.GetComponentsInChildren<SpringJoint>();
+            PhysicCable cable = cables[i];
 
-            Connector start = startEnd[0];
-            Connector end = startEnd[1];
+            save.cableNames.Add(cable.gameObject.name);
+            SpringJoint[] points = cable.gameObject.GetComponentsInChildren<SpringJoint>();
+
+            Connector start = cable.StartConnector;
+            Connector end = cable.EndConnector;
 
             save.cableStartPosition.Add(start.gameObject.transform.position);
             save.cableEndPosition.Add(end.gameObject.transform.position);
@@ -119,7 +120,7 @@ public static class SaveManager
                 Connector female = start.ConnectedTo;
                 save.cableStartTarget.Add(female.gameObject.name);
 
-            } else {
+            } else{
                 save.cableStartTarget.Add("");
             }
 
@@ -145,7 +146,6 @@ public static class SaveManager
 
         return save;
     }
-
     static void LoadElectrical(SaveData save)
     {
         if (!SceneManager.GetSceneByName("Electrical_Scene").isLoaded)
@@ -159,14 +159,21 @@ public static class SaveManager
 
         for (int i = 0; i < save.cableNames.Count; i++)
         {
-            PhysicCable cable = GameObject.Find(save.cableNames[i]).GetComponent<PhysicCable>();
+            GameObject cGO = GameObject.Find(save.cableNames[i]);
+
+            if (cGO == null)
+            {
+                Debug.LogError($"DontfoundCable {save.cableNames[i]}");
+                continue;
+            }
+
+            PhysicCable cable = cGO.GetComponent<PhysicCable>();
             if (cable.allowSaved == false) continue;
 
-            Connector[] startEnd = cable.gameObject.GetComponentsInChildren<Connector>();
             SpringJoint[] points = cable.gameObject.GetComponentsInChildren<SpringJoint>();
             
-            Connector start = startEnd[0];
-            Connector end = startEnd[1];
+            Connector start = cable.StartConnector;
+            Connector end = cable.EndConnector;
 
             if (start.IsConnected && start.ConnectionType != Connector.ConType.Female) start.Disconnect(false);
             if (end.IsConnected && start.ConnectionType != Connector.ConType.Female) end.Disconnect(false);
@@ -177,12 +184,18 @@ public static class SaveManager
             //Debug.Log(points.Length + " p: " + save.cablePartsLocation[i].list.Count);
             for (int j = 0; j < save.cablePartsLocation.Count; j++)
             {
-                if (save.cablePartsLocation[j].key == save.cableNames[i])
+                var cablePortLocationS = save.cablePartsLocation[j];
+                if (cablePortLocationS.key == save.cableNames[i])
                 {
                     //Debug.Log(save.cablePartsLocation[j].key + " : " + save.cablePartsLocation[j].value.list.Count);
-                    for (int k = 0; k < save.cablePartsLocation[j].value.list.Count; k++)
+                    for (int k = 0; k < cablePortLocationS.value.list.Count; k++)
                     {
-                        points[k].transform.position = save.cablePartsLocation[j].value.list[k];
+                        if (k >= points.Length)
+                        {
+                            Debug.LogError("Zjebany zapis kable jest");
+                            continue;
+                        }
+                        points[k].transform.position = cablePortLocationS.value.list[k];
                     }
                 }
             }

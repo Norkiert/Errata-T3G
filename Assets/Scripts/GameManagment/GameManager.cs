@@ -141,7 +141,7 @@ namespace GameManagment
         {
             IsGamePaused = false;
             SetCursorState(true);
-            OnResumeGame.Invoke();
+            OnResumeGame?.Invoke();
         }
         public static void SetCursorState(bool isLock)
         {
