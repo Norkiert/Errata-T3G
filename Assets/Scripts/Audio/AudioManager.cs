@@ -34,7 +34,7 @@ namespace Audio
 
 
         private const string keyGeneralVolume = "GeneralVolume";
-        public static float GeneralVolume => PlayerPrefs.GetFloat(keyGeneralVolume, 1f);
+        public static float GeneralVolume => PlayerPrefs.GetFloat(keyGeneralVolume, 0.8f);
         public static void SetGeneralVolume(float volume)
         {
             PlayerPrefs.SetFloat(keyGeneralVolume, volume);
@@ -45,7 +45,7 @@ namespace Audio
         #region -Music-
 
         private const string keyMusicVolume = "MusicVolume";
-        public static float MusicVolume => PlayerPrefs.GetFloat(keyMusicVolume, 0.5f);
+        public static float MusicVolume => PlayerPrefs.GetFloat(keyMusicVolume, 1f);
         public static void SetMusicVolume(float volume)
         {
             PlayerPrefs.SetFloat(keyMusicVolume, volume);
@@ -126,7 +126,7 @@ namespace Audio
         #region -SFX-
 
         private const string keySFXVolume = "SFXVolume";
-        public static float SFXVolume => PlayerPrefs.GetFloat(keySFXVolume, 0.5f);
+        public static float SFXVolume => PlayerPrefs.GetFloat(keySFXVolume, 1f);
         public static void SetSFXVolume(float volume) => PlayerPrefs.SetFloat(keySFXVolume, volume);
 
 
