@@ -43,6 +43,7 @@ public class MainMenu : MonoBehaviour
     private void LoadGame()
     {
         GameManager.instance.LoadGame();
+        GameManager.ResumeGame();
     }
 
     private void OpenSettings()
