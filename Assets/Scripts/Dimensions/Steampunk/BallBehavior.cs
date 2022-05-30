@@ -311,10 +311,12 @@ public class BallPool
             if (ball) ball.Awake();
         }
 
-        if (ball) ZeroBall(ball);
-
-        ball.MyTransform.position = position;
-        ball.MyTransform.parent = parent;
+        if (ball)
+        {
+            ZeroBall(ball);
+            ball.MyTransform.position = position;
+            ball.MyTransform.parent = parent;
+        }
 
         if (ball) ball.StartCoroutine(ball.AudioLoop());
 

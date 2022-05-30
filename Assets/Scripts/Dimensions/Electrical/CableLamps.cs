@@ -43,10 +43,10 @@ public class CableLamps : MonoBehaviour
             else
                 SetMaterialOnLamps(Q3Lamps, unDoneMaterial);
 
-            if (quest.Q3State)
-                SetMaterialOnLamps(Q3Lamps, doneMaterial);
+            if (quest.Q4State)
+                SetMaterialOnLamps(Q4Lamps, doneMaterial);
             else
-                SetMaterialOnLamps(Q3Lamps, unDoneMaterial);
+                SetMaterialOnLamps(Q4Lamps, unDoneMaterial);
         }    
     }
     private void SetMaterialOnLamps(List<Renderer> lamps, Material mat)

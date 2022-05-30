@@ -82,7 +82,7 @@ public class LaserMirror : Interactable
             float my = Input.GetAxis("Mouse Y");
             // Debug.Log(mx);
 
-            float tarationMultiplier = rotationSpeed * Mathf.Pow(SettingsMenu.MouseSensitivity, 2);
+            float tarationMultiplier = rotationSpeed * Mathf.Pow(SettingsMenu.MirrorsSensitivity, 2);
 
             if (LimitRotation)
             {
