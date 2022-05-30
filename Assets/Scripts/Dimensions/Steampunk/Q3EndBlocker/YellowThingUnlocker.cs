@@ -29,12 +29,8 @@ public class YellowThingUnlocker : ImpulseTrackHandler
     }
     protected IEnumerator WaitNGO(YellowThing yellowThing)
     {
-        //yield return new WaitForSeconds(waitTime);
-
         var mechanism = yellowThing.gearRigidbody.transform;
         float angleNow = mechanism.localEulerAngles.x;
-
-        const float ratio = 177.267f / 62.515f;
 
         yellowThing.myRigidbody.useGravity = false;
 
@@ -58,14 +54,5 @@ public class YellowThingUnlocker : ImpulseTrackHandler
             }
 
         }
-
-        for (int i = 0; i < 8; i++)
-        {
-            yellowThing.myRigidbody.AddForceAtPosition(yellowThing.unlockForcePoint.forward * -yellowThing.unlockForceMagnitude, yellowThing.unlockForcePoint.position);
-            yield return new WaitForFixedUpdate();
-            yield return new WaitForFixedUpdate();
-        }
-       
-        yield break;
     }
 }
