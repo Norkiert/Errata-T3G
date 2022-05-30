@@ -98,8 +98,6 @@ namespace GameManagment
             // unload current dimension
             if (LoadedDimension != null)
             {
-                SaveManager.SaveGame();
-
                 Debug.Log($"Unloading {LoadedDimension}");
                 AsyncOperation unloadingDimension = SceneManager.UnloadSceneAsync(LoadedDimension.SceneName);
 

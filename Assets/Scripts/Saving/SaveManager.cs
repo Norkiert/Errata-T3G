@@ -29,7 +29,6 @@ public static class SaveManager
 
         Debug.Log("saved game");
     }
-
     public static void LoadGame()
     {
 
@@ -68,7 +67,6 @@ public static class SaveManager
         Debug.Log("saved laser");
         return save;
     }
-
     static void LoadLaser(SaveData save)
     {
         if (!SceneManager.GetSceneByName("SpaceLaser_Scene").isLoaded)
@@ -256,7 +254,6 @@ public static class SaveManager
 
         return save;
     }
-
     static void LoadSteampunk(SaveData save)
     {
         if (!SceneManager.GetSceneByName("Steampunk_Scene").isLoaded)
@@ -316,6 +313,5 @@ public static class SaveManager
             return false;
         }
     }
-
     public static bool AreAllLevelFinished() => IsLevelFinished(Dimension.Electrical) && IsLevelFinished(Dimension.Laser) && IsLevelFinished(Dimension.Steampunk);
 }

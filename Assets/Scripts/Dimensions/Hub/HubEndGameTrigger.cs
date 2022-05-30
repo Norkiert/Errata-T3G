@@ -11,6 +11,8 @@ public class HubEndGameTrigger : MonoBehaviour
 {
     [SerializeField] private HubPlayerHandler activator;
     [SerializeField] private DimensionSO mainDimension;
+    [SerializeField] private Connector cableToDisconnect;
+    [SerializeField] private Transform endPlayerPOsition;
 
     [Header("End one")]
     [SerializeField] private TextAsset dialogueText;
@@ -47,16 +49,22 @@ public class HubEndGameTrigger : MonoBehaviour
 
     private void OnPlayerEnter()
     {
-        if (SaveManager.AreAllLevelFinished() && HroberPrefs.ReadBool(saveName, false) == false)
-        {
-            HroberPrefs.SaveBool(saveName, true);
-
+        if (activator.IsPlayerInHub && HroberPrefs.ReadBool(saveName, false) == false)
             StartCoroutine(EndGame());
-        }
     }
 
     private IEnumerator EndGame()
     {
+        // wiat for save
+        yield return new WaitForSeconds(0.5f);
+
+        // check save
+        if (SaveManager.AreAllLevelFinished() == false)
+            yield break;
+
+        // set bool
+        HroberPrefs.SaveBool(saveName, true);
+
         PlayerController playerController = FindObjectOfType<PlayerController>();
         PlayerInteractions playerInteractions = playerController.GetComponent<PlayerInteractions>();
         GCubeController cubeController = FindObjectOfType<GCubeController>();
@@ -66,8 +74,16 @@ public class HubEndGameTrigger : MonoBehaviour
             playerController.FreezMovement = true;
             playerInteractions.enabled = false;
 
+            playerController.SetPosition(endPlayerPOsition.position);
+
+            cableToDisconnect.Disconnect(false);
+            DialogueManager.instance.CloseDialoguePanel();
+
             // load dimesnuin
-            yield return DimensionManager.LoadDimension(mainDimension);
+            if (DimensionManager.LoadedDimension == mainDimension)
+                yield return new WaitForSeconds(0.5f);
+            else
+                yield return DimensionManager.LoadDimension(mainDimension);
         }
         
         // play and wait for dialogue
@@ -88,7 +104,13 @@ public class HubEndGameTrigger : MonoBehaviour
             while (Input.GetKey(KeyCode.Alpha1) == false)
                 yield return null;
 
-            yield return new WaitForSeconds(timeForLastDialogue);
+
+            float timer = timeForLastDialogue;
+            while (timer > 0 && DialogueManager.instance.IsDialoguePlaying)
+            {
+                timer -= Time.deltaTime;
+                yield return null;
+            }
         }
 
         // anim end

@@ -12,8 +12,8 @@ public class HubPlayerHandler : MonoBehaviour
 
     public bool IsPlayerInHub => isPlayerInHub;
 
-    private void OnEnable() => OnChange += DebugEnter;
-    private void OnDisable() => OnChange -= DebugEnter;
+    private void OnEnable() => OnChange += ChangeState;
+    private void OnDisable() => OnChange -= ChangeState;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,11 +32,15 @@ public class HubPlayerHandler : MonoBehaviour
         }
     }
 
-    private void DebugEnter()
+    private void ChangeState()
     {
+        // debug
         if (isPlayerInHub)
             Debug.Log("Player enter hub");
         else
             Debug.Log("Player exit hub");
+
+        // save game
+        SaveManager.SaveGame();
     }
 }
