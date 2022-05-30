@@ -29,7 +29,36 @@ public class YellowThingUnlocker : ImpulseTrackHandler
     }
     protected IEnumerator WaitNGO(YellowThing yellowThing)
     {
-        yield return new WaitForSeconds(waitTime);
+        //yield return new WaitForSeconds(waitTime);
+
+        var mechanism = yellowThing.gearRigidbody.transform;
+        float angleNow = mechanism.localEulerAngles.x;
+
+        const float ratio = 177.267f / 62.515f;
+
+        yellowThing.myRigidbody.useGravity = false;
+
+        float deltaAngle = 0f;
+
+        for (; ; )
+        {
+            yield return new WaitForFixedUpdate();
+
+            if (deltaAngle == 0) deltaAngle = Mathf.Abs(mechanism.localEulerAngles.x - angleNow);
+
+            else
+            {
+                yellowThing.myRigidbody.AddForceAtPosition(yellowThing.unlockForceMagnitude * -yellowThing.unlockForcePoint.forward, yellowThing.unlockForcePoint.position);
+
+                if(yellowThing.MyTransform.localEulerAngles.x <= 0f)
+                {
+                    yellowThing.myRigidbody.useGravity = true;
+                    yield break;
+                }
+            }
+
+        }
+
         for (int i = 0; i < 8; i++)
         {
             yellowThing.myRigidbody.AddForceAtPosition(yellowThing.unlockForcePoint.forward * -yellowThing.unlockForceMagnitude, yellowThing.unlockForcePoint.position);
