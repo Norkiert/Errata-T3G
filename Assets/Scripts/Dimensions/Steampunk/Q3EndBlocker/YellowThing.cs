@@ -12,7 +12,7 @@ public class YellowThing : ImpulseTrackHandler
 
     [SerializeField] public Rigidbody myRigidbody;
 
-    [SerializeField] protected Rigidbody gearRigidbody;
+    [SerializeField] public Rigidbody gearRigidbody;
     [SerializeField] protected Transform gearForcePoint;
     [SerializeField] protected float gearForceMagnitude;
     [SerializeField] protected float gearWaitTime;

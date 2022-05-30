@@ -513,12 +513,12 @@ MonoBehaviour:
   blockForcePoint: {fileID: 6108715099849166875}
   blockForceMagnitude: 100
   unlockForcePoint: {fileID: 7614961098189468900}
-  unlockForceMagnitude: 80
+  unlockForceMagnitude: 0.75
   myRigidbody: {fileID: 8794969959129049947}
   gearRigidbody: {fileID: 0}
   gearForcePoint: {fileID: 0}
-  gearForceMagnitude: 300
-  gearWaitTime: 0.4
+  gearForceMagnitude: 3500
+  gearWaitTime: 0.35
 --- !u!54 &8794969959129049947
 Rigidbody:
   m_ObjectHideFlags: 0
