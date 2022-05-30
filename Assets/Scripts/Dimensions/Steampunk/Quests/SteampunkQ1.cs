@@ -24,8 +24,11 @@ public class SteampunkQ1 : MonoBehaviour
     }
     public void OnCompletion()
     {
-        qGeneral.OnCompletion();
+        if (!qGeneral.completed)
+        {
+            qGeneral.OnCompletion();
 
-        dialogueZone.SetActive(false);
+            dialogueZone.SetActive(false);
+        }
     }
 }
