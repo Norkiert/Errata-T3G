@@ -38,6 +38,7 @@ public class MainMenu : MonoBehaviour
     {
         HroberPrefsReset.ResetAll();
         GameManager.instance.LoadFirstGame();
+        GameManager.ResumeGame();
     }
 
     private void LoadGame()
