@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.014313219, g: 0.025239313, b: 0.07649527, a: 1}
+  m_IndirectSpecularColor: {r: 0.014313248, g: 0.025239313, b: 0.0764955, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3424,7 +3424,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Mateusz Kawalec\nJakub D\u0142ugosz\nNorbert Falenty\nMaksymilian Regner"
+  m_text: "Mateusz Kawalec\nJakub D\u0142ugosz\nNorbert Falenty\nJakub Stanula-Kaczka"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4058a754eaa911146a484904328d3505, type: 2}
   m_sharedMaterial: {fileID: 1120967222411054947, guid: 4058a754eaa911146a484904328d3505, type: 2}
@@ -3830,7 +3830,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Team attendant
+  m_text: Opiekun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c797545790826e64fa4598fef293fd45, type: 2}
   m_sharedMaterial: {fileID: -1102886838055796935, guid: c797545790826e64fa4598fef293fd45, type: 2}
@@ -8852,9 +8852,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Kasia Zdziebko
 
-    Aleksander Stanoch
-
-    Norbert Falenty'
+    Maksymilian Regner'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4058a754eaa911146a484904328d3505, type: 2}
   m_sharedMaterial: {fileID: 1120967222411054947, guid: 4058a754eaa911146a484904328d3505, type: 2}
@@ -16788,7 +16786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Substantive support
+  m_text: "Podzi\u0119kowania"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c797545790826e64fa4598fef293fd45, type: 2}
   m_sharedMaterial: {fileID: -1102886838055796935, guid: c797545790826e64fa4598fef293fd45, type: 2}
@@ -17745,7 +17743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Micha\u0142 Nowak\nIgnacy Nowicki\nKacper Widzisz"
+  m_text: "Micha\u0142 Nowak\nIgnacy Nowicki\nKacper Widzisz\nPiotr Syno\u015B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4058a754eaa911146a484904328d3505, type: 2}
   m_sharedMaterial: {fileID: 1120967222411054947, guid: 4058a754eaa911146a484904328d3505, type: 2}
@@ -23104,6 +23102,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 351225027}
     m_Modifications:
+    - target: {fileID: 8324250714739555308, guid: 16ee0bb02bd0c7b45961d90744e6cd1f, type: 3}
+      propertyPath: m_text
+      value: "Powr\xF3t"
+      objectReference: {fileID: 0}
     - target: {fileID: 8324250715024455705, guid: 16ee0bb02bd0c7b45961d90744e6cd1f, type: 3}
       propertyPath: m_Name
       value: BackButton
