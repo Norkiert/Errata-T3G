@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using DG.Tweening;
+
 public class LaserMirror : Interactable
 {
+    [SerializeField] public bool refleactWhenIsDisable = false;
+    public bool IsRefleacting => enabled || refleactWhenIsDisable;
+
     [Header("Rotation types")]
     [SerializeField] private bool rotateHorizontal = true;
     [SerializeField] private bool rotateVertical = false;

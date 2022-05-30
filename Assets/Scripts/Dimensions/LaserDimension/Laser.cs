@@ -54,7 +54,7 @@ public class Laser : LogicBoolOutput
 
     private void CheckHit(RaycastHit hitInfo, Vector3 direction)
     {
-        if (hitInfo.collider.gameObject.TryGetComponent(out LaserMirror _))
+        if (hitInfo.collider.gameObject.TryGetComponent(out LaserMirror mirror) && mirror.IsRefleacting)
         {
             Vector3 hitPosition = hitInfo.point - direction * laserSize * 0.1f;
             Debug.DrawLine(hitPosition, hitInfo.point, Color.blue);
