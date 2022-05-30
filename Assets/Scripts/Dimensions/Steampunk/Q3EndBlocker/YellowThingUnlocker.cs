@@ -36,22 +36,40 @@ public class YellowThingUnlocker : ImpulseTrackHandler
 
         float deltaAngle = 0f;
 
+        float timeElapsed = 0;
+
         for (; ; )
         {
             yield return new WaitForFixedUpdate();
 
-            if (deltaAngle == 0) deltaAngle = Mathf.Abs(mechanism.localEulerAngles.x - angleNow);
+            timeElapsed += Time.fixedDeltaTime;
 
-            else
+            if(timeElapsed >= 0.25)
             {
                 yellowThing.myRigidbody.AddForceAtPosition(yellowThing.unlockForceMagnitude * -yellowThing.unlockForcePoint.forward, yellowThing.unlockForcePoint.position);
-
-                if(yellowThing.MyTransform.localEulerAngles.x <= 0f)
+                if(timeElapsed >= 5)
                 {
                     yellowThing.myRigidbody.useGravity = true;
                     yield break;
                 }
             }
+
+            /*if (deltaAngle == 0) deltaAngle = Mathf.Abs(mechanism.localEulerAngles.x - angleNow);
+
+            else
+            {
+                yellowThing.myRigidbody.AddForceAtPosition(yellowThing.unlockForceMagnitude * -yellowThing.unlockForcePoint.forward, yellowThing.unlockForcePoint.position);
+
+                Debug.Log(yellowThing.MyTransform.localEulerAngles.x);
+
+                if(Mathf.Abs(yellowThing.MyTransform.localEulerAngles.x - 346) <= 1f)
+                {
+                    yellowThing.myRigidbody.useGravity = true;
+                    yield break;
+                }
+            }
+
+            angleNow = mechanism.localEulerAngles.x; */   
 
         }
     }
