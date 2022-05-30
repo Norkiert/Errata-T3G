@@ -25935,7 +25935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1773190775521317365, guid: 2b511700ede92804caa11ddef92e55ea, type: 3}
       propertyPath: dimensionToCheck
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6052626262706430948, guid: 2b511700ede92804caa11ddef92e55ea, type: 3}
       propertyPath: m_Name
@@ -69079,6 +69079,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6831834703376598085, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831834703376598085, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831834703376598085, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831834703376598085, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831834703376598085, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7389440732342781050, guid: af903a2daa7962a4389569e98e50a56b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -85504,7 +85524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1773190775521317365, guid: 2b511700ede92804caa11ddef92e55ea, type: 3}
       propertyPath: dimensionToCheck
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6052626262706430948, guid: 2b511700ede92804caa11ddef92e55ea, type: 3}
       propertyPath: m_Name
@@ -100190,13 +100210,13 @@ MonoBehaviour:
   conCubeImpact: 7
   conMoveTime: 4
   connectors:
-  - <Dimension>k__BackingField: {fileID: 11400000, guid: 76cc78ceeda3dd14592cfcf8ec029a48, type: 2}
+  - <Dimension>k__BackingField: {fileID: 11400000, guid: 0bf3557d9503a9347bcd1f3d5120dd00, type: 2}
     <X>k__BackingField: 10
     <Y>k__BackingField: 5
   - <Dimension>k__BackingField: {fileID: 11400000, guid: 1293f0dba0dc167468aa4d3b8cf3a363, type: 2}
     <X>k__BackingField: -11
     <Y>k__BackingField: 3
-  - <Dimension>k__BackingField: {fileID: 11400000, guid: 0bf3557d9503a9347bcd1f3d5120dd00, type: 2}
+  - <Dimension>k__BackingField: {fileID: 11400000, guid: 76cc78ceeda3dd14592cfcf8ec029a48, type: 2}
     <X>k__BackingField: 5
     <Y>k__BackingField: -10
 --- !u!4 &1362399512154996940
