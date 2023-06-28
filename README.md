@@ -1,3 +1,3 @@
 # Errata-T3G
-Róbcie coś skoro to macie
-Dupaaa
+
+Repozytorium zawierające pełny projekt i pliki źródłowe gry Errata przygotowanej w ramach Turnieju Trójgamicznego.
